@@ -19,7 +19,8 @@ const localePath = useLocalePath()
       <NuxtLink
         class="underline hover:text-primary"
         :class="{
-          'cursor-default text-primary hover:text-on-background': route.path === '/contact'
+          'cursor-default text-primary hover:text-on-background':
+            route.path === localePath('/contact')
         }"
         :to="localePath('/contact')"
       >
@@ -27,7 +28,10 @@ const localePath = useLocalePath()
       </NuxtLink>
       <NuxtLink
         class="underline hover:text-primary"
-        :class="{ 'cursor-default text-primary hover:text-on-background': route.path === '/login' }"
+        :class="{
+          'cursor-default text-primary hover:text-on-background':
+            route.path === localePath('/login')
+        }"
         :to="localePath('/login')"
       >
         {{ $t('header_login-link') }}
