@@ -1,13 +1,23 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-04-02',
   devtools: { enabled: true },
-  postcss: {
-    plugins: {
-      '@tailwindcss/postcss': {},
-      autoprefixer: {}
-    }
+  components: [{ path: '~/components', pathPrefix: false }],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n'],
+  tailwindcss: {
+    cssPath: '~/assets/css/main.css',
+    configPath: 'tailwind.config.js'
   },
-  css: ['@/assets/style/main.css'],
-  components: [{ path: '~/components', pathPrefix: false }]
+  i18n: {
+    strategy: 'prefix_except_default',
+    bundle: {
+      optimizeTranslationDirective: false
+    },
+    locales: ['fr', 'en'],
+    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root'
+    }
+  }
 })
