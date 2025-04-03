@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nuxtjs/i18n": "^9.4.0",
+    "@vesp/nuxt-fontawesome": "^1.2.1",
     "express": "^4.21.2",
     "nuxt": "^3.16.1",
     "pg": "^8.14.1",
@@ -20,6 +21,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-regular-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@types/express": "^5.0.1",
     "@types/node": "^22.13.11",

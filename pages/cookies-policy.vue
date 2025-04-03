@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePageMeta } from '~/composables/usePageMeta'
 
-usePageMeta('login')
+usePageMeta('cookies-policy')
 </script>
 
 <template>

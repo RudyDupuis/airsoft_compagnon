@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePageMeta } from '~/composables/usePageMeta'
 
-usePageMeta('login')
+usePageMeta('terms-and-conditions')
 </script>
 
 <template>

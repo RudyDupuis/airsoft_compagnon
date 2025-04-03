@@ -1,7 +1,43 @@
 {
-  "header_contact-link": "Contact us",
-  "header_login-link": "Login",
-
-  "index_subtitle": "Find games,\nMeet players,\nBuild your reputation!",
-  "index_cta": "Find a game"
+  "header": {
+    "contact-link": "Contact us",
+    "login-link": "Login"
+  },
+  "footer": {
+    "terms-and-conditions": "GTC",
+    "terms-of-use": "TOU",
+    "cookies-policy": "Cookies",
+    "developped-by": "Developped by Rudy Dupuis"
+  },
+  "error": {
+    "title": "Airsoft Compagnon - Oops!",
+    "description": "Oops! Something went wrong.",
+    "cta": "Back to home ?"
+  },
+  "index": {
+    "title": "Airsoft Compagnon - Home",
+    "description": "Airsoft Companion is a platform for airsoft enthusiasts. Find games, meet players, and build your reputation.",
+    "subtitle": "Find games,\nMeet players,\nBuild your reputation!",
+    "cta": "Find a game"
+  },
+  "contact": {
+    "title": "Airsoft Compagnon - Contact",
+    "description": "Contact us"
+  },
+  "login": {
+    "title": "Airsoft Compagnon - Login",
+    "description": "Login to your account"
+  },
+  "terms-and-conditions": {
+    "title": "Airsoft Compagnon - GTC",
+    "description": "General Terms and Conditions of Airsoft Compagnon"
+  },
+  "terms-of-use": {
+    "title": "Airsoft Compagnon - TOU",
+    "description": "General Terms of Use of Airsoft Compagnon"
+  },
+  "cookies-policy": {
+    "title": "Airsoft Compagnon - Cookies Policy",
+    "description": "Cookies Policy of Airsoft Compagnon"
+  }
 }

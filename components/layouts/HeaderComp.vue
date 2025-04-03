@@ -24,7 +24,7 @@ const localePath = useLocalePath()
         }"
         :to="localePath('/contact')"
       >
-        {{ $t('header_contact-link') }}
+        {{ $t('header.contact-link') }}
       </NuxtLink>
       <NuxtLink
         class="underline hover:text-primary"
@@ -34,7 +34,7 @@ const localePath = useLocalePath()
         }"
         :to="localePath('/login')"
       >
-        {{ $t('header_login-link') }}
+        {{ $t('header.login-link') }}
       </NuxtLink>
     </nav>
   </header>

@@ -1,7 +1,43 @@
 {
-  "header_contact-link": "Nous contacter",
-  "header_login-link": "Se connecter",
-
-  "index_subtitle": "Trouver des parties,\nRencontrez des joueurs,\nBâtissez votre réputation !",
-  "index_cta": "Trouver une partie"
+  "header": {
+    "contact-link": "Nous contacter",
+    "login-link": "Se connecter"
+  },
+  "footer": {
+    "terms-and-conditions": "CGV",
+    "terms-of-use": "CGU",
+    "cookies-policy": "Cookies",
+    "developped-by": "Développé par Rudy Dupuis"
+  },
+  "error": {
+    "title": "Airsoft Compagnon - Oups!",
+    "description": "Oups! Quelque chose s'est mal passé.",
+    "cta": "Retour à l'accueil ?"
+  },
+  "index": {
+    "title": "Airsoft Compagnon - Accueil",
+    "description": "Airsoft Compagnon est une plateforme pour les passionnés d'airsoft. Trouvez des parties, rencontrez des joueurs et bâtissez votre réputation.",
+    "subtitle": "Trouver des parties,\nRencontrez des joueurs,\nBâtissez votre réputation !",
+    "cta": "Trouver une partie"
+  },
+  "contact": {
+    "title": "Airsoft Compagnon - Contact",
+    "description": "Nous contacter"
+  },
+  "login": {
+    "title": "Airsoft Compagnon - Connexion",
+    "description": "Se connecter à votre compte"
+  },
+  "terms-and-conditions": {
+    "title": "Airsoft Compagnon - CGV",
+    "description": "Conditions Générales de Vente d'Airsoft Compagnon"
+  },
+  "terms-of-use": {
+    "title": "Airsoft Compagnon - CGU",
+    "description": "Conditions Générales d'Utilisation d'Airsoft Compagnon"
+  },
+  "cookies-policy": {
+    "title": "Airsoft Compagnon - Politique de Cookies",
+    "description": "Politique de Cookies d'Airsoft Compagnon"
+  }
 }
