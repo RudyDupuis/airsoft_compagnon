@@ -3,31 +3,31 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Aldrich-Regular';
-    src: url(../fonts/Aldrich-Regular.ttf);
-    font-display: swap;
+  font-family: 'Aldrich-Regular';
+  src: url(../fonts/Aldrich-Regular.ttf);
+  font-display: swap;
 }
 
 @layer base {
-    * {
-        @apply font-primary text-on-background;
-    }
+  * {
+    @apply font-primary text-on-background;
+  }
 
-    body {
-        @apply bg-background;
-    }
+  body {
+    @apply bg-background;
+  }
 }
 
 .large-title {
-    @apply font-bold text-2xl text-center;
+  @apply font-bold text-2xl text-center;
 }
 .medium-title {
-    @apply font-bold text-xl text-center;
+  @apply font-bold text-xl text-center;
 }
 .small-title {
-    @apply font-bold text-lg tracking-widest;
+  @apply font-bold text-lg tracking-widest;
 }
 
 .button {
-    @apply bg-primary text-lg py-4 px-8 rounded-lg shadow-inner hover:bg-on-background hover:text-background transition duration-300 ease-in-out;
+  @apply bg-primary text-lg py-4 px-8 rounded-lg shadow-inner hover:bg-on-background hover:text-background transition duration-300 ease-in-out;
 }

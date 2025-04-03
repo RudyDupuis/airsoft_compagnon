@@ -1,8 +1,6 @@
 {
-    "name": "Airsoft Compagnon Dev Container",
-    "dockerComposeFile": [
-        "../docker-compose.dev.yml"
-    ],
-    "workspaceFolder": "/app",
-    "service": "app"
+  "name": "Airsoft Compagnon Dev Container",
+  "dockerComposeFile": ["../docker-compose.dev.yml"],
+  "workspaceFolder": "/app",
+  "service": "app"
 }
