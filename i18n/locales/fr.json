@@ -17,8 +17,21 @@
   "index": {
     "title": "Airsoft Compagnon - Accueil",
     "description": "Airsoft Compagnon est une plateforme pour les passionnés d'airsoft. Trouvez des parties, rencontrez des joueurs et bâtissez votre réputation.",
-    "subtitle": "Trouver des parties,\nRencontrez des joueurs,\nBâtissez votre réputation !",
-    "cta": "Trouver une partie"
+    "hero-banner": {
+      "subtitle": "Trouver des parties,\nRencontrez des joueurs,\nBâtissez votre réputation !",
+      "cta": "Trouver une partie"
+    },
+    "find-a-game": {
+      "title": "Trouver une partie"
+    },
+    "infos": {
+      "title1": "Airsoft compagnon, c’est quoi ?",
+      "description1": "Que vous soyez joueur ou organisateur, Airsoft Compagnon est votre allié idéal pour gérer et trouver des parties d'airsoft. En un clic, accédez aux événements près de chez vous et aux boutiques spécialisées. Publiez vos parties en toute simplicité, sans vous soucier des paiements et des inscriptions – on s’occupe de tout ! Et le meilleur ? C'est 100 % gratuit !",
+      "title2": "Quels avantages pour les organisateurs ?",
+      "description2": "Marre de perdre du temps à gérer les inscriptions ? Airsoft Compagnon s’en charge pour vous ! Publiez votre annonce en un instant et laissez la plateforme s’occuper du reste. Les joueurs problématiques sont automatiquement filtrés, et les paiements des PAF sont sécurisés directement via l’application. En validant les inscriptions après le paiement, réduisez considérablement le taux d’absentéisme.",
+      "title3": "Quels avantages pour les Joueurs ?",
+      "description3": "Fini les recherches interminables ! Accédez en un clic à toutes les parties et magasins proches de chez vous. Gérez facilement votre PAF et retrouvez l’historique de vos événements passés et à venir. Créez votre profil, affichez votre équipement et rejoignez des équipes. Collectionnez des badges pour montrer votre engagement au sein de la communauté."
+    }
   },
   "contact": {
     "title": "Airsoft Compagnon - Contact",
@@ -26,7 +39,12 @@
   },
   "login": {
     "title": "Airsoft Compagnon - Connexion",
-    "description": "Se connecter à votre compte"
+    "description": "Se connecter à votre compte",
+    "email": "Email",
+    "password": "Mot de passe",
+    "submit": "Se connecter",
+    "register": "Pas de compte ?",
+    "forgot-password": "Mot de passe oublié ?"
   },
   "terms-and-conditions": {
     "title": "Airsoft Compagnon - CGV",

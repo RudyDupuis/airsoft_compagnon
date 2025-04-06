@@ -17,8 +17,21 @@
   "index": {
     "title": "Airsoft Compagnon - Home",
     "description": "Airsoft Companion is a platform for airsoft enthusiasts. Find games, meet players, and build your reputation.",
-    "subtitle": "Find games,\nMeet players,\nBuild your reputation!",
-    "cta": "Find a game"
+    "hero-banner": {
+      "subtitle": "Find games,\nMeet players,\nBuild your reputation!",
+      "cta": "Find a game"
+    },
+    "find-a-game": {
+      "title": "Find a game"
+    },
+    "infos": {
+      "title1": "What is Airsoft Compagnon ?",
+      "description1": "Whether you're a player or an organizer, Airsoft Compagnon is your ideal ally for managing and finding airsoft games. With one click, access events near you and specialized shops. Post your games with ease, without worrying about payments and registrations – we take care of everything! And the best part? It's 100% free!",
+      "title2": "What are the benefits for organizers ?",
+      "description2": "Tired of wasting time managing registrations? Airsoft Compagnon takes care of it for you! Post your announcement in an instant and let the platform handle the rest. Problematic players are automatically filtered, and PAF payments are secured directly through the app. By validating registrations after payment, significantly reduce no-show rates.",
+      "title3": "What are the benefits for players ?",
+      "description3": "No more endless searches! Access all games and shops near you with one click. Easily manage your PAF and find the history of your past and upcoming events. Create your profile, showcase your gear, and join teams. Collect badges to show your commitment to the community."
+    }
   },
   "contact": {
     "title": "Airsoft Compagnon - Contact",
@@ -26,7 +39,12 @@
   },
   "login": {
     "title": "Airsoft Compagnon - Login",
-    "description": "Login to your account"
+    "description": "Login to your account",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "register": "No account ?",
+    "forgot-password": "Forgot password ?"
   },
   "terms-and-conditions": {
     "title": "Airsoft Compagnon - GTC",
