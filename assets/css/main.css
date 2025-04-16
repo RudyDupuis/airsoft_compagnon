@@ -29,11 +29,15 @@
 }
 
 .button {
-  @apply bg-primary text-lg py-4 px-8 rounded-lg shadow-inner hover:bg-on-background hover:text-background transition duration-300 ease-in-out;
+  @apply bg-primary text-center text-lg py-4 px-8 rounded-lg shadow-inner hover:bg-on-background hover:text-background transition duration-300 ease-in-out;
 }
 
 .button-secondary {
-  @apply bg-secondary text-lg py-4 px-8 rounded-lg shadow-inner hover:bg-on-background hover:text-background transition duration-300 ease-in-out;
+  @apply bg-secondary text-center text-lg py-4 px-8 rounded-lg shadow-inner hover:bg-on-background hover:text-background transition duration-300 ease-in-out;
+}
+
+.button:disabled, .button-secondary:disabled {
+  @apply bg-secondary hover:bg-secondary;
 }
 
 .text-input {

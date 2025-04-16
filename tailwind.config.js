@@ -6,7 +6,8 @@ export default {
       primary: '#F30002',
       secondary: '#606060',
       background: '#1C0000',
-      'on-background': '#FFF8F8'
+      'on-background': '#FFF8F8',
+      error: '#F30002'
     },
     fontFamily: {
       primary: ['Aldrich-Regular', 'Arial']

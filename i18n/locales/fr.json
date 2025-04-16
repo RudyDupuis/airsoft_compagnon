@@ -1,4 +1,9 @@
 {
+  "common": {
+    "server-error": "Erreur serveur, veuillez réessayer plus tard.",
+    "all-fields-required": "Des champs obligatoires n'ont pas été renseignés.",
+    "rules-not-respected": "Toutes les règles doivent être respectées."
+  },
   "header": {
     "contact-link": "Nous contacter",
     "login-link": "Se connecter"
@@ -9,7 +14,7 @@
     "cookies-policy": "Cookies",
     "developped-by": "Développé par Rudy Dupuis"
   },
-  "error": {
+  "errorPage": {
     "title": "Airsoft Compagnon - Oups!",
     "description": "Oups! Quelque chose s'est mal passé.",
     "cta": "Retour à l'accueil ?"
@@ -39,12 +44,34 @@
   },
   "login": {
     "title": "Airsoft Compagnon - Connexion",
-    "description": "Se connecter à votre compte",
+    "description": "Création de votre compte",
     "email": "Email",
     "password": "Mot de passe",
     "submit": "Se connecter",
     "register": "Pas de compte ?",
-    "forgot-password": "Mot de passe oublié ?"
+    "forgot-password": "Mot de passe oublié ?",
+    "invalid-credentials": "Identifiant ou mot de passe invalide."
+  },
+  "register": {
+    "title": "Airsoft Compagnon - Enregistrement",
+    "description": "Se connecter à votre compte",
+    "first-name": "Prénom",
+    "last-name": "Nom",
+    "pseudo": "Pseudo",
+    "date-of-birth": "Date de naissance",
+    "email": "Email",
+    "password": "Mot de passe",
+    "confirm-password": "Confirmer mot de passe",
+    "submit": "S'inscrire",
+    "login": "Déjà un compte ?",
+    "password-mismatch": "Les mots de passe ne correspondent pas",
+    "email-already-exists": "Cet email est déjà utilisé",
+    "invalid-first-name": "Le prénom doit contenir entre 2 et 50 caractères et ne peut inclure que des lettres, espaces, traits d'union et apostrophes.",
+    "invalid-last-name": "Le nom doit contenir entre 2 et 50 caractères et ne peut inclure que des lettres, espaces, traits d'union et apostrophes.",
+    "invalid-pseudo": "Le pseudonyme doit contenir entre 3 et 20 caractères et ne peut inclure que des lettres, des chiffres, des tirets (-) et des underscores (_).",
+    "invalid-date-of-birth": "Vous devez être majeur pour vous inscrire.",
+    "invalid-email": "Veuillez saisir une adresse email valide.",
+    "invalid-password": "Le mot de passe doit contenir au moins 8 caractères, inclure une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial (parmi '$ ! % * ? &')."
   },
   "terms-and-conditions": {
     "title": "Airsoft Compagnon - CGV",

@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { useRoute, useLocalePath } from '#imports'
+import { useRoute, useLocalePath, useUserSession } from '#imports'
 
 const route = useRoute()
 const localePath = useLocalePath()
+const { loggedIn, user, clear } = useUserSession()
 </script>
 
 <template>
@@ -27,6 +28,7 @@ const localePath = useLocalePath()
         {{ $t('header.contact-link') }}
       </NuxtLink>
       <NuxtLink
+        v-if="!loggedIn"
         class="underline hover:text-primary"
         :class="{
           'cursor-default text-primary hover:text-on-background':
@@ -36,6 +38,7 @@ const localePath = useLocalePath()
       >
         {{ $t('header.login-link') }}
       </NuxtLink>
+      <p v-else>{{ user?.pseudo }} <span @click="clear">Déconnexion</span></p>
     </nav>
   </header>
 </template>

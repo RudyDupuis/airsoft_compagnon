@@ -1,4 +1,9 @@
 {
+  "common": {
+    "server-error": "Server error, please try again later.",
+    "all-fields-required": "Some required fields have not been filled.",
+    "rules-not-respected": "All rules must be respected."
+  },
   "header": {
     "contact-link": "Contact us",
     "login-link": "Login"
@@ -9,7 +14,7 @@
     "cookies-policy": "Cookies",
     "developped-by": "Developped by Rudy Dupuis"
   },
-  "error": {
+  "errorPage": {
     "title": "Airsoft Compagnon - Oops!",
     "description": "Oops! Something went wrong.",
     "cta": "Back to home ?"
@@ -43,8 +48,30 @@
     "email": "Email",
     "password": "Password",
     "submit": "Login",
-    "register": "No account ?",
-    "forgot-password": "Forgot password ?"
+    "register": "No account?",
+    "forgot-password": "Forgot password?",
+    "invalid-credentials": "Invalid email or password."
+  },
+  "register": {
+    "title": "Airsoft Compagnon - Registration",
+    "description": "Sign up for your account",
+    "first-name": "First name",
+    "last-name": "Last name",
+    "pseudo": "Pseudo",
+    "date-of-birth": "Date of birth",
+    "email": "Email",
+    "password": "Password",
+    "confirm-password": "Confirm password",
+    "submit": "Sign up",
+    "login": "Already have an account?",
+    "password-mismatch": "Passwords do not match",
+    "email-already-exists": "Email already exists",
+    "invalid-first-name": "The first name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.",
+    "invalid-last-name": "The last name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.",
+    "invalid-pseudo": "The pseudonym must be between 3 and 20 characters long and can only include letters, numbers, dashes (-), and underscores (_).",
+    "invalid-date-of-birth": "You must be of legal age to register.",
+    "invalid-email": "Please enter a valid email address.",
+    "invalid-password": "The password must be at least 8 characters long, include a lowercase letter, an uppercase letter, a number, and a special character (among '$ ! % * ? &')."
   },
   "terms-and-conditions": {
     "title": "Airsoft Compagnon - GTC",

@@ -14,6 +14,7 @@
     "@vesp/nuxt-fontawesome": "^1.2.1",
     "express": "^4.21.2",
     "nuxt": "^3.16.1",
+    "nuxt-auth-utils": "^0.5.18",
     "pg": "^8.14.1",
     "sequelize": "^6.37.6",
     "vue": "^3.5.13",
