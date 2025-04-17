@@ -40,7 +40,14 @@
   },
   "contact": {
     "title": "Airsoft Compagnon - Contact",
-    "description": "Nous contacter"
+    "description": "Nous contacter",
+    "email": "Email",
+    "message": "Votre message",
+    "submit": "Envoyer",
+    "invalid-email": "Veuillez saisir une adresse email valide.",
+    "thank-you": "Merci pour votre message !",
+    "message-sent": "Nous vous répondrons dans les plus brefs délais.",
+    "redirecting": "Redirection vers la page d'accueil dans 5 secondes."
   },
   "login": {
     "title": "Airsoft Compagnon - Connexion",

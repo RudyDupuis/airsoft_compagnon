@@ -44,7 +44,7 @@ async function login() {
     style="background-image: url('/images/player-lying-in-the-grass-background.png')"
   >
     <div
-      class="bg-background rounded-lg border-primary border-2 border px-40 py-10 flex flex-col items-center justify-center gap-10"
+      class="bg-background rounded-lg border-primary border-2 border px-10 mx-5 sm:px-40 py-10 flex flex-col items-center justify-center gap-10"
     >
       <BigLogoSvg class="w-60 md:w-80" />
 
