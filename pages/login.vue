@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useLocalePath, useUserSession } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useRouter } from 'vue-router'
 import type { User } from '~/server/db/models/User.model'
-import { isNotBlankString, isNotNull } from '~/utils/types/typeGuards'
+import { isNotNull } from '~/utils/types/typeGuards'
 
 usePageMeta('login')
 const localePath = useLocalePath()
@@ -15,21 +15,22 @@ const email = ref('')
 const password = ref('')
 
 const {
-  data,
   error,
   isLoading,
-  fetch: loginUser
+  isSuccess,
+  execute: loginUser
 } = useFetchWithState<User>('/api/auth/login', {
-  method: 'POST'
+  method: 'POST',
+  body: computed(() => ({
+    email: email.value,
+    password: password.value
+  }))
 })
 
 async function login() {
-  await loginUser({
-    email: email.value,
-    password: password.value
-  })
+  await loginUser()
 
-  if (isNotNull(data.value)) {
+  if (isSuccess.value) {
     const { fetch: refreshSession } = useUserSession()
     await refreshSession()
     router.push(localePath('/'))
@@ -48,7 +49,7 @@ async function login() {
       <BigLogoSvg class="w-60 md:w-80" />
 
       <form @submit.prevent="login" class="flex flex-col gap-8 w-full">
-        <div v-if="isNotBlankString(error)" class="border border-2 px-4 py-3 rounded text-center">
+        <div v-if="isNotNull(error)" class="border border-2 px-4 py-3 rounded text-center">
           {{ error }}
         </div>
 

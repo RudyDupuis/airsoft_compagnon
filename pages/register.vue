@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useLocalePath, useUserSession } from '#imports'
 import { useI18n } from 'vue-i18n'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useRouter } from 'vue-router'
 import type { User } from '~/server/db/models/User.model'
-import { isNotBlankString, isNotNull } from '~/utils/types/typeGuards'
+import { isNotNull } from '~/utils/types/typeGuards'
 import { emailRegex, nameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
 import { isOfLegalAge } from '~/utils/validations/methods'
 
@@ -24,12 +24,20 @@ const dateOfBirth = ref('')
 const pseudo = ref('')
 
 const {
-  data,
   error,
   isLoading,
-  fetch: registerUser
+  isSuccess,
+  execute: registerUser
 } = useFetchWithState<User>('/api/auth/register', {
-  method: 'POST'
+  method: 'POST',
+  body: computed(() => ({
+    email: email.value,
+    password: password.value,
+    firstName: firstName.value,
+    lastName: lastName.value,
+    dateOfBirth: dateOfBirth.value,
+    pseudo: pseudo.value
+  }))
 })
 
 async function register() {
@@ -38,16 +46,9 @@ async function register() {
     return
   }
 
-  await registerUser({
-    email: email.value,
-    password: password.value,
-    firstName: firstName.value,
-    lastName: lastName.value,
-    dateOfBirth: dateOfBirth.value,
-    pseudo: pseudo.value
-  })
+  await registerUser()
 
-  if (isNotNull(data.value)) {
+  if (isSuccess.value) {
     const { fetch: refreshSession } = useUserSession()
     await refreshSession()
     router.push(localePath('/'))
@@ -66,7 +67,7 @@ async function register() {
       <BigLogoSvg class="w-60 md:w-80" />
 
       <form @submit.prevent="register" class="flex flex-col gap-8 w-full">
-        <div v-if="isNotBlankString(error)" class="border border-2 px-4 py-3 rounded text-center">
+        <div v-if="isNotNull(error)" class="border border-2 px-4 py-3 rounded text-center">
           {{ error }}
         </div>
 
