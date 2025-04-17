@@ -4,6 +4,7 @@ declare module '#auth-utils' {
     pseudo: string
   }
 
+  // TODO : Add your own fields ?
   //   interface UserSession {
   //     // Add your own fields
   //   }
