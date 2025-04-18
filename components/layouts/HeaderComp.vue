@@ -3,7 +3,7 @@ import { useRoute, useLocalePath, useUserSession } from '#imports'
 
 const route = useRoute()
 const localePath = useLocalePath()
-const { loggedIn, user, clear } = useUserSession()
+const { loggedIn, user } = useUserSession()
 </script>
 
 <template>
@@ -28,7 +28,23 @@ const { loggedIn, user, clear } = useUserSession()
       >
         {{ $t('header.login-link') }}
       </NuxtLink>
-      <p v-else>{{ user?.pseudo }} <span @click="clear">Déconnexion</span></p>
+      <NuxtLink
+        v-else
+        :class="{
+          'cursor-default': route.path === localePath('/me')
+        }"
+        :to="localePath('/me')"
+      >
+        <!-- TODO : handle icon color (check footer too) -->
+        <font-awesome class="mr-1" :icon="['fas', 'person-rifle']" />
+        <span
+          class="underline hover:text-primary"
+          :class="{
+            'text-primary hover:text-on-background': route.path === localePath('/me')
+          }"
+          >{{ user?.pseudo }}</span
+        >
+      </NuxtLink>
     </nav>
   </header>
 </template>

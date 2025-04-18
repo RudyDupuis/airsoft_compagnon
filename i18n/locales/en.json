@@ -83,6 +83,20 @@
     "invalid-email": "Please enter a valid email address.",
     "invalid-password": "The password must be at least 8 characters long, include a lowercase letter, an uppercase letter, a number, and a special character (among '$ ! % * ? &')."
   },
+  "me": {
+    "title": "Airsoft Companion - My Account",
+    "description": "View your account information",
+    "h1": "My Account",
+    "pseudo": "Pseudo",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "email": "Email",
+    "date-of-birth": "Date of Birth",
+    "edit": "Edit",
+    "logout": "Logout",
+    "unauthorized": "You must be logged in to access this page.",
+    "user-not-found": "A problem occurred with your session, please log in again."
+  },
   "terms-and-conditions": {
     "title": "Airsoft Compagnon - GTC",
     "description": "General Terms and Conditions of Airsoft Compagnon"

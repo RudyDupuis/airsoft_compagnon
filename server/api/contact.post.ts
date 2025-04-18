@@ -1,10 +1,10 @@
-import { isNotBlankString, isNotNullOrUndefined } from '~/utils/types/typeGuards'
+import { isNotBlankString, isNullOrUndefined } from '~/utils/types/typeGuards'
 import { emailRegex } from '~/utils/validations/regex'
 
 export default defineEventHandler(async (event) => {
   const { email, message } = await readBody(event)
 
-  if (!isNotNullOrUndefined(email) || !isNotNullOrUndefined(message)) {
+  if (isNullOrUndefined(email) || isNullOrUndefined(message)) {
     throw createError({
       statusCode: 400,
       data: {

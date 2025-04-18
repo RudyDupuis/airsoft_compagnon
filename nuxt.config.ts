@@ -24,7 +24,7 @@ export default defineNuxtConfig({
   fontawesome: {
     icons: {
       brands: ['facebook', 'instagram'],
-      solid: ['spinner']
+      solid: ['spinner', 'person-rifle']
     }
   },
   nitro: {

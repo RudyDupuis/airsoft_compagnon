@@ -60,9 +60,9 @@ async function send() {
         <InputField v-model="message" type="textarea" placeholderKey="contact.message" required />
       </FormComp>
 
-      <div v-else class="text-center mb-20">
-        <h2 class="text-2xl">{{ $t('contact.thank-you') }}</h2>
-        <p class="text-xl mt-5">
+      <div v-else class="mb-20">
+        <h2 class="text-2xl text-center">{{ $t('contact.thank-you') }}</h2>
+        <p class="text-xl mt-10">
           {{ $t('contact.message-sent') }}
           <br />
           {{ $t('contact.redirecting') }}

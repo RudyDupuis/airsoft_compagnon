@@ -1,18 +1,18 @@
 import { User } from '~/server/db/models/User.model'
 import { emailRegex, nameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
-import { isNotBlankString, isNotNull, isNotNullOrUndefined } from '~/utils/types/typeGuards'
+import { isNotBlankString, isNotNull, isNullOrUndefined } from '~/utils/types/typeGuards'
 import { isOfLegalAge } from '~/utils/validations/methods'
 
 export default defineEventHandler(async (event) => {
   const { email, password, dateOfBirth, firstName, lastName, pseudo } = await readBody(event)
 
   if (
-    !isNotNullOrUndefined(email) ||
-    !isNotNullOrUndefined(password) ||
-    !isNotNullOrUndefined(dateOfBirth) ||
-    !isNotNullOrUndefined(firstName) ||
-    !isNotNullOrUndefined(lastName) ||
-    !isNotNullOrUndefined(pseudo)
+    isNullOrUndefined(email) ||
+    isNullOrUndefined(password) ||
+    isNullOrUndefined(dateOfBirth) ||
+    isNullOrUndefined(firstName) ||
+    isNullOrUndefined(lastName) ||
+    isNullOrUndefined(pseudo)
   ) {
     throw createError({
       statusCode: 400,

@@ -1,10 +1,10 @@
 import { User } from '~/server/db/models/User.model'
-import { isNotNullOrUndefined, isNull } from '~/utils/types/typeGuards'
+import { isNullOrUndefined, isNull } from '~/utils/types/typeGuards'
 
 export default defineEventHandler(async (event) => {
   const { email, password } = await readBody(event)
 
-  if (!isNotNullOrUndefined(email) || !isNotNullOrUndefined(password)) {
+  if (isNullOrUndefined(email) || isNullOrUndefined(password)) {
     throw createError({
       statusCode: 400,
       data: {
