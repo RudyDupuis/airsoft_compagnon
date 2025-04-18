@@ -40,9 +40,19 @@ function validateInput() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 md:w-96">
+  <div class="flex flex-col gap-2">
     <label :for="uniqueId">{{ $t(placeholderKey) }} {{ required ? '*' : '' }}</label>
+    <textarea
+      v-if="type === 'textarea'"
+      :id="uniqueId"
+      v-model="inputValue"
+      :placeholder="$t(placeholderKey)"
+      :required="required"
+      class="text-input resize-none h-32"
+      @blur="validateInput"
+    ></textarea>
     <input
+      v-else
       :id="uniqueId"
       v-model="inputValue"
       :type="type"

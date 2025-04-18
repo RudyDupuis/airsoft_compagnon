@@ -15,6 +15,9 @@ const localePath = useLocalePath()
     </div>
 
     <div class="flex items-center gap-2">
+      <NuxtLink :to="localePath('/contact')" class="underline hover:text-primary">
+        {{ $t('footer.contact') }}
+      </NuxtLink>
       <NuxtLink :to="localePath('/terms-and-conditions')" class="underline hover:text-primary">
         {{ $t('footer.terms-and-conditions') }}
       </NuxtLink>
@@ -26,7 +29,7 @@ const localePath = useLocalePath()
       </NuxtLink>
     </div>
     <div class="flex flex-col items-center lg:items-start">
-      <p>Copyright © {{ new Date().getFullYear() }} Airsoft Compagnon</p>
+      <p class="text-center">Copyright © {{ new Date().getFullYear() }} Airsoft Compagnon</p>
       <p class="text-xs">{{ $t('footer.developped-by') }}</p>
     </div>
   </footer>

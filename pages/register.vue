@@ -6,7 +6,6 @@ import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useRouter } from 'vue-router'
 import type { User } from '~/server/db/models/User.model'
-import { isNotNull } from '~/utils/types/typeGuards'
 import { emailRegex, nameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
 import { isOfLegalAge } from '~/utils/validations/methods'
 
@@ -57,20 +56,18 @@ async function register() {
 </script>
 
 <template>
-  <section
-    class="w-screen pt-40 pb-20 bg-cover bg-center bg-left flex items-center justify-center"
-    style="background-image: url('/images/player-lying-in-the-grass-background.png')"
-  >
-    <div
-      class="bg-background rounded-lg border-primary border-2 border px-10 mx-5 sm:px-40 py-10 flex flex-col items-center justify-center gap-10"
-    >
-      <BigLogoSvg class="w-60 md:w-80" />
+  <section class="fullscreen-player-lying-in-the-grass-background">
+    <div class="container">
+      <h1>{{ $t('register.h1') }}</h1>
 
-      <form @submit.prevent="register" class="flex flex-col gap-8 w-full">
-        <div v-if="isNotNull(error)" class="border border-2 px-4 py-3 rounded text-center">
-          {{ error }}
-        </div>
-
+      <FormComp
+        v-if="!isSuccess"
+        submitButtonKey="register.submit"
+        :error="error"
+        :isLoading="isLoading"
+        :isSuccess="isSuccess"
+        @submit="register"
+      >
         <InputField
           v-model="firstName"
           placeholderKey="register.first-name"
@@ -124,12 +121,7 @@ async function register() {
           type="password"
           required
         />
-
-        <button v-if="!isLoading" class="button mt-5">{{ $t('register.submit') }}</button>
-        <button v-else class="button mt-5" disabled>
-          <font-awesome class="text-2xl animate-spin" :icon="['fas', 'spinner']" />
-        </button>
-      </form>
+      </FormComp>
 
       <NuxtLink :to="localePath('/login')" class="button-secondary">
         {{ $t('register.login') }}

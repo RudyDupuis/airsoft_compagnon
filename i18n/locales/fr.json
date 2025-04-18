@@ -5,10 +5,10 @@
     "rules-not-respected": "Toutes les règles doivent être respectées."
   },
   "header": {
-    "contact-link": "Nous contacter",
     "login-link": "Se connecter"
   },
   "footer": {
+    "contact": "Contact",
     "terms-and-conditions": "CGV",
     "terms-of-use": "CGU",
     "cookies-policy": "Cookies",
@@ -41,6 +41,7 @@
   "contact": {
     "title": "Airsoft Compagnon - Contact",
     "description": "Nous contacter",
+    "h1": "Nous contacter",
     "email": "Email",
     "message": "Votre message",
     "submit": "Envoyer",
@@ -52,6 +53,7 @@
   "login": {
     "title": "Airsoft Compagnon - Connexion",
     "description": "Création de votre compte",
+    "h1": "Se connecter",
     "email": "Email",
     "password": "Mot de passe",
     "submit": "Se connecter",
@@ -62,6 +64,7 @@
   "register": {
     "title": "Airsoft Compagnon - Enregistrement",
     "description": "Se connecter à votre compte",
+    "h1": "Créer son compte",
     "first-name": "Prénom",
     "last-name": "Nom",
     "pseudo": "Pseudo",

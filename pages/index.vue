@@ -5,10 +5,7 @@ usePageMeta('index')
 </script>
 
 <template>
-  <section
-    class="w-screen h-screen bg-cover bg-center bg-left flex items-center justify-center"
-    style="background-image: url('/images/player-lying-in-the-grass-background.png')"
-  >
+  <section class="fullscreen-player-lying-in-the-grass-background">
     <div class="lg:w-5/12"></div>
     <div class="flex flex-col items-center justify-center gap-14 md:gap-20">
       <BigLogoSvg class="w-10/12 md:w-fit" />

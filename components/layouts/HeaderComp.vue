@@ -18,16 +18,6 @@ const { loggedIn, user, clear } = useUserSession()
 
     <nav class="flex flex-col gap-2 md:flex-row md:gap-10">
       <NuxtLink
-        class="underline hover:text-primary"
-        :class="{
-          'cursor-default text-primary hover:text-on-background':
-            route.path === localePath('/contact')
-        }"
-        :to="localePath('/contact')"
-      >
-        {{ $t('header.contact-link') }}
-      </NuxtLink>
-      <NuxtLink
         v-if="!loggedIn"
         class="underline hover:text-primary"
         :class="{
