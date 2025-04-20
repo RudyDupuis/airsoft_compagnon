@@ -30,20 +30,14 @@ const { loggedIn, user } = useUserSession()
       </NuxtLink>
       <NuxtLink
         v-else
+        class="hover:text-primary"
         :class="{
-          'cursor-default': route.path === localePath('/me')
+          'cursor-default text-primary hover:text-on-background': route.path === localePath('/me')
         }"
         :to="localePath('/me')"
       >
-        <!-- TODO : handle icon color (check footer too) -->
         <font-awesome class="mr-1" :icon="['fas', 'person-rifle']" />
-        <span
-          class="underline hover:text-primary"
-          :class="{
-            'text-primary hover:text-on-background': route.path === localePath('/me')
-          }"
-          >{{ user?.pseudo }}</span
-        >
+        <span class="underline">{{ user?.pseudo }}</span>
       </NuxtLink>
     </nav>
   </header>

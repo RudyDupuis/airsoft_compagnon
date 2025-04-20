@@ -5,9 +5,9 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "fix": "prettier --write . && eslint . --fix",
     "analyse": "eslint",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format": "prettier --check ."
   },
   "dependencies": {
     "@nuxtjs/i18n": "^9.4.0",

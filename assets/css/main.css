@@ -9,12 +9,8 @@
 }
 
 @layer base {
-  * {
-    @apply font-primary text-on-background;
-  }
-
   body {
-    @apply bg-background overflow-x-hidden;
+    @apply bg-background font-primary text-on-background overflow-x-hidden;
   }
 }
 

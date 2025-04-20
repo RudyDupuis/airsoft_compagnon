@@ -7,10 +7,10 @@ const localePath = useLocalePath()
   <footer class="flex flex-col lg:flex-row gap-10 items-center justify-between px-10 py-5">
     <div class="flex items-center gap-2">
       <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-        <font-awesome class="text-2xl" :icon="['fab', 'facebook']" />
+        <font-awesome class="text-2xl hover:text-primary" :icon="['fab', 'facebook']" />
       </a>
       <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
-        <font-awesome class="text-2xl" color="primary" :icon="['fab', 'instagram']" />
+        <font-awesome class="text-2xl hover:text-primary" :icon="['fab', 'instagram']" />
       </a>
     </div>
 

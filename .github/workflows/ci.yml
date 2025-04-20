@@ -25,7 +25,7 @@ jobs:
         run: npm run analyse
 
       - name: Code Formatting
-        run: npm run format:check
+        run: npm run format
 
       - name: Build Project
         run: npm run build
