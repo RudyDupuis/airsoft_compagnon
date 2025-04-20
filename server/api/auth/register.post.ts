@@ -1,4 +1,4 @@
-import { User } from '~/server/db/models/User.model'
+import { User } from '~/server/db/models/User'
 import { emailRegex, nameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
 import { isNotBlankString, isNotNull, isNullOrUndefined } from '~/utils/types/typeGuards'
 import { isOfLegalAge } from '~/utils/validations/methods'

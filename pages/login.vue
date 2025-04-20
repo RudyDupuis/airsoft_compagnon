@@ -4,7 +4,7 @@ import { useLocalePath, useUserSession } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useRouter } from 'vue-router'
-import type { User } from '~/server/db/models/User.model'
+import type { User } from '~/server/db/models/User'
 
 usePageMeta('login')
 const localePath = useLocalePath()

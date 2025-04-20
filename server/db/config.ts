@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript'
 import { isUndefined } from '~/utils/types/typeGuards'
-import { User } from './models/User.model'
+import models from './modelRegistry'
 
 if (
   isUndefined(process.env.DB_NAME) ||
@@ -16,8 +16,7 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
   dialect: 'postgres',
-  // TODO : make it automatic (not easy with nuxt)
-  models: [User],
+  models: models,
   logging: process.env.DB_LOGGING === 'true'
 })
 

@@ -3,7 +3,7 @@ import { useLocalePath, useUserSession } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { isNotNull } from '~/utils/types/typeGuards'
-import type { User } from '~/server/db/models/User.model'
+import type { User } from '~/server/db/models/User'
 import { useRouter } from 'vue-router'
 
 usePageMeta('me')

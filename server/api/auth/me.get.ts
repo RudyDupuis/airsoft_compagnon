@@ -1,4 +1,4 @@
-import { User } from '~/server/db/models/User.model'
+import { User } from '~/server/db/models/User'
 import { isNull, isNullOrUndefined } from '~/utils/types/typeGuards'
 
 export default defineEventHandler(async (event) => {
