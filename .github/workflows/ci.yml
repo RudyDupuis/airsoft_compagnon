@@ -12,7 +12,6 @@ jobs:
   testing:
     runs-on: ubuntu-latest
 
-    # Configurer un service PostgreSQL directement dans le workflow
     services:
       postgres:
         image: postgres:16-alpine
@@ -21,13 +20,7 @@ jobs:
           POSTGRES_PASSWORD: secret
           POSTGRES_DB: database
         ports:
-          # Map le port 5432 du conteneur au port 5432 sur l'hôte
           - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
 
     steps:
       - name: Checkout code
@@ -45,6 +38,9 @@ jobs:
       - name: Code Formatting
         run: npm run format:check
 
+      - name: Build Project
+        run: npm run build
+
       - name: Create .env file
         run: |
           echo "DB_HOST=localhost" > .env
@@ -55,32 +51,11 @@ jobs:
           echo "NUXT_SESSION_PASSWORD=f62c6b3ad917483a979ece313fab0339" >> .env
           cat .env
 
-      - name: Build Project
-        run: npm run build
-
       - name: Start server with database connection
         run: |
           npm run dev > server.log 2>&1 &
-          sleep 20
+          sleep 10
           curl -s http://localhost:3000 || (echo "Server failed to start" && cat server.log && exit 1)
 
       - name: Run Cypress Tests
         run: npm run cy:check
-        env:
-          DB_HOST: localhost
-          DB_NAME: database
-          DB_USER: admin
-          DB_PASSWORD: secret
-          DB_LOGGING: false
-
-      - name: Debug on failure
-        if: failure()
-        run: |
-          echo "==== Server Logs ===="
-          cat server.log || echo "No server log file"
-          echo "==== Server Status ===="
-          curl -v http://localhost:3000 || echo "Server not responding"
-          echo "==== Database Status ===="
-          PGPASSWORD=secret psql -h localhost -U admin -d database -c "\dt" || echo "Cannot connect to DB"
-          echo "==== Current Environment Variables ===="
-          env | grep DB_
