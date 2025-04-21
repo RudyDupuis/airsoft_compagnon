@@ -37,7 +37,7 @@ const { loggedIn, user } = useUserSession()
         :to="localePath('/me')"
       >
         <font-awesome class="mr-1" :icon="['fas', 'person-rifle']" />
-        <span class="underline">{{ user?.pseudo }}</span>
+        <span class="underline" data-cy="header-user-pseudo">{{ user?.pseudo }}</span>
       </NuxtLink>
     </nav>
   </header>

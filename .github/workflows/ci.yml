@@ -22,10 +22,18 @@ jobs:
         run: npm install
 
       - name: Code Analysis
-        run: npm run analyse
+        run: npm run analyse:check
 
       - name: Code Formatting
-        run: npm run format
+        run: npm run format:check
 
       - name: Build Project
         run: npm run build
+
+      - name: Start server in background
+        run: |
+          npm run dev &
+          sleep 10
+
+      - name: Run Cypress Tests
+        run: npm run cy:check

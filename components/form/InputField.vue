@@ -10,6 +10,7 @@ const props = withDefaults(
     placeholderKey: string
     type?: string
     required?: boolean
+    cy?: string
     errorMessageKey?: string
     regex?: RegExp
     customValidation?: (value: string) => boolean
@@ -49,6 +50,7 @@ function validateInput() {
       :placeholder="$t(placeholderKey)"
       :required="required"
       class="text-input resize-none h-32"
+      :data-cy="`text-input-${cy}`"
       @blur="validateInput"
     ></textarea>
     <input
@@ -59,9 +61,14 @@ function validateInput() {
       :placeholder="$t(placeholderKey)"
       :required="required"
       class="text-input"
+      :data-cy="`text-input-${cy}`"
       @blur="validateInput"
     />
-    <p v-if="isDefined(errorMessageKey) && !isInputValid" class="text-error">
+    <p
+      v-if="isDefined(errorMessageKey) && !isInputValid"
+      class="text-error"
+      :data-cy="`text-input-${cy}-error`"
+    >
       {{ $t(errorMessageKey) }}
     </p>
   </div>

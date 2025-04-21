@@ -24,7 +24,7 @@ export default async function initDatabase() {
   try {
     await sequelize.authenticate()
     console.log('Connection to database has been established successfully.')
-    // TODO : remove force in production and make migrations
+    // TODO PASSER à TYPEORM
     await sequelize.sync({ force: true })
     console.log('Database synchronized successfully.')
   } catch (error) {

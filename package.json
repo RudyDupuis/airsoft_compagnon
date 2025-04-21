@@ -6,8 +6,10 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "fix": "prettier --write . && eslint . --fix",
-    "analyse": "eslint",
-    "format": "prettier --check ."
+    "analyse:check": "eslint",
+    "format:check": "prettier --check .",
+    "cy:dev": "cypress open",
+    "cy:check": "cypress run"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^9.4.0",
@@ -29,6 +31,7 @@
     "@types/express": "^5.0.1",
     "@types/node": "^22.13.11",
     "@types/sequelize": "^4.28.20",
+    "cypress": "^14.3.1",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-nuxt": "^4.0.0",

@@ -74,6 +74,7 @@ async function register() {
           :regex="nameRegex"
           errorMessageKey="register.invalid-first-name"
           required
+          cy="first-name"
         />
         <InputField
           v-model="lastName"
@@ -81,6 +82,7 @@ async function register() {
           :regex="nameRegex"
           errorMessageKey="register.invalid-last-name"
           required
+          cy="last-name"
         />
         <InputField
           v-model="pseudo"
@@ -88,6 +90,7 @@ async function register() {
           :regex="pseudoRegex"
           errorMessageKey="register.invalid-pseudo"
           required
+          cy="pseudo"
         />
         <InputField
           v-model="dateOfBirth"
@@ -96,6 +99,7 @@ async function register() {
           error-message-key="register.invalid-date-of-birth"
           type="date"
           required
+          cy="date-of-birth"
         />
         <InputField
           v-model="email"
@@ -104,6 +108,7 @@ async function register() {
           errorMessageKey="register.invalid-email"
           type="email"
           required
+          cy="email"
         />
         <InputField
           v-model="password"
@@ -112,6 +117,7 @@ async function register() {
           errorMessageKey="register.invalid-password"
           type="password"
           required
+          cy="password"
         />
         <InputField
           v-model="confirmPassword"
@@ -120,10 +126,11 @@ async function register() {
           errorMessageKey="register.invalid-password"
           type="password"
           required
+          cy="confirm-password"
         />
       </FormComp>
 
-      <NuxtLink :to="localePath('/login')" class="button-secondary">
+      <NuxtLink :to="localePath('/login')" class="button-secondary" data-cy="login-link">
         {{ $t('register.login') }}
       </NuxtLink>
     </div>
