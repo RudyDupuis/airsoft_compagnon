@@ -33,6 +33,6 @@ jobs:
 
       - name: Run Cypress Tests
         run: |
-          docker-compose -f docker-compose.yml up -d --build
-          timeout 60 bash -c 'until curl -s http://localhost:3000 > /dev/null; do sleep 1; done' || echo "App startup timed out"
+          docker compose -f docker-compose.dev.yml up -d --build
+          sleep 30
           docker exec $(docker ps -qf "name=app") npm run cy:check
