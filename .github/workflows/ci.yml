@@ -11,6 +11,7 @@ on:
 jobs:
   testing:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -30,10 +31,8 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Start server in background
-        run: |
-          npm run dev &
-          sleep 10
-
       - name: Run Cypress Tests
-        run: npm run cy:check
+        run: |
+          docker-compose -f docker-compose.yml up -d --build
+          timeout 60 bash -c 'until curl -s http://localhost:3000 > /dev/null; do sleep 1; done' || echo "App startup timed out"
+          docker exec $(docker ps -qf "name=app") npm run cy:check
