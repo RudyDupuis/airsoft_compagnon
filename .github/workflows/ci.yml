@@ -32,6 +32,16 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Create .env file
+        run: |
+          echo "DB_HOST=localhost" >> .env
+          echo "DB_NAME=database" >> .env
+          echo "DB_USER=admin" >> .env
+          echo "DB_PASSWORD=secret" >> .env
+          echo "DB_LOGGING=false" >> .env
+          echo "NUXT_SESSION_PASSWORD=f62c6b3ad917483a979ece313fab0339" >> .env
+          cat .env
+
       - name: Code Analysis
         run: npm run analyse:check
 
@@ -41,21 +51,11 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Create .env file
+      - name: Start dev server with database connection
         run: |
-          echo "DB_HOST=localhost" > .env
-          echo "DB_NAME=database" >> .env
-          echo "DB_USER=admin" >> .env
-          echo "DB_PASSWORD=secret" >> .env
-          echo "DB_LOGGING=false" >> .env
-          echo "NUXT_SESSION_PASSWORD=f62c6b3ad917483a979ece313fab0339" >> .env
-          cat .env
-
-      - name: Start server with database connection
-        run: |
-          npm run dev > server.log 2>&1 &
+          npm run dev &
           sleep 10
-          curl -s http://localhost:3000 || (echo "Server failed to start" && cat server.log && exit 1)
+          curl -s http://localhost:3000
 
       - name: Run Cypress Tests
         run: npm run cy:check
