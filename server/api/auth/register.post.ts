@@ -1,7 +1,8 @@
-import { User } from '~/server/db/models/User'
+import { User } from '~/server/db/entities/User'
 import { emailRegex, nameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
 import { isNotBlankString, isNotNull, isNullOrUndefined } from '~/utils/types/typeGuards'
 import { isOfLegalAge } from '~/utils/validations/methods'
+import { TypeORM } from '~/server/db/config'
 
 export default defineEventHandler(async (event) => {
   const { email, password, dateOfBirth, firstName, lastName, pseudo } = await readBody(event)
@@ -38,7 +39,8 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const existingUser = await User.findOne({ where: { email } })
+  const userRepository = TypeORM.getRepository(User)
+  const existingUser = await userRepository.findOne({ where: { email } })
 
   if (isNotNull(existingUser)) {
     throw createError({
@@ -50,7 +52,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const passwordHash = await hashPassword(password)
-  const user = await User.create({
+  const user = userRepository.create({
     email,
     passwordHash,
     dateOfBirth,
@@ -58,16 +60,17 @@ export default defineEventHandler(async (event) => {
     lastName,
     pseudo
   })
+  await userRepository.save(user)
 
   await setUserSession(event, {
     user: {
-      id: user.get('id'),
-      pseudo: user.get('pseudo')
+      id: user.id,
+      pseudo: user.pseudo
     }
   })
 
   return {
-    id: user.get('id'),
-    pseudo: user.get('pseudo')
+    id: user.id,
+    pseudo: user.pseudo
   }
 })

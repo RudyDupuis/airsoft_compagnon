@@ -1,4 +1,5 @@
-import { User } from '~/server/db/models/User'
+import { TypeORM } from '~/server/db/config'
+import { User } from '~/server/db/entities/User'
 import { isNullOrUndefined, isNull } from '~/utils/types/typeGuards'
 
 export default defineEventHandler(async (event) => {
@@ -13,9 +14,10 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const user = await User.findOne({ where: { email } })
+  const userRepository = TypeORM.getRepository(User)
+  const user = await userRepository.findOne({ where: { email } })
 
-  if (isNull(user) || !(await verifyPassword(user.get('passwordHash'), password))) {
+  if (isNull(user) || !(await verifyPassword(user.passwordHash, password))) {
     throw createError({
       statusCode: 401,
       data: {
@@ -26,13 +28,13 @@ export default defineEventHandler(async (event) => {
 
   await setUserSession(event, {
     user: {
-      id: user.get('id'),
-      pseudo: user.get('pseudo')
+      id: user.id,
+      pseudo: user.pseudo
     }
   })
 
   return {
-    id: user.get('id'),
-    pseudo: user.get('pseudo')
+    id: user.id,
+    pseudo: user.pseudo
   }
 })

@@ -1,4 +1,5 @@
-import { User } from '~/server/db/models/User'
+import { TypeORM } from '~/server/db/config'
+import { User } from '~/server/db/entities/User'
 import { isNull, isNullOrUndefined } from '~/utils/types/typeGuards'
 
 export default defineEventHandler(async (event) => {
@@ -14,7 +15,8 @@ export default defineEventHandler(async (event) => {
   }
 
   const { id } = session.user
-  const user = await User.findOne({ where: { id } })
+  const userRepository = TypeORM.getRepository(User)
+  const user = await userRepository.findOne({ where: { id } })
 
   if (isNull(user)) {
     throw createError({
@@ -26,11 +28,11 @@ export default defineEventHandler(async (event) => {
   }
 
   return {
-    id: user.get('id'),
-    email: user.get('email'),
-    pseudo: user.get('pseudo'),
-    firstName: user.get('firstName'),
-    lastName: user.get('lastName'),
-    dateOfBirth: user.get('dateOfBirth')
+    id: user.id,
+    email: user.email,
+    pseudo: user.pseudo,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    dateOfBirth: user.dateOfBirth
   }
 })

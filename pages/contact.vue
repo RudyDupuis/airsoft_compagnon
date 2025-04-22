@@ -4,7 +4,7 @@ import { useLocalePath } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useRouter } from 'vue-router'
-import type { User } from '~/server/db/models/User'
+import type { User } from '~/server/db/entities/User'
 import { emailRegex } from '~/utils/validations/regex'
 
 usePageMeta('contact')

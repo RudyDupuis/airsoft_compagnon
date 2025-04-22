@@ -5,7 +5,7 @@ import { useI18n } from 'vue-i18n'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useRouter } from 'vue-router'
-import type { User } from '~/server/db/models/User'
+import type { User } from '~/server/db/entities/User'
 import { emailRegex, nameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
 import { isOfLegalAge } from '~/utils/validations/methods'
 
