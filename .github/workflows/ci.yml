@@ -54,3 +54,11 @@ jobs:
 
       - name: Run Cypress Tests
         run: npm run cy:check
+      
+      - name: Upload Cypress Screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+          retention-days: 5

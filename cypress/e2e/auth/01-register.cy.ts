@@ -61,6 +61,7 @@ describe('As a user, I want to register', () => {
     fillForm({ ...user, confirmPassword: 'differentpassword' })
 
     cy.getBySel('form-submit-button').click()
+    cy.wait('@registerRequest')
     cy.getBySel('form-error').should('contain', errorMessages.passwordsDoNotMatch)
   })
 
@@ -73,6 +74,7 @@ describe('As a user, I want to register', () => {
     cy.getBySel('text-input-first-name-error').should('contain', errorMessages.firstName)
 
     cy.getBySel('form-submit-button').click()
+    cy.wait('@registerRequest')
     cy.getBySel('form-error').should('contain', errorMessages.rulesNotRespected)
   })
 
@@ -85,6 +87,7 @@ describe('As a user, I want to register', () => {
     cy.getBySel('text-input-last-name-error').should('contain', errorMessages.lastName)
 
     cy.getBySel('form-submit-button').click()
+    cy.wait('@registerRequest')
     cy.getBySel('form-error').should('contain', errorMessages.rulesNotRespected)
   })
 
@@ -97,6 +100,7 @@ describe('As a user, I want to register', () => {
     cy.getBySel('text-input-pseudo-error').should('contain', errorMessages.pseudo)
 
     cy.getBySel('form-submit-button').click()
+    cy.wait('@registerRequest')
     cy.getBySel('form-error').should('contain', errorMessages.rulesNotRespected)
   })
 
@@ -109,6 +113,7 @@ describe('As a user, I want to register', () => {
     cy.getBySel('text-input-date-of-birth-error').should('contain', errorMessages.dateOfBirth)
 
     cy.getBySel('form-submit-button').click()
+    cy.wait('@registerRequest')
     cy.getBySel('form-error').should('contain', errorMessages.rulesNotRespected)
   })
 
@@ -121,6 +126,7 @@ describe('As a user, I want to register', () => {
     cy.getBySel('text-input-email-error').should('contain', errorMessages.email)
 
     cy.getBySel('form-submit-button').click()
+    cy.wait('@registerRequest')
     cy.getBySel('form-error').should('contain', errorMessages.rulesNotRespected)
   })
 
@@ -133,6 +139,7 @@ describe('As a user, I want to register', () => {
     cy.getBySel('text-input-password-error').should('contain', errorMessages.password)
 
     cy.getBySel('form-submit-button').click()
+    cy.wait('@registerRequest')
     cy.getBySel('form-error').should('contain', errorMessages.rulesNotRespected)
   })
 
@@ -148,9 +155,7 @@ describe('As a user, I want to register', () => {
     cy.getBySel('text-input-confirm-password-error').should('not.exist')
 
     cy.getBySel('form-submit-button').click()
-
     cy.wait('@registerRequest')
-
     cy.url().should('eq', `${Cypress.config().baseUrl}/`)
     cy.getBySel('header-user-pseudo').should('contain', user.pseudo)
   })
@@ -159,9 +164,7 @@ describe('As a user, I want to register', () => {
     fillForm(user)
 
     cy.getBySel('form-submit-button').click()
-
     cy.wait('@registerRequest')
-
     cy.getBySel('form-error').should('contain', errorMessages.emailAlreadyUsed)
   })
 })

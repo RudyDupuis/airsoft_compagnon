@@ -50,11 +50,17 @@ async function login() {
         :isSuccess="isSuccess"
         @submit="login"
       >
-        <InputField v-model="email" placeholderKey="login.email" type="email" required />
-        <InputField v-model="password" placeholderKey="login.password" type="password" required />
+        <InputField v-model="email" placeholderKey="login.email" type="email" required cy="email" />
+        <InputField
+          v-model="password"
+          placeholderKey="login.password"
+          type="password"
+          required
+          cy="password"
+        />
       </FormComp>
 
-      <NuxtLink :to="localePath('/register')" class="button-secondary">
+      <NuxtLink :to="localePath('/register')" class="button-secondary" data-cy="register-link">
         {{ $t('login.register') }}
       </NuxtLink>
 

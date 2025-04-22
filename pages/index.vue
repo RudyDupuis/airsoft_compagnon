@@ -9,8 +9,12 @@ usePageMeta('index')
     <div class="lg:w-5/12"></div>
     <div class="flex flex-col items-center justify-center gap-14 md:gap-20">
       <BigLogoSvg class="w-10/12 md:w-fit" />
-      <pre class="text-lg md:text-2xl">{{ $t('index.hero-banner.subtitle') }}</pre>
-      <a class="button" href="/#find-a-game">{{ $t('index.hero-banner.cta') }}</a>
+      <pre class="text-lg md:text-2xl" data-cy="hero-banner-subtitle">{{
+        $t('index.hero-banner.subtitle')
+      }}</pre>
+      <a class="button" href="/#find-a-game" data-cy="hero-banner-cta">{{
+        $t('index.hero-banner.cta')
+      }}</a>
     </div>
   </section>
   <section id="find-a-game">
