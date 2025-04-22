@@ -61,7 +61,6 @@ describe('As a user, I want to register', () => {
     fillForm({ ...user, confirmPassword: 'differentpassword' })
 
     cy.getBySel('form-submit-button').click()
-    cy.wait('@registerRequest')
     cy.getBySel('form-error').should('contain', errorMessages.passwordsDoNotMatch)
   })
 
