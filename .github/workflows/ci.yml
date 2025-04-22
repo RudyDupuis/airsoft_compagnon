@@ -51,11 +51,9 @@ jobs:
       - name: Build Project
         run: npm run build
 
-      - name: Start dev server with database connection
+      - name: Start server
         run: |
-          npm run dev &
-          sleep 10
-          curl -s http://localhost:3000
+          node .output/server/index.mjs
 
       - name: Run Cypress Tests
         run: npm run cy:check
