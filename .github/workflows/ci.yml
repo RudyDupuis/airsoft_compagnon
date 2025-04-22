@@ -43,14 +43,14 @@ jobs:
 
       - name: Start Server
         run: |
-          export DB_HOST=localhost
-          export DB_NAME=database
-          export DB_USER=admin
-          export DB_PASSWORD=secret
-          export DB_LOGGING=false
-          export NUXT_SESSION_PASSWORD=f62c6b3ad917483a979ece313fab0339
+          echo "Retrieving environment variables from .env.example excluding database-related variables"
+          grep -v "^DB_HOST\|^DB_NAME\|^DB_USER\|^DB_PASSWORD" .env.example > .env
+          cat .env
+          export $(grep -v '^#' .env | xargs)
+          echo "Exporting environment variables related to the database"
+          export DB_HOST=localhost DB_NAME=database DB_USER=admin DB_PASSWORD=secret
           node .output/server/index.mjs &
-          sleep 10
+          sleep 3
 
       - name: Run Cypress Tests
         run: npm run cy:check
