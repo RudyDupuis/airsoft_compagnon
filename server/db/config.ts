@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm'
 import { isUndefined } from '~/utils/types/typeGuards'
-import entities from './entitiesRegistry'
+import entities from './entities/entitiesRegistry'
+import { runSeeders } from './seeders/runSeeders'
 
 if (
   isUndefined(process.env.DB_NAME) ||
@@ -25,6 +26,11 @@ export default async function initDatabase() {
   try {
     await TypeORM.initialize()
     console.log('Database connection established successfully')
+
+    if (process.env.ENV === 'Dev') {
+      await runSeeders()
+      console.log('Database seeded successfully')
+    }
   } catch (error) {
     console.error('Unable to connect to the database:', error)
   }

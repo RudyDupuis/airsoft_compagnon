@@ -1,3 +1,5 @@
+import { userSeeds } from '~/server/db/seeders/UserSeeder'
+
 const user = {
   firstName: 'John',
   lastName: 'Doe',
@@ -160,7 +162,10 @@ describe('As a user, I want to register', () => {
   })
 
   it('should show error when email is already used', () => {
-    fillForm(user)
+    fillForm({
+      ...user,
+      email: userSeeds[0].email
+    })
 
     cy.getBySel('form-submit-button').click()
     cy.wait('@registerRequest')
