@@ -1,4 +1,11 @@
-import { userSeeds } from '~/server/db/seeders/UserSeeder'
+const userAlreadyCreated = {
+  email: 'john.doe@example.com',
+  password: 'password123!',
+  dateOfBirth: new Date('1990-01-01'),
+  firstName: 'John',
+  lastName: 'Doe',
+  pseudo: 'Johnny'
+}
 
 const invalidCredentials = {
   email: 'bad@email.com',
@@ -23,15 +30,15 @@ describe('As a user, I want to login', () => {
   it('should login successfully and redirect to homepage', () => {
     cy.getBySel('form').should('be.visible')
 
-    cy.getBySel('text-input-email').should('be.visible').type(userSeeds[0].email)
-    cy.getBySel('text-input-password').should('be.visible').type(userSeeds[0].password)
+    cy.getBySel('text-input-email').should('be.visible').type(userAlreadyCreated.email)
+    cy.getBySel('text-input-password').should('be.visible').type(userAlreadyCreated.password)
 
     cy.getBySel('form-submit-button').click()
 
     cy.wait('@loginRequest')
 
     cy.url().should('eq', `${Cypress.config().baseUrl}/`)
-    cy.getBySel('header-user-pseudo').should('contain', userSeeds[0].pseudo)
+    cy.getBySel('header-user-pseudo').should('contain', userAlreadyCreated.pseudo)
   })
 
   it('should show error when credentials are invalid', () => {

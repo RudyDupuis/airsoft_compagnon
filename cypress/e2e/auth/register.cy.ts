@@ -1,6 +1,4 @@
-import { userSeeds } from '~/server/db/seeders/UserSeeder'
-
-const user = {
+const newUser = {
   firstName: 'John',
   lastName: 'Doe',
   pseudo: 'John25',
@@ -9,7 +7,9 @@ const user = {
   dateOfBirth: '2000-01-01'
 }
 
-const invalidUser: typeof user = {
+const mailAlreadyUsed = 'john.doe@example.com'
+
+const invalidUser: typeof newUser = {
   firstName: 'John25!',
   lastName: 'Doe25!',
   pseudo: 'John25@',
@@ -34,7 +34,7 @@ const errorMessages = {
   rulesNotRespected: 'All rules must be respected.'
 }
 
-function fillForm(formData: typeof user & { confirmPassword?: string }) {
+function fillForm(formData: typeof newUser & { confirmPassword?: string }) {
   cy.getBySel('form').should('be.visible')
 
   cy.getBySel('text-input-first-name').should('be.visible').type(formData.firstName)
@@ -60,7 +60,7 @@ describe('As a user, I want to register', () => {
   })
 
   it('should show error when passwords do not match', () => {
-    fillForm({ ...user, confirmPassword: 'differentpassword' })
+    fillForm({ ...newUser, confirmPassword: 'differentpassword' })
 
     cy.getBySel('form-submit-button').click()
     cy.getBySel('form-error').should('contain', errorMessages.passwordsDoNotMatch)
@@ -68,7 +68,7 @@ describe('As a user, I want to register', () => {
 
   it('should show error when first name is invalid', () => {
     fillForm({
-      ...user,
+      ...newUser,
       firstName: invalidUser.firstName
     })
 
@@ -81,7 +81,7 @@ describe('As a user, I want to register', () => {
 
   it('should show error when last name is invalid', () => {
     fillForm({
-      ...user,
+      ...newUser,
       lastName: invalidUser.lastName
     })
 
@@ -94,7 +94,7 @@ describe('As a user, I want to register', () => {
 
   it('should show error when pseudo is invalid', () => {
     fillForm({
-      ...user,
+      ...newUser,
       pseudo: invalidUser.pseudo
     })
 
@@ -107,7 +107,7 @@ describe('As a user, I want to register', () => {
 
   it('should show error when user is not legal age', () => {
     fillForm({
-      ...user,
+      ...newUser,
       dateOfBirth: invalidUser.dateOfBirth
     })
 
@@ -120,7 +120,7 @@ describe('As a user, I want to register', () => {
 
   it('should show error when email is invalid', () => {
     fillForm({
-      ...user,
+      ...newUser,
       email: invalidUser.email
     })
 
@@ -133,7 +133,7 @@ describe('As a user, I want to register', () => {
 
   it('should show error when password is invalid', () => {
     fillForm({
-      ...user,
+      ...newUser,
       password: invalidUser.password
     })
 
@@ -145,7 +145,7 @@ describe('As a user, I want to register', () => {
   })
 
   it('should register successfully and redirect to homepage', () => {
-    fillForm(user)
+    fillForm(newUser)
 
     cy.getBySel('text-input-first-name-error').should('not.exist')
     cy.getBySel('text-input-last-name-error').should('not.exist')
@@ -158,14 +158,11 @@ describe('As a user, I want to register', () => {
     cy.getBySel('form-submit-button').click()
     cy.wait('@registerRequest')
     cy.url().should('eq', `${Cypress.config().baseUrl}/`)
-    cy.getBySel('header-user-pseudo').should('contain', user.pseudo)
+    cy.getBySel('header-user-pseudo').should('contain', newUser.pseudo)
   })
 
   it('should show error when email is already used', () => {
-    fillForm({
-      ...user,
-      email: userSeeds[0].email
-    })
+    fillForm({ ...newUser, email: mailAlreadyUsed })
 
     cy.getBySel('form-submit-button').click()
     cy.wait('@registerRequest')
