@@ -1,4 +1,5 @@
 import { TypeORM } from '../config'
+import { seedGames } from './GameSeeder'
 import { seedUsers } from './UserSeeder'
 
 export async function runSeeders() {
@@ -7,4 +8,5 @@ export async function runSeeders() {
   })
 
   await seedUsers()
+  await seedGames()
 }

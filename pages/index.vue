@@ -17,9 +17,9 @@ usePageMeta('index')
       }}</a>
     </div>
   </section>
-  <section id="find-a-game">
+  <section id="find-a-game" class="w-screen p-5 md:p-20">
     <h2 class="large-title p-10">{{ $t('index.find-a-game.title') }}</h2>
-    <p class="text-center p-20">Work in progress</p>
+    <MapComp />
   </section>
   <section
     class="w-screen bg-cover bg-center flex items-center justify-center xl:justify-between"
