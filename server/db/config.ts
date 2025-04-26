@@ -18,7 +18,6 @@ export const TypeORM = new DataSource({
   database: process.env.DB_NAME,
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  synchronize: process.env.ENV === 'Dev',
   entities: entities
 })
 
@@ -28,6 +27,7 @@ export default async function initDatabase() {
     console.log('Database connection established successfully')
 
     if (process.env.ENV === 'Dev') {
+      await TypeORM.synchronize(true)
       await runSeeders()
       console.log('Database seeded successfully')
     }

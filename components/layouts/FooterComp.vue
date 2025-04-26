@@ -30,7 +30,7 @@ const localePath = useLocalePath()
     </div>
     <div class="flex flex-col items-center lg:items-start">
       <p class="text-center">Copyright © {{ new Date().getFullYear() }} Airsoft Compagnon</p>
-      <p class="text-xs">{{ $t('footer.developped-by') }}</p>
+      <p class="text-xs">{{ $t('footer.developped-by') }} | {{ $t('footer.version') }} 0.0.0</p>
     </div>
   </footer>
 </template>

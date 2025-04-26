@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm'
+import { Game } from './Game'
 
 @Entity()
 export class User {
@@ -11,7 +12,7 @@ export class User {
   @Column({ type: 'varchar', nullable: false })
   passwordHash!: string
 
-  @Column({ type: 'date', nullable: false })
+  @Column({ type: 'timestamptz', nullable: false })
   dateOfBirth!: Date
 
   @Column({ type: 'varchar', nullable: false })
@@ -22,4 +23,10 @@ export class User {
 
   @Column({ type: 'varchar', nullable: false })
   pseudo!: string
+
+  @Column({ type: 'boolean', default: false })
+  isVerified!: boolean
+
+  @ManyToMany(() => Game, (game) => game.participants)
+  participatingGames!: Game[]
 }

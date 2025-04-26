@@ -12,7 +12,8 @@
     "terms-and-conditions": "GTC",
     "terms-of-use": "TOU",
     "cookies-policy": "Cookies",
-    "developped-by": "Developped by Rudy Dupuis"
+    "developped-by": "Developped by Rudy Dupuis",
+    "version": "version"
   },
   "errorPage": {
     "title": "Airsoft Compagnon - Oops!",
@@ -27,7 +28,16 @@
       "cta": "Find a game"
     },
     "find-a-game": {
-      "title": "Find a game"
+      "title": "Find a game",
+      "allowed-consumables": "Allowed consumables",
+      "dominical": "Dominical",
+      "op": "OP",
+      "public": "Public",
+      "private": "Private",
+      "join-game": "Login to join",
+      "has-amenities": "Amenities",
+      "has-parking": "Parking",
+      "has-equipement-rental": "Equipment rental"
     },
     "infos": {
       "title1": "What is Airsoft Compagnon ?",

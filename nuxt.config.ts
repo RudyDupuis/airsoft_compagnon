@@ -1,3 +1,21 @@
+function fontawesomeIcons() {
+  return {
+    brands: ['facebook', 'instagram'],
+    solid: [
+      'spinner',
+      'person-rifle',
+      'toilet',
+      'car',
+      'store',
+      'circle-xmark',
+      'people-group',
+      'coins',
+      'calendar-days',
+      'calendar'
+    ]
+  }
+}
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-04-02',
   devtools: { enabled: true },
@@ -22,10 +40,7 @@ export default defineNuxtConfig({
     }
   },
   fontawesome: {
-    icons: {
-      brands: ['facebook', 'instagram'],
-      solid: ['spinner', 'person-rifle']
-    }
+    icons: fontawesomeIcons()
   },
   nitro: {
     esbuild: {
