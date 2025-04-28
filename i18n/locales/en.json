@@ -15,6 +15,16 @@
     "developped-by": "Developped by Rudy Dupuis",
     "version": "version"
   },
+  "game-infos-panel": {
+    "allowed-consumables": "Allowed consumables",
+    "dominical": "Dominical",
+    "op": "OP",
+    "public": "Public",
+    "private": "Private",
+    "has-amenities": "Amenities",
+    "has-parking": "Parking",
+    "has-equipement-rental": "Equipment rental"
+  },
   "errorPage": {
     "title": "Airsoft Compagnon - Oops!",
     "description": "Oops! Something went wrong.",
@@ -29,15 +39,7 @@
     },
     "find-a-game": {
       "title": "Find a game",
-      "allowed-consumables": "Allowed consumables",
-      "dominical": "Dominical",
-      "op": "OP",
-      "public": "Public",
-      "private": "Private",
-      "join-game": "Login to join",
-      "has-amenities": "Amenities",
-      "has-parking": "Parking",
-      "has-equipement-rental": "Equipment rental"
+      "join-game": "Login to join"
     },
     "infos": {
       "title1": "What is Airsoft Compagnon ?",
@@ -47,6 +49,11 @@
       "title3": "What are the benefits for players ?",
       "description3": "No more endless searches! Access all games and shops near you with one click. Easily manage your PAF and find the history of your past and upcoming events. Create your profile, showcase your gear, and join teams. Collect badges to show your commitment to the community."
     }
+  },
+  "map": {
+    "title": "Airsoft Compagnon - Map",
+    "description": "Map of airsoft games",
+    "join-game": "Join the game"
   },
   "contact": {
     "title": "Airsoft Compagnon - Contact",

@@ -34,11 +34,26 @@
 }
 
 .container {
-  @apply bg-background rounded-lg border-primary border-2 border px-10 mx-5 sm:px-40 py-10 flex flex-col items-center justify-center gap-10 w-auto;
+  @apply bg-background rounded-lg border-on-background border-2 px-10 mx-5 sm:px-40 py-10 flex flex-col items-center justify-center gap-10 w-auto;
 }
 
 .container h1 {
   @apply text-3xl font-bold text-center my-10;
+}
+
+.fullscreen-without-navbar {
+  @apply mt-20 w-full;
+  height: calc(100dvh - 5rem);
+}
+
+.modal {
+  @apply fixed inset-0 bg-background border-2 border-on-background flex items-center justify-center z-50;
+}
+.modal > svg {
+  @apply text-2xl absolute right-0 top-0 m-5 hover:text-primary cursor-pointer;
+}
+.modal > div {
+  @apply max-h-dvh lg:max-h-full overflow-auto p-10;
 }
 
 /* Button */

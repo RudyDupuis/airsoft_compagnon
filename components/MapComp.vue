@@ -53,5 +53,5 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div id="map" class="z-0 w-full" :style="{ height: '80vh' }"></div>
+  <div id="map" class="z-0 w-full h-full"></div>
 </template>

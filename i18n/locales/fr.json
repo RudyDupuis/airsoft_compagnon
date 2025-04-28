@@ -15,6 +15,16 @@
     "developped-by": "Développé par Rudy Dupuis",
     "version": "version"
   },
+  "game-infos-panel": {
+    "allowed-consumables": "Consommables autorisés",
+    "dominical": "Dominicale",
+    "op": "OP",
+    "public": "Public",
+    "private": "Privée",
+    "has-amenities": "Commodités",
+    "has-parking": "Parking",
+    "has-equipement-rental": "Location d'équipement"
+  },
   "errorPage": {
     "title": "Airsoft Compagnon - Oups!",
     "description": "Oups! Quelque chose s'est mal passé.",
@@ -29,15 +39,7 @@
     },
     "find-a-game": {
       "title": "Trouver une partie",
-      "allowed-consumables": "Consommables autorisés",
-      "dominical": "Dominicale",
-      "op": "OP",
-      "public": "Public",
-      "private": "Privée",
-      "join-game": "Se connecter pour rejoindre",
-      "has-amenities": "Commodités",
-      "has-parking": "Parking",
-      "has-equipement-rental": "Location d'équipement"
+      "join-game": "Se connecter pour rejoindre"
     },
     "infos": {
       "title1": "Airsoft compagnon, c’est quoi ?",
@@ -47,6 +49,11 @@
       "title3": "Quels avantages pour les Joueurs ?",
       "description3": "Fini les recherches interminables ! Accédez en un clic à toutes les parties et magasins proches de chez vous. Gérez facilement votre PAF et retrouvez l’historique de vos événements passés et à venir. Créez votre profil, affichez votre équipement et rejoignez des équipes. Collectionnez des badges pour montrer votre engagement au sein de la communauté."
     }
+  },
+  "map": {
+    "title": "Airsoft Compagnon - Carte",
+    "description": "Carte des parties d'airsoft",
+    "join-game": "Rejoindre la partie"
   },
   "contact": {
     "title": "Airsoft Compagnon - Contact",

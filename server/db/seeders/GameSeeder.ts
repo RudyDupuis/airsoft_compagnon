@@ -115,7 +115,7 @@ export const gameSeeds = [
   {
     name: 'Partie débutants friendly',
     description:
-      "Session d'initiation idéale pour les nouveaux joueurs. Rythme lent, nombreuses explications et pauses.",
+      "Session d'initiation spécialement conçue pour les nouveaux joueurs d'airsoft qui souhaitent découvrir ce sport dans les meilleures conditions possibles. Notre équipe de joueurs expérimentés vous accompagnera tout au long de cette journée avec un rythme adapté, de nombreuses explications sur les règles, l'équipement et les techniques de base. Le terrain a été spécialement aménagé pour offrir différentes zones de jeu accessibles aux débutants : zones dégagées pour faciliter la visibilité, bunkers simples pour apprendre le jeu de couverture, et quelques zones plus techniques pour ceux qui se sentent prêts à relever des défis. Des pauses régulières sont prévues pour permettre des débriefings, répondre à vos questions, et vous donner des conseils personnalisés pour améliorer votre expérience. Les scénarios proposés seront progressifs en difficulté, commençant par des objectifs simples jusqu'à des missions plus élaborées en fin de journée. Aucune expérience préalable n'est requise, et l'atmosphère sera détendue et bienveillante pour assurer que chacun prenne du plaisir, quel que soit son niveau.",
     startDateTime: new Date('2025-05-25T10:00:00'),
     endDateTime: new Date('2025-05-25T15:00:00'),
     gameType: GameType.DOMINICAL,

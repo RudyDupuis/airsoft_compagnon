@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { useLocalePath } from '#imports'
+import { useLocalePath, useUserSession, navigateTo } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { computed, ref } from 'vue'
-import { GameType, PrivacyType, type Game } from '~/server/db/entities/Game'
+import { type Game } from '~/server/db/entities/Game'
 import type { MarkerData } from '~/components/MapComp.vue'
 import { isDefined, isNull } from '~/utils/types/typeGuards'
-import { displayDateTime } from '~/utils/formatting/date'
 
 usePageMeta('index')
 const localePath = useLocalePath()
+const { loggedIn } = useUserSession()
+
+if (loggedIn.value) {
+  navigateTo(localePath('/map'))
+}
 
 const {
   data: games,
@@ -58,84 +62,24 @@ const selectedGame = computed(() => {
   </section>
   <section
     id="find-a-game"
-    class="relative w-screen p-5 md:p-20 flex flex-col items-center justify-center"
+    class="relative fullscreen-without-navbar p-5 flex flex-col items-center justify-center"
   >
-    <h2 class="large-title p-10">{{ $t('index.find-a-game.title') }}</h2>
+    <h2 class="large-title mb-10">{{ $t('index.find-a-game.title') }}</h2>
     <FetchDataComp :error="error" :isLoading="isLoading" />
-    <div
-      class="w-4/5 absolute lg:bottom-0 bg-background border-2 border-on-background rounded-md p-10 lg:mb-24 z-10"
-      v-if="isDefined(selectedGame)"
-    >
-      <font-awesome
-        class="text-2xl absolute right-0 top-0 m-5 hover:text-primary cursor-pointer"
-        :icon="['fas', 'circle-xmark']"
-        @click="selectedGameId = undefined"
-      />
-      <h3 class="text-xl text-center font-bold mb-10">{{ selectedGame.name }}</h3>
-      <div class="flex flex-col-reverse lg:flex-row justify-between lg:space-x-10">
-        <div class="flex flex-col justify-between mt-10 lg:mt-0">
-          <p>{{ selectedGame.description }}</p>
-          <p class="my-5">
-            <span class="underline">{{ $t('index.find-a-game.allowed-consumables') }}</span>
-            {{ selectedGame.allowedConsumables }}
-          </p>
-          <div class="flex justify-center">
-            <NuxtLink class="button w-fit" :to="localePath('/login')">
-              {{ $t('index.find-a-game.join-game') }}
-            </NuxtLink>
-          </div>
-        </div>
-        <div class="lg:w-fit flex flex-col space-y-5 text-center lg:text-left">
-          <p>
-            {{ selectedGame.gameType === GameType.OP ? $t('index.find-a-game.op') : '' }}
-            {{
-              selectedGame.gameType === GameType.DOMINICAL ? $t('index.find-a-game.dominical') : ''
-            }}
-            -
-            {{
-              selectedGame.privacyType === PrivacyType.PRIVATE
-                ? $t('index.find-a-game.private')
-                : ''
-            }}
-            {{
-              selectedGame.privacyType === PrivacyType.PUBLIC ? $t('index.find-a-game.public') : ''
-            }}
-          </p>
-          <p><font-awesome :icon="['fas', 'coins']" /> {{ selectedGame.price }} €</p>
-          <p class="text-nowrap">
-            <font-awesome :icon="['fas', 'calendar-days']" />
-            {{ displayDateTime(new Date(selectedGame.startDateTime)) }}
-            <br />
-            <font-awesome :icon="['fas', 'calendar']" />
-            {{ displayDateTime(new Date(selectedGame.endDateTime)) }}
-          </p>
-          <p>
-            <font-awesome :icon="['fas', 'people-group']" />
-            {{ selectedGame.participants.length }} /
-            {{ selectedGame.maxPlayers }}
-          </p>
-          <div class="flex justify-center align-center space-x-5 pt-5">
-            <p v-if="selectedGame.hasAmenities" class="icon-with-text">
-              <font-awesome :icon="['fas', 'toilet']" />
-              <span>{{ $t('index.find-a-game.has-amenities') }}</span>
-            </p>
-            <p v-if="selectedGame.hasParking" class="icon-with-text">
-              <font-awesome :icon="['fas', 'car']" />
-              <span>{{ $t('index.find-a-game.has-parking') }}</span>
-            </p>
-            <p v-if="selectedGame.hasEquipmentRental" class="icon-with-text">
-              <font-awesome :icon="['fas', 'store']" />
-              <span>{{ $t('index.find-a-game.has-equipement-rental') }}</span>
-            </p>
-          </div>
-        </div>
+    <template v-if="isSuccess">
+      <MapComp :markersData="markersData" @marker-clicked="(id) => (selectedGameId = id)" />
+      <div
+        v-if="isDefined(selectedGame)"
+        class="modal lg:absolute lg:inset-auto lg:right-0 lg:top-0 lg:bottom-0 lg:w-96 lg:mt-24 lg:mr-6 lg:mb-6 lg:rounded-xl lg:z-0"
+      >
+        <font-awesome :icon="['fas', 'circle-xmark']" @click="selectedGameId = undefined" />
+        <GameInfos :game="selectedGame">
+          <NuxtLink class="button" :to="localePath(`/login`)">
+            {{ $t('index.find-a-game.join-game') }}
+          </NuxtLink>
+        </GameInfos>
       </div>
-    </div>
-    <MapComp
-      v-if="isSuccess"
-      :markersData="markersData"
-      @marker-clicked="(id) => (selectedGameId = id)"
-    />
+    </template>
   </section>
   <section
     class="w-screen bg-cover bg-center flex items-center justify-center xl:justify-between"

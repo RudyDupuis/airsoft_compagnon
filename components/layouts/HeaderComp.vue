@@ -8,7 +8,7 @@ const { loggedIn, user } = useUserSession()
 
 <template>
   <header
-    class="flex items-center justify-between px-10 md:px-20 py-5 fixed top-0 left-0 w-screen z-50 bg-background bg-opacity-80"
+    class="flex items-center justify-between px-10 md:px-20 h-20 fixed top-0 left-0 w-screen z-50 bg-background bg-opacity-80"
   >
     <NuxtLink :to="localePath('/')">
       <div>
