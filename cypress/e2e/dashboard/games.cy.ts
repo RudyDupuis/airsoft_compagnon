@@ -55,16 +55,19 @@ const game = {
     minute: '2-digit'
   }),
   endDateTimeToType: '2025-06-16T03:00:00',
-  gameType: 'MilSim',
+  gameType: 'OP',
+  gameTypeToSelect: 'op',
   address: 'Terrain Echo, 33610 Cestas, France',
   allowedConsumables:
     'BBs biodégradables obligatoires. Bâtons lumineux autorisés. Grenades sonores limitées à 2 par joueur.',
   price: 35.0,
   validationType: 'Manual',
+  validationTypeToSelect: 'manual',
   hasAmenities: true,
   hasParking: false,
   hasEquipementRental: true,
   privacyType: 'Private',
+  privacyTypeToSelect: 'private',
   maxPlayers: 30
 }
 
@@ -121,15 +124,15 @@ function fillGameForm(formData: typeof game) {
   cy.getBySel('text-input-game-description').should('exist').type(formData.description)
   cy.getBySel('text-input-game-start-date').should('exist').type(formData.startDateTimeToType)
   cy.getBySel('text-input-game-end-date').should('exist').type(formData.endDateTimeToType)
-  cy.getBySel('select-input-game-type').should('exist').click()
-  cy.getBySel(`select-input-game-type-${formData.gameType}`).click()
+  cy.getBySel('select-input-game-type').should('exist').select(formData.gameTypeToSelect)
   cy.getBySel('text-input-game-address').should('exist').type(formData.address)
   cy.getBySel('text-input-game-allowed-consumables')
     .should('exist')
     .type(formData.allowedConsumables)
   cy.getBySel('text-input-game-price').should('exist').type(formData.price.toString())
-  cy.getBySel('select-input-game-validation-type').should('exist').click()
-  cy.getBySel(`select-input-game-validation-type-${formData.validationType}`).click()
+  cy.getBySel('select-input-game-validation-type')
+    .should('exist')
+    .select(formData.validationTypeToSelect)
   if (formData.hasAmenities) {
     cy.getBySel('checkbox-game-has-amenities').click()
   }
@@ -139,8 +142,7 @@ function fillGameForm(formData: typeof game) {
   if (formData.hasEquipementRental) {
     cy.getBySel('checkbox-game-has-equipement-rental').click()
   }
-  cy.getBySel('select-input-game-privacy-type').should('exist').click()
-  cy.getBySel(`select-input-game-privacy-type-${formData.privacyType}`).click()
+  cy.getBySel('select-input-game-privacy-type').should('exist').select(formData.privacyTypeToSelect)
   cy.getBySel('text-input-game-max-players').should('exist').type(formData.maxPlayers.toString())
 }
 
