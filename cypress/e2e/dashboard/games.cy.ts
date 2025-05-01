@@ -46,6 +46,7 @@ const game = {
     hour: '2-digit',
     minute: '2-digit'
   }),
+  startDateTimeToType: '2025-06-15T21:00:00',
   endDateTime: new Date('2025-06-16T03:00:00').toLocaleString(undefined, {
     year: 'numeric',
     month: 'numeric',
@@ -53,6 +54,7 @@ const game = {
     hour: '2-digit',
     minute: '2-digit'
   }),
+  endDateTimeToType: '2025-06-16T03:00:00',
   gameType: 'MilSim',
   address: 'Terrain Echo, 33610 Cestas, France',
   allowedConsumables:
@@ -174,8 +176,8 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-types').should('contain', game.gameType)
     cy.getBySel('game-infos-panel-types').should('contain', game.privacyType)
     cy.getBySel('game-infos-panel-price').should('contain', game.price)
-    cy.getBySel('game-infos-panel-dates').should('contain', game.startDateTime)
-    cy.getBySel('game-infos-panel-dates').should('contain', game.endDateTime)
+    cy.getBySel('game-infos-panel-dates').should('contain', game.startDateTimeToType)
+    cy.getBySel('game-infos-panel-dates').should('contain', game.endDateTimeToType)
     cy.getBySel('game-infos-panel-max-players').should('contain', game.maxPlayers)
     cy.getBySel('game-infos-panel-address').should('contain', game.address)
     cy.getBySel('game-infos-panel-has-amenities').should('exist')
