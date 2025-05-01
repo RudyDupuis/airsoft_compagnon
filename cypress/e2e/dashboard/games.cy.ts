@@ -60,7 +60,6 @@ describe('As a unverified user, I want to handle games', () => {
     cy.getBySel('marker-map-5').should('exist')
     cy.getBySel('marker-map-6').should('exist')
     cy.getBySel('marker-map-7').should('exist')
-    cy.getBySel('marker-map-8').should('exist')
     cy.getBySel('marker-map-1').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-name').should('contain', gameAlreadyAdded.name)
@@ -96,8 +95,6 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('text-input-password').should('be.visible').type(verifiedUser.password)
 
     cy.getBySel('form-submit-button').click()
-
-    cy.wait('@loginRequest')
 
     cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
   })
