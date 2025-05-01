@@ -250,7 +250,7 @@ async function create() {
       />
       <CheckboxField
         v-model="hasEquipmentRental"
-        labelKey="dashboard.create-game.has-equipement-rental"
+        labelKey="dashboard.create-game.has-equipment-rental"
         cy="game-has-equipment-rental"
       />
       <SelectField

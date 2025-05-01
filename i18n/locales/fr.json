@@ -24,7 +24,7 @@
     "private": "Privée",
     "has-amenities": "Commodités",
     "has-parking": "Parking",
-    "has-equipement-rental": "Location d'équipement"
+    "has-equipment-rental": "Location d'équipement"
   },
   "geocoding": {
     "coordinates-not-found": "Aucune coordonnée trouvée pour cette adresse."
@@ -88,7 +88,7 @@
       "private": "Privée",
       "has-amenities": "Commodités",
       "has-parking": "Parking",
-      "has-equipement-rental": "Location d'équipement",
+      "has-equipment-rental": "Location d'équipement",
       "submit": "Créer la partie",
       "invalid-name": "Le nom doit contenir entre 2 et 50 caractères et ne peut inclure que des lettres, espaces, traits d'union et apostrophes.",
       "invalid-date-time": "La partie ne peut pas être planifiée dans le passé.",

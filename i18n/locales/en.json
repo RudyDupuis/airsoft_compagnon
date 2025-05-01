@@ -24,7 +24,7 @@
     "private": "Private",
     "has-amenities": "Amenities",
     "has-parking": "Parking",
-    "has-equipement-rental": "Equipment rental"
+    "has-equipment-rental": "Equipment rental"
   },
   "geocoding": {
     "coordinates-not-found": "No coordinates found for this address."
@@ -88,7 +88,7 @@
       "private": "Private",
       "has-amenities": "Amenities",
       "has-parking": "Parking",
-      "has-equipement-rental": "Equipment rental",
+      "has-equipment-rental": "Equipment rental",
       "submit": "Create game",
       "invalid-name": "The name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.",
       "invalid-date-time": "The game cannot be scheduled in the past.",

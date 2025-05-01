@@ -56,11 +56,11 @@ defineProps<{
         </p>
         <p
           v-if="game.hasEquipmentRental"
-          data-cy="game-infos-panel-has-equipement-rental"
+          data-cy="game-infos-panel-has-equipment-rental"
           class="icon-with-text"
         >
           <font-awesome :icon="['fas', 'store']" />
-          <span>{{ $t('game-infos-panel.has-equipement-rental') }}</span>
+          <span>{{ $t('game-infos-panel.has-equipment-rental') }}</span>
         </p>
       </div>
       <p v-if="isNotBlankString(game.description)" data-cy="game-infos-panel-description">

@@ -65,7 +65,7 @@ const game = {
   validationTypeToSelect: 'manual',
   hasAmenities: true,
   hasParking: false,
-  hasEquipementRental: true,
+  hasequipmentRental: true,
   privacyType: 'Private',
   privacyTypeToSelect: 'private',
   maxPlayers: 30
@@ -108,7 +108,7 @@ describe('As a unverified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-address').should('contain', gameAlreadyAdded.address)
     cy.getBySel('game-infos-panel-has-amenities').should('exist')
     cy.getBySel('game-infos-panel-has-parking').should('exist')
-    cy.getBySel('game-infos-panel-has-equipement-rental').should('exist')
+    cy.getBySel('game-infos-panel-has-equipment-rental').should('exist')
     cy.getBySel('game-infos-panel-description').should('contain', gameAlreadyAdded.description)
     cy.getBySel('game-infos-panel-allowed-consumables').should(
       'contain',
@@ -139,8 +139,8 @@ function fillGameForm(formData: typeof game) {
   if (formData.hasParking) {
     cy.getBySel('checkbox-game-has-parking').click()
   }
-  if (formData.hasEquipementRental) {
-    cy.getBySel('checkbox-game-has-equipement-rental').click()
+  if (formData.hasequipmentRental) {
+    cy.getBySel('checkbox-game-has-equipment-rental').click()
   }
   cy.getBySel('select-input-game-privacy-type').should('exist').select(formData.privacyTypeToSelect)
   cy.getBySel('text-input-game-max-players').should('exist').type(formData.maxPlayers.toString())
@@ -184,7 +184,7 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-address').should('contain', game.address)
     cy.getBySel('game-infos-panel-has-amenities').should('exist')
     cy.getBySel('game-infos-panel-has-parking').should('not.exist')
-    cy.getBySel('game-infos-panel-has-equipement-rental').should('exist')
+    cy.getBySel('game-infos-panel-has-equipment-rental').should('exist')
     cy.getBySel('game-infos-panel-description').should('contain', game.description)
     cy.getBySel('game-infos-panel-allowed-consumables').should('contain', game.allowedConsumables)
   })
