@@ -214,7 +214,7 @@ async function create() {
         v-model="allowedConsumables"
         placeholderKey="dashboard.create-game.allowed-consumables"
         type="textarea"
-        cy="allowed-consumables"
+        cy="game-allowed-consumables"
       />
       <InputField
         v-model="price"
@@ -236,22 +236,22 @@ async function create() {
           { value: ValidationType.MANUAL, label: $t('dashboard.create-game.manual') }
         ]"
         required
-        cy="validation-type"
+        cy="game-validation-type"
       />
       <CheckboxField
         v-model="hasAmenities"
         labelKey="dashboard.create-game.has-amenities"
-        cy="has-amenities"
+        cy="game-has-amenities"
       />
       <CheckboxField
         v-model="hasParking"
         labelKey="dashboard.create-game.has-parking"
-        cy="has-parking"
+        cy="game-has-parking"
       />
       <CheckboxField
         v-model="hasEquipmentRental"
         labelKey="dashboard.create-game.has-equipement-rental"
-        cy="has-equipment-rental"
+        cy="game-has-equipment-rental"
       />
       <SelectField
         v-model="privacyType"
@@ -261,7 +261,7 @@ async function create() {
           { value: PrivacyType.PRIVATE, label: $t('dashboard.create-game.private') }
         ]"
         required
-        cy="privacy-type"
+        cy="game-privacy-type"
       />
       <InputField
         v-model="maxPlayers"
@@ -271,7 +271,7 @@ async function create() {
         type="number"
         :min="1"
         required
-        cy="max-players"
+        cy="game-max-players"
       />
     </FormComp>
   </div>

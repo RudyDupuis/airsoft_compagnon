@@ -29,7 +29,12 @@ const uniqueId = useId()
       :data-cy="`select-input-${cy}`"
     >
       <option value="" disabled>{{ $t(placeholderKey) }}</option>
-      <option v-for="option in options" :key="option.value" :value="option.value">
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+        :data-cy="`select-option-${cy}-${option.label}`"
+      >
         {{ option.label }}
       </option>
     </select>

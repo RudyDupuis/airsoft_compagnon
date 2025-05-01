@@ -35,6 +35,37 @@ const gameAlreadyAdded = {
   maxPlayers: 40
 }
 
+const game = {
+  name: 'Embuscade Nocturne',
+  description:
+    "Partie nocturne avec scénario d'infiltration. Équipement infrarouge recommandé. Objectifs spéciaux annoncés sur place.",
+  startDateTime: new Date('2025-06-15T21:00:00').toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  }),
+  endDateTime: new Date('2025-06-16T03:00:00').toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  }),
+  gameType: 'MilSim',
+  address: 'Terrain Echo, 33610 Cestas, France',
+  allowedConsumables:
+    'BBs biodégradables obligatoires. Bâtons lumineux autorisés. Grenades sonores limitées à 2 par joueur.',
+  price: 35.0,
+  validationType: 'Manual',
+  hasAmenities: true,
+  hasParking: false,
+  hasEquipementRental: true,
+  privacyType: 'Private',
+  maxPlayers: 30
+}
+
 describe('As a unverified user, I want to handle games', () => {
   beforeEach(() => {
     cy.visit('/login')
@@ -81,6 +112,38 @@ describe('As a unverified user, I want to handle games', () => {
   })
 })
 
+function fillGameForm(formData: typeof game) {
+  cy.getBySel('form').should('be.visible')
+
+  cy.getBySel('text-input-game-name').should('be.visible').type(formData.name)
+  cy.getBySel('text-input-game-description').should('be.visible').type(formData.description)
+  cy.getBySel('text-input-game-start-date').should('be.visible').type(formData.startDateTime)
+  cy.getBySel('text-input-game-end-date').should('be.visible').type(formData.endDateTime)
+  cy.getBySel('select-input-game-type').should('be.visible').click()
+  cy.getBySel(`select-input-game-type-${formData.gameType}`).click()
+  cy.getBySel('text-input-game-address').should('be.visible').type(formData.address)
+  cy.getBySel('text-input-game-allowed-consumables')
+    .should('be.visible')
+    .type(formData.allowedConsumables)
+  cy.getBySel('text-input-game-price').should('be.visible').type(formData.price.toString())
+  cy.getBySel('select-input-game-validation-type').should('be.visible').click()
+  cy.getBySel(`select-input-game-validation-type-${formData.validationType}`).click()
+  if (formData.hasAmenities) {
+    cy.getBySel('checkbox-game-has-amenities').click()
+  }
+  if (formData.hasParking) {
+    cy.getBySel('checkbox-game-has-parking').click()
+  }
+  if (formData.hasEquipementRental) {
+    cy.getBySel('checkbox-game-has-equipement-rental').click()
+  }
+  cy.getBySel('select-input-game-privacy-type').should('be.visible').click()
+  cy.getBySel(`select-input-game-privacy-type-${formData.privacyType}`).click()
+  cy.getBySel('text-input-game-max-players')
+    .should('be.visible')
+    .type(formData.maxPlayers.toString())
+}
+
 describe('As a verified user, I want to handle games', () => {
   beforeEach(() => {
     cy.visit('/login')
@@ -92,9 +155,35 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('form-submit-button').click()
 
     cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
+
+    cy.intercept('POST', '/api/games/create').as('createGameRequest')
   })
 
   it('should see the button to add a game', () => {
     cy.getBySel('open-add-panel').should('exist')
+  })
+
+  it('should add a game', () => {
+    cy.getBySel('open-add-panel').click()
+    fillGameForm(game)
+
+    cy.getBySel('form-submit-button').click()
+    cy.wait('@createGameRequest')
+
+    cy.getBySel('marker-map-8').should('exist').click()
+    cy.getBySel('game-infos-panel').should('exist')
+    cy.getBySel('game-infos-panel-name').should('contain', game.name)
+    cy.getBySel('game-infos-panel-types').should('contain', game.gameType)
+    cy.getBySel('game-infos-panel-types').should('contain', game.privacyType)
+    cy.getBySel('game-infos-panel-price').should('contain', game.price)
+    cy.getBySel('game-infos-panel-dates').should('contain', game.startDateTime)
+    cy.getBySel('game-infos-panel-dates').should('contain', game.endDateTime)
+    cy.getBySel('game-infos-panel-max-players').should('contain', game.maxPlayers)
+    cy.getBySel('game-infos-panel-address').should('contain', game.address)
+    cy.getBySel('game-infos-panel-has-amenities').should('exist')
+    cy.getBySel('game-infos-panel-has-parking').should('not.exist')
+    cy.getBySel('game-infos-panel-has-equipement-rental').should('exist')
+    cy.getBySel('game-infos-panel-description').should('contain', game.description)
+    cy.getBySel('game-infos-panel-allowed-consumables').should('contain', game.allowedConsumables)
   })
 })
