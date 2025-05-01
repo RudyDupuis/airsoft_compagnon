@@ -63,17 +63,12 @@ describe('As a unverified user, I want to handle games', () => {
     cy.getBySel('marker-map-1').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-name').should('contain', gameAlreadyAdded.name)
-    cy.getBySel('game-infos-panel-type').should(
-      'contain',
-      `${gameAlreadyAdded.gameType} - ${gameAlreadyAdded.privacyType}`
-    )
+    cy.getBySel('game-infos-panel-types').should('contain', gameAlreadyAdded.gameType)
+    cy.getBySel('game-infos-panel-types').should('contain', gameAlreadyAdded.privacyType)
     cy.getBySel('game-infos-panel-price').should('contain', gameAlreadyAdded.price)
     cy.getBySel('game-infos-panel-dates').should('contain', gameAlreadyAdded.startDateTime)
     cy.getBySel('game-infos-panel-dates').should('contain', gameAlreadyAdded.endDateTime)
-    cy.getBySel('game-infos-panel-max-players').should(
-      'contain',
-      `0 / ${gameAlreadyAdded.maxPlayers}`
-    )
+    cy.getBySel('game-infos-panel-max-players').should('contain', gameAlreadyAdded.maxPlayers)
     cy.getBySel('game-infos-panel-address').should('contain', gameAlreadyAdded.address)
     cy.getBySel('game-infos-panel-has-amenities').should('exist')
     cy.getBySel('game-infos-panel-has-parking').should('exist')

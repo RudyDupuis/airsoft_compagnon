@@ -14,7 +14,7 @@ defineProps<{
       {{ game.name }}
     </h3>
     <div class="flex flex-col space-y-10">
-      <p data-cy="game-infos-panel-type" class="text-center">
+      <p data-cy="game-infos-panel-types" class="text-center">
         {{ game.gameType === GameType.OP ? $t('game-infos-panel.op') : '' }}
         {{ game.gameType === GameType.DOMINICAL ? $t('game-infos-panel.dominical') : '' }}
         -
