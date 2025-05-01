@@ -45,8 +45,6 @@ describe('As a unverified user, I want to handle games', () => {
 
     cy.getBySel('form-submit-button').click()
 
-    cy.wait('@loginRequest')
-
     cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
   })
 
