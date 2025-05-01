@@ -39,22 +39,22 @@ const game = {
   name: 'Embuscade Nocturne',
   description:
     "Partie nocturne avec scénario d'infiltration. Équipement infrarouge recommandé. Objectifs spéciaux annoncés sur place.",
-  startDateTime: new Date('2025-06-15T21:00:00').toLocaleString(undefined, {
+  startDateTime: new Date('2060-06-15T21:00:00').toLocaleString(undefined, {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit'
   }),
-  startDateTimeToType: '2025-06-15T21:00:00',
-  endDateTime: new Date('2025-06-16T03:00:00').toLocaleString(undefined, {
+  startDateTimeToType: '2060-06-15T21:00:00',
+  endDateTime: new Date('2060-06-16T03:00:00').toLocaleString(undefined, {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit'
   }),
-  endDateTimeToType: '2025-06-16T03:00:00',
+  endDateTimeToType: '2060-06-16T03:00:00',
   gameType: 'OP',
   gameTypeToSelect: 'op',
   address: 'Terrain Echo, 33610 Cestas, France',
@@ -69,6 +69,16 @@ const game = {
   privacyType: 'Private',
   privacyTypeToSelect: 'private',
   maxPlayers: 30
+}
+
+const errorMessages = {
+  invalidName:
+    'The name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.',
+  invalidDateTime: 'The game cannot be scheduled in the past.',
+  startDateAfterEndDate: 'The start date must be before the end date.',
+  invalidPrice: 'The price must be a positive number.',
+  invalidMaxPlayers: 'The maximum number of players must be a positive number.',
+  rulesNotRespected: 'All rules must be respected.'
 }
 
 describe('As a unverified user, I want to handle games', () => {
@@ -163,6 +173,40 @@ describe('As a verified user, I want to handle games', () => {
 
   it('should see the button to add a game', () => {
     cy.getBySel('open-add-panel').should('exist')
+  })
+
+  it('should show errors when fiels are wrong', () => {
+    cy.getBySel('open-add-panel').click()
+    fillGameForm({
+      ...game,
+      name: 'a',
+      startDateTimeToType: '2000-06-15T21:00:00',
+      endDateTimeToType: '2000-06-16T03:00:00',
+      price: -1,
+      maxPlayers: -1
+    })
+
+    cy.getBySel('text-input-game-name-error').should('contain', errorMessages.invalidName)
+    cy.getBySel('text-input-game-start-date-error').should('contain', errorMessages.invalidDateTime)
+    cy.getBySel('text-input-game-end-date-error').should('contain', errorMessages.invalidDateTime)
+    cy.getBySel('text-input-game-price-error').should('contain', errorMessages.invalidPrice)
+    cy.getBySel('text-input-game-max-players').should('contain', errorMessages.invalidMaxPlayers)
+
+    cy.getBySel('form-submit-button').click()
+    cy.wait('@createGameRequest')
+    cy.getBySel('form-error').should('contain', errorMessages.rulesNotRespected)
+  })
+
+  it('should show error when start date is after end date', () => {
+    cy.getBySel('open-add-panel').click()
+    fillGameForm({
+      ...game,
+      startDateTimeToType: '2060-06-15T21:00:00',
+      endDateTimeToType: '2059-06-16T03:00:00'
+    })
+
+    cy.getBySel('form-submit-button').click()
+    cy.getBySel('form-error').should('contain', errorMessages.startDateAfterEndDate)
   })
 
   it('should add a game', () => {

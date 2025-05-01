@@ -70,7 +70,8 @@ onMounted(async () => {
                 </div>`,
           // Remove default style
           className: '',
-          iconSize: [25, 41]
+          iconSize: [25, 41],
+          iconAnchor: [12.5, 41]
         })
 
         L.marker([markerData.latitude, markerData.longitude], { icon: customIcon })
