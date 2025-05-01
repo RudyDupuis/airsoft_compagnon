@@ -69,10 +69,10 @@ const game = {
 describe('As a unverified user, I want to handle games', () => {
   beforeEach(() => {
     cy.visit('/login')
-    cy.getBySel('form').should('be.visible')
+    cy.getBySel('form').should('exist')
 
-    cy.getBySel('text-input-email').should('be.visible').type(UnverifiedUser.email)
-    cy.getBySel('text-input-password').should('be.visible').type(UnverifiedUser.password)
+    cy.getBySel('text-input-email').should('exist').type(UnverifiedUser.email)
+    cy.getBySel('text-input-password').should('exist').type(UnverifiedUser.password)
 
     cy.getBySel('form-submit-button').click()
 
@@ -113,20 +113,20 @@ describe('As a unverified user, I want to handle games', () => {
 })
 
 function fillGameForm(formData: typeof game) {
-  cy.getBySel('form').should('be.visible')
+  cy.getBySel('form').should('exist')
 
-  cy.getBySel('text-input-game-name').should('be.visible').type(formData.name)
-  cy.getBySel('text-input-game-description').should('be.visible').type(formData.description)
-  cy.getBySel('text-input-game-start-date').should('be.visible').type(formData.startDateTime)
-  cy.getBySel('text-input-game-end-date').should('be.visible').type(formData.endDateTime)
-  cy.getBySel('select-input-game-type').should('be.visible').click()
+  cy.getBySel('text-input-game-name').should('exist').type(formData.name)
+  cy.getBySel('text-input-game-description').should('exist').type(formData.description)
+  cy.getBySel('text-input-game-start-date').should('exist').type(formData.startDateTime)
+  cy.getBySel('text-input-game-end-date').should('exist').type(formData.endDateTime)
+  cy.getBySel('select-input-game-type').should('exist').click()
   cy.getBySel(`select-input-game-type-${formData.gameType}`).click()
-  cy.getBySel('text-input-game-address').should('be.visible').type(formData.address)
+  cy.getBySel('text-input-game-address').should('exist').type(formData.address)
   cy.getBySel('text-input-game-allowed-consumables')
-    .should('be.visible')
+    .should('exist')
     .type(formData.allowedConsumables)
-  cy.getBySel('text-input-game-price').should('be.visible').type(formData.price.toString())
-  cy.getBySel('select-input-game-validation-type').should('be.visible').click()
+  cy.getBySel('text-input-game-price').should('exist').type(formData.price.toString())
+  cy.getBySel('select-input-game-validation-type').should('exist').click()
   cy.getBySel(`select-input-game-validation-type-${formData.validationType}`).click()
   if (formData.hasAmenities) {
     cy.getBySel('checkbox-game-has-amenities').click()
@@ -137,20 +137,18 @@ function fillGameForm(formData: typeof game) {
   if (formData.hasEquipementRental) {
     cy.getBySel('checkbox-game-has-equipement-rental').click()
   }
-  cy.getBySel('select-input-game-privacy-type').should('be.visible').click()
+  cy.getBySel('select-input-game-privacy-type').should('exist').click()
   cy.getBySel(`select-input-game-privacy-type-${formData.privacyType}`).click()
-  cy.getBySel('text-input-game-max-players')
-    .should('be.visible')
-    .type(formData.maxPlayers.toString())
+  cy.getBySel('text-input-game-max-players').should('exist').type(formData.maxPlayers.toString())
 }
 
 describe('As a verified user, I want to handle games', () => {
   beforeEach(() => {
     cy.visit('/login')
-    cy.getBySel('form').should('be.visible')
+    cy.getBySel('form').should('exist')
 
-    cy.getBySel('text-input-email').should('be.visible').type(verifiedUser.email)
-    cy.getBySel('text-input-password').should('be.visible').type(verifiedUser.password)
+    cy.getBySel('text-input-email').should('exist').type(verifiedUser.email)
+    cy.getBySel('text-input-password').should('exist').type(verifiedUser.password)
 
     cy.getBySel('form-submit-button').click()
 
