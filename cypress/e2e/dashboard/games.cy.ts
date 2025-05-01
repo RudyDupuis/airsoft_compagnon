@@ -182,8 +182,8 @@ describe('As a verified user, I want to handle games', () => {
       name: 'a',
       startDateTimeToType: '2000-06-15T21:00:00',
       endDateTimeToType: '2000-06-16T03:00:00',
-      price: -1,
-      maxPlayers: -1
+      price: -10,
+      maxPlayers: -10
     })
 
     cy.getBySel('text-input-game-name-error').should('contain', errorMessages.invalidName)
