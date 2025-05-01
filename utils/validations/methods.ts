@@ -8,3 +8,13 @@ export function isOfLegalAge(dateOfBirthString: string): boolean {
   }
   return age >= 18
 }
+
+export function isInFuture(dateString: string): boolean {
+  const date = new Date(dateString)
+  const today = new Date()
+  return date > today
+}
+
+export function isPositiveNumber(value: number): boolean {
+  return value > 0
+}

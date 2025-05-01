@@ -29,12 +29,14 @@ export default defineEventHandler(async (event) => {
   await setUserSession(event, {
     user: {
       id: user.id,
-      pseudo: user.pseudo
+      pseudo: user.pseudo,
+      isVerified: user.isVerified
     }
   })
 
   return {
     id: user.id,
-    pseudo: user.pseudo
+    pseudo: user.pseudo,
+    isVerified: user.isVerified
   }
 })

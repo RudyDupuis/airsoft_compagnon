@@ -144,7 +144,7 @@ describe('As a user, I want to register', () => {
     cy.getBySel('form-error').should('contain', errorMessages.rulesNotRespected)
   })
 
-  it('should register successfully and redirect to homepage', () => {
+  it('should register successfully and redirect to dashboard', () => {
     fillForm(newUser)
 
     cy.getBySel('text-input-first-name-error').should('not.exist')
@@ -157,7 +157,7 @@ describe('As a user, I want to register', () => {
 
     cy.getBySel('form-submit-button').click()
     cy.wait('@registerRequest')
-    cy.url().should('eq', `${Cypress.config().baseUrl}/`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
     cy.getBySel('header-user-pseudo').should('contain', newUser.pseudo)
   })
 

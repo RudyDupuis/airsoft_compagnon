@@ -8,7 +8,8 @@ export const userSeeds = [
     dateOfBirth: new Date('1990-01-01'),
     firstName: 'John',
     lastName: 'Doe',
-    pseudo: 'Johnny'
+    pseudo: 'Johnny',
+    isVerified: true
   },
   {
     email: 'jane.doe@example.com',
@@ -16,7 +17,8 @@ export const userSeeds = [
     dateOfBirth: new Date('1992-02-02'),
     firstName: 'Jane',
     lastName: 'Doe',
-    pseudo: 'Jane_d'
+    pseudo: 'Jane_d',
+    isVerified: true
   },
   {
     email: 'alice.smith@example.com',
@@ -24,23 +26,27 @@ export const userSeeds = [
     dateOfBirth: new Date('1985-05-05'),
     firstName: 'Alice',
     lastName: 'Smith',
-    pseudo: 'Alice85'
+    pseudo: 'Alice85',
+    isVerified: true
   }
 ]
 
 export async function seedUsers() {
   const userRepository = TypeORM.getRepository(User)
 
-  userSeeds.forEach(async (seed) => {
-    const passwordHash = await hashPassword(seed.password)
-    const user = userRepository.create({
-      email: seed.email,
-      passwordHash,
-      dateOfBirth: seed.dateOfBirth,
-      firstName: seed.firstName,
-      lastName: seed.lastName,
-      pseudo: seed.pseudo
+  await Promise.all(
+    userSeeds.map(async (seed) => {
+      const passwordHash = await hashPassword(seed.password)
+      const user = userRepository.create({
+        email: seed.email,
+        passwordHash,
+        dateOfBirth: seed.dateOfBirth,
+        firstName: seed.firstName,
+        lastName: seed.lastName,
+        pseudo: seed.pseudo,
+        isVerified: seed.isVerified
+      })
+      return userRepository.save(user)
     })
-    await userRepository.save(user)
-  })
+  )
 }

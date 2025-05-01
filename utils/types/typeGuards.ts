@@ -25,3 +25,7 @@ export function isNullOrUndefined<T>(value: T | null | undefined): value is null
 export function isNotBlankString(value: string): value is string {
   return value.trim() !== ''
 }
+
+export function isBlankString(value: string): value is string {
+  return value.trim() === ''
+}

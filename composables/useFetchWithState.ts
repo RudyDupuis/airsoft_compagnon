@@ -4,15 +4,17 @@ import { useI18n } from 'vue-i18n'
 import { isDefined, isNotNullOrUndefined } from '~/utils/types/typeGuards'
 import type { UseFetchOptions } from '#app'
 
-export function useFetchWithState<T>(url: string, options: UseFetchOptions<T> = {}) {
+export function useFetchWithState<T>(url: string | Ref<string>, options: UseFetchOptions<T> = {}) {
   const { t } = useI18n()
+
+  const resolvedUrl = computed(() => unref(url))
 
   const {
     data,
     error: fetchError,
     status,
     execute: executeUseFetch
-  } = useFetch(url, {
+  } = useFetch(resolvedUrl, {
     ...options,
     immediate: false,
     watch: false

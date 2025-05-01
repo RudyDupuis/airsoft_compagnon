@@ -2,7 +2,8 @@
   "common": {
     "server-error": "Erreur serveur, veuillez réessayer plus tard.",
     "all-fields-required": "Des champs obligatoires n'ont pas été renseignés.",
-    "rules-not-respected": "Toutes les règles doivent être respectées."
+    "rules-not-respected": "Toutes les règles doivent être respectées.",
+    "unauthorized": "Vous n'avez pas l'autorisation d'accéder à cette ressource."
   },
   "header": {
     "login-link": "Se connecter"
@@ -24,6 +25,9 @@
     "has-amenities": "Commodités",
     "has-parking": "Parking",
     "has-equipement-rental": "Location d'équipement"
+  },
+  "geocoding": {
+    "coordinates-not-found": "Aucune coordonnée trouvée pour cette adresse."
   },
   "errorPage": {
     "title": "Airsoft Compagnon - Oups!",
@@ -50,10 +54,48 @@
       "description3": "Fini les recherches interminables ! Accédez en un clic à toutes les parties et magasins proches de chez vous. Gérez facilement votre PAF et retrouvez l’historique de vos événements passés et à venir. Créez votre profil, affichez votre équipement et rejoignez des équipes. Collectionnez des badges pour montrer votre engagement au sein de la communauté."
     }
   },
-  "map": {
-    "title": "Airsoft Compagnon - Carte",
-    "description": "Carte des parties d'airsoft",
-    "join-game": "Rejoindre la partie"
+  "dashboard": {
+    "title": "Airsoft Compagnon - Tableau de bord",
+    "description": "Gérez vos parties d'airsoft.",
+    "join-game": "Rejoindre la partie",
+    "add": "Ajouter",
+    "games": "Parties",
+    "players": "Joueurs",
+    "teams": "Équipes",
+    "stores": "Magasins",
+    "create-game": {
+      "title": "Créer une partie",
+      "name": "Nom de la partie",
+      "description": "Description",
+      "start-date-time": "Date de début",
+      "end-date-time": "Date de fin",
+      "address": "Adresse",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "coordinate-entry-mode-auto-button": "Entrer les coordonnées à la main ?",
+      "coordinate-entry-mode-manual-button": "Générer les coordonées par l'adresse ?",
+      "max-players": "Nombre maximum de joueurs",
+      "price": "Prix",
+      "allowed-consumables": "Consommables autorisés",
+      "game-type": "Type de partie",
+      "dominical": "Dominicale",
+      "op": "OP",
+      "validation-type": "Type de validation",
+      "auto": "Automatique",
+      "manual": "Manuelle",
+      "privacy-type": "Type de confidentialité",
+      "public": "Public",
+      "private": "Privée",
+      "has-amenities": "Commodités",
+      "has-parking": "Parking",
+      "has-equipement-rental": "Location d'équipement",
+      "submit": "Créer la partie",
+      "invalid-name": "Le nom doit contenir entre 2 et 50 caractères et ne peut inclure que des lettres, espaces, traits d'union et apostrophes.",
+      "invalid-date-time": "La partie ne peut pas être planifiée dans le passé.",
+      "start-date-after-end-date": "La date de début doit être avant la date de fin.",
+      "invalid-price": "Le prix doit être un nombre positif.",
+      "invalid-max-players": "Le nombre maximum de joueurs doit être un nombre positif."
+    }
   },
   "contact": {
     "title": "Airsoft Compagnon - Contact",
@@ -111,7 +153,6 @@
     "date-of-birth": "Date de naissance",
     "edit": "Modifier",
     "logout": "Se déconnecter",
-    "unauthorized": "Vous devez être connecté pour accéder à cette page.",
     "user-not-found": "Un problème est survenu avec votre session, veuillez vous reconnecter."
   },
   "terms-and-conditions": {

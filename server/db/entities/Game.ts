@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { User } from './User'
 
 export enum GameType {
@@ -24,7 +24,7 @@ export class Game {
   @Column({ type: 'varchar', nullable: false })
   name!: string
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: false })
   description!: string
 
   @Column({ type: 'timestamptz', nullable: false })
@@ -46,7 +46,10 @@ export class Game {
   @Column({ type: 'decimal', precision: 10, scale: 7, nullable: false })
   longitude!: number
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'text', nullable: false })
+  address!: string
+
+  @Column({ type: 'text', nullable: false })
   allowedConsumables!: string
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
@@ -85,4 +88,10 @@ export class Game {
     inverseJoinColumn: { name: 'user_id', referencedColumnName: 'id' }
   })
   participants!: User[]
+
+  @ManyToOne(() => User, { nullable: false })
+  createdBy!: User
+
+  @Column({ type: 'integer', nullable: false })
+  createdById!: number
 }

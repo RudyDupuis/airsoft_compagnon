@@ -27,7 +27,7 @@ describe('As a user, I want to login', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/register`)
   })
 
-  it('should login successfully and redirect to homepage', () => {
+  it('should login successfully and redirect to dashboard', () => {
     cy.getBySel('form').should('be.visible')
 
     cy.getBySel('text-input-email').should('be.visible').type(userAlreadyCreated.email)
@@ -37,7 +37,7 @@ describe('As a user, I want to login', () => {
 
     cy.wait('@loginRequest')
 
-    cy.url().should('eq', `${Cypress.config().baseUrl}/`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
     cy.getBySel('header-user-pseudo').should('contain', userAlreadyCreated.pseudo)
   })
 

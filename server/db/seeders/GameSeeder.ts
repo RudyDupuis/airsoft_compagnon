@@ -1,5 +1,6 @@
 import { TypeORM } from '../config'
 import { Game, GameType, PrivacyType, ValidationType } from '../entities/Game'
+import { User } from '../entities/User'
 
 export const gameSeeds = [
   {
@@ -11,6 +12,7 @@ export const gameSeeds = [
     gameType: GameType.OP,
     latitude: 48.5734,
     longitude: 7.7521,
+    address: 'Route Forestière, 67000 Strasbourg, France',
     allowedConsumables:
       'BBs biodégradables uniquement. Grenades fumigènes autorisées. Pas de grenades à fragmentation.',
     price: 25.5,
@@ -30,6 +32,7 @@ export const gameSeeds = [
     gameType: GameType.DOMINICAL,
     latitude: 45.7578,
     longitude: 4.832,
+    address: '10 Rue des Fantasques, 69001 Lyon, France',
     allowedConsumables: 'BBs biodégradables obligatoires. Grenades autorisées.',
     price: 15.0,
     validationType: ValidationType.AUTO,
@@ -48,6 +51,7 @@ export const gameSeeds = [
     gameType: GameType.OP,
     latitude: 50.6333,
     longitude: 3.0667,
+    address: 'Chemin du Fort, 59800 Lille, France',
     allowedConsumables: 'BBs bio uniquement. Cyalumes et IR beacons autorisés. Fumigènes limités.',
     price: 35.0,
     validationType: ValidationType.MANUAL,
@@ -66,6 +70,7 @@ export const gameSeeds = [
     gameType: GameType.DOMINICAL,
     latitude: 44.8378,
     longitude: -0.5792,
+    address: 'Forêt du Taillan-Médoc, 33320 Le Taillan-Médoc, France',
     allowedConsumables: 'BBs bio. Pas de grenades à CO2.',
     price: 12.0,
     validationType: ValidationType.AUTO,
@@ -84,6 +89,7 @@ export const gameSeeds = [
     gameType: GameType.OP,
     latitude: 48.8723,
     longitude: 2.2951,
+    address: '24 Rue Nungesser et Coli, 92150 Suresnes, France',
     allowedConsumables: 'BBs bio 0.20g-0.25g conseillées. Grenades à ressort uniquement.',
     price: 22.5,
     validationType: ValidationType.MANUAL,
@@ -102,6 +108,7 @@ export const gameSeeds = [
     gameType: GameType.OP,
     latitude: 49.1234,
     longitude: 2.5678,
+    address: "Domaine de Chantilly, Route d'Apremont, 60500 Vineuil-Saint-Firmin, France",
     allowedConsumables:
       'BBs bio uniquement. Pas de limite de chargeurs. Grenades, fumigènes et flashbangs autorisés.',
     price: 75.0,
@@ -121,6 +128,7 @@ export const gameSeeds = [
     gameType: GameType.DOMINICAL,
     latitude: 43.2965,
     longitude: 5.3698,
+    address: 'Chemin du Vallon de Toulouse, 13009 Marseille, France',
     allowedConsumables: "BBs fournies. Pas d'équipement spécial nécessaire.",
     price: 10.0,
     validationType: ValidationType.AUTO,
@@ -134,25 +142,31 @@ export const gameSeeds = [
 
 export async function seedGames() {
   const gameRepository = TypeORM.getRepository(Game)
+  const userRepository = TypeORM.getRepository(User)
+  const users = await userRepository.find()
 
-  gameSeeds.forEach(async (seed) => {
-    const game = gameRepository.create({
-      name: seed.name,
-      description: seed.description,
-      startDateTime: seed.startDateTime,
-      endDateTime: seed.endDateTime,
-      gameType: seed.gameType,
-      latitude: seed.latitude,
-      longitude: seed.longitude,
-      allowedConsumables: seed.allowedConsumables,
-      price: seed.price,
-      validationType: seed.validationType,
-      hasAmenities: seed.hasAmenities,
-      hasParking: seed.hasParking,
-      hasEquipmentRental: seed.hasEquipmentRental,
-      privacyType: seed.privacyType,
-      maxPlayers: seed.maxPlayers
+  await Promise.all(
+    gameSeeds.map(async (seed) => {
+      const game = gameRepository.create({
+        name: seed.name,
+        description: seed.description,
+        startDateTime: seed.startDateTime,
+        endDateTime: seed.endDateTime,
+        gameType: seed.gameType,
+        latitude: seed.latitude,
+        longitude: seed.longitude,
+        address: seed.address,
+        allowedConsumables: seed.allowedConsumables,
+        price: seed.price,
+        validationType: seed.validationType,
+        hasAmenities: seed.hasAmenities,
+        hasParking: seed.hasParking,
+        hasEquipmentRental: seed.hasEquipmentRental,
+        privacyType: seed.privacyType,
+        maxPlayers: seed.maxPlayers,
+        createdById: users[Math.floor(Math.random() * users.length)].id
+      })
+      return gameRepository.save(game)
     })
-    await gameRepository.save(game)
-  })
+  )
 }

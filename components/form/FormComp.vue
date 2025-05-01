@@ -20,6 +20,8 @@ defineEmits<{
     class="flex flex-col gap-8 w-full md:w-96"
     data-cy="form"
   >
+    <slot></slot>
+
     <div
       v-if="isNotNull(error)"
       class="border border-2 px-4 py-3 rounded text-center"
@@ -27,8 +29,6 @@ defineEmits<{
     >
       {{ error }}
     </div>
-
-    <slot></slot>
 
     <button v-if="!isLoading" class="button my-5" data-cy="form-submit-button">
       {{ $t(submitButtonKey) }}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, watch, useId } from 'vue'
 import 'leaflet/dist/leaflet.css'
 
 export interface MarkerData {
@@ -15,10 +15,12 @@ const emit = defineEmits<{
   (e: 'markerClicked', id: number): void
 }>()
 
+const uniqueId = useId()
+
 onMounted(async () => {
   const L = await import('leaflet')
 
-  const map = L.map('map', {
+  const map = L.map(uniqueId, {
     minZoom: 3,
     maxZoom: 15,
     // Using maxBounds to prevent scrolling beyond the world's boundaries
@@ -35,13 +37,7 @@ onMounted(async () => {
     noWrap: true
   }).addTo(map)
 
-  props.markersData.forEach((markerData) => {
-    const marker = L.marker([markerData.latitude, markerData.longitude]).addTo(map)
-
-    marker.on('click', () => {
-      emit('markerClicked', markerData.id)
-    })
-  })
+  const markerGroup = L.layerGroup().addTo(map)
 
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -49,9 +45,28 @@ onMounted(async () => {
       map.setView([latitude, longitude], 6)
     })
   }
+
+  watch(
+    () => props.markersData,
+    (newMarkers) => {
+      markerGroup.clearLayers()
+
+      newMarkers.forEach((markerData) => {
+        L.marker([markerData.latitude, markerData.longitude])
+          .addTo(markerGroup)
+          .on('click', () => emit('markerClicked', markerData.id))
+      })
+
+      if (props.markersData.length === 1) {
+        const { latitude, longitude } = props.markersData[0]
+        map.setView([latitude, longitude], 5)
+      }
+    },
+    { immediate: true, deep: true }
+  )
 })
 </script>
 
 <template>
-  <div id="map" class="z-0 w-full h-full"></div>
+  <div :id="uniqueId" class="z-0 w-full h-full"></div>
 </template>

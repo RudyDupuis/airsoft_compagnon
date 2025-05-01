@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 401,
       data: {
-        errorKey: 'me.unauthorized'
+        errorKey: 'common.unauthorized'
       }
     })
   }
@@ -33,6 +33,7 @@ export default defineEventHandler(async (event) => {
     pseudo: user.pseudo,
     firstName: user.firstName,
     lastName: user.lastName,
-    dateOfBirth: user.dateOfBirth
+    dateOfBirth: user.dateOfBirth,
+    isVerified: user.isVerified
   }
 })

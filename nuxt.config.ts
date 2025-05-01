@@ -8,17 +8,19 @@ function fontawesomeIcons() {
       'car',
       'store',
       'circle-xmark',
+      'gamepad',
+      'person',
       'people-group',
       'coins',
       'calendar-days',
-      'calendar'
+      'calendar',
+      'map-location-dot'
     ]
   }
 }
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-04-02',
-  devtools: { enabled: true },
   serverHandlers: [{ route: '/api/**', handler: './server/index' }],
   components: [{ path: '~/components', pathPrefix: false }],
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@vesp/nuxt-fontawesome', 'nuxt-auth-utils'],

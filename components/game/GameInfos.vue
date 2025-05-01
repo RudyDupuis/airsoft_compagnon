@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { GameType, PrivacyType, type Game } from '~/server/db/entities/Game'
 import { displayDateTime } from '~/utils/formatting/date'
+import { isNotBlankString } from '~/utils/types/typeGuards'
 
 defineProps<{
   game: Game
@@ -31,6 +32,14 @@ defineProps<{
         {{ game.participants.length }} /
         {{ game.maxPlayers }}
       </p>
+      <a
+        :href="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(game.address)}`"
+        target="_blank"
+        class="text-center hover:text-primary"
+      >
+        <font-awesome :icon="['fas', 'map-location-dot']" /> {{ game.address }}
+      </a>
+
       <div class="flex justify-center align-center space-x-5 pt-5">
         <p v-if="game.hasAmenities" class="icon-with-text">
           <font-awesome :icon="['fas', 'toilet']" />
@@ -45,8 +54,8 @@ defineProps<{
           <span>{{ $t('game-infos-panel.has-equipement-rental') }}</span>
         </p>
       </div>
-      <p>{{ game.description }}</p>
-      <p class="my-5">
+      <p v-if="isNotBlankString(game.description)">{{ game.description }}</p>
+      <p v-if="isNotBlankString(game.allowedConsumables)" class="my-5">
         <span class="underline">{{ $t('game-infos-panel.allowed-consumables') }}</span>
         {{ game.allowedConsumables }}
       </p>

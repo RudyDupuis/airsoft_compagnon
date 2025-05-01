@@ -95,7 +95,7 @@ async function register() {
         <InputField
           v-model="dateOfBirth"
           placeholderKey="register.date-of-birth"
-          :custom-validation="isOfLegalAge"
+          :custom-string-validation="isOfLegalAge"
           error-message-key="register.invalid-date-of-birth"
           type="date"
           required

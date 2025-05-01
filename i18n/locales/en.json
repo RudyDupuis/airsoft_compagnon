@@ -2,7 +2,8 @@
   "common": {
     "server-error": "Server error, please try again later.",
     "all-fields-required": "Some required fields have not been filled.",
-    "rules-not-respected": "All rules must be respected."
+    "rules-not-respected": "All rules must be respected.",
+    "unauthorized": "You are not authorized to access this resource."
   },
   "header": {
     "login-link": "Login"
@@ -24,6 +25,9 @@
     "has-amenities": "Amenities",
     "has-parking": "Parking",
     "has-equipement-rental": "Equipment rental"
+  },
+  "geocoding": {
+    "coordinates-not-found": "No coordinates found for this address."
   },
   "errorPage": {
     "title": "Airsoft Compagnon - Oops!",
@@ -50,10 +54,48 @@
       "description3": "No more endless searches! Access all games and shops near you with one click. Easily manage your PAF and find the history of your past and upcoming events. Create your profile, showcase your gear, and join teams. Collect badges to show your commitment to the community."
     }
   },
-  "map": {
-    "title": "Airsoft Compagnon - Map",
-    "description": "Map of airsoft games",
-    "join-game": "Join the game"
+  "dashboard": {
+    "title": "Airsoft Compagnon - Dashboard",
+    "description": "Manage your airsoft games.",
+    "join-game": "Join the game",
+    "add": "Add",
+    "games": "Games",
+    "players": "Players",
+    "teams": "Teams",
+    "stores": "Stores",
+    "create-game": {
+      "title": "Create a game",
+      "name": "Game name",
+      "description": "Description",
+      "start-date-time": "Start date",
+      "end-date-time": "End date",
+      "address": "Address",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "coordinate-entry-mode-auto-button": "Enter coordinates manually?",
+      "coordinate-entry-mode-manual-button": "Generate coordinates from address?",
+      "max-players": "Maximum number of players",
+      "price": "Price",
+      "allowed-consumables": "Allowed consumables",
+      "game-type": "Game type",
+      "dominical": "Dominical",
+      "op": "OP",
+      "validation-type": "Validation type",
+      "auto": "Automatic",
+      "manual": "Manual",
+      "privacy-type": "Privacy type",
+      "public": "Public",
+      "private": "Private",
+      "has-amenities": "Amenities",
+      "has-parking": "Parking",
+      "has-equipement-rental": "Equipment rental",
+      "submit": "Create game",
+      "invalid-name": "The name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.",
+      "invalid-date-time": "The game cannot be scheduled in the past.",
+      "start-date-after-end-date": "The start date must be before the end date.",
+      "invalid-price": "The price must be a positive number.",
+      "invalid-max-players": "The maximum number of players must be a positive number."
+    }
   },
   "contact": {
     "title": "Airsoft Compagnon - Contact",
@@ -111,7 +153,6 @@
     "date-of-birth": "Date of Birth",
     "edit": "Edit",
     "logout": "Logout",
-    "unauthorized": "You must be logged in to access this page.",
     "user-not-found": "A problem occurred with your session, please log in again."
   },
   "terms-and-conditions": {

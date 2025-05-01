@@ -12,7 +12,7 @@ const localePath = useLocalePath()
 const { loggedIn } = useUserSession()
 
 if (loggedIn.value) {
-  navigateTo(localePath('/map'))
+  navigateTo(localePath('/dashboard'))
 }
 
 const {
