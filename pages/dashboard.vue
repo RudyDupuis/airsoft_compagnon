@@ -90,6 +90,7 @@ const selectedGame = computed(() => {
         v-if="user.isVerified"
         class="m-3 self-start flex flex-col items-center hover:text-primary cursor-pointer bg-background p-5 rounded-full pointer-events-auto"
         @click="openAddPanel = !openAddPanel"
+        data-cy="open-add-panel"
       >
         <font-awesome :icon="['fas', 'map-location-dot']" class="text-xl" />
         <span class="text-xs text-center mt-2">{{ $t('dashboard.add') }}</span>

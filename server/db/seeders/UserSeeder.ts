@@ -18,7 +18,7 @@ export const userSeeds = [
     firstName: 'Jane',
     lastName: 'Doe',
     pseudo: 'Jane_d',
-    isVerified: true
+    isVerified: false
   },
   {
     email: 'alice.smith@example.com',

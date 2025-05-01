@@ -52,7 +52,28 @@ onMounted(async () => {
       markerGroup.clearLayers()
 
       newMarkers.forEach((markerData) => {
-        L.marker([markerData.latitude, markerData.longitude])
+        const customIcon = L.divIcon({
+          html: `<div data-cy="marker-map-${markerData.id}" style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%;">
+                  <svg viewBox="0 0 384 512">
+                      <rect
+                        style="fill:#FFF8F8;fill-opacity:1;stroke:none;stroke-width:25.064;stroke-linecap:round;stroke-linejoin:round"
+                        width="134.50893"
+                        height="131.0152"
+                        x="122.28085"
+                        y="129.26833"
+                      />
+                      <path
+                        d="M 214.22871,500.9842 C 265.01778,436.86673 380.85243,281.46675 380.85243,194.17911 380.85243,88.315392 295.70901,2.4259479 190.76478,2.4259479 85.820548,2.4259479 0.67711995,88.315392 0.67711995,194.17911 c 0,87.28764 115.83466005,242.68762 166.62372005,306.80509 12.17749,15.28032 34.75039,15.28032 46.92787,0 z M 190.76478,130.26139 a 63.362553,63.917725 0 1 1 0,127.83545 63.362553,63.917725 0 1 1 0,-127.83545 z"
+                        style="fill:#f30002;fill-opacity:1;stroke:none;stroke-width:34.7242;stroke-opacity:1"
+                      />
+                  </svg>
+                </div>`,
+          // Remove default style
+          className: '',
+          iconSize: [25, 41]
+        })
+
+        L.marker([markerData.latitude, markerData.longitude], { icon: customIcon })
           .addTo(markerGroup)
           .on('click', () => emit('markerClicked', markerData.id))
       })
