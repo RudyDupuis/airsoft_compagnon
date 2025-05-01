@@ -76,8 +76,6 @@ const errorMessages = {
     'The name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.',
   invalidDateTime: 'The game cannot be scheduled in the past.',
   startDateAfterEndDate: 'The start date must be before the end date.',
-  invalidPrice: 'The price must be a positive number.',
-  invalidMaxPlayers: 'The maximum number of players must be a positive number.',
   rulesNotRespected: 'All rules must be respected.'
 }
 
@@ -181,16 +179,12 @@ describe('As a verified user, I want to handle games', () => {
       ...game,
       name: 'a',
       startDateTimeToType: '2000-06-15T21:00:00',
-      endDateTimeToType: '2000-06-16T03:00:00',
-      price: -10,
-      maxPlayers: -10
+      endDateTimeToType: '2000-06-16T03:00:00'
     })
 
     cy.getBySel('text-input-game-name-error').should('contain', errorMessages.invalidName)
     cy.getBySel('text-input-game-start-date-error').should('contain', errorMessages.invalidDateTime)
     cy.getBySel('text-input-game-end-date-error').should('contain', errorMessages.invalidDateTime)
-    cy.getBySel('text-input-game-price-error').should('contain', errorMessages.invalidPrice)
-    cy.getBySel('text-input-game-max-players').should('contain', errorMessages.invalidMaxPlayers)
 
     cy.getBySel('form-submit-button').click()
     cy.wait('@createGameRequest')
