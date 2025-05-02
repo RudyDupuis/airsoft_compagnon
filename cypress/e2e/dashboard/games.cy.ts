@@ -228,8 +228,8 @@ describe('As a verified user, I want to handle games', () => {
   })
 
   it('should update a game', () => {
-    cy.intercept('PUT', '/api/games/2').as('updateGameRequest')
-    cy.getBySel('marker-map-2').click()
+    cy.intercept('PUT', '/api/games/8').as('updateGameRequest')
+    cy.getBySel('marker-map-8').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-edit-button').click()
 
@@ -238,7 +238,7 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('form-submit-button').click()
     cy.wait('@updateGameRequest')
 
-    cy.getBySel('marker-map-2').click()
+    cy.getBySel('marker-map-8').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-name').should('contain', game.name)
     cy.getBySel('game-infos-panel-types').should('contain', game.gameType)
@@ -262,8 +262,8 @@ describe('As a verified user, I want to handle games', () => {
   })
 
   it('should delete a game', () => {
-    cy.intercept('DELETE', '/api/games/2').as('deleteGameRequest')
-    cy.getBySel('marker-map-2').click()
+    cy.intercept('DELETE', '/api/games/8').as('deleteGameRequest')
+    cy.getBySel('marker-map-8').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-edit-button').click()
 
@@ -274,6 +274,6 @@ describe('As a verified user, I want to handle games', () => {
 
     cy.wait('@deleteGameRequest')
 
-    cy.getBySel('marker-map-2').should('not.exist')
+    cy.getBySel('marker-map-8').should('not.exist')
   })
 })
