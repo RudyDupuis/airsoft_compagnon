@@ -49,6 +49,7 @@ const selectedGame = computed(() => {
 
   return games.value.find((game) => game.id === selectedId.value)
 })
+const gameToUpdate = ref<Game | undefined>(undefined)
 </script>
 
 <template>
@@ -65,6 +66,19 @@ const selectedGame = computed(() => {
     >
       <font-awesome :icon="['fas', 'circle-xmark']" @click="selectedId = undefined" />
       <GameInfos v-if="isDefined(selectedGame) && view === View.Games" :game="selectedGame">
+        <button
+          v-if="selectedGame.createdById === user.id"
+          class="button-secondary"
+          @click="
+            () => {
+              gameToUpdate = selectedGame
+              openAddPanel = true
+            }
+          "
+          data-cy="game-infos-panel-edit-button"
+        >
+          {{ $t('dashboard.update-game') }}
+        </button>
         <button class="button">
           {{ $t('dashboard.join-game') }}
         </button>
@@ -74,12 +88,30 @@ const selectedGame = computed(() => {
       v-if="openAddPanel"
       class="modal lg:absolute lg:inset-auto lg:right-0 lg:top-0 lg:bottom-0 lg:m-2 lg:rounded-xl lg:z-10"
     >
-      <font-awesome :icon="['fas', 'circle-xmark']" @click="openAddPanel = false" />
+      <font-awesome
+        :icon="['fas', 'circle-xmark']"
+        @click="
+          () => {
+            gameToUpdate = undefined
+            openAddPanel = false
+          }
+        "
+      />
       <GameForm
         v-if="view === View.Games"
+        :gameToUpdate="gameToUpdate"
         @submit="
           () => {
             fetchGames()
+            gameToUpdate = undefined
+            openAddPanel = false
+          }
+        "
+        @remove="
+          () => {
+            fetchGames()
+            selectedId = undefined
+            gameToUpdate = undefined
             openAddPanel = false
           }
         "

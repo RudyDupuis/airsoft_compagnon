@@ -147,6 +147,10 @@ export async function seedGames() {
 
   await Promise.all(
     gameSeeds.map(async (seed) => {
+      // Assign user in a round-robin fashion (1st game->1st user, 2nd game->2nd user, etc.)
+      // When we run out of users, we start from the first user again
+      const userIndex = seed === gameSeeds[0] ? 0 : gameSeeds.indexOf(seed) % users.length
+
       const game = gameRepository.create({
         name: seed.name,
         description: seed.description,
@@ -164,7 +168,7 @@ export async function seedGames() {
         hasEquipmentRental: seed.hasEquipmentRental,
         privacyType: seed.privacyType,
         maxPlayers: seed.maxPlayers,
-        createdById: users[Math.floor(Math.random() * users.length)].id
+        createdById: users[userIndex].id
       })
       return gameRepository.save(game)
     })

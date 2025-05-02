@@ -226,4 +226,54 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-description').should('contain', game.description)
     cy.getBySel('game-infos-panel-allowed-consumables').should('contain', game.allowedConsumables)
   })
+
+  it('should update a game', () => {
+    cy.intercept('PUT', '/api/games/3').as('updateGameRequest')
+    cy.getBySel('marker-map-3').click()
+    cy.getBySel('game-infos-panel').should('exist')
+    cy.getBySel('game-infos-panel-edit-button').click()
+
+    fillGameForm(game)
+
+    cy.getBySel('form-submit-button').click()
+    cy.wait('@updateGameRequest')
+
+    cy.getBySel('marker-map-3').click()
+    cy.getBySel('game-infos-panel').should('exist')
+    cy.getBySel('game-infos-panel-name').should('contain', game.name)
+    cy.getBySel('game-infos-panel-types').should('contain', game.gameType)
+    cy.getBySel('game-infos-panel-types').should('contain', game.privacyType)
+    cy.getBySel('game-infos-panel-price').should('contain', game.price)
+    cy.getBySel('game-infos-panel-dates').should('contain', game.startDateTime)
+    cy.getBySel('game-infos-panel-dates').should('contain', game.endDateTime)
+    cy.getBySel('game-infos-panel-max-players').should('contain', game.maxPlayers)
+    cy.getBySel('game-infos-panel-address').should('contain', game.address)
+    cy.getBySel('game-infos-panel-has-amenities').should('exist')
+    cy.getBySel('game-infos-panel-has-parking').should('not.exist')
+    cy.getBySel('game-infos-panel-has-equipment-rental').should('exist')
+    cy.getBySel('game-infos-panel-description').should('contain', game.description)
+    cy.getBySel('game-infos-panel-allowed-consumables').should('contain', game.allowedConsumables)
+  })
+
+  it('should not be able to update if he is not the owner', () => {
+    cy.getBySel('marker-map-2').click()
+    cy.getBySel('game-infos-panel').should('exist')
+    cy.getBySel('game-infos-panel-edit-button').should('not.exist')
+  })
+
+  it('should delete a game', () => {
+    cy.intercept('DELETE', '/api/games/3').as('deleteGameRequest')
+    cy.getBySel('marker-map-3').click()
+    cy.getBySel('game-infos-panel').should('exist')
+    cy.getBySel('game-infos-panel-edit-button').click()
+
+    cy.getBySel('game-form-delete-confirm-modal-button').click()
+    cy.getBySel('game-form-delete-confirm-modal').should('exist')
+
+    cy.getBySel('game-form-delete-button').click()
+
+    cy.wait('@deleteGameRequest')
+
+    cy.getBySel('marker-map-3').should('not.exist')
+  })
 })

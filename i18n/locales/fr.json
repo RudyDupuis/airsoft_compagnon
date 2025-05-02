@@ -3,7 +3,10 @@
     "server-error": "Erreur serveur, veuillez réessayer plus tard.",
     "all-fields-required": "Des champs obligatoires n'ont pas été renseignés.",
     "rules-not-respected": "Toutes les règles doivent être respectées.",
-    "unauthorized": "Vous n'avez pas l'autorisation d'accéder à cette ressource."
+    "unauthorized": "Vous n'avez pas l'autorisation d'accéder à cette ressource.",
+    "forbidden": "Vous n'avez pas la permission d'accéder à cette ressource.",
+    "invalid-id": "Identifiant de la ressource invalide.",
+    "not-found": "Ressource introuvable."
   },
   "header": {
     "login-link": "Se connecter"
@@ -58,13 +61,15 @@
     "title": "Airsoft Compagnon - Tableau de bord",
     "description": "Gérez vos parties d'airsoft.",
     "join-game": "Rejoindre la partie",
+    "update-game": "Modifier la partie",
     "add": "Ajouter",
     "games": "Parties",
     "players": "Joueurs",
     "teams": "Équipes",
     "stores": "Magasins",
-    "create-game": {
-      "title": "Créer une partie",
+    "game-form": {
+      "create-title": "Créer une partie",
+      "update-title": "Modifier la partie",
       "name": "Nom de la partie",
       "description": "Description",
       "start-date-time": "Date de début",
@@ -89,7 +94,12 @@
       "has-amenities": "Commodités",
       "has-parking": "Parking",
       "has-equipment-rental": "Location d'équipement",
-      "submit": "Créer la partie",
+      "create-submit": "Créer la partie",
+      "update-submit": "Modifier la partie",
+      "open-delete-dialog": "Supprimer la partie",
+      "confirm-delete": "Êtes-vous sûr de vouloir supprimer cette partie ?\n(Cette action est irréversible)",
+      "delete": "Supprimer",
+      "cancel": "Annuler",
       "invalid-name": "Le nom doit contenir entre 2 et 50 caractères et ne peut inclure que des lettres, espaces, traits d'union et apostrophes.",
       "invalid-date-time": "La partie ne peut pas être planifiée dans le passé.",
       "start-date-after-end-date": "La date de début doit être avant la date de fin.",

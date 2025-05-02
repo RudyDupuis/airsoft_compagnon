@@ -1,13 +1,6 @@
 <script setup lang="ts">
-import { useId, ref } from 'vue'
+import { useId, ref, computed } from 'vue'
 import { isDefined, isNotBlankString } from '~/utils/types/typeGuards'
-
-const inputValue = defineModel<string | number>({ required: true })
-const isInputValid = ref(true)
-
-defineEmits<{
-  (e: 'blur'): void
-}>()
 
 const props = withDefaults(
   defineProps<{
@@ -29,6 +22,46 @@ const props = withDefaults(
   }
 )
 
+defineEmits<{
+  (e: 'blur'): void
+}>()
+
+const modelValue = defineModel<string | number>({ required: true })
+
+const inputValue = computed({
+  get: () => {
+    // Format the date string to YYYY-MM-DDTHH:MM to work with the input
+    if (
+      (props.type === 'date' || props.type === 'datetime-local') &&
+      typeof modelValue.value === 'string' &&
+      isNotBlankString(modelValue.value)
+    ) {
+      const date = new Date(modelValue.value)
+      const year = date.getFullYear()
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const day = String(date.getDate()).padStart(2, '0')
+      const hours = String(date.getHours()).padStart(2, '0')
+      const minutes = String(date.getMinutes()).padStart(2, '0')
+
+      return `${year}-${month}-${day}T${hours}:${minutes}`
+    }
+    return modelValue.value
+  },
+  set: (value) => {
+    // Format the date string to ISO format to retrieve the timezone
+    if (
+      (props.type === 'date' || props.type === 'datetime-local') &&
+      typeof value === 'string' &&
+      isNotBlankString(value)
+    ) {
+      modelValue.value = new Date(value).toISOString()
+      return
+    }
+    modelValue.value = value
+  }
+})
+
+const isInputValid = ref(true)
 const uniqueId = useId()
 
 function validateInput() {
@@ -36,26 +69,26 @@ function validateInput() {
 
   if (
     props.regex &&
-    typeof inputValue.value !== 'number' &&
-    isNotBlankString(inputValue.value) &&
-    !props.regex.test(inputValue.value)
+    typeof modelValue.value !== 'number' &&
+    isNotBlankString(modelValue.value) &&
+    !props.regex.test(modelValue.value)
   ) {
     isInputValid.value = false
   }
 
   if (
     props.customStringValidation &&
-    typeof inputValue.value !== 'number' &&
-    isNotBlankString(inputValue.value) &&
-    !props.customStringValidation(inputValue.value)
+    typeof modelValue.value !== 'number' &&
+    isNotBlankString(modelValue.value) &&
+    !props.customStringValidation(modelValue.value)
   ) {
     isInputValid.value = false
   }
 
   if (
     props.customNumberValidation &&
-    typeof inputValue.value !== 'string' &&
-    !props.customNumberValidation(inputValue.value)
+    typeof modelValue.value !== 'string' &&
+    !props.customNumberValidation(modelValue.value)
   ) {
     isInputValid.value = false
   }
