@@ -234,7 +234,6 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('form-submit-button').click()
     cy.wait('@updateGameRequest')
 
-    cy.getBySel('marker-map-8').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-name').should('contain', game.name)
     cy.getBySel('game-infos-panel-types').should('contain', game.gameType)
