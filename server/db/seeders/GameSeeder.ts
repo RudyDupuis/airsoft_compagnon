@@ -1,6 +1,5 @@
 import { TypeORM } from '../config'
 import { Game, GameType, PrivacyType, ValidationType } from '../entities/Game'
-import { User } from '../entities/User'
 
 export const gameSeeds = [
   {
@@ -21,7 +20,8 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: true,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 40
+    maxPlayers: 40,
+    createdById: 1
   },
   {
     name: 'Dominicale Urbex',
@@ -40,7 +40,8 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: false,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 30
+    maxPlayers: 30,
+    createdById: 2
   },
   {
     name: 'Night Ops Elite',
@@ -59,7 +60,8 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: true,
     privacyType: PrivacyType.PRIVATE,
-    maxPlayers: 24
+    maxPlayers: 24,
+    createdById: 3
   },
   {
     name: 'Partie forestière du dimanche',
@@ -78,7 +80,8 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: false,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 50
+    maxPlayers: 50,
+    createdById: 1
   },
   {
     name: 'CQB Warehouse',
@@ -97,7 +100,8 @@ export const gameSeeds = [
     hasParking: false,
     hasEquipmentRental: true,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 20
+    maxPlayers: 20,
+    createdById: 2
   },
   {
     name: 'Milsim Opération Dragon',
@@ -117,7 +121,8 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: false,
     privacyType: PrivacyType.PRIVATE,
-    maxPlayers: 60
+    maxPlayers: 60,
+    createdById: 3
   },
   {
     name: 'Partie débutants friendly',
@@ -136,21 +141,16 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: true,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 25
+    maxPlayers: 25,
+    createdById: 1
   }
 ]
 
 export async function seedGames() {
   const gameRepository = TypeORM.getRepository(Game)
-  const userRepository = TypeORM.getRepository(User)
-  const users = await userRepository.find()
 
   await Promise.all(
     gameSeeds.map(async (seed) => {
-      // Assign user in a round-robin fashion (1st game->1st user, 2nd game->2nd user, etc.)
-      // When we run out of users, we start from the first user again
-      const userIndex = seed === gameSeeds[0] ? 0 : gameSeeds.indexOf(seed) % users.length
-
       const game = gameRepository.create({
         name: seed.name,
         description: seed.description,
@@ -168,7 +168,7 @@ export async function seedGames() {
         hasEquipmentRental: seed.hasEquipmentRental,
         privacyType: seed.privacyType,
         maxPlayers: seed.maxPlayers,
-        createdById: users[userIndex].id
+        createdById: seed.createdById
       })
       return gameRepository.save(game)
     })
