@@ -128,19 +128,15 @@ describe('As a unverified user, I want to handle games', () => {
 function fillGameForm(formData: typeof game) {
   cy.getBySel('form').should('exist')
 
-  cy.getBySel('text-input-game-name').should('exist').type(formData.name)
-  cy.getBySel('text-input-game-description').should('exist').type(formData.description)
-  cy.getBySel('text-input-game-start-date').should('exist').type(formData.startDateTimeToType)
-  cy.getBySel('text-input-game-end-date').should('exist').type(formData.endDateTimeToType)
-  cy.getBySel('select-input-game-type').should('exist').select(formData.gameTypeToSelect)
-  cy.getBySel('text-input-game-address').should('exist').type(formData.address)
-  cy.getBySel('text-input-game-allowed-consumables')
-    .should('exist')
-    .type(formData.allowedConsumables)
-  cy.getBySel('text-input-game-price').should('exist').type(formData.price.toString())
-  cy.getBySel('select-input-game-validation-type')
-    .should('exist')
-    .select(formData.validationTypeToSelect)
+  cy.getBySel('text-input-game-name').clear().type(formData.name)
+  cy.getBySel('text-input-game-description').clear().type(formData.description)
+  cy.getBySel('text-input-game-start-date').clear().type(formData.startDateTimeToType)
+  cy.getBySel('text-input-game-end-date').clear().type(formData.endDateTimeToType)
+  cy.getBySel('select-input-game-type').select(formData.gameTypeToSelect)
+  cy.getBySel('text-input-game-address').clear().type(formData.address)
+  cy.getBySel('text-input-game-allowed-consumables').clear().type(formData.allowedConsumables)
+  cy.getBySel('text-input-game-price').clear().type(formData.price.toString())
+  cy.getBySel('select-input-game-validation-type').select(formData.validationTypeToSelect)
   if (formData.hasAmenities) {
     cy.getBySel('checkbox-game-has-amenities').click()
   }
@@ -150,8 +146,8 @@ function fillGameForm(formData: typeof game) {
   if (formData.hasequipmentRental) {
     cy.getBySel('checkbox-game-has-equipment-rental').click()
   }
-  cy.getBySel('select-input-game-privacy-type').should('exist').select(formData.privacyTypeToSelect)
-  cy.getBySel('text-input-game-max-players').should('exist').type(formData.maxPlayers.toString())
+  cy.getBySel('select-input-game-privacy-type').select(formData.privacyTypeToSelect)
+  cy.getBySel('text-input-game-max-players').clear().type(formData.maxPlayers.toString())
 }
 
 describe('As a verified user, I want to handle games', () => {
