@@ -31,10 +31,10 @@ defineProps<{
         <font-awesome :icon="['fas', 'calendar']" />
         {{ displayDateTime(new Date(game.endDateTime)) }}
       </p>
-      <p data-cy="game-infos-panel-max-players" class="text-center">
+      <p data-cy="game-infos-panel-max-participants" class="text-center">
         <font-awesome :icon="['fas', 'people-group']" />
         {{ game.participants.length }} /
-        {{ game.maxPlayers }}
+        {{ game.maxParticipants }}
       </p>
       <a
         :href="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(game.address)}`"

@@ -49,6 +49,7 @@ export default defineEventHandler(async (event) => {
   await gameRepository.remove(game)
 
   return {
+    success: true,
     message: 'Game deleted successfully'
   }
 })

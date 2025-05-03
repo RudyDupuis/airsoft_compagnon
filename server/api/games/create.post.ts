@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
     hasParking,
     hasEquipmentRental,
     privacyType,
-    maxPlayers
+    maxParticipants
   } = await readBody(event)
 
   if (
@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
     isNullOrUndefined(hasParking) ||
     isNullOrUndefined(hasEquipmentRental) ||
     isNullOrUndefined(privacyType) ||
-    isNullOrUndefined(maxPlayers)
+    isNullOrUndefined(maxParticipants)
   ) {
     throw createError({
       statusCode: 400,
@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
     typeof hasParking !== 'boolean' ||
     typeof hasEquipmentRental !== 'boolean' ||
     !Object.values(PrivacyType).includes(privacyType) ||
-    !isPositiveNumber(maxPlayers)
+    !isPositiveNumber(maxParticipants)
   ) {
     throw createError({
       statusCode: 400,
@@ -102,7 +102,7 @@ export default defineEventHandler(async (event) => {
     hasParking,
     hasEquipmentRental,
     privacyType,
-    maxPlayers,
+    maxParticipants,
     createdById: session.user.id
   })
 

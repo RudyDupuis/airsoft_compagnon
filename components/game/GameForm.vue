@@ -4,7 +4,7 @@ import { useI18n } from 'vue-i18n'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useGeocoding } from '~/composables/useGeocoding'
 import { Game, GameType, PrivacyType, ValidationType } from '~/server/db/entities/Game'
-import { isDefined, isNotNull } from '~/utils/types/typeGuards'
+import { isDefined, isNotNull, isNull } from '~/utils/types/typeGuards'
 import { isInFuture, isPositiveNumber } from '~/utils/validations/methods'
 import { nameRegex } from '~/utils/validations/regex'
 import type { MarkerData } from '../MapComp.vue'
@@ -37,7 +37,7 @@ const hasAmenities = ref(props.gameToUpdate?.hasAmenities ?? false)
 const hasParking = ref(props.gameToUpdate?.hasParking ?? false)
 const hasEquipmentRental = ref(props.gameToUpdate?.hasEquipmentRental ?? false)
 const privacyType = ref<PrivacyType>(props.gameToUpdate?.privacyType ?? PrivacyType.PUBLIC)
-const maxPlayers = ref(props.gameToUpdate?.maxPlayers ?? 1)
+const maxParticipants = ref(props.gameToUpdate?.maxParticipants ?? 1)
 
 enum CoordinateEntryMode {
   Auto = 'auto',
@@ -79,7 +79,7 @@ const {
   isLoading,
   isSuccess,
   execute: createOrUpdateGame
-} = useFetchWithState(
+} = useFetchWithState<Game>(
   `/api/games/${isDefined(props.gameToUpdate) ? props.gameToUpdate.id : 'create'}`,
   {
     method: isDefined(props.gameToUpdate) ? 'PUT' : 'POST',
@@ -99,7 +99,7 @@ const {
       hasParking: hasParking.value,
       hasEquipmentRental: hasEquipmentRental.value,
       privacyType: privacyType.value,
-      maxPlayers: maxPlayers.value
+      maxParticipants: maxParticipants.value
     }))
   }
 )
@@ -118,8 +118,9 @@ async function submit() {
 }
 
 const {
-  isSuccess: removeIsSuccess,
-  isLoading: removeIsLoading,
+  error: removeError,
+  isSuccess: isRemoveSuccess,
+  isLoading: isRemoveLoading,
   execute: removeGame
 } = useFetchWithState(`/api/games/${props.gameToUpdate?.id}`, {
   method: 'DELETE'
@@ -129,7 +130,7 @@ const openRemoveDialog = ref(false)
 async function remove() {
   await removeGame()
 
-  if (removeIsSuccess.value) {
+  if (isRemoveSuccess.value) {
     emit('remove')
   }
 }
@@ -302,14 +303,14 @@ async function remove() {
         cy="game-privacy-type"
       />
       <InputField
-        v-model="maxPlayers"
-        placeholderKey="dashboard.game-form.max-players"
+        v-model="maxParticipants"
+        placeholderKey="dashboard.game-form.max-participants"
         :custom-number-validation="isPositiveNumber"
-        error-message-key="dashboard.game-form.invalid-max-players"
+        error-message-key="dashboard.game-form.invalid-max-participants"
         type="number"
         :min="1"
         required
-        cy="game-max-players"
+        cy="game-max-participants"
       />
     </FormComp>
     <div
@@ -322,16 +323,18 @@ async function remove() {
           <button
             v-if="isDefined(gameToUpdate)"
             class="button"
-            :disabled="removeIsLoading"
+            :disabled="isRemoveLoading"
             @click="remove"
             data-cy="game-form-delete-button"
           >
-            <FetchDataComp v-if="removeIsLoading" :isLoading="removeIsLoading" :error="error" />
-            <template v-else>{{ $t('dashboard.game-form.delete') }}</template>
+            <FetchDataComp :isLoading="isRemoveLoading" :error="removeError" />
+            <template v-if="!isRemoveLoading && isNull(removeError)">{{
+              $t('dashboard.game-form.delete')
+            }}</template>
           </button>
           <button
             class="button-secondary"
-            :disabled="removeIsLoading"
+            :disabled="isRemoveLoading"
             @click="openRemoveDialog = false"
           >
             {{ $t('dashboard.game-form.cancel') }}

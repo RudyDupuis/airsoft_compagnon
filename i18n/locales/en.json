@@ -6,7 +6,8 @@
     "unauthorized": "You are not authorized to access this resource.",
     "forbidden": "You do not have permission to access this resource.",
     "invalid-id": "Invalid resource identifier.",
-    "not-found": "Resource not found."
+    "not-found": "Resource not found.",
+    "user-not-found": "User not found."
   },
   "header": {
     "login-link": "Login"
@@ -67,6 +68,11 @@
     "players": "Players",
     "teams": "Teams",
     "stores": "Stores",
+    "game": {
+      "user-already-joined": "You have already joined this game.",
+      "game-full": "This game is full.",
+      "private-game": "This game is private."
+    },
     "game-form": {
       "create-title": "Create a game",
       "update-title": "Update a game",
@@ -79,7 +85,7 @@
       "longitude": "Longitude",
       "coordinate-entry-mode-auto-button": "Enter coordinates manually?",
       "coordinate-entry-mode-manual-button": "Generate coordinates from address?",
-      "max-players": "Maximum number of players",
+      "max-participants": "Maximum number of players",
       "price": "Price",
       "allowed-consumables": "Allowed consumables",
       "game-type": "Game type",
@@ -104,7 +110,7 @@
       "invalid-date-time": "The game cannot be scheduled in the past.",
       "start-date-after-end-date": "The start date must be before the end date.",
       "invalid-price": "The price must be a positive number.",
-      "invalid-max-players": "The maximum number of players must be a positive number."
+      "invalid-max-participants": "The maximum number of players must be a positive number."
     }
   },
   "contact": {

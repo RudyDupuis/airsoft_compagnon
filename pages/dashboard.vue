@@ -2,10 +2,10 @@
 import { useUserSession } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { type Game } from '~/server/db/entities/Game'
 import type { MarkerData } from '~/components/MapComp.vue'
-import { isDefined, isNotNull, isNull } from '~/utils/types/typeGuards'
+import { isDefined, isNotNull, isNull, isUndefined } from '~/utils/types/typeGuards'
 
 usePageMeta('dashboard')
 
@@ -26,9 +26,9 @@ const {
   error,
   isLoading,
   isSuccess,
-  execute: fetchGames
+  execute: executeFetchGames
 } = useFetchWithState<Game[]>('/api/games')
-fetchGames()
+executeFetchGames()
 
 const markersData = computed<MarkerData[]>(() => {
   if (view.value === View.Games && isNotNull(games.value)) {
@@ -50,6 +50,45 @@ const selectedGame = computed(() => {
   return games.value.find((game) => game.id === selectedId.value)
 })
 const gameToUpdate = ref<Game | undefined>(undefined)
+
+const canJoinSelectedGame = computed(() => {
+  if (isUndefined(selectedGame.value)) {
+    return false
+  }
+
+  const isParticipant = selectedGame.value.participants.some((participant) => {
+    return participant.id === user.value?.id
+  })
+
+  const gameFull = selectedGame.value.participants.length >= selectedGame.value.maxParticipants
+
+  return !isParticipant && !gameFull
+})
+
+const {
+  error: joinGameError,
+  resetError: resetJoinGameError,
+  isSuccess: isJoinGameSuccess,
+  isLoading: isJoinGameLoading,
+  execute: executeJoinGame
+} = useFetchWithState(
+  computed(() => `/api/games/${selectedGame.value?.id}/join`),
+  {
+    method: 'POST'
+  }
+)
+
+watch(selectedId, () => {
+  resetJoinGameError()
+})
+
+async function joinGame() {
+  await executeJoinGame()
+
+  if (isJoinGameSuccess.value) {
+    executeFetchGames()
+  }
+}
 </script>
 
 <template>
@@ -79,8 +118,16 @@ const gameToUpdate = ref<Game | undefined>(undefined)
         >
           {{ $t('dashboard.update-game') }}
         </button>
-        <button class="button">
-          {{ $t('dashboard.join-game') }}
+        <button
+          v-if="canJoinSelectedGame"
+          :disabled="isJoinGameLoading"
+          class="button"
+          @click="joinGame"
+        >
+          <FetchDataComp :error="joinGameError" :isLoading="isJoinGameLoading" />
+          <span v-if="!isJoinGameLoading && isNull(joinGameError)">
+            {{ $t('dashboard.join-game') }}
+          </span>
         </button>
       </GameInfos>
     </div>
@@ -102,14 +149,14 @@ const gameToUpdate = ref<Game | undefined>(undefined)
         :gameToUpdate="gameToUpdate"
         @submit="
           () => {
-            fetchGames()
+            executeFetchGames()
             gameToUpdate = undefined
             openAddPanel = false
           }
         "
         @remove="
           () => {
-            fetchGames()
+            executeFetchGames()
             selectedId = undefined
             gameToUpdate = undefined
             openAddPanel = false

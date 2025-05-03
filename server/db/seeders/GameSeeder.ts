@@ -20,7 +20,7 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: true,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 40,
+    maxParticipants: 40,
     createdById: 1
   },
   {
@@ -40,7 +40,7 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: false,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 30,
+    maxParticipants: 30,
     createdById: 2
   },
   {
@@ -60,7 +60,7 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: true,
     privacyType: PrivacyType.PRIVATE,
-    maxPlayers: 24,
+    maxParticipants: 24,
     createdById: 3
   },
   {
@@ -80,7 +80,7 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: false,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 50,
+    maxParticipants: 50,
     createdById: 1
   },
   {
@@ -100,7 +100,7 @@ export const gameSeeds = [
     hasParking: false,
     hasEquipmentRental: true,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 20,
+    maxParticipants: 20,
     createdById: 2
   },
   {
@@ -121,7 +121,7 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: false,
     privacyType: PrivacyType.PRIVATE,
-    maxPlayers: 60,
+    maxParticipants: 60,
     createdById: 3
   },
   {
@@ -141,7 +141,7 @@ export const gameSeeds = [
     hasParking: true,
     hasEquipmentRental: true,
     privacyType: PrivacyType.PUBLIC,
-    maxPlayers: 25,
+    maxParticipants: 25,
     createdById: 1
   }
 ]
@@ -167,7 +167,7 @@ export async function seedGames() {
         hasParking: seed.hasParking,
         hasEquipmentRental: seed.hasEquipmentRental,
         privacyType: seed.privacyType,
-        maxPlayers: seed.maxPlayers,
+        maxParticipants: seed.maxParticipants,
         createdById: seed.createdById
       })
       return gameRepository.save(game)

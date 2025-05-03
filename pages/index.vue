@@ -20,9 +20,9 @@ const {
   error,
   isLoading,
   isSuccess,
-  execute: fetchGames
+  execute: executeFetchGames
 } = useFetchWithState<Game[]>('/api/games')
-fetchGames()
+executeFetchGames()
 
 const markersData = computed<MarkerData[]>(() => {
   if (isNull(games.value)) {

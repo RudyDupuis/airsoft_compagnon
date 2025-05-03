@@ -17,7 +17,7 @@ const {
   error,
   isLoading,
   isSuccess,
-  execute: loginUser
+  execute: executeLoginUser
 } = useFetchWithState<User>('/api/auth/login', {
   method: 'POST',
   body: computed(() => ({
@@ -26,8 +26,8 @@ const {
   }))
 })
 
-async function login() {
-  await loginUser()
+async function loginUser() {
+  await executeLoginUser()
 
   if (isSuccess.value) {
     const { fetch: refreshSession } = useUserSession()
@@ -48,7 +48,7 @@ async function login() {
         :error="error"
         :isLoading="isLoading"
         :isSuccess="isSuccess"
-        @submit="login"
+        @submit="loginUser"
       >
         <InputField v-model="email" placeholderKey="login.email" type="email" required cy="email" />
         <InputField

@@ -26,7 +26,7 @@ const {
   error,
   isLoading,
   isSuccess,
-  execute: registerUser
+  execute: executeRegisterUser
 } = useFetchWithState<User>('/api/auth/register', {
   method: 'POST',
   body: computed(() => ({
@@ -39,13 +39,13 @@ const {
   }))
 })
 
-async function register() {
+async function registerUser() {
   if (password.value !== confirmPassword.value) {
     error.value = t('register.password-mismatch')
     return
   }
 
-  await registerUser()
+  await executeRegisterUser()
 
   if (isSuccess.value) {
     const { fetch: refreshSession } = useUserSession()
@@ -66,7 +66,7 @@ async function register() {
         :error="error"
         :isLoading="isLoading"
         :isSuccess="isSuccess"
-        @submit="register"
+        @submit="registerUser"
       >
         <InputField
           v-model="firstName"

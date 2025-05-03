@@ -32,7 +32,7 @@ const gameAlreadyAdded = {
     'BBs biodégradables uniquement. Grenades fumigènes autorisées. Pas de grenades à fragmentation.',
   price: 25.5,
   privacyType: 'Public',
-  maxPlayers: 40
+  maxParticipants: 40
 }
 
 const game = {
@@ -68,7 +68,7 @@ const game = {
   hasequipmentRental: true,
   privacyType: 'Private',
   privacyTypeToSelect: 'private',
-  maxPlayers: 30
+  maxParticipants: 30
 }
 
 const errorMessages = {
@@ -112,7 +112,10 @@ describe('As a unverified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-price').should('contain', gameAlreadyAdded.price)
     cy.getBySel('game-infos-panel-dates').should('contain', gameAlreadyAdded.startDateTime)
     cy.getBySel('game-infos-panel-dates').should('contain', gameAlreadyAdded.endDateTime)
-    cy.getBySel('game-infos-panel-max-players').should('contain', gameAlreadyAdded.maxPlayers)
+    cy.getBySel('game-infos-panel-max-participants').should(
+      'contain',
+      gameAlreadyAdded.maxParticipants
+    )
     cy.getBySel('game-infos-panel-address').should('contain', gameAlreadyAdded.address)
     cy.getBySel('game-infos-panel-has-amenities').should('exist')
     cy.getBySel('game-infos-panel-has-parking').should('exist')
@@ -147,7 +150,7 @@ function fillGameForm(formData: typeof game) {
     cy.getBySel('checkbox-game-has-equipment-rental').click()
   }
   cy.getBySel('select-input-game-privacy-type').select(formData.privacyTypeToSelect)
-  cy.getBySel('text-input-game-max-players').clear().type(formData.maxPlayers.toString())
+  cy.getBySel('text-input-game-max-participants').clear().type(formData.maxParticipants.toString())
 }
 
 describe('As a verified user, I want to handle games', () => {
@@ -214,7 +217,7 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-price').should('contain', game.price)
     cy.getBySel('game-infos-panel-dates').should('contain', game.startDateTime)
     cy.getBySel('game-infos-panel-dates').should('contain', game.endDateTime)
-    cy.getBySel('game-infos-panel-max-players').should('contain', game.maxPlayers)
+    cy.getBySel('game-infos-panel-max-participants').should('contain', game.maxParticipants)
     cy.getBySel('game-infos-panel-address').should('contain', game.address)
     cy.getBySel('game-infos-panel-has-amenities').should('exist')
     cy.getBySel('game-infos-panel-has-parking').should('not.exist')
@@ -241,7 +244,7 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-price').should('contain', game.price)
     cy.getBySel('game-infos-panel-dates').should('contain', game.startDateTime)
     cy.getBySel('game-infos-panel-dates').should('contain', game.endDateTime)
-    cy.getBySel('game-infos-panel-max-players').should('contain', game.maxPlayers)
+    cy.getBySel('game-infos-panel-max-participants').should('contain', game.maxParticipants)
     cy.getBySel('game-infos-panel-address').should('contain', game.address)
     cy.getBySel('game-infos-panel-has-amenities').should('not.exist')
     cy.getBySel('game-infos-panel-has-parking').should('not.exist')

@@ -18,7 +18,7 @@ const {
   error,
   isLoading,
   isSuccess,
-  execute: sendMessage
+  execute: executeSendMessage
 } = useFetchWithState<User>('/api/contact', {
   method: 'POST',
   body: computed(() => ({
@@ -27,8 +27,8 @@ const {
   }))
 })
 
-async function send() {
-  await sendMessage()
+async function sendMessage() {
+  await executeSendMessage()
 
   if (isSuccess.value) {
     setTimeout(() => router.push(localePath('/')), 5000)
@@ -47,7 +47,7 @@ async function send() {
         :error="error"
         :isLoading="isLoading"
         :isSuccess="isSuccess"
-        @submit="send"
+        @submit="sendMessage"
       >
         <InputField
           v-model="email"

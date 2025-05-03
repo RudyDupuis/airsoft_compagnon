@@ -16,9 +16,9 @@ const {
   error,
   isLoading,
   isSuccess,
-  execute: fetchMe
+  execute: executeFetchMe
 } = useFetchWithState<User>('/api/auth/me')
-fetchMe()
+executeFetchMe()
 
 function logout() {
   clear()

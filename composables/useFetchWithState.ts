@@ -22,7 +22,7 @@ export function useFetchWithState<T>(url: string | Ref<string>, options: UseFetc
 
   const error = ref<string | null>(null)
 
-  const execute = async () => {
+  async function execute() {
     error.value = null
 
     await executeUseFetch()
@@ -36,9 +36,14 @@ export function useFetchWithState<T>(url: string | Ref<string>, options: UseFetc
     }
   }
 
+  function resetError() {
+    error.value = null
+  }
+
   return {
     data,
     error,
+    resetError,
     isLoading: computed(() => status.value === 'pending'),
     isSuccess: computed(() => status.value === 'success'),
     execute

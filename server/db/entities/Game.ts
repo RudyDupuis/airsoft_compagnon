@@ -79,7 +79,7 @@ export class Game {
   privacyType!: PrivacyType
 
   @Column({ type: 'integer', nullable: false })
-  maxPlayers!: number
+  maxParticipants!: number
 
   @ManyToMany(() => User)
   @JoinTable({

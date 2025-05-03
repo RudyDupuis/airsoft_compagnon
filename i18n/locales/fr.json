@@ -6,7 +6,8 @@
     "unauthorized": "Vous n'avez pas l'autorisation d'accéder à cette ressource.",
     "forbidden": "Vous n'avez pas la permission d'accéder à cette ressource.",
     "invalid-id": "Identifiant de la ressource invalide.",
-    "not-found": "Ressource introuvable."
+    "not-found": "Ressource introuvable.",
+    "user-not-found": "Utilisateur introuvable."
   },
   "header": {
     "login-link": "Se connecter"
@@ -67,6 +68,11 @@
     "players": "Joueurs",
     "teams": "Équipes",
     "stores": "Magasins",
+    "game": {
+      "user-already-joined": "Vous avez déjà rejoint cette partie.",
+      "game-full": "Cette partie est complète.",
+      "private-game": "Cette partie est privée."
+    },
     "game-form": {
       "create-title": "Créer une partie",
       "update-title": "Modifier la partie",
@@ -79,7 +85,7 @@
       "longitude": "Longitude",
       "coordinate-entry-mode-auto-button": "Entrer les coordonnées à la main ?",
       "coordinate-entry-mode-manual-button": "Générer les coordonées par l'adresse ?",
-      "max-players": "Nombre maximum de joueurs",
+      "max-participants": "Nombre maximum de joueurs",
       "price": "Prix",
       "allowed-consumables": "Consommables autorisés",
       "game-type": "Type de partie",
@@ -104,7 +110,7 @@
       "invalid-date-time": "La partie ne peut pas être planifiée dans le passé.",
       "start-date-after-end-date": "La date de début doit être avant la date de fin.",
       "invalid-price": "Le prix doit être un nombre positif.",
-      "invalid-max-players": "Le nombre maximum de joueurs doit être un nombre positif."
+      "invalid-max-participants": "Le nombre maximum de joueurs doit être un nombre positif."
     }
   },
   "contact": {
