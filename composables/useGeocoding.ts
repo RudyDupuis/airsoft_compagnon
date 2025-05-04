@@ -35,7 +35,7 @@ export function useGeocoding(address: Ref<string>) {
       }
     }
 
-    error.value = t('geocoding.coordinates-not-found')
+    error.value = t('composables.use-geocoding.coordinates-not-found')
 
     return null
   }

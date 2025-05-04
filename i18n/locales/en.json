@@ -1,186 +1,197 @@
 {
   "common": {
-    "server-error": "Server error, please try again later.",
-    "all-fields-required": "Some required fields have not been filled.",
-    "rules-not-respected": "All rules must be respected.",
-    "unauthorized": "You are not authorized to access this resource.",
-    "forbidden": "You do not have permission to access this resource.",
-    "invalid-id": "Invalid resource identifier.",
-    "not-found": "Resource not found.",
-    "user-not-found": "User not found."
-  },
-  "header": {
-    "login-link": "Login"
-  },
-  "footer": {
-    "contact": "Contact",
-    "terms-and-conditions": "GTC",
-    "terms-of-use": "TOU",
-    "cookies-policy": "Cookies",
-    "developped-by": "Developped by Rudy Dupuis",
-    "version": "version"
-  },
-  "game-infos-panel": {
-    "allowed-consumables": "Allowed consumables",
-    "dominical": "Dominical",
-    "op": "OP",
-    "public": "Public",
-    "private": "Private",
-    "has-amenities": "Amenities",
-    "has-parking": "Parking",
-    "has-equipment-rental": "Equipment rental"
-  },
-  "geocoding": {
-    "coordinates-not-found": "No coordinates found for this address."
-  },
-  "errorPage": {
-    "title": "Airsoft Compagnon - Oops!",
-    "description": "Oops! Something went wrong.",
-    "cta": "Back to home ?"
-  },
-  "index": {
-    "title": "Airsoft Compagnon - Home",
-    "description": "Airsoft Companion is a platform for airsoft enthusiasts. Find games, meet players, and build your reputation.",
-    "hero-banner": {
-      "subtitle": "Find games,\nMeet players,\nBuild your reputation!",
-      "cta": "Find a game"
+    "errors": {
+      "server-error": "Server error, please try again later.",
+      "unauthorized": "You don't have authorization to access this resource.",
+      "forbidden": "You don't have permission to access this resource.",
+      "invalid-id": "Invalid resource identifier.",
+      "not-found": "Resource not found.",
+      "user-not-found": "There was a problem with your session, please log in again."
     },
-    "find-a-game": {
-      "title": "Find a game",
-      "join-game": "Login to join"
-    },
-    "infos": {
-      "title1": "What is Airsoft Compagnon ?",
-      "description1": "Whether you're a player or an organizer, Airsoft Compagnon is your ideal ally for managing and finding airsoft games. With one click, access events near you and specialized shops. Post your games with ease, without worrying about payments and registrations – we take care of everything! And the best part? It's 100% free!",
-      "title2": "What are the benefits for organizers ?",
-      "description2": "Tired of wasting time managing registrations? Airsoft Compagnon takes care of it for you! Post your announcement in an instant and let the platform handle the rest. Problematic players are automatically filtered, and PAF payments are secured directly through the app. By validating registrations after payment, significantly reduce no-show rates.",
-      "title3": "What are the benefits for players ?",
-      "description3": "No more endless searches! Access all games and shops near you with one click. Easily manage your PAF and find the history of your past and upcoming events. Create your profile, showcase your gear, and join teams. Collect badges to show your commitment to the community."
+    "form": {
+      "submit": "Submit!",
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirm-delete": "Are you sure you want to delete this item?\n(This action is irreversible)",
+      "cancel": "Cancel",
+      "errors": {
+        "all-fields-required": "Required fields have not been filled.",
+        "rules-not-respected": "All rules must be followed."
+      }
     }
   },
-  "dashboard": {
-    "title": "Airsoft Compagnon - Dashboard",
-    "description": "Manage your airsoft games.",
-    "join-game": "Join the game",
-    "update-game": "Update the game",
-    "add": "Add",
-    "games": "Games",
-    "players": "Players",
-    "teams": "Teams",
-    "stores": "Stores",
-    "game": {
-      "user-already-joined": "You have already joined this game.",
-      "game-full": "This game is full.",
-      "private-game": "This game is private."
+  "components": {
+    "header": {
+      "login": "Log in"
     },
-    "game-form": {
-      "create-title": "Create a game",
-      "update-title": "Update a game",
+    "footer": {
+      "contact": "Contact",
+      "terms-and-conditions": "Terms and Conditions",
+      "terms-of-use": "Terms of Use",
+      "cookies-policy": "Cookies",
+      "developped-by": "Developed by Rudy Dupuis",
+      "version": "version"
+    }
+  },
+  "composables": {
+    "use-geocoding": {
+      "coordinates-not-found": "No coordinates found for this address."
+    }
+  },
+  "entities": {
+    "game": {
       "name": "Game name",
       "description": "Description",
-      "start-date-time": "Start date",
-      "end-date-time": "End date",
-      "address": "Address",
+      "start-date": "Start date",
+      "end-date": "End date",
+      "game-type": {
+        "title": "Game type",
+        "dominical": "Sunday",
+        "op": "OP"
+      },
       "latitude": "Latitude",
       "longitude": "Longitude",
-      "coordinate-entry-mode-auto-button": "Enter coordinates manually?",
-      "coordinate-entry-mode-manual-button": "Generate coordinates from address?",
-      "max-participants": "Maximum number of players",
-      "price": "Price",
+      "address": "Address",
       "allowed-consumables": "Allowed consumables",
-      "game-type": "Game type",
-      "dominical": "Dominical",
-      "op": "OP",
-      "validation-type": "Validation type",
-      "auto": "Automatic",
-      "manual": "Manual",
-      "privacy-type": "Privacy type",
+      "price": "Price (Entrance fee)",
       "public": "Public",
       "private": "Private",
+      "validation-type": {
+        "title": "Validation type",
+        "auto": "Automatic",
+        "manual": "Manual"
+      },
       "has-amenities": "Amenities",
       "has-parking": "Parking",
       "has-equipment-rental": "Equipment rental",
-      "create-submit": "Create game",
-      "update-submit": "Update game",
-      "open-delete-dialog": "Delete game",
-      "confirm-delete": "Are you sure you want to delete this game?\n(This action is irreversible)",
-      "delete": "Delete",
-      "cancel": "Cancel",
-      "invalid-name": "The name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.",
-      "invalid-date-time": "The game cannot be scheduled in the past.",
-      "start-date-after-end-date": "The start date must be before the end date.",
-      "invalid-price": "The price must be a positive number.",
-      "invalid-max-participants": "The maximum number of players must be a positive number."
+      "privacy-type": {
+        "title": "Privacy type",
+        "public": "Public",
+        "private": "Private"
+      },
+      "max-participants": "Maximum number of players",
+      "errors": {
+        "start-date-after-end-date": "Start date must be before end date.",
+        "invalid-name": "Name must be between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.",
+        "invalid-date-time": "The game cannot be scheduled in the past.",
+        "invalid-price": "Price must be a positive number.",
+        "invalid-max-participants": "Maximum number of players must be a positive number."
+      }
+    },
+    "user": {
+      "first-name": "First name",
+      "last-name": "Last name",
+      "pseudo": "Username",
+      "date-of-birth": "Date of birth",
+      "email": "Email",
+      "password": "Password",
+      "errors": {
+        "email-already-exists": "This email is already in use",
+        "invalid-first-name": "First name must contain between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.",
+        "invalid-last-name": "Last name must contain between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.",
+        "invalid-pseudo": "Username must contain between 3 and 20 characters and can only include letters, numbers, hyphens (-) and underscores (_).",
+        "invalid-date-of-birth": "You must be at least 18 years old to register.",
+        "invalid-email": "Please enter a valid email address.",
+        "invalid-password": "Password must contain at least 8 characters, include a lowercase letter, an uppercase letter, a number and a special character (among '$ ! % * ? &')."
+      }
     }
   },
-  "contact": {
-    "title": "Airsoft Compagnon - Contact",
-    "description": "Contact us",
-    "h1": "Contact us",
-    "email": "Email",
-    "message": "Your message",
-    "submit": "Send",
-    "invalid-email": "Please enter a valid email address.",
-    "thank-you": "Thank you for your message!",
-    "message-sent": "We will get back to you as soon as possible.",
-    "redirecting": "Redirecting to the homepage in 5 seconds."
-  },
-  "login": {
-    "title": "Airsoft Compagnon - Login",
-    "description": "Login to your account",
-    "h1": "Login",
-    "email": "Email",
-    "password": "Password",
-    "submit": "Login",
-    "register": "No account?",
-    "forgot-password": "Forgot password?",
-    "invalid-credentials": "Invalid email or password."
-  },
-  "register": {
-    "title": "Airsoft Compagnon - Registration",
-    "description": "Sign up for your account",
-    "h1": "Create your account",
-    "first-name": "First name",
-    "last-name": "Last name",
-    "pseudo": "Pseudo",
-    "date-of-birth": "Date of birth",
-    "email": "Email",
-    "password": "Password",
-    "confirm-password": "Confirm password",
-    "submit": "Sign up",
-    "login": "Already have an account?",
-    "password-mismatch": "Passwords do not match",
-    "email-already-exists": "Email already exists",
-    "invalid-first-name": "The first name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.",
-    "invalid-last-name": "The last name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.",
-    "invalid-pseudo": "The pseudonym must be between 3 and 20 characters long and can only include letters, numbers, dashes (-), and underscores (_).",
-    "invalid-date-of-birth": "You must be of legal age to register.",
-    "invalid-email": "Please enter a valid email address.",
-    "invalid-password": "The password must be at least 8 characters long, include a lowercase letter, an uppercase letter, a number, and a special character (among '$ ! % * ? &')."
-  },
-  "me": {
-    "title": "Airsoft Companion - My Account",
-    "description": "View your account information",
-    "h1": "My Account",
-    "pseudo": "Pseudo",
-    "first-name": "First Name",
-    "last-name": "Last Name",
-    "email": "Email",
-    "date-of-birth": "Date of Birth",
-    "edit": "Edit",
-    "logout": "Logout",
-    "user-not-found": "A problem occurred with your session, please log in again."
-  },
-  "terms-and-conditions": {
-    "title": "Airsoft Compagnon - GTC",
-    "description": "General Terms and Conditions of Airsoft Compagnon"
-  },
-  "terms-of-use": {
-    "title": "Airsoft Compagnon - TOU",
-    "description": "General Terms of Use of Airsoft Compagnon"
-  },
-  "cookies-policy": {
-    "title": "Airsoft Compagnon - Cookies Policy",
-    "description": "Cookies Policy of Airsoft Compagnon"
+  "pages": {
+    "error": {
+      "title": "Airsoft Companion - Oops!",
+      "description": "Oops! Something went wrong.",
+      "cta": "Back to home?"
+    },
+    "index": {
+      "title": "Airsoft Companion - Home",
+      "description": "Airsoft Companion is a platform for airsoft enthusiasts. Find games, meet players and build your reputation.",
+      "hero-banner": {
+        "subtitle": "Find games,\nMeet players,\nBuild your reputation!",
+        "cta": "Find a game"
+      },
+      "find-a-game": {
+        "title": "Find a game",
+        "join-game": "Log in to join"
+      },
+      "infos": {
+        "title1": "What is Airsoft Companion?",
+        "description1": "Whether you're a player or an organizer, Airsoft Companion is your ideal ally for managing and finding airsoft games. With a single click, access events near you and specialized stores. Publish your games with ease, without worrying about payments and registrations - we take care of everything! And the best part? It's 100% free!",
+        "title2": "What are the benefits for organizers?",
+        "description2": "Tired of wasting time managing registrations? Airsoft Companion takes care of it for you! Publish your listing instantly and let the platform handle the rest. Problematic players are automatically filtered, and entrance fee payments are secured directly via the application. By validating registrations after payment, significantly reduce absenteeism.",
+        "title3": "What are the benefits for Players?",
+        "description3": "No more endless searches! Access all games and stores near you with one click. Easily manage your entrance fee and view history of your past and upcoming events. Create your profile, display your equipment and join teams. Collect badges to show your commitment within the community."
+      }
+    },
+    "dashboard": {
+      "title": "Airsoft Companion - Dashboard",
+      "description": "Manage your airsoft games.",
+      "tab-bar": {
+        "games": "Games",
+        "players": "Players",
+        "teams": "Teams",
+        "stores": "Stores"
+      },
+      "game": {
+        "join": "Join the game",
+        "add": "Create a game",
+        "edit": "Edit the game",
+        "coordinate-entry-mode": {
+          "auto-button": "Enter coordinates manually?",
+          "manual-button": "Generate coordinates from address?"
+        },
+        "errors": {
+          "user-already-joined": "You have already joined this game.",
+          "game-full": "This game is full.",
+          "private-game": "This game is private."
+        }
+      }
+    },
+    "contact": {
+      "title": "Airsoft Companion - Contact",
+      "description": "Contact us",
+      "h1": "Contact us",
+      "message": "Your message",
+      "thank-you": "Thank you for your message!",
+      "message-sent": "We will respond as soon as possible.",
+      "redirecting": "Redirecting to the home page in 5 seconds."
+    },
+    "login": {
+      "title": "Airsoft Companion - Login",
+      "description": "Create your account",
+      "h1": "Log in",
+      "register": "No account?",
+      "errors": {
+        "invalid-credentials": "Invalid username or password."
+      }
+    },
+    "register": {
+      "title": "Airsoft Companion - Registration",
+      "description": "Sign in to your account",
+      "h1": "Register",
+      "login": "Already have an account?",
+      "confirm-password": "Confirm password",
+      "errors": {
+        "password-mismatch": "Passwords do not match."
+      }
+    },
+    "me": {
+      "title": "Airsoft Companion - My Account",
+      "description": "View your account information",
+      "h1": "My account",
+      "logout": "Log out"
+    },
+    "terms-and-conditions": {
+      "title": "Airsoft Companion - Terms and Conditions",
+      "description": "Airsoft Companion Terms and Conditions"
+    },
+    "terms-of-use": {
+      "title": "Airsoft Companion - Terms of Use",
+      "description": "Airsoft Companion Terms of Use"
+    },
+    "cookies-policy": {
+      "title": "Airsoft Companion - Cookies Policy",
+      "description": "Airsoft Companion Cookies Policy"
+    }
   }
 }

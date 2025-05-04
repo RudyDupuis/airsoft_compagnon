@@ -106,7 +106,7 @@ const {
 
 async function submit() {
   if (new Date(startDateTime.value) > new Date(endDateTime.value)) {
-    error.value = t('dashboard.game-form.start-date-after-end-date')
+    error.value = t('entities.game.errors.start-date-after-end-date')
     return
   }
 
@@ -140,18 +140,12 @@ async function remove() {
   <div class="w-full">
     <h3 class="text-xl text-center font-bold mb-10">
       {{
-        isDefined(gameToUpdate)
-          ? $t('dashboard.game-form.update-title')
-          : $t('dashboard.game-form.create-title')
+        isDefined(gameToUpdate) ? $t('pages.dashboard.game.edit') : $t('pages.dashboard.game.add')
       }}
     </h3>
     <FormComp
       v-if="!isSuccess"
-      :submitButtonKey="
-        isDefined(gameToUpdate)
-          ? 'dashboard.game-form.update-submit'
-          : 'dashboard.game-form.create-submit'
-      "
+      :submitButtonKey="isDefined(gameToUpdate) ? 'common.form.edit' : 'common.form.add'"
       :error="error"
       :isLoading="isLoading"
       :isSuccess="isSuccess"
@@ -160,49 +154,49 @@ async function remove() {
     >
       <InputField
         v-model="name"
-        placeholderKey="dashboard.game-form.name"
+        placeholderKey="entities.game.name"
         :regex="nameRegex"
-        error-message-key="dashboard.game-form.invalid-name"
+        error-message-key="entities.game.errors.invalid-name"
         required
         cy="game-name"
       />
       <InputField
         v-model="description"
-        placeholderKey="dashboard.game-form.description"
+        placeholderKey="entities.game.description"
         type="textarea"
         cy="game-description"
       />
       <InputField
         v-model="startDateTime"
-        placeholderKey="dashboard.game-form.start-date-time"
+        placeholderKey="entities.game.start-date"
         :custom-string-validation="isInFuture"
-        error-message-key="dashboard.game-form.invalid-date-time"
+        error-message-key="entities.game.errors.invalid-date-time"
         type="datetime-local"
         required
         cy="game-start-date"
       />
       <InputField
         v-model="endDateTime"
-        placeholderKey="dashboard.game-form.end-date-time"
+        placeholderKey="entities.game.end-date"
         :custom-string-validation="isInFuture"
-        error-message-key="dashboard.game-form.invalid-date-time"
+        error-message-key="entities.game.errors.invalid-date-time"
         type="datetime-local"
         required
         cy="game-end-date"
       />
       <SelectField
         v-model="gameType"
-        placeholderKey="dashboard.game-form.game-type"
+        placeholderKey="entities.game.game-type.title"
         :options="[
-          { value: GameType.DOMINICAL, label: $t('dashboard.game-form.dominical') },
-          { value: GameType.OP, label: $t('dashboard.game-form.op') }
+          { value: GameType.DOMINICAL, label: $t('entities.game.game-type.dominical') },
+          { value: GameType.OP, label: $t('entities.game.game-type.op') }
         ]"
         required
         cy="game-type"
       />
       <InputField
         v-model="address"
-        placeholderKey="dashboard.game-form.address"
+        placeholderKey="entities.game.address"
         required
         cy="game-address"
         @blur="generateCoordinates()"
@@ -218,8 +212,8 @@ async function remove() {
       >
         {{
           coordinateEntryMode === CoordinateEntryMode.Auto
-            ? $t('dashboard.game-form.coordinate-entry-mode-auto-button')
-            : $t('dashboard.game-form.coordinate-entry-mode-manual-button')
+            ? $t('pages.dashboard.game.coordinate-entry-mode.auto-button')
+            : $t('pages.dashboard.game.coordinate-entry-mode.manual-button')
         }}
       </button>
       <div v-if="coordinateEntryMode === CoordinateEntryMode.Auto" class="w-full h-40 relative">
@@ -234,7 +228,7 @@ async function remove() {
       <template v-if="coordinateEntryMode === CoordinateEntryMode.Manual">
         <InputField
           v-model="latitude"
-          placeholderKey="dashboard.game-form.latitude"
+          placeholderKey="entities.game.latitude"
           :step="0.0000001"
           type="number"
           required
@@ -242,7 +236,7 @@ async function remove() {
         />
         <InputField
           v-model="longitude"
-          placeholderKey="dashboard.game-form.longitude"
+          placeholderKey="entities.game.longitude"
           :step="0.0000001"
           type="number"
           required
@@ -251,15 +245,15 @@ async function remove() {
       </template>
       <InputField
         v-model="allowedConsumables"
-        placeholderKey="dashboard.game-form.allowed-consumables"
+        placeholderKey="entities.game.allowed-consumables"
         type="textarea"
         cy="game-allowed-consumables"
       />
       <InputField
         v-model="price"
-        placeholderKey="dashboard.game-form.price"
+        placeholderKey="entities.game.price"
         :custom-number-validation="isPositiveNumber"
-        error-message-key="dashboard.game-form.invalid-price"
+        error-message-key="entities.game.errors.invalid-price"
         type="number"
         :min="1"
         :step="0.01"
@@ -269,44 +263,44 @@ async function remove() {
       />
       <SelectField
         v-model="validationType"
-        placeholderKey="dashboard.game-form.validation-type"
+        placeholderKey="entities.game.validation-type.title"
         :options="[
-          { value: ValidationType.AUTO, label: $t('dashboard.game-form.auto') },
-          { value: ValidationType.MANUAL, label: $t('dashboard.game-form.manual') }
+          { value: ValidationType.AUTO, label: $t('entities.game.validation-type.auto') },
+          { value: ValidationType.MANUAL, label: $t('entities.game.validation-type.manual') }
         ]"
         required
         cy="game-validation-type"
       />
       <CheckboxField
         v-model="hasAmenities"
-        labelKey="dashboard.game-form.has-amenities"
+        labelKey="entities.game.has-amenities"
         cy="game-has-amenities"
       />
       <CheckboxField
         v-model="hasParking"
-        labelKey="dashboard.game-form.has-parking"
+        labelKey="entities.game.has-parking"
         cy="game-has-parking"
       />
       <CheckboxField
         v-model="hasEquipmentRental"
-        labelKey="dashboard.game-form.has-equipment-rental"
+        labelKey="entities.game.has-equipment-rental"
         cy="game-has-equipment-rental"
       />
       <SelectField
         v-model="privacyType"
-        placeholderKey="dashboard.game-form.privacy-type"
+        placeholderKey="entities.game.privacy-type.title"
         :options="[
-          { value: PrivacyType.PUBLIC, label: $t('dashboard.game-form.public') },
-          { value: PrivacyType.PRIVATE, label: $t('dashboard.game-form.private') }
+          { value: PrivacyType.PUBLIC, label: $t('entities.game.privacy-type.public') },
+          { value: PrivacyType.PRIVATE, label: $t('entities.game.privacy-type.private') }
         ]"
         required
         cy="game-privacy-type"
       />
       <InputField
         v-model="maxParticipants"
-        placeholderKey="dashboard.game-form.max-participants"
+        placeholderKey="entities.game.max-participants"
         :custom-number-validation="isPositiveNumber"
-        error-message-key="dashboard.game-form.invalid-max-participants"
+        error-message-key="entities.game.errors.invalid-max-participants"
         type="number"
         :min="1"
         required
@@ -318,7 +312,7 @@ async function remove() {
       class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background bg-opacity-50"
     >
       <div class="container" data-cy="game-form-delete-confirm-modal">
-        <pre class="medium-title text-wrap">{{ $t('dashboard.game-form.confirm-delete') }}</pre>
+        <pre class="medium-title text-wrap">{{ $t('common.form.confirm-delete') }}</pre>
         <div class="flex flex-col md:flex-row gap-8 mt-4">
           <button
             v-if="isDefined(gameToUpdate)"
@@ -329,7 +323,7 @@ async function remove() {
           >
             <FetchDataComp :isLoading="isRemoveLoading" :error="removeError" />
             <template v-if="!isRemoveLoading && isNull(removeError)">{{
-              $t('dashboard.game-form.delete')
+              $t('common.form.delete')
             }}</template>
           </button>
           <button
@@ -337,7 +331,7 @@ async function remove() {
             :disabled="isRemoveLoading"
             @click="openRemoveDialog = false"
           >
-            {{ $t('dashboard.game-form.cancel') }}
+            {{ $t('common.form.cancel') }}
           </button>
         </div>
       </div>
@@ -348,7 +342,7 @@ async function remove() {
       @click="openRemoveDialog = true"
       data-cy="game-form-delete-confirm-modal-button"
     >
-      {{ $t('dashboard.game-form.open-delete-dialog') }}
+      {{ $t('common.form.delete') }}
     </button>
   </div>
 </template>

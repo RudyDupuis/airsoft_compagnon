@@ -26,7 +26,7 @@ const { loggedIn, user } = useUserSession()
         }"
         :to="localePath('/login')"
       >
-        {{ $t('header.login-link') }}
+        {{ $t('components.header.login') }}
       </NuxtLink>
       <NuxtLink
         v-else

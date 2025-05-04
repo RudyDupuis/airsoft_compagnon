@@ -5,7 +5,7 @@ export function usePageMeta(pageKey: string) {
   const { t } = useI18n()
 
   useHead({
-    title: t(`${pageKey}.title`),
-    meta: [{ name: 'description', content: t(`${pageKey}.description`) }]
+    title: t(`pages.${pageKey}.title`),
+    meta: [{ name: 'description', content: t(`pages.${pageKey}.description`) }]
   })
 }

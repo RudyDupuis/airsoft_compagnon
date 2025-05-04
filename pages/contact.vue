@@ -39,11 +39,11 @@ async function sendMessage() {
 <template>
   <section class="fullscreen-player-lying-in-the-grass-background">
     <div class="container">
-      <h1>{{ $t('contact.h1') }}</h1>
+      <h1>{{ $t('pages.contact.h1') }}</h1>
 
       <FormComp
         v-if="!isSuccess"
-        submitButtonKey="contact.submit"
+        submitButtonKey="common.form.submit"
         :error="error"
         :isLoading="isLoading"
         :isSuccess="isSuccess"
@@ -51,21 +51,26 @@ async function sendMessage() {
       >
         <InputField
           v-model="email"
-          placeholderKey="contact.email"
+          placeholderKey="entities.user.email"
           :regex="emailRegex"
-          errorMessageKey="contact.invalid-email"
+          errorMessageKey="entities.user.errors.invalid-email"
           type="email"
           required
         />
-        <InputField v-model="message" type="textarea" placeholderKey="contact.message" required />
+        <InputField
+          v-model="message"
+          type="textarea"
+          placeholderKey="pages.contact.message"
+          required
+        />
       </FormComp>
 
       <div v-else class="mb-20">
-        <h2 class="text-2xl text-center">{{ $t('contact.thank-you') }}</h2>
+        <h2 class="text-2xl text-center">{{ $t('pages.contact.thank-you') }}</h2>
         <p class="text-xl mt-10">
-          {{ $t('contact.message-sent') }}
+          {{ $t('pages.contact.message-sent') }}
           <br />
-          {{ $t('contact.redirecting') }}
+          {{ $t('pages.contact.redirecting') }}
         </p>
       </div>
     </div>

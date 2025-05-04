@@ -40,20 +40,26 @@ async function loginUser() {
 <template>
   <section class="fullscreen-player-lying-in-the-grass-background">
     <div class="container">
-      <h1>{{ $t('login.h1') }}</h1>
+      <h1>{{ $t('pages.login.h1') }}</h1>
 
       <FormComp
         v-if="!isSuccess"
-        submitButtonKey="login.submit"
+        submitButtonKey="pages.login.h1"
         :error="error"
         :isLoading="isLoading"
         :isSuccess="isSuccess"
         @submit="loginUser"
       >
-        <InputField v-model="email" placeholderKey="login.email" type="email" required cy="email" />
+        <InputField
+          v-model="email"
+          placeholderKey="entities.user.email"
+          type="email"
+          required
+          cy="email"
+        />
         <InputField
           v-model="password"
-          placeholderKey="login.password"
+          placeholderKey="entities.user.password"
           type="password"
           required
           cy="password"
@@ -61,7 +67,7 @@ async function loginUser() {
       </FormComp>
 
       <NuxtLink :to="localePath('/register')" class="button-secondary" data-cy="register-link">
-        {{ $t('login.register') }}
+        {{ $t('pages.login.register') }}
       </NuxtLink>
 
       <!-- TODO <NuxtLink :to="localePath('/forgot-password')" class="underline hover:text-primary">

@@ -116,7 +116,7 @@ async function joinGame() {
           "
           data-cy="game-infos-panel-edit-button"
         >
-          {{ $t('dashboard.update-game') }}
+          {{ $t('common.form.edit') }}
         </button>
         <button
           v-if="canJoinSelectedGame"
@@ -126,7 +126,7 @@ async function joinGame() {
         >
           <FetchDataComp :error="joinGameError" :isLoading="isJoinGameLoading" />
           <span v-if="!isJoinGameLoading && isNull(joinGameError)">
-            {{ $t('dashboard.join-game') }}
+            {{ $t('pages.dashboard.game.join') }}
           </span>
         </button>
       </GameInfos>
@@ -172,7 +172,7 @@ async function joinGame() {
         data-cy="open-add-panel"
       >
         <font-awesome :icon="['fas', 'map-location-dot']" class="text-xl" />
-        <span class="text-xs text-center mt-2">{{ $t('dashboard.add') }}</span>
+        <span class="text-xs text-center mt-2">{{ $t('common.form.add') }}</span>
       </button>
       <div
         class="w-full lg:w-fit lg:rounded-xl lg:mb-5 flex items-center justify-center gap-5 p-5 bg-background pointer-events-auto"
@@ -183,28 +183,28 @@ async function joinGame() {
           @click="view = View.Games"
         >
           <font-awesome :icon="['fas', 'gamepad']" class="text-xl" />
-          <span class="text-xs text-center mt-2">{{ $t('dashboard.games') }}</span>
+          <span class="text-xs text-center mt-2">{{ $t('pages.dashboard.tab-bar.games') }}</span>
         </p>
         <p
           class="flex flex-col items-center text-secondary"
           :class="{ 'text-primary': view === View.Players }"
         >
           <font-awesome :icon="['fas', 'person']" class="text-xl" />
-          <span class="text-xs text-center mt-2">{{ $t('dashboard.players') }}</span>
+          <span class="text-xs text-center mt-2">{{ $t('pages.dashboard.tab-bar.players') }}</span>
         </p>
         <p
           class="flex flex-col items-center text-secondary"
           :class="{ 'text-primary': view === View.Teams }"
         >
           <font-awesome :icon="['fas', 'people-group']" class="text-xl" />
-          <span class="text-xs text-center mt-2">{{ $t('dashboard.teams') }}</span>
+          <span class="text-xs text-center mt-2">{{ $t('pages.dashboard.tab-bar.teams') }}</span>
         </p>
         <p
           class="flex flex-col items-center text-secondary"
           :class="{ 'text-primary': view === View.Stores }"
         >
           <font-awesome :icon="['fas', 'store']" class="text-xl" />
-          <span class="text-xs text-center mt-2">{{ $t('dashboard.stores') }}</span>
+          <span class="text-xs text-center mt-2">{{ $t('pages.dashboard.tab-bar.stores') }}</span>
         </p>
       </div>
     </div>

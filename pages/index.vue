@@ -53,10 +53,10 @@ const selectedGame = computed(() => {
     <div class="flex flex-col items-center justify-center gap-14 md:gap-20">
       <BigLogoSvg class="w-10/12 md:w-fit" />
       <pre class="text-lg md:text-2xl" data-cy="hero-banner-subtitle">{{
-        $t('index.hero-banner.subtitle')
+        $t('pages.index.hero-banner.subtitle')
       }}</pre>
       <a class="button" href="/#find-a-game" data-cy="hero-banner-cta">{{
-        $t('index.hero-banner.cta')
+        $t('pages.index.hero-banner.cta')
       }}</a>
     </div>
   </section>
@@ -64,7 +64,7 @@ const selectedGame = computed(() => {
     id="find-a-game"
     class="relative fullscreen-without-navbar p-5 flex flex-col items-center justify-center"
   >
-    <h2 class="large-title mb-10">{{ $t('index.find-a-game.title') }}</h2>
+    <h2 class="large-title mb-10">{{ $t('pages.index.find-a-game.title') }}</h2>
     <FetchDataComp :error="error" :isLoading="isLoading" />
     <template v-if="isSuccess">
       <MapComp :markersData="markersData" @marker-clicked="(id) => (selectedGameId = id)" />
@@ -75,7 +75,7 @@ const selectedGame = computed(() => {
         <font-awesome :icon="['fas', 'circle-xmark']" @click="selectedGameId = undefined" />
         <GameInfos :game="selectedGame">
           <NuxtLink class="button" :to="localePath(`/login`)">
-            {{ $t('index.find-a-game.join-game') }}
+            {{ $t('pages.index.find-a-game.join-game') }}
           </NuxtLink>
         </GameInfos>
       </div>
@@ -87,12 +87,12 @@ const selectedGame = computed(() => {
   >
     <div></div>
     <div class="px-10 xl:pr-40 py-40 xl:py-60 xl:w-5/12">
-      <h3 class="font-bold text-2xl py-8">{{ $t('index.infos.title1') }}</h3>
-      <p>{{ $t('index.infos.description1') }}</p>
-      <h3 class="font-bold text-2xl py-8">{{ $t('index.infos.title2') }}</h3>
-      <p>{{ $t('index.infos.description2') }}</p>
-      <h3 class="font-bold text-2xl py-8">{{ $t('index.infos.title3') }}</h3>
-      <p>{{ $t('index.infos.description3') }}</p>
+      <h3 class="font-bold text-2xl py-8">{{ $t('pages.index.infos.title1') }}</h3>
+      <p>{{ $t('pages.index.infos.description1') }}</p>
+      <h3 class="font-bold text-2xl py-8">{{ $t('pages.index.infos.title2') }}</h3>
+      <p>{{ $t('pages.index.infos.description2') }}</p>
+      <h3 class="font-bold text-2xl py-8">{{ $t('pages.index.infos.title3') }}</h3>
+      <p>{{ $t('pages.index.infos.description3') }}</p>
     </div>
   </section>
 </template>

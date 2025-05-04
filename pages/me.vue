@@ -29,25 +29,28 @@ function logout() {
 <template>
   <section class="fullscreen-player-lying-in-the-grass-background">
     <div class="container">
-      <h1>{{ $t('me.h1') }}</h1>
+      <h1>{{ $t('pages.me.h1') }}</h1>
 
       <FetchDataComp :error="error" :isLoading="isLoading" />
 
       <div v-if="isSuccess && isNotNull(user)" class="flex flex-col gap-8">
         <div class="flex flex-col gap-4">
-          <p>{{ $t('me.pseudo') }}: {{ user.pseudo }}</p>
-          <p>{{ $t('me.first-name') }}: {{ user.firstName }}</p>
-          <p>{{ $t('me.last-name') }}: {{ user.lastName }}</p>
-          <p>{{ $t('me.email') }}: {{ user.email }}</p>
-          <p>{{ $t('me.date-of-birth') }}: {{ new Date(user.dateOfBirth).toLocaleDateString() }}</p>
+          <p>{{ $t('entities.user.pseudo') }}: {{ user.pseudo }}</p>
+          <p>{{ $t('entities.user.first-name') }}: {{ user.firstName }}</p>
+          <p>{{ $t('entities.user.last-name') }}: {{ user.lastName }}</p>
+          <p>{{ $t('entities.user.email') }}: {{ user.email }}</p>
+          <p>
+            {{ $t('entities.user.date-of-birth') }}:
+            {{ new Date(user.dateOfBirth).toLocaleDateString() }}
+          </p>
         </div>
 
         <NuxtLink :to="localePath('/me/edit')" class="button">
-          {{ $t('me.edit') }}
+          {{ $t('common.form.edit') }}
         </NuxtLink>
       </div>
       <button class="button-secondary" @click="logout">
-        {{ $t('me.logout') }}
+        {{ $t('pages.me.logout') }}
       </button>
     </div>
   </section>

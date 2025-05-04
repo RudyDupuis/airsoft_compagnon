@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 401,
       data: {
-        errorKey: 'common.unauthorized'
+        errorKey: 'common.errors.unauthorized'
       }
     })
   }
@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       data: {
-        errorKey: 'common.invalid-id'
+        errorKey: 'common.errors.invalid-id'
       }
     })
   }
@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 404,
       data: {
-        errorKey: 'common.not-found'
+        errorKey: 'common.errors.not-found'
       }
     })
   }
@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 404,
       data: {
-        errorKey: 'common.user-not-found'
+        errorKey: 'common.errors.user-not-found'
       }
     })
   }
@@ -60,7 +60,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       data: {
-        errorKey: 'dashboard.game.user-already-joined'
+        errorKey: 'pages.dashboard.game.errors.user-already-joined'
       }
     })
   }
@@ -69,7 +69,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       data: {
-        errorKey: 'dashboard.game.game-full'
+        errorKey: 'pages.dashboard.game.errors.game-full'
       }
     })
   }
@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 403,
       data: {
-        errorKey: 'dashboard.game.private-game'
+        errorKey: 'pages.dashboard.game.errors.private-game'
       }
     })
   }

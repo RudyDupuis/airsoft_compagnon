@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 401,
       data: {
-        errorKey: 'common.unauthorized'
+        errorKey: 'common.errors.unauthorized'
       }
     })
   }
@@ -55,7 +55,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       data: {
-        errorKey: 'common.all-fields-required'
+        errorKey: 'common.form.errors.all-fields-required'
       }
     })
   }
@@ -79,7 +79,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       data: {
-        errorKey: 'common.rules-not-respected'
+        errorKey: 'common.form.errors.rules-not-respected'
       }
     })
   }

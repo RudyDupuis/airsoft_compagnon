@@ -15,11 +15,13 @@ defineProps<{
     </h3>
     <div class="flex flex-col space-y-10">
       <p data-cy="game-infos-panel-types" class="text-center">
-        {{ game.gameType === GameType.OP ? $t('game-infos-panel.op') : '' }}
-        {{ game.gameType === GameType.DOMINICAL ? $t('game-infos-panel.dominical') : '' }}
+        {{ game.gameType === GameType.OP ? $t('entities.game.game-type.op') : '' }}
+        {{ game.gameType === GameType.DOMINICAL ? $t('entities.game.game-type.dominical') : '' }}
         -
-        {{ game.privacyType === PrivacyType.PRIVATE ? $t('game-infos-panel.private') : '' }}
-        {{ game.privacyType === PrivacyType.PUBLIC ? $t('game-infos-panel.public') : '' }}
+        {{
+          game.privacyType === PrivacyType.PRIVATE ? $t('entities.game.privacy-type.private') : ''
+        }}
+        {{ game.privacyType === PrivacyType.PUBLIC ? $t('entities.game.privacy-type.public') : '' }}
       </p>
       <p data-cy="game-infos-panel-price" class="text-center">
         <font-awesome :icon="['fas', 'coins']" /> {{ game.price }} €
@@ -48,11 +50,11 @@ defineProps<{
       <div class="flex justify-center align-center space-x-5 pt-5">
         <p v-if="game.hasAmenities" data-cy="game-infos-panel-has-amenities" class="icon-with-text">
           <font-awesome :icon="['fas', 'toilet']" />
-          <span>{{ $t('game-infos-panel.has-amenities') }}</span>
+          <span>{{ $t('entities.game.has-amenities') }}</span>
         </p>
         <p v-if="game.hasParking" data-cy="game-infos-panel-has-parking" class="icon-with-text">
           <font-awesome :icon="['fas', 'car']" />
-          <span>{{ $t('game-infos-panel.has-parking') }}</span>
+          <span>{{ $t('entities.game.has-parking') }}</span>
         </p>
         <p
           v-if="game.hasEquipmentRental"
@@ -60,7 +62,7 @@ defineProps<{
           class="icon-with-text"
         >
           <font-awesome :icon="['fas', 'store']" />
-          <span>{{ $t('game-infos-panel.has-equipment-rental') }}</span>
+          <span>{{ $t('entities.game.has-equipment-rental') }}</span>
         </p>
       </div>
       <p v-if="isNotBlankString(game.description)" data-cy="game-infos-panel-description">
@@ -71,7 +73,7 @@ defineProps<{
         data-cy="game-infos-panel-allowed-consumables"
         class="my-5"
       >
-        <span class="underline">{{ $t('game-infos-panel.allowed-consumables') }}</span>
+        <span class="underline">{{ $t('entities.game.allowed-consumables') }}</span>
         {{ game.allowedConsumables }}
       </p>
       <slot></slot>

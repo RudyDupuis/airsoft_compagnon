@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 401,
       data: {
-        errorKey: 'common.unauthorized'
+        errorKey: 'common.errors.unauthorized'
       }
     })
   }
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 404,
       data: {
-        errorKey: 'me.user-not-found'
+        errorKey: 'common.errors.user-not-found'
       }
     })
   }

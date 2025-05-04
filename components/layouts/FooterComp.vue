@@ -16,21 +16,23 @@ const localePath = useLocalePath()
 
     <div class="flex items-center gap-2">
       <NuxtLink :to="localePath('/contact')" class="underline hover:text-primary">
-        {{ $t('footer.contact') }}
+        {{ $t('components.footer.contact') }}
       </NuxtLink>
       <NuxtLink :to="localePath('/terms-and-conditions')" class="underline hover:text-primary">
-        {{ $t('footer.terms-and-conditions') }}
+        {{ $t('components.footer.terms-and-conditions') }}
       </NuxtLink>
       <NuxtLink :to="localePath('/terms-of-use')" class="underline hover:text-primary">
-        {{ $t('footer.terms-of-use') }}
+        {{ $t('components.footer.terms-of-use') }}
       </NuxtLink>
       <NuxtLink :to="localePath('/cookies-policy')" class="underline hover:text-primary">
-        {{ $t('footer.cookies-policy') }}
+        {{ $t('components.footer.cookies-policy') }}
       </NuxtLink>
     </div>
     <div class="flex flex-col items-center lg:items-start">
       <p class="text-center">Copyright © {{ new Date().getFullYear() }} Airsoft Compagnon</p>
-      <p class="text-xs">{{ $t('footer.developped-by') }} | {{ $t('footer.version') }} 0.0.0</p>
+      <p class="text-xs">
+        {{ $t('components.footer.developped-by') }} | {{ $t('components.footer.version') }} 0.0.0
+      </p>
     </div>
   </footer>
 </template>

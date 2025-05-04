@@ -41,7 +41,7 @@ const {
 
 async function registerUser() {
   if (password.value !== confirmPassword.value) {
-    error.value = t('register.password-mismatch')
+    error.value = t('pages.register.errors.password-mismatch')
     return
   }
 
@@ -58,11 +58,11 @@ async function registerUser() {
 <template>
   <section class="fullscreen-player-lying-in-the-grass-background">
     <div class="container">
-      <h1>{{ $t('register.h1') }}</h1>
+      <h1>{{ $t('pages.register.h1') }}</h1>
 
       <FormComp
         v-if="!isSuccess"
-        submitButtonKey="register.submit"
+        submitButtonKey="pages.register.h1"
         :error="error"
         :isLoading="isLoading"
         :isSuccess="isSuccess"
@@ -70,60 +70,60 @@ async function registerUser() {
       >
         <InputField
           v-model="firstName"
-          placeholderKey="register.first-name"
+          placeholderKey="entities.user.first-name"
           :regex="nameRegex"
-          errorMessageKey="register.invalid-first-name"
+          errorMessageKey="entities.user.errors.invalid-first-name"
           required
           cy="first-name"
         />
         <InputField
           v-model="lastName"
-          placeholderKey="register.last-name"
+          placeholderKey="entities.user.last-name"
           :regex="nameRegex"
-          errorMessageKey="register.invalid-last-name"
+          errorMessageKey="entities.user.errors.invalid-last-name"
           required
           cy="last-name"
         />
         <InputField
           v-model="pseudo"
-          placeholderKey="register.pseudo"
+          placeholderKey="entities.user.pseudo"
           :regex="pseudoRegex"
-          errorMessageKey="register.invalid-pseudo"
+          errorMessageKey="entities.user.errors.invalid-pseudo"
           required
           cy="pseudo"
         />
         <InputField
           v-model="dateOfBirth"
-          placeholderKey="register.date-of-birth"
+          placeholderKey="entities.user.date-of-birth"
           :custom-string-validation="isOfLegalAge"
-          error-message-key="register.invalid-date-of-birth"
+          error-message-key="entities.user.errors.invalid-date-of-birth"
           type="date"
           required
           cy="date-of-birth"
         />
         <InputField
           v-model="email"
-          placeholderKey="register.email"
+          placeholderKey="entities.user.email"
           :regex="emailRegex"
-          errorMessageKey="register.invalid-email"
+          errorMessageKey="entities.user.errors.invalid-email"
           type="email"
           required
           cy="email"
         />
         <InputField
           v-model="password"
-          placeholderKey="register.password"
+          placeholderKey="entities.user.password"
           :regex="passwordRegex"
-          errorMessageKey="register.invalid-password"
+          errorMessageKey="entities.user.errors.invalid-password"
           type="password"
           required
           cy="password"
         />
         <InputField
           v-model="confirmPassword"
-          placeholderKey="register.confirm-password"
+          placeholderKey="pages.register.confirm-password"
           :regex="passwordRegex"
-          errorMessageKey="register.invalid-password"
+          errorMessageKey="entities.user.errors.invalid-password"
           type="password"
           required
           cy="confirm-password"
@@ -131,7 +131,7 @@ async function registerUser() {
       </FormComp>
 
       <NuxtLink :to="localePath('/login')" class="button-secondary" data-cy="login-link">
-        {{ $t('register.login') }}
+        {{ $t('pages.register.login') }}
       </NuxtLink>
     </div>
   </section>

@@ -28,7 +28,7 @@ export function useFetchWithState<T>(url: string | Ref<string>, options: UseFetc
     await executeUseFetch()
 
     if (isNotNullOrUndefined(fetchError.value)) {
-      error.value = t('common.server-error')
+      error.value = t('common.errors.server-error')
 
       if (isDefined(fetchError.value.data.data.errorKey)) {
         error.value = t(fetchError.value.data.data.errorKey)

@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       data: {
-        errorKey: 'common.all-fields-required'
+        errorKey: 'common.form.errors.all-fields-required'
       }
     })
   }
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 401,
       data: {
-        errorKey: 'login.invalid-credentials'
+        errorKey: 'pages.login.errors.invalid-credentials'
       }
     })
   }
