@@ -162,7 +162,7 @@
       "h1": "Log in",
       "register": "No account?",
       "errors": {
-        "invalid-credentials": "Invalid username or password."
+        "invalid-credentials": "Invalid email or password."
       }
     },
     "register": {

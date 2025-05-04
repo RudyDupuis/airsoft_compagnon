@@ -162,7 +162,7 @@
       "h1": "Se connecter",
       "register": "Pas de compte ?",
       "errors": {
-        "invalid-credentials": "Identifiant ou mot de passe invalide."
+        "invalid-credentials": "Email ou mot de passe invalide."
       }
     },
     "register": {

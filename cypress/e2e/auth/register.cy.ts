@@ -20,18 +20,18 @@ const invalidUser: typeof newUser = {
 
 const errorMessages = {
   firstName:
-    'The first name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.',
+    'First name must contain between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.',
   lastName:
-    'The last name must be between 2 and 50 characters long and can only include letters, spaces, hyphens, and apostrophes.',
+    'Last name must contain between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.',
   pseudo:
-    'The pseudonym must be between 3 and 20 characters long and can only include letters, numbers, dashes (-), and underscores (_).',
-  dateOfBirth: 'You must be of legal age to register.',
+    'Username must contain between 3 and 20 characters and can only include letters, numbers, hyphens (-) and underscores (_).',
+  dateOfBirth: 'You must be at least 18 years old to register.',
   email: 'Please enter a valid email address.',
-  emailAlreadyUsed: 'Email already exists',
+  emailAlreadyUsed: 'This email is already in use',
   password:
-    "The password must be at least 8 characters long, include a lowercase letter, an uppercase letter, a number, and a special character (among '$ ! % * ? &').",
-  passwordsDoNotMatch: 'Passwords do not match',
-  rulesNotRespected: 'All rules must be respected.'
+    "Password must contain at least 8 characters, include a lowercase letter, an uppercase letter, a number and a special character (among '$ ! % * ? &').",
+  passwordsDoNotMatch: 'Passwords do not match.',
+  rulesNotRespected: 'All rules must be followed.'
 }
 
 function fillForm(formData: typeof newUser & { confirmPassword?: string }) {
