@@ -46,7 +46,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 409,
       data: {
-        errorKey: 'register.email-already-exists'
+        errorKey: 'entities.game.errors.email-already-exists'
       }
     })
   }
