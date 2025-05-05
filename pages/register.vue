@@ -6,7 +6,7 @@ import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useRouter } from 'vue-router'
 import type { User } from '~/server/db/entities/User'
-import { emailRegex, nameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
+import { emailRegex, usernameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
 import { isOfLegalAge } from '~/utils/validations/methods'
 
 usePageMeta('register')
@@ -71,7 +71,7 @@ async function registerUser() {
         <InputField
           v-model="firstName"
           placeholderKey="entities.user.first-name"
-          :regex="nameRegex"
+          :regex="usernameRegex"
           errorMessageKey="entities.user.errors.invalid-first-name"
           required
           cy="first-name"
@@ -79,7 +79,7 @@ async function registerUser() {
         <InputField
           v-model="lastName"
           placeholderKey="entities.user.last-name"
-          :regex="nameRegex"
+          :regex="usernameRegex"
           errorMessageKey="entities.user.errors.invalid-last-name"
           required
           cy="last-name"

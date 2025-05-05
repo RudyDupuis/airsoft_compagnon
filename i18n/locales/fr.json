@@ -73,7 +73,7 @@
       "max-participants": "Nombre maximum de joueurs",
       "errors": {
         "start-date-after-end-date": "La date de début doit être avant la date de fin.",
-        "invalid-name": "Le nom doit contenir entre 2 et 50 caractères et ne peut inclure que des lettres, espaces, traits d'union et apostrophes.",
+        "invalid-name": "Le nom doit contenir entre 2 et 50 caractères et ne peut inclure que des lettres, chiffres, espaces, traits d'union et apostrophes.",
         "invalid-date-time": "La partie ne peut pas être planifiée dans le passé.",
         "invalid-price": "Le prix doit être un nombre positif.",
         "invalid-max-participants": "Le nombre maximum de joueurs doit être un nombre positif."

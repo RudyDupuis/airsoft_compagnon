@@ -73,7 +73,7 @@ const game = {
 
 const errorMessages = {
   invalidName:
-    'Name must be between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.',
+    'Name must be between 2 and 50 characters and can only include letters, numbers, spaces, hyphens and apostrophes.',
   invalidDateTime: 'The game cannot be scheduled in the past.',
   startDateAfterEndDate: 'Start date must be before end date.',
   rulesNotRespected: 'All rules must be followed.'

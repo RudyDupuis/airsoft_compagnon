@@ -1,5 +1,5 @@
 import { User } from '~/server/db/entities/User'
-import { emailRegex, nameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
+import { emailRegex, usernameRegex, passwordRegex, pseudoRegex } from '~/utils/validations/regex'
 import { isNotBlankString, isNotNull, isNullOrUndefined } from '~/utils/types/typeGuards'
 import { isOfLegalAge } from '~/utils/validations/methods'
 import { TypeORM } from '~/server/db/config'
@@ -27,8 +27,8 @@ export default defineEventHandler(async (event) => {
     (isNotBlankString(email) && !emailRegex.test(email)) ||
     (isNotBlankString(password) && !passwordRegex.test(password)) ||
     (isNotBlankString(dateOfBirth) && !isOfLegalAge(dateOfBirth)) ||
-    (isNotBlankString(firstName) && !nameRegex.test(firstName)) ||
-    (isNotBlankString(lastName) && !nameRegex.test(lastName)) ||
+    (isNotBlankString(firstName) && !usernameRegex.test(firstName)) ||
+    (isNotBlankString(lastName) && !usernameRegex.test(lastName)) ||
     (isNotBlankString(pseudo) && !pseudoRegex.test(pseudo))
   ) {
     throw createError({
