@@ -34,6 +34,7 @@ export default defineEventHandler(async (event) => {
     firstName: user.firstName,
     lastName: user.lastName,
     dateOfBirth: user.dateOfBirth,
+    reputation: user.reputation,
     isVerified: user.isVerified
   }
 })

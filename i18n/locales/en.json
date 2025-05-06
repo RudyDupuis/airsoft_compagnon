@@ -86,6 +86,7 @@
       "date-of-birth": "Date of birth",
       "email": "Email",
       "password": "Password",
+      "reputation": "Reputation",
       "errors": {
         "email-already-exists": "This email is already in use",
         "invalid-first-name": "First name must contain between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.",
@@ -179,7 +180,17 @@
       "title": "Airsoft Companion - My Account",
       "description": "View your account information",
       "h1": "My account",
-      "logout": "Log out"
+      "no-reputation": "Not rated",
+      "edit-account": "Edit my account",
+      "edit-password": "Change password",
+      "old-password": "Old password",
+      "new-password": "New password",
+      "confirm-new-password": "Confirm new password",
+      "logout": "Log out",
+      "errors": {
+        "password-mismatch": "New passwords don't match.",
+        "invalid-old-password": "Old password is incorrect."
+      }
     },
     "terms-and-conditions": {
       "title": "Airsoft Companion - Terms and Conditions",

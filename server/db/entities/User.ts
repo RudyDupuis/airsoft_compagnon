@@ -24,6 +24,9 @@ export class User {
   @Column({ type: 'varchar', nullable: false })
   pseudo!: string
 
+  @Column({ type: 'decimal', precision: 2, scale: 1, nullable: true })
+  reputation!: number
+
   @Column({ type: 'boolean', default: false })
   isVerified!: boolean
 

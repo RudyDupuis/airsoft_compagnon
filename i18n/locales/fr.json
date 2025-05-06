@@ -86,6 +86,7 @@
       "date-of-birth": "Date de naissance",
       "email": "Email",
       "password": "Mot de passe",
+      "reputation": "Réputation",
       "errors": {
         "email-already-exists": "Cet email est déjà utilisé",
         "invalid-first-name": "Le prénom doit contenir entre 2 et 50 caractères et ne peut inclure que des lettres, espaces, traits d'union et apostrophes.",
@@ -179,7 +180,17 @@
       "title": "Airsoft Compagnon - Mon compte",
       "description": "Voir les informations de votre compte",
       "h1": "Mon compte",
-      "logout": "Se déconnecter"
+      "no-reputation": "Non noté",
+      "edit-account": "Modifier mon compte",
+      "edit-password": "Changer de mot de passe",
+      "old-password": "Ancien mot de passe",
+      "new-password": "Nouveau mot de passe",
+      "confirm-new-password": "Confirmer le nouveau mot de passe",
+      "logout": "Se déconnecter",
+      "errors": {
+        "password-mismatch": "Les nouveaux mots de passe ne correspondent pas.",
+        "invalid-old-password": "L'ancien mot de passe est incorrect."
+      }
     },
     "terms-and-conditions": {
       "title": "Airsoft Compagnon - CGV",

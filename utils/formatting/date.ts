@@ -7,3 +7,10 @@ export function displayDateTime(date: Date): string {
     minute: '2-digit'
   })
 }
+export function displayDate(date: Date): string {
+  return date.toLocaleString(undefined, {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric'
+  })
+}

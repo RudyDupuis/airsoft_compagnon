@@ -9,6 +9,7 @@ export const userSeeds = [
     firstName: 'John',
     lastName: 'Doe',
     pseudo: 'Johnny',
+    reputation: 4.5,
     isVerified: true
   },
   {
@@ -18,6 +19,7 @@ export const userSeeds = [
     firstName: 'Jane',
     lastName: 'Doe',
     pseudo: 'Jane_d',
+    reputation: 4.8,
     isVerified: false
   },
   {
@@ -44,6 +46,7 @@ export async function seedUsers() {
         firstName: seed.firstName,
         lastName: seed.lastName,
         pseudo: seed.pseudo,
+        reputation: seed.reputation,
         isVerified: seed.isVerified
       })
       return userRepository.save(user)

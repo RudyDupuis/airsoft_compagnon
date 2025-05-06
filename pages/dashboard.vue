@@ -92,8 +92,13 @@ async function joinGame() {
 </script>
 
 <template>
-  <FetchDataComp :error="error" :isLoading="isLoading" />
-  <section v-if="isSuccess" class="relative fullscreen-without-navbar">
+  <div
+    v-if="!isSuccess"
+    class="flex flex-col items-center justify-center fullscreen-without-navbar"
+  >
+    <FetchDataComp :error="error" :isLoading="isLoading" />
+  </div>
+  <section v-else class="relative fullscreen-without-navbar">
     <MapComp
       v-if="view === View.Games || view === View.Stores"
       :markersData="markersData"

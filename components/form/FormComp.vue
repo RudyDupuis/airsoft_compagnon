@@ -5,7 +5,6 @@ defineProps<{
   submitButtonKey: string
   error: string | null
   isLoading: boolean
-  isSuccess: boolean
 }>()
 
 defineEmits<{
@@ -14,12 +13,7 @@ defineEmits<{
 </script>
 
 <template>
-  <form
-    v-if="!isSuccess"
-    @submit.prevent="$emit('submit')"
-    class="flex flex-col gap-8 w-full md:w-96"
-    data-cy="form"
-  >
+  <form @submit.prevent="$emit('submit')" class="flex flex-col gap-8 w-full md:w-96" data-cy="form">
     <slot></slot>
 
     <div

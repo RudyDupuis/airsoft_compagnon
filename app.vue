@@ -7,7 +7,7 @@ const localePath = useLocalePath()
 
 <template>
   <HeaderComp />
-  <main class="flex flex-col items-center justify-center min-h-screen">
+  <main class="min-h-screen pt-20">
     <NuxtPage />
   </main>
   <FooterComp v-if="route.path !== localePath('/dashboard')" />

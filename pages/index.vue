@@ -64,7 +64,7 @@ const selectedGame = computed(() => {
     id="find-a-game"
     class="relative fullscreen-without-navbar p-5 flex flex-col items-center justify-center"
   >
-    <h2 class="large-title mb-10">{{ $t('pages.index.find-a-game.title') }}</h2>
+    <h2 class="large-title my-10">{{ $t('pages.index.find-a-game.title') }}</h2>
     <FetchDataComp :error="error" :isLoading="isLoading" />
     <template v-if="isSuccess">
       <MapComp :markersData="markersData" @marker-clicked="(id) => (selectedGameId = id)" />

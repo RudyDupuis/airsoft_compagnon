@@ -4,6 +4,9 @@ function fontawesomeIcons() {
     solid: [
       'spinner',
       'person-rifle',
+      'trophy',
+      'address-card',
+      'key',
       'toilet',
       'car',
       'store',

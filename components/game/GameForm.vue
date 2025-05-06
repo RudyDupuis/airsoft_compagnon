@@ -148,7 +148,6 @@ async function remove() {
       :submitButtonKey="isDefined(gameToUpdate) ? 'common.form.edit' : 'common.form.add'"
       :error="error"
       :isLoading="isLoading"
-      :isSuccess="isSuccess"
       class="mx-auto"
       @submit="submit"
     >

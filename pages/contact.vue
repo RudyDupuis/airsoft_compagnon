@@ -37,42 +37,39 @@ async function sendMessage() {
 </script>
 
 <template>
-  <section class="fullscreen-player-lying-in-the-grass-background">
-    <div class="container">
-      <h1>{{ $t('pages.contact.h1') }}</h1>
+  <section class="wrapper">
+    <h1 class="large-title">{{ $t('pages.contact.h1') }}</h1>
 
-      <FormComp
-        v-if="!isSuccess"
-        submitButtonKey="common.form.submit"
-        :error="error"
-        :isLoading="isLoading"
-        :isSuccess="isSuccess"
-        @submit="sendMessage"
-      >
-        <InputField
-          v-model="email"
-          placeholderKey="entities.user.email"
-          :regex="emailRegex"
-          errorMessageKey="entities.user.errors.invalid-email"
-          type="email"
-          required
-        />
-        <InputField
-          v-model="message"
-          type="textarea"
-          placeholderKey="pages.contact.message"
-          required
-        />
-      </FormComp>
+    <FormComp
+      v-if="!isSuccess"
+      submitButtonKey="common.form.submit"
+      :error="error"
+      :isLoading="isLoading"
+      @submit="sendMessage"
+    >
+      <InputField
+        v-model="email"
+        placeholderKey="entities.user.email"
+        :regex="emailRegex"
+        errorMessageKey="entities.user.errors.invalid-email"
+        type="email"
+        required
+      />
+      <InputField
+        v-model="message"
+        type="textarea"
+        placeholderKey="pages.contact.message"
+        required
+      />
+    </FormComp>
 
-      <div v-else class="mb-20">
-        <h2 class="text-2xl text-center">{{ $t('pages.contact.thank-you') }}</h2>
-        <p class="text-xl mt-10">
-          {{ $t('pages.contact.message-sent') }}
-          <br />
-          {{ $t('pages.contact.redirecting') }}
-        </p>
-      </div>
+    <div v-else class="mb-20">
+      <h2 class="text-2xl text-center">{{ $t('pages.contact.thank-you') }}</h2>
+      <p class="text-xl mt-10">
+        {{ $t('pages.contact.message-sent') }}
+        <br />
+        {{ $t('pages.contact.redirecting') }}
+      </p>
     </div>
   </section>
 </template>
