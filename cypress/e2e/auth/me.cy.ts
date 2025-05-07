@@ -141,8 +141,8 @@ describe('As a user, I want to handle my account', () => {
 
     cy.wait('@editPasswordMeRequest')
 
-    cy.getBySel('text-input-new-password').should('contain', errorMessages.password)
-    cy.getBySel('text-input-confirm-new-password').should('contain', errorMessages.password)
+    cy.getBySel('text-input-new-password-error').should('contain', errorMessages.password)
+    cy.getBySel('text-input-confirm-new-password-error').should('contain', errorMessages.password)
     cy.getBySel('form-error').should('contain', errorMessages.rulesNotRespected)
   })
 
