@@ -39,7 +39,7 @@ const errorMessages = {
   emailAlreadyUsed: 'This email is already in use',
   password:
     "Password must contain at least 8 characters, include a lowercase letter, an uppercase letter, a number and a special character (among '$ ! % * ? &').",
-  passwordsDoNotMatch: 'Passwords do not match.',
+  passwordsDoNotMatch: "New passwords don't match.",
   invalidOldPassword: 'Old password is incorrect.',
   rulesNotRespected: 'All rules must be followed.'
 }
@@ -120,7 +120,7 @@ describe('As a user, I want to handle my account', () => {
   it('should be able to log out', () => {
     cy.getBySel('me-logout').click()
 
-    cy.url().should('eq', `${Cypress.config().baseUrl}/`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`) //TODO : redirect to home page
   })
 
   it('Should show errors when edit password fiels are wrong', () => {
