@@ -1,5 +1,5 @@
 const verifiedUser = {
-  email: 'john.doe@example.com',
+  email: 'alice.smith@example.com',
   password: 'Password123!'
 }
 
