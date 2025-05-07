@@ -1,6 +1,6 @@
 const userAlreadyCreated = {
   email: 'john.doe@example.com',
-  password: 'password123!',
+  password: 'Password123!',
   dateOfBirth: new Date('1990-01-01'),
   firstName: 'John',
   lastName: 'Doe',

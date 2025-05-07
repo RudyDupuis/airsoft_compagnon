@@ -1,11 +1,11 @@
 const verifiedUser = {
   email: 'john.doe@example.com',
-  password: 'password123!'
+  password: 'Password123!'
 }
 
 const UnverifiedUser = {
   email: 'jane.doe@example.com',
-  password: 'password123!'
+  password: 'Password123!'
 }
 
 const gameAlreadyAdded = {

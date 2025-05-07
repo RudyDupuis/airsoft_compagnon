@@ -4,7 +4,7 @@ import { User } from '../entities/User'
 export const userSeeds = [
   {
     email: 'john.doe@example.com',
-    password: 'password123!',
+    password: 'Password123!',
     dateOfBirth: new Date('1990-01-01'),
     firstName: 'John',
     lastName: 'Doe',
@@ -14,7 +14,7 @@ export const userSeeds = [
   },
   {
     email: 'jane.doe@example.com',
-    password: 'password123!',
+    password: 'Password123!',
     dateOfBirth: new Date('1992-02-02'),
     firstName: 'Jane',
     lastName: 'Doe',
@@ -24,7 +24,7 @@ export const userSeeds = [
   },
   {
     email: 'alice.smith@example.com',
-    password: 'password123!',
+    password: 'Password123!',
     dateOfBirth: new Date('1985-05-05'),
     firstName: 'Alice',
     lastName: 'Smith',

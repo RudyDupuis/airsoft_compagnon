@@ -123,27 +123,37 @@ function logout() {
       <div class="flex items-center justify-center gap-8">
         <font-awesome class="text-7xl" :icon="['fas', 'person-rifle']" />
         <div>
-          <p class="text-2xl">{{ user.pseudo }}</p>
+          <p class="text-2xl" data-cy="me-pseudo">{{ user.pseudo }}</p>
           <p>
             <font-awesome class="mr-2" :icon="['fas', 'trophy']" />
-            <span v-if="isNotNull(user.reputation)">{{ user.reputation }} / 5</span>
+            <span v-if="isNotNull(user.reputation)" data-cy="me-reputation">
+              {{ user.reputation }} / 5
+            </span>
             <span v-else>{{ $t('pages.me.no-reputation') }}</span>
           </p>
         </div>
       </div>
 
       <div class="flex flex-col gap-4">
-        <button @click="mode = Mode.EDIT_ACCOUNT" class="text-left hover:text-primary">
+        <button
+          @click="mode = Mode.EDIT_ACCOUNT"
+          class="text-left hover:text-primary"
+          data-cy="me-edit-account"
+        >
           <font-awesome class="mr-2" :icon="['fas', 'address-card']" />
           <span class="underline">{{ $t('pages.me.edit-account') }}</span>
         </button>
-        <button @click="mode = Mode.EDIT_PASSWORD" class="text-left hover:text-primary">
+        <button
+          @click="mode = Mode.EDIT_PASSWORD"
+          class="text-left hover:text-primary"
+          data-cy="me-edit-password"
+        >
           <font-awesome class="mr-2" :icon="['fas', 'key']" />
           <span class="underline">{{ $t('pages.me.edit-password') }}</span>
         </button>
       </div>
 
-      <button class="button-secondary" @click="logout">
+      <button class="button-secondary" @click="logout" data-cy="me-logout">
         {{ $t('pages.me.logout') }}
       </button>
     </div>

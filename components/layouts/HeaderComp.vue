@@ -25,6 +25,7 @@ const { loggedIn, user } = useUserSession()
             route.path === localePath('/login')
         }"
         :to="localePath('/login')"
+        data-cy="header-login-link"
       >
         {{ $t('components.header.login') }}
       </NuxtLink>
@@ -35,6 +36,7 @@ const { loggedIn, user } = useUserSession()
           'cursor-default text-primary hover:text-on-background': route.path === localePath('/me')
         }"
         :to="localePath('/me')"
+        data-cy="header-me-link"
       >
         <font-awesome class="mr-1" :icon="['fas', 'person-rifle']" />
         <span class="underline" data-cy="header-user-pseudo">{{ user?.pseudo }}</span>
