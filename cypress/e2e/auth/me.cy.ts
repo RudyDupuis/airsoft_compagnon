@@ -85,10 +85,10 @@ describe('As a user, I want to handle my account', () => {
 
     cy.getBySel('me-edit-account').click()
 
-    cy.getBySel('text-input-first-name').invoke('val').should('eq', existingUser.firstName)
-    cy.getBySel('text-input-last-name').invoke('val').should('eq', existingUser.lastName)
-    cy.getBySel('text-input-pseudo').invoke('val').should('eq', existingUser.pseudo)
-    cy.getBySel('text-input-date-of-birth').invoke('val').should('eq', existingUser.dateOfBirth)
+    cy.getBySel('text-input-first-name').invoke('val').should('eq', newUser.firstName)
+    cy.getBySel('text-input-last-name').invoke('val').should('eq', newUser.lastName)
+    cy.getBySel('text-input-pseudo').invoke('val').should('eq', newUser.pseudo)
+    cy.getBySel('text-input-date-of-birth').invoke('val').should('eq', newUser.dateOfBirth)
     cy.getBySel('text-input-email').invoke('val').should('eq', existingUser.email)
   })
 
@@ -120,33 +120,7 @@ describe('As a user, I want to handle my account', () => {
   it('should be able to log out', () => {
     cy.getBySel('me-logout').click()
 
-    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`) //TODO: Redirect to home page
-  })
-
-  it('should be able to update my password', () => {
-    cy.intercept('PUT', '/api/auth/me/password').as('editPasswordMeRequest')
-
-    cy.getBySel('me-edit-password').click()
-
-    cy.getBySel('form').should('exist')
-    cy.getBySel('text-input-old-password').type(existingUser.password)
-    cy.getBySel('text-input-new-password').type(newPassword)
-    cy.getBySel('text-input-confirm-new-password').type(newPassword)
-    cy.getBySel('form-submit-button').click()
-
-    cy.wait('@editPasswordMeRequest')
-
-    cy.getBySel('me-logout').click()
-
-    cy.getBySel('header-login-link').click()
-
-    cy.getBySel('form').should('exist')
-
-    cy.getBySel('text-input-email').should('exist').type(existingUser.email)
-    cy.getBySel('text-input-password').should('exist').type(newPassword)
-    cy.getBySel('form-submit-button').click()
-
-    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/`)
   })
 
   it('Should show errors when edit password fiels are wrong', () => {
@@ -186,5 +160,31 @@ describe('As a user, I want to handle my account', () => {
     cy.wait('@editPasswordMeRequest')
 
     cy.getBySel('form-error').should('contain', errorMessages.invalidOldPassword)
+  })
+
+  it('should be able to update my password', () => {
+    cy.intercept('PUT', '/api/auth/me/password').as('editPasswordMeRequest')
+
+    cy.getBySel('me-edit-password').click()
+
+    cy.getBySel('form').should('exist')
+    cy.getBySel('text-input-old-password').type(existingUser.password)
+    cy.getBySel('text-input-new-password').type(newPassword)
+    cy.getBySel('text-input-confirm-new-password').type(newPassword)
+    cy.getBySel('form-submit-button').click()
+
+    cy.wait('@editPasswordMeRequest')
+
+    cy.getBySel('me-logout').click()
+
+    cy.getBySel('header-login-link').click()
+
+    cy.getBySel('form').should('exist')
+
+    cy.getBySel('text-input-email').should('exist').type(existingUser.email)
+    cy.getBySel('text-input-password').should('exist').type(newPassword)
+    cy.getBySel('form-submit-button').click()
+
+    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
   })
 })
