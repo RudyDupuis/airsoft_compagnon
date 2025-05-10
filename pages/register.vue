@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useLocalePath, useUserSession } from '#imports'
+import { useLocalePath } from '#imports'
 import { useI18n } from 'vue-i18n'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
@@ -49,8 +49,6 @@ async function registerUser() {
   await executeRegisterUser()
 
   if (isSuccess.value) {
-    const { fetch: refreshSession } = useUserSession()
-    await refreshSession()
     router.push(localePath('/'))
   }
 }

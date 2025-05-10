@@ -6,6 +6,7 @@ import type { UseFetchOptions } from '#app'
 
 export function useFetchWithState<T>(url: string | Ref<string>, options: UseFetchOptions<T> = {}) {
   const { t } = useI18n()
+  const { fetch: refreshUserSession } = useUserSession()
 
   const resolvedUrl = computed(() => unref(url))
 
@@ -26,6 +27,7 @@ export function useFetchWithState<T>(url: string | Ref<string>, options: UseFetc
     error.value = null
 
     await executeUseFetch()
+    await refreshUserSession()
 
     if (isNotNullOrUndefined(fetchError.value)) {
       error.value = t('common.errors.server-error')

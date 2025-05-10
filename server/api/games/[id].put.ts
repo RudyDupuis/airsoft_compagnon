@@ -47,7 +47,6 @@ export default defineEventHandler(async (event) => {
   validateFieldRules(
     body,
     {
-      //TODO: BUG, check with create too
       name: {
         check: (value) => isString(value) && isNotBlankString(value) && nameRegex.test(value)
       },

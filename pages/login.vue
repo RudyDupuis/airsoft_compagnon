@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useLocalePath, useUserSession } from '#imports'
+import { useLocalePath } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useRouter } from 'vue-router'
@@ -30,8 +30,6 @@ async function loginUser() {
   await executeLoginUser()
 
   if (isSuccess.value) {
-    const { fetch: refreshSession } = useUserSession()
-    await refreshSession()
     router.push(localePath('/'))
   }
 }

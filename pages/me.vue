@@ -14,7 +14,7 @@ usePageMeta('me')
 const localePath = useLocalePath()
 const router = useRouter()
 const { t } = useI18n()
-const { clear: resetSession, fetch: refreshUserSession } = useUserSession()
+const { clear: resetSession } = useUserSession()
 
 enum Mode {
   ACCOUNT_VIEW = 'account_view',
@@ -68,7 +68,6 @@ async function editUser() {
   await executeEditUser()
 
   if (isEditUserSuccess.value) {
-    await refreshUserSession()
     await executeFetchMe()
     mode.value = Mode.ACCOUNT_VIEW
   }

@@ -35,6 +35,16 @@ export async function getSessionAndUser(event: H3Event<EventHandlerRequest>) {
     throw errorResponse('common.errors.banned', 403)
   }
 
+  const requiresUserSessionRefresh =
+    user.pseudo !== session.user.pseudo ||
+    user.isVerified !== session.user.isVerified ||
+    user.isAdmin !== session.user.isAdmin ||
+    user.isBanned !== session.user.isBanned
+
+  if (requiresUserSessionRefresh) {
+    await standardizeUserSession(event, user)
+  }
+
   return { session, user }
 }
 
