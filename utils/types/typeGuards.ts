@@ -29,3 +29,7 @@ export function isNotBlankString(value: string): value is string {
 export function isBlankString(value: string): value is string {
   return value.trim() === ''
 }
+
+export function isString(value: unknown): value is string {
+  return typeof value === 'string'
+}

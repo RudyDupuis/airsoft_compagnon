@@ -1,112 +1,96 @@
 import { Game, GameType, PrivacyType, ValidationType } from '~/server/db/entities/Game'
 import { TypeORM } from '~/server/db/config'
-import { isBlankString, isNotBlankString, isNullOrUndefined } from '~/utils/types/typeGuards'
+import { isNotBlankString, isString } from '~/utils/types/typeGuards'
 import { nameRegex } from '~/utils/validations/regex'
 import { isInFuture, isPositiveNumber } from '~/utils/validations/methods'
+import { throwIfUserIsNotVerified, getSessionAndUser } from '~/server/utils/userSession'
+import { validateFieldRules, validateRequiredFields } from '~/server/utils/validation'
+import { successResponse } from '~/server/utils/response'
 
 export default defineEventHandler(async (event) => {
-  const session = await getUserSession(event)
-  if (isNullOrUndefined(session) || isNullOrUndefined(session.user) || !session.user.isVerified) {
-    throw createError({
-      statusCode: 401,
-      data: {
-        errorKey: 'common.errors.unauthorized'
-      }
-    })
-  }
+  const { user } = await getSessionAndUser(event)
+  throwIfUserIsNotVerified(user)
 
-  const {
-    name,
-    description,
-    startDateTime,
-    endDateTime,
-    gameType,
-    latitude,
-    longitude,
-    address,
-    allowedConsumables,
-    price,
-    validationType,
-    hasAmenities,
-    hasParking,
-    hasEquipmentRental,
-    privacyType,
-    maxParticipants
-  } = await readBody(event)
+  const body = await readBody(event)
 
-  if (
-    isNullOrUndefined(name) ||
-    isNullOrUndefined(description) ||
-    isNullOrUndefined(startDateTime) ||
-    isNullOrUndefined(endDateTime) ||
-    isNullOrUndefined(gameType) ||
-    isNullOrUndefined(latitude) ||
-    isNullOrUndefined(longitude) ||
-    isNullOrUndefined(address) ||
-    isNullOrUndefined(allowedConsumables) ||
-    isNullOrUndefined(price) ||
-    isNullOrUndefined(validationType) ||
-    isNullOrUndefined(hasAmenities) ||
-    isNullOrUndefined(hasParking) ||
-    isNullOrUndefined(hasEquipmentRental) ||
-    isNullOrUndefined(privacyType) ||
-    isNullOrUndefined(maxParticipants)
-  ) {
-    throw createError({
-      statusCode: 400,
-      data: {
-        errorKey: 'common.form.errors.all-fields-required'
-      }
-    })
-  }
-
-  if (
-    (isNotBlankString(name) && !nameRegex.test(name)) ||
-    (isNotBlankString(startDateTime) && !isInFuture(startDateTime)) ||
-    (isNotBlankString(endDateTime) && !isInFuture(endDateTime)) ||
-    !Object.values(GameType).includes(gameType) ||
-    isNaN(latitude) ||
-    isNaN(longitude) ||
-    isBlankString(address) ||
-    !isPositiveNumber(price) ||
-    !Object.values(ValidationType).includes(validationType) ||
-    typeof hasAmenities !== 'boolean' ||
-    typeof hasParking !== 'boolean' ||
-    typeof hasEquipmentRental !== 'boolean' ||
-    !Object.values(PrivacyType).includes(privacyType) ||
-    !isPositiveNumber(maxParticipants)
-  ) {
-    throw createError({
-      statusCode: 400,
-      data: {
-        errorKey: 'common.form.errors.rules-not-respected'
-      }
-    })
-  }
+  validateRequiredFields(body, [
+    'name',
+    'description',
+    'startDateTime',
+    'endDateTime',
+    'gameType',
+    'latitude',
+    'longitude',
+    'address',
+    'allowedConsumables',
+    'price',
+    'validationType',
+    'hasAmenities',
+    'hasParking',
+    'hasEquipmentRental',
+    'privacyType',
+    'maxParticipants'
+  ])
+  validateFieldRules(body, {
+    name: { check: (value) => isString(value) && isNotBlankString(value) && nameRegex.test(value) },
+    startDateTime: {
+      check: (value) => isString(value) && isNotBlankString(value) && isInFuture(value)
+    },
+    endDateTime: {
+      check: (value) => isString(value) && isNotBlankString(value) && isInFuture(value)
+    },
+    gameType: {
+      check: (value) =>
+        isString(value) &&
+        isNotBlankString(value) &&
+        Object.values(GameType).includes(value as GameType)
+    },
+    latitude: { check: (value) => !isNaN(Number(value)) },
+    longitude: { check: (value) => !isNaN(Number(value)) },
+    address: { check: (value) => isString(value) && isNotBlankString(value) },
+    price: { check: (value) => !isNaN(Number(value)) && isPositiveNumber(Number(value)) },
+    validationType: {
+      check: (value) =>
+        isString(value) &&
+        isNotBlankString(value) &&
+        Object.values(ValidationType).includes(value as ValidationType)
+    },
+    hasAmenities: { check: (value) => typeof value === 'boolean' },
+    hasParking: { check: (value) => typeof value === 'boolean' },
+    hasEquipmentRental: { check: (value) => typeof value === 'boolean' },
+    privacyType: {
+      check: (value) =>
+        isString(value) &&
+        isNotBlankString(value) &&
+        Object.values(PrivacyType).includes(value as PrivacyType)
+    },
+    maxParticipants: { check: (value) => !isNaN(Number(value)) && isPositiveNumber(Number(value)) }
+  })
 
   const gameRepository = TypeORM.getRepository(Game)
 
   const game = gameRepository.create({
-    name,
-    description,
-    startDateTime,
-    endDateTime,
-    gameType,
-    latitude,
-    longitude,
-    address,
-    allowedConsumables,
-    price,
-    validationType,
-    hasAmenities,
-    hasParking,
-    hasEquipmentRental,
-    privacyType,
-    maxParticipants,
-    createdById: session.user.id
+    name: body.name,
+    description: body.description,
+    startDateTime: body.startDateTime,
+    endDateTime: body.endDateTime,
+    gameType: body.gameType,
+    latitude: body.latitude,
+    longitude: body.longitude,
+    address: body.address,
+    allowedConsumables: body.allowedConsumables,
+    price: body.price,
+    validationType: body.validationType,
+    hasAmenities: body.hasAmenities,
+    hasParking: body.hasParking,
+    hasEquipmentRental: body.hasEquipmentRental,
+    privacyType: body.privacyType,
+    maxParticipants: body.maxParticipants,
+    createdAt: new Date(),
+    createdById: user.id
   })
 
   await gameRepository.save(game)
 
-  return game
+  return successResponse('Game created successfully')
 })

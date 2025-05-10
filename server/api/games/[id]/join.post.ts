@@ -1,94 +1,39 @@
 import { Game } from '~/server/db/entities/Game'
-import { User } from '~/server/db/entities/User'
 import { TypeORM } from '~/server/db/config'
-import { isNull, isNullOrUndefined } from '~/utils/types/typeGuards'
+import { getSessionAndUser } from '~/server/utils/userSession'
+import { errorResponse, successResponse } from '~/server/utils/response'
+import { throwIfIdIsNaN, throwIfObjectIsNotFound } from '~/server/utils/validation'
 
 export default defineEventHandler(async (event) => {
-  const session = await getUserSession(event)
-  if (isNullOrUndefined(session) || isNullOrUndefined(session.user)) {
-    throw createError({
-      statusCode: 401,
-      data: {
-        errorKey: 'common.errors.unauthorized'
-      }
-    })
-  }
+  const { user } = await getSessionAndUser(event)
 
-  const gameId = Number(event.context.params?.id)
-
-  if (isNaN(gameId)) {
-    throw createError({
-      statusCode: 400,
-      data: {
-        errorKey: 'common.errors.invalid-id'
-      }
-    })
-  }
+  const id = Number(event.context.params?.id)
+  throwIfIdIsNaN(id)
 
   const gameRepository = TypeORM.getRepository(Game)
-  const userRepository = TypeORM.getRepository(User)
 
   const game = await gameRepository.findOne({
-    where: { id: gameId },
+    where: { id },
     relations: ['participants']
   })
-
-  if (isNull(game)) {
-    throw createError({
-      statusCode: 404,
-      data: {
-        errorKey: 'common.errors.not-found'
-      }
-    })
-  }
-
-  const user = await userRepository.findOne({
-    where: { id: session.user.id }
-  })
-
-  if (isNull(user)) {
-    throw createError({
-      statusCode: 404,
-      data: {
-        errorKey: 'common.errors.user-not-found'
-      }
-    })
-  }
+  throwIfObjectIsNotFound(game)
 
   const isAlreadyParticipant = game.participants.some((participant) => participant.id === user.id)
   if (isAlreadyParticipant) {
-    throw createError({
-      statusCode: 400,
-      data: {
-        errorKey: 'pages.dashboard.game.errors.user-already-joined'
-      }
-    })
+    throw errorResponse('pages.dashboard.games.errors.user-already-joined')
   }
 
   if (game.participants.length >= game.maxParticipants) {
-    throw createError({
-      statusCode: 400,
-      data: {
-        errorKey: 'pages.dashboard.game.errors.game-full'
-      }
-    })
+    throw errorResponse('pages.dashboard.games.errors.game-full')
   }
 
   if (game.privacyType === 'private') {
     // TODO: Check if the user is invited
-    throw createError({
-      statusCode: 403,
-      data: {
-        errorKey: 'pages.dashboard.game.errors.private-game'
-      }
-    })
+    throw errorResponse('pages.dashboard.games.errors.private-game')
   }
 
   game.participants.push(user)
   await gameRepository.save(game)
 
-  return {
-    success: true,
-    message: 'Successfully joined the game'
-  }
+  return successResponse('Successfully joined the game')
 })

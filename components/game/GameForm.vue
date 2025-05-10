@@ -140,7 +140,7 @@ async function remove() {
   <div class="w-full">
     <h3 class="text-xl text-center font-bold mb-10">
       {{
-        isDefined(gameToUpdate) ? $t('pages.dashboard.game.edit') : $t('pages.dashboard.game.add')
+        isDefined(gameToUpdate) ? $t('pages.dashboard.games.edit') : $t('pages.dashboard.games.add')
       }}
     </h3>
     <FormComp
@@ -211,8 +211,8 @@ async function remove() {
       >
         {{
           coordinateEntryMode === CoordinateEntryMode.Auto
-            ? $t('pages.dashboard.game.coordinate-entry-mode.auto-button')
-            : $t('pages.dashboard.game.coordinate-entry-mode.manual-button')
+            ? $t('pages.dashboard.games.coordinate-entry-mode.auto-button')
+            : $t('pages.dashboard.games.coordinate-entry-mode.manual-button')
         }}
       </button>
       <div v-if="coordinateEntryMode === CoordinateEntryMode.Auto" class="w-full h-40 relative">

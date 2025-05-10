@@ -3,6 +3,9 @@
     "errors": {
       "server-error": "Erreur serveur, veuillez réessayer plus tard.",
       "unauthorized": "Vous n'avez pas l'autorisation d'accéder à cette ressource.",
+      "banned": "Votre compte a été banni.",
+      "not-verified": "Vous ne pouvez pas faire cette action car votre compte n'est pas vérifié.",
+      "not-admin": "Vous ne pouvez pas faire cette action car vous n'êtes pas admin.",
       "forbidden": "Vous n'avez pas la permission d'accéder à cette ressource.",
       "invalid-id": "Identifiant de la ressource invalide.",
       "not-found": "Ressource introuvable.",
@@ -80,6 +83,7 @@
       }
     },
     "user": {
+      "id": "ID",
       "first-name": "Prénom",
       "last-name": "Nom",
       "pseudo": "Pseudo",
@@ -87,6 +91,12 @@
       "email": "Email",
       "password": "Mot de passe",
       "reputation": "Réputation",
+      "no-reputation": "Non noté",
+      "member-since": "Membre depuis le ",
+      "games-played": " parties jouées",
+      "is-admin": "Administrateur",
+      "is-verified": "Vérifié",
+      "is-banned": "Banni",
       "errors": {
         "email-already-exists": "Cet email est déjà utilisé",
         "invalid-first-name": "Le prénom doit contenir entre 2 et 50 caractères et ne peut inclure que des lettres, espaces, traits d'union et apostrophes.",
@@ -125,15 +135,15 @@
       }
     },
     "dashboard": {
-      "title": "Airsoft Compagnon - Tableau de bord",
-      "description": "Gérez vos parties d'airsoft.",
       "tab-bar": {
         "games": "Parties",
         "players": "Joueurs",
         "teams": "Équipes",
         "stores": "Magasins"
       },
-      "game": {
+      "games": {
+        "title": "Airsoft Compagnon - Parties",
+        "description": "Gérez vos parties d'airsoft.",
         "join": "Rejoindre la partie",
         "add": "Créer une partie",
         "edit": "Modifier la partie",
@@ -146,6 +156,11 @@
           "game-full": "Cette partie est complète.",
           "private-game": "Cette partie est privée."
         }
+      },
+      "players": {
+        "title": "Airsoft Compagnon - Joueurs",
+        "description": "Retrouvez les joueurs d'airdoft.",
+        "search-placeholder": "Rechercher par pseudo ou ID"
       }
     },
     "contact": {
@@ -180,7 +195,6 @@
       "title": "Airsoft Compagnon - Mon compte",
       "description": "Voir les informations de votre compte",
       "h1": "Mon compte",
-      "no-reputation": "Non noté",
       "edit-account": "Modifier mon compte",
       "edit-password": "Changer de mot de passe",
       "old-password": "Ancien mot de passe",

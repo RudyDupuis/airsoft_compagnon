@@ -10,5 +10,10 @@ const localePath = useLocalePath()
   <main class="min-h-screen pt-20">
     <NuxtPage />
   </main>
-  <FooterComp v-if="route.path !== localePath('/dashboard')" />
+  <FooterComp
+    v-if="
+      route.path !== localePath('/dashboard/games') &&
+      route.path !== localePath('/dashboard/players')
+    "
+  />
 </template>

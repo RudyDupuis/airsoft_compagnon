@@ -21,6 +21,7 @@ export const gameSeeds = [
     hasEquipmentRental: true,
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 40,
+    createdAt: new Date('2025-03-10'),
     createdById: 1
   },
   {
@@ -41,6 +42,7 @@ export const gameSeeds = [
     hasEquipmentRental: false,
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 30,
+    createdAt: new Date('2025-02-19'),
     createdById: 2
   },
   {
@@ -61,6 +63,7 @@ export const gameSeeds = [
     hasEquipmentRental: true,
     privacyType: PrivacyType.PRIVATE,
     maxParticipants: 24,
+    createdAt: new Date('2025-01-25'),
     createdById: 3
   },
   {
@@ -81,6 +84,7 @@ export const gameSeeds = [
     hasEquipmentRental: false,
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 50,
+    createdAt: new Date('2024-12-12'),
     createdById: 1
   },
   {
@@ -101,6 +105,7 @@ export const gameSeeds = [
     hasEquipmentRental: true,
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 20,
+    createdAt: new Date(),
     createdById: 2
   },
   {
@@ -122,6 +127,7 @@ export const gameSeeds = [
     hasEquipmentRental: false,
     privacyType: PrivacyType.PRIVATE,
     maxParticipants: 60,
+    createdAt: new Date('2024-10-10'),
     createdById: 3
   },
   {
@@ -142,6 +148,7 @@ export const gameSeeds = [
     hasEquipmentRental: true,
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 25,
+    createdAt: new Date('2025-02-15'),
     createdById: 1
   }
 ]
@@ -168,6 +175,7 @@ export async function seedGames() {
         hasEquipmentRental: seed.hasEquipmentRental,
         privacyType: seed.privacyType,
         maxParticipants: seed.maxParticipants,
+        createdAt: seed.createdAt,
         createdById: seed.createdById
       })
       return gameRepository.save(game)

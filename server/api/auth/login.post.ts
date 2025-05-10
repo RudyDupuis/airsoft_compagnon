@@ -1,42 +1,27 @@
 import { TypeORM } from '~/server/db/config'
 import { User } from '~/server/db/entities/User'
-import { isNullOrUndefined, isNull } from '~/utils/types/typeGuards'
+import { errorResponse, successResponse } from '~/server/utils/response'
+import { standardizeUserSession } from '~/server/utils/userSession'
+import { validateRequiredFields } from '~/server/utils/validation'
+import { isNull } from '~/utils/types/typeGuards'
 
 export default defineEventHandler(async (event) => {
-  const { email, password } = await readBody(event)
+  const body = await readBody(event)
 
-  if (isNullOrUndefined(email) || isNullOrUndefined(password)) {
-    throw createError({
-      statusCode: 400,
-      data: {
-        errorKey: 'common.form.errors.all-fields-required'
-      }
-    })
-  }
+  validateRequiredFields(body, ['email', 'password'])
 
   const userRepository = TypeORM.getRepository(User)
-  const user = await userRepository.findOne({ where: { email } })
+  const user = await userRepository.findOne({ where: { email: body.email } })
 
-  if (isNull(user) || !(await verifyPassword(user.passwordHash, password))) {
-    throw createError({
-      statusCode: 401,
-      data: {
-        errorKey: 'pages.login.errors.invalid-credentials'
-      }
-    })
+  if (isNull(user) || !(await verifyPassword(user.passwordHash, body.password))) {
+    throw errorResponse('pages.login.errors.invalid-credentials', 401)
   }
 
-  await setUserSession(event, {
-    user: {
-      id: user.id,
-      pseudo: user.pseudo,
-      isVerified: user.isVerified
-    }
-  })
-
-  return {
-    id: user.id,
-    pseudo: user.pseudo,
-    isVerified: user.isVerified
+  if (user.isBanned) {
+    throw errorResponse('common.errors.banned', 403)
   }
+
+  await standardizeUserSession(event, user)
+
+  return successResponse('User logged in successfully')
 })

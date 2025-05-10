@@ -1,55 +1,26 @@
 import { Game } from '~/server/db/entities/Game'
 import { TypeORM } from '~/server/db/config'
-import { isNull, isNullOrUndefined } from '~/utils/types/typeGuards'
+import { throwIfUserIsNotVerified, getSessionAndUser } from '~/server/utils/userSession'
+import { throwIfIdIsNaN, throwIfObjectIsNotFound } from '~/server/utils/validation'
+import { errorResponse, successResponse } from '~/server/utils/response'
 
 export default defineEventHandler(async (event) => {
-  const session = await getUserSession(event)
-  if (isNullOrUndefined(session) || isNullOrUndefined(session.user) || !session.user.isVerified) {
-    throw createError({
-      statusCode: 401,
-      data: {
-        errorKey: 'common.errors.unauthorized'
-      }
-    })
-  }
+  const { user } = await getSessionAndUser(event)
+  throwIfUserIsNotVerified(user)
 
   const id = Number(event.context.params?.id)
-
-  if (isNaN(id)) {
-    throw createError({
-      statusCode: 400,
-      data: {
-        errorKey: 'common.errors.invalid-id'
-      }
-    })
-  }
+  throwIfIdIsNaN(id)
 
   const gameRepository = TypeORM.getRepository(Game)
 
   const game = await gameRepository.findOne({ where: { id } })
+  throwIfObjectIsNotFound(game)
 
-  if (isNull(game)) {
-    throw createError({
-      statusCode: 404,
-      data: {
-        errorKey: 'common.errors.not-found'
-      }
-    })
-  }
-
-  if (game.createdById !== session.user.id) {
-    throw createError({
-      statusCode: 403,
-      data: {
-        errorKey: 'common.errors.forbidden'
-      }
-    })
+  if (game.createdById !== user.id && !user.isAdmin) {
+    throw errorResponse('common.errors.forbidden', 403)
   }
 
   await gameRepository.remove(game)
 
-  return {
-    success: true,
-    message: 'Game deleted successfully'
-  }
+  return successResponse('Game deleted successfully')
 })

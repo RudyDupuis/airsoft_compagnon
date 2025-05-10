@@ -30,6 +30,18 @@ export class User {
   @Column({ type: 'boolean', default: false })
   isVerified!: boolean
 
+  @Column({ type: 'boolean', default: false })
+  isAdmin!: boolean
+
+  @Column({ type: 'boolean', default: false })
+  isBanned!: boolean
+
+  @Column({ type: 'timestamptz', nullable: false })
+  createdAt!: Date
+
+  @Column({ type: 'integer', nullable: false })
+  gamesPlayed!: number
+
   @ManyToMany(() => Game, (game) => game.participants)
   participatingGames!: Game[]
 }

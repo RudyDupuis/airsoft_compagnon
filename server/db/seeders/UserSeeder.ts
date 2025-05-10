@@ -10,7 +10,9 @@ export const userSeeds = [
     lastName: 'Doe',
     pseudo: 'Johnny',
     reputation: 4.5,
-    isVerified: true
+    isVerified: true,
+    createdAt: new Date('2023-01-01'),
+    gamesPlayed: 10
   },
   {
     email: 'jane.doe@example.com',
@@ -20,7 +22,9 @@ export const userSeeds = [
     lastName: 'Doe',
     pseudo: 'Jane_d',
     reputation: 4.8,
-    isVerified: false
+    isVerified: false,
+    createdAt: new Date('2024-02-01'),
+    gamesPlayed: 5
   },
   {
     email: 'alice.smith@example.com',
@@ -29,7 +33,21 @@ export const userSeeds = [
     firstName: 'Alice',
     lastName: 'Smith',
     pseudo: 'Alice85',
-    isVerified: true
+    isVerified: true,
+    createdAt: new Date('2025-01-01'),
+    gamesPlayed: 20
+  },
+  {
+    email: 'rudy.dupuis@airsoft-compagnon.com',
+    password: 'Password123!',
+    dateOfBirth: new Date('2000-01-08'),
+    firstName: 'Rudy',
+    lastName: 'Dupuis',
+    pseudo: 'Rudaye',
+    isVerified: true,
+    isAdmin: true,
+    createdAt: new Date(),
+    gamesPlayed: 0
   }
 ]
 
@@ -47,7 +65,10 @@ export async function seedUsers() {
         lastName: seed.lastName,
         pseudo: seed.pseudo,
         reputation: seed.reputation,
-        isVerified: seed.isVerified
+        isVerified: seed.isVerified,
+        isAdmin: seed.isAdmin,
+        createdAt: seed.createdAt,
+        gamesPlayed: seed.gamesPlayed
       })
       return userRepository.save(user)
     })

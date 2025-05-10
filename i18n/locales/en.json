@@ -3,6 +3,9 @@
     "errors": {
       "server-error": "Server error, please try again later.",
       "unauthorized": "You don't have authorization to access this resource.",
+      "banned": "Your account has been banned.",
+      "not-verified": "You cannot perform this action because your account is not verified.",
+      "not-admin": "You cannot perform this action because you are not an administrator.",
       "forbidden": "You don't have permission to access this resource.",
       "invalid-id": "Invalid resource identifier.",
       "not-found": "Resource not found.",
@@ -80,6 +83,7 @@
       }
     },
     "user": {
+      "id": "ID",
       "first-name": "First name",
       "last-name": "Last name",
       "pseudo": "Username",
@@ -87,6 +91,12 @@
       "email": "Email",
       "password": "Password",
       "reputation": "Reputation",
+      "no-reputation": "Not rated",
+      "member-since": "Member since ",
+      "games-played": " games played",
+      "is-admin": "Administrator",
+      "is-verified": "Verified",
+      "is-banned": "Banned",
       "errors": {
         "email-already-exists": "This email is already in use",
         "invalid-first-name": "First name must contain between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.",
@@ -125,15 +135,15 @@
       }
     },
     "dashboard": {
-      "title": "Airsoft Companion - Dashboard",
-      "description": "Manage your airsoft games.",
       "tab-bar": {
         "games": "Games",
         "players": "Players",
         "teams": "Teams",
         "stores": "Stores"
       },
-      "game": {
+      "games": {
+        "title": "Airsoft Companion - Games",
+        "description": "Manage your airsoft games.",
         "join": "Join the game",
         "add": "Create a game",
         "edit": "Edit the game",
@@ -146,6 +156,11 @@
           "game-full": "This game is full.",
           "private-game": "This game is private."
         }
+      },
+      "players": {
+        "title": "Airsoft Companion - Players",
+        "description": "Find airsoft players.",
+        "search-placeholder": "Search by username or ID"
       }
     },
     "contact": {
@@ -180,7 +195,6 @@
       "title": "Airsoft Companion - My Account",
       "description": "View your account information",
       "h1": "My account",
-      "no-reputation": "Not rated",
       "edit-account": "Edit my account",
       "edit-password": "Change password",
       "old-password": "Old password",

@@ -89,6 +89,9 @@ export class Game {
   })
   participants!: User[]
 
+  @Column({ type: 'timestamptz', nullable: false })
+  createdAt!: Date
+
   @ManyToOne(() => User, { nullable: false })
   createdBy!: User
 

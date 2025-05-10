@@ -89,7 +89,7 @@ describe('As a unverified user, I want to handle games', () => {
 
     cy.getBySel('form-submit-button').click()
 
-    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/games`)
   })
 
   it('should not see the button to add a game', () => {
@@ -163,7 +163,7 @@ describe('As a verified user, I want to handle games', () => {
 
     cy.getBySel('form-submit-button').click()
 
-    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/games`)
 
     cy.intercept('POST', '/api/games/create').as('createGameRequest')
   })

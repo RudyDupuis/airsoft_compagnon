@@ -54,7 +54,7 @@ describe('As a user, I want to handle my account', () => {
 
     cy.getBySel('form-submit-button').click()
 
-    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/games`)
     cy.getBySel('header-me-link').click()
     cy.url().should('eq', `${Cypress.config().baseUrl}/me`)
   })
@@ -120,7 +120,7 @@ describe('As a user, I want to handle my account', () => {
   it('should be able to log out', () => {
     cy.getBySel('me-logout').click()
 
-    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`) //TODO : redirect to home page
+    cy.url().should('eq', `${Cypress.config().baseUrl}/login`)
   })
 
   it('Should show errors when edit password fiels are wrong', () => {
@@ -185,6 +185,6 @@ describe('As a user, I want to handle my account', () => {
     cy.getBySel('text-input-password').should('exist').type(newPassword)
     cy.getBySel('form-submit-button').click()
 
-    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard`)
+    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/games`)
   })
 })

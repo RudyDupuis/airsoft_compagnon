@@ -106,7 +106,7 @@ async function editPassword() {
 
 function logout() {
   resetSession()
-  router.push(localePath('/'))
+  router.push(localePath('/login'))
 }
 </script>
 
@@ -120,19 +120,15 @@ function logout() {
       v-if="isFetchUserSuccess && isNotNull(user) && mode === Mode.ACCOUNT_VIEW"
       class="flex flex-col w-full gap-20"
     >
-      <div class="flex items-center justify-center gap-8">
-        <font-awesome class="text-7xl" :icon="['fas', 'person-rifle']" />
-        <div>
-          <p class="text-2xl" data-cy="me-pseudo">{{ user.pseudo }}</p>
-          <p>
-            <font-awesome class="mr-2" :icon="['fas', 'trophy']" />
-            <span v-if="isNotNull(user.reputation)" data-cy="me-reputation">
-              {{ user.reputation }} / 5
-            </span>
-            <span v-else>{{ $t('pages.me.no-reputation') }}</span>
-          </p>
-        </div>
-      </div>
+      <UserCard
+        :user="{
+          id: user.id,
+          pseudo: user.pseudo,
+          reputation: user.reputation,
+          createdAt: user.createdAt,
+          gamesPlayed: user.gamesPlayed
+        }"
+      />
 
       <div class="flex flex-col gap-4">
         <button
