@@ -105,6 +105,12 @@
         "invalid-date-of-birth": "You must be at least 18 years old to register.",
         "invalid-email": "Please enter a valid email address.",
         "invalid-password": "Password must contain at least 8 characters, include a lowercase letter, an uppercase letter, a number and a special character (among '$ ! % * ? &')."
+      },
+      "admin": {
+        "ban": "Ban",
+        "unban": "Unban",
+        "verify": "Verify",
+        "unverify": "Unverify"
       }
     }
   },

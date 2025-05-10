@@ -156,29 +156,28 @@ export const gameSeeds = [
 export async function seedGames() {
   const gameRepository = TypeORM.getRepository(Game)
 
-  await Promise.all(
-    gameSeeds.map(async (seed) => {
-      const game = gameRepository.create({
-        name: seed.name,
-        description: seed.description,
-        startDateTime: seed.startDateTime,
-        endDateTime: seed.endDateTime,
-        gameType: seed.gameType,
-        latitude: seed.latitude,
-        longitude: seed.longitude,
-        address: seed.address,
-        allowedConsumables: seed.allowedConsumables,
-        price: seed.price,
-        validationType: seed.validationType,
-        hasAmenities: seed.hasAmenities,
-        hasParking: seed.hasParking,
-        hasEquipmentRental: seed.hasEquipmentRental,
-        privacyType: seed.privacyType,
-        maxParticipants: seed.maxParticipants,
-        createdAt: seed.createdAt,
-        createdById: seed.createdById
-      })
-      return gameRepository.save(game)
+  for (const seed of gameSeeds) {
+    const game = gameRepository.create({
+      name: seed.name,
+      description: seed.description,
+      startDateTime: seed.startDateTime,
+      endDateTime: seed.endDateTime,
+      gameType: seed.gameType,
+      latitude: seed.latitude,
+      longitude: seed.longitude,
+      address: seed.address,
+      allowedConsumables: seed.allowedConsumables,
+      price: seed.price,
+      validationType: seed.validationType,
+      hasAmenities: seed.hasAmenities,
+      hasParking: seed.hasParking,
+      hasEquipmentRental: seed.hasEquipmentRental,
+      privacyType: seed.privacyType,
+      maxParticipants: seed.maxParticipants,
+      createdAt: seed.createdAt,
+      createdById: seed.createdById
     })
-  )
+
+    await gameRepository.save(game)
+  }
 }

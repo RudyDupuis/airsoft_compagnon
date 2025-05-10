@@ -7,13 +7,19 @@ const userAlreadyCreated = {
   pseudo: 'Johnny'
 }
 
+const bannedUser = {
+  email: 'badplayer@ban.com',
+  password: 'Password123!'
+}
+
 const invalidCredentials = {
   email: 'bad@email.com',
   password: 'badpassword'
 }
 
 const errorMessages = {
-  invalidCredentials: 'Invalid email or password.'
+  invalidCredentials: 'Invalid email or password.',
+  banned: 'Your account has been banned.'
 }
 
 describe('As a user, I want to login', () => {
@@ -50,5 +56,16 @@ describe('As a user, I want to login', () => {
     cy.wait('@loginRequest')
 
     cy.getBySel('form-error').should('contain', errorMessages.invalidCredentials)
+  })
+
+  it('should show error when user is banned', () => {
+    cy.getBySel('text-input-email').should('be.visible').type(bannedUser.email)
+    cy.getBySel('text-input-password').should('be.visible').type(bannedUser.password)
+
+    cy.getBySel('form-submit-button').click()
+
+    cy.wait('@loginRequest')
+
+    cy.getBySel('form-error').should('contain', errorMessages.banned)
   })
 })

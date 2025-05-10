@@ -253,12 +253,11 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-allowed-consumables').should('contain', game.allowedConsumables)
   })
 
-  //TODO C'est aléatoire faut trouver une solution
-  // it('should not be able to update if he is not the owner', () => {
-  //   cy.getBySel('marker-map-4').click()
-  //   cy.getBySel('game-infos-panel').should('exist')
-  //   cy.getBySel('game-infos-panel-edit-button').should('not.exist')
-  // })
+  it('should not be able to update if he is not the owner', () => {
+    cy.getBySel('marker-map-4').click()
+    cy.getBySel('game-infos-panel').should('exist')
+    cy.getBySel('game-infos-panel-edit-button').should('not.exist')
+  })
 
   it('should delete a game', () => {
     cy.intercept('DELETE', '/api/games/8').as('deleteGameRequest')

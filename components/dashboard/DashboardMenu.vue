@@ -27,6 +27,7 @@ const localePath = useLocalePath()
           'cursor-default text-primary': route.path === localePath('/dashboard/players')
         }"
         :to="localePath('/dashboard/players')"
+        data-cy="players-tab"
       >
         <font-awesome :icon="['fas', 'person']" class="text-xl" />
         <span class="text-xs text-center mt-2">{{ $t('pages.dashboard.tab-bar.players') }}</span>

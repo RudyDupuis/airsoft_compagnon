@@ -56,6 +56,7 @@ const selectedPlayer = computed(() => {
         type="text"
         class="text-input max-w-xl"
         :placeholder="$t('pages.dashboard.players.search-placeholder')"
+        data-cy="player-search-input"
       />
     </div>
     <ul class="w-full">
@@ -64,6 +65,7 @@ const selectedPlayer = computed(() => {
         :key="player.id"
         class="px-10 py-5 border-b-2 hover:bg-secondary cursor-pointer"
         @click="selectedPlayerId = player.id"
+        :data-cy="`player-list-item-${player.id}`"
       >
         <div class="flex justify-between max-w-md">
           <p class="flex flex-col gap-2">

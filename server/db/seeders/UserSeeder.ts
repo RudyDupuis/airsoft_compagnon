@@ -46,31 +46,41 @@ export const userSeeds = [
     pseudo: 'Rudaye',
     isVerified: true,
     isAdmin: true,
+    createdAt: new Date()
+  },
+  {
+    email: 'badplayer@ban.com',
+    password: 'Password123!',
+    dateOfBirth: new Date('2002-05-18'),
+    firstName: 'Bad',
+    lastName: 'Player',
+    pseudo: 'BadPlayer',
     createdAt: new Date(),
-    gamesPlayed: 0
+    isBanned: true
   }
 ]
 
 export async function seedUsers() {
   const userRepository = TypeORM.getRepository(User)
 
-  await Promise.all(
-    userSeeds.map(async (seed) => {
-      const passwordHash = await hashPassword(seed.password)
-      const user = userRepository.create({
-        email: seed.email,
-        passwordHash,
-        dateOfBirth: seed.dateOfBirth,
-        firstName: seed.firstName,
-        lastName: seed.lastName,
-        pseudo: seed.pseudo,
-        reputation: seed.reputation,
-        isVerified: seed.isVerified,
-        isAdmin: seed.isAdmin,
-        createdAt: seed.createdAt,
-        gamesPlayed: seed.gamesPlayed
-      })
-      return userRepository.save(user)
+  for (const seed of userSeeds) {
+    const passwordHash = await hashPassword(seed.password)
+
+    const user = userRepository.create({
+      email: seed.email,
+      passwordHash,
+      dateOfBirth: seed.dateOfBirth,
+      firstName: seed.firstName,
+      lastName: seed.lastName,
+      pseudo: seed.pseudo,
+      reputation: seed.reputation,
+      isVerified: seed.isVerified,
+      isAdmin: seed.isAdmin,
+      isBanned: seed.isBanned,
+      createdAt: seed.createdAt,
+      gamesPlayed: seed.gamesPlayed
     })
-  )
+
+    await userRepository.save(user)
+  }
 }
