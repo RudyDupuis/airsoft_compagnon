@@ -12,10 +12,10 @@ const userCard = {
 }
 
 const userCardAdmin = {
-  email: 'Email: john.doe@example.com',
-  dateOfBirth: 'Date of birth: 01/01/1990',
-  firstName: 'First name: John',
-  lastName: 'Last name: Doe'
+  email: 'Email: alice.smith@example.com',
+  dateOfBirth: 'Date of birth: 05/05/1985',
+  firstName: 'First name: Alice',
+  lastName: 'Last name: Smith'
 }
 
 const admin = {
@@ -56,7 +56,7 @@ describe('As a user, I want to find players', () => {
   })
 
   it('should be able to see player details', () => {
-    cy.getBySel('player-list-item-1').click()
+    cy.getBySel('player-list-item-3').click()
     cy.getBySel('user-card-pseudo').contains(userCard.pseudo)
     cy.getBySel('user-card-reputation').contains(userCard.reputation)
     cy.getBySel('user-card-id').contains(userCard.id)
@@ -80,7 +80,7 @@ describe('As an admin, I want to handle players', () => {
   })
 
   it('should be able to see player critical details', () => {
-    cy.getBySel('player-list-item-1').click()
+    cy.getBySel('player-list-item-3').click()
     cy.getBySel('admin-user-email').contains(userCardAdmin.email)
     cy.getBySel('admin-user-date-of-birth').contains(userCardAdmin.dateOfBirth)
     cy.getBySel('admin-user-first-name').contains(userCardAdmin.firstName)
@@ -92,19 +92,19 @@ describe('As an admin, I want to handle players', () => {
   })
 
   it('should be able to verify player', () => {
-    cy.getBySel('player-list-item-1').click()
+    cy.getBySel('player-list-item-3').click()
     cy.getBySel('admin-user-is-verified-check').should('exist')
     cy.getBySel('admin-user-verify-button').click()
-    cy.getBySel('admin-user-is-unverified-check').should('exist')
+    cy.getBySel('admin-user-is-verified-xmark').should('exist')
     cy.getBySel('admin-user-verify-button').click()
     cy.getBySel('admin-user-is-verified-check').should('exist')
   })
 
   it('should be able to ban player', () => {
-    cy.getBySel('player-list-item-1').click()
+    cy.getBySel('player-list-item-3').click()
     cy.getBySel('admin-user-is-banned-xmark').should('exist')
     cy.getBySel('admin-user-ban-button').click()
-    cy.getBySel('admin-user-is-unbanned-check').should('exist')
+    cy.getBySel('admin-user-is-banned-check').should('exist')
     cy.getBySel('admin-user-ban-button').click()
     cy.getBySel('admin-user-is-banned-xmark').should('exist')
   })
