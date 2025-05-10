@@ -11,12 +11,17 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event)
 
-  validateRequiredFields(body, ['oldPassword', 'newPassword'])
-  validateFieldRules(body, {
-    newPassword: {
-      check: (value) => isString(value) && isNotBlankString(value) && passwordRegex.test(value)
-    }
-  })
+  validateRequiredFields(body, ['oldPassword', 'newPassword'], user.id, 'putMePassword')
+  validateFieldRules(
+    body,
+    {
+      newPassword: {
+        check: (value) => isString(value) && isNotBlankString(value) && passwordRegex.test(value)
+      }
+    },
+    user.id,
+    'putMePassword'
+  )
 
   if (!(await verifyPassword(user.passwordHash, body.oldPassword))) {
     throw errorResponse('pages.me.errors.invalid-old-password', 401)

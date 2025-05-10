@@ -12,24 +12,34 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event)
 
-  validateRequiredFields(body, ['email', 'dateOfBirth', 'firstName', 'lastName', 'pseudo'])
-  validateFieldRules(body, {
-    email: {
-      check: (value) => isString(value) && isNotBlankString(value) && emailRegex.test(value)
+  validateRequiredFields(
+    body,
+    ['email', 'dateOfBirth', 'firstName', 'lastName', 'pseudo'],
+    user.id,
+    'putMe'
+  )
+  validateFieldRules(
+    body,
+    {
+      email: {
+        check: (value) => isString(value) && isNotBlankString(value) && emailRegex.test(value)
+      },
+      dateOfBirth: {
+        check: (value) => isString(value) && isNotBlankString(value) && isOfLegalAge(value)
+      },
+      firstName: {
+        check: (value) => isString(value) && isNotBlankString(value) && usernameRegex.test(value)
+      },
+      lastName: {
+        check: (value) => isString(value) && isNotBlankString(value) && usernameRegex.test(value)
+      },
+      pseudo: {
+        check: (value) => isString(value) && isNotBlankString(value) && pseudoRegex.test(value)
+      }
     },
-    dateOfBirth: {
-      check: (value) => isString(value) && isNotBlankString(value) && isOfLegalAge(value)
-    },
-    firstName: {
-      check: (value) => isString(value) && isNotBlankString(value) && usernameRegex.test(value)
-    },
-    lastName: {
-      check: (value) => isString(value) && isNotBlankString(value) && usernameRegex.test(value)
-    },
-    pseudo: {
-      check: (value) => isString(value) && isNotBlankString(value) && pseudoRegex.test(value)
-    }
-  })
+    user.id,
+    'putMe'
+  )
 
   Object.assign(user, {
     email: body.email,

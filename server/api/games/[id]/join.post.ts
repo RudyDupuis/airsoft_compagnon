@@ -1,14 +1,14 @@
 import { Game } from '~/server/db/entities/Game'
 import { TypeORM } from '~/server/db/config'
 import { getSessionAndUser } from '~/server/utils/userSession'
-import { errorResponse, successResponse } from '~/server/utils/response'
+import { consoleError, errorResponse, successResponse } from '~/server/utils/response'
 import { throwIfIdIsNaN, throwIfObjectIsNotFound } from '~/server/utils/validation'
 
 export default defineEventHandler(async (event) => {
   const { user } = await getSessionAndUser(event)
 
   const id = Number(event.context.params?.id)
-  throwIfIdIsNaN(id)
+  throwIfIdIsNaN(id, user.id, 'joinGame')
 
   const gameRepository = TypeORM.getRepository(Game)
 
@@ -16,14 +16,16 @@ export default defineEventHandler(async (event) => {
     where: { id },
     relations: ['participants']
   })
-  throwIfObjectIsNotFound(game)
+  throwIfObjectIsNotFound(game, 'Game', id, user.id, 'joinGame')
 
   const isAlreadyParticipant = game.participants.some((participant) => participant.id === user.id)
   if (isAlreadyParticipant) {
+    consoleError(`User is already a participant in game ${game.id}`, user.id, 'joinGame')
     throw errorResponse('pages.dashboard.games.errors.user-already-joined')
   }
 
   if (game.participants.length >= game.maxParticipants) {
+    consoleError(`Game is full, ID: ${game.id}`, user.id, 'joinGame')
     throw errorResponse('pages.dashboard.games.errors.game-full')
   }
 

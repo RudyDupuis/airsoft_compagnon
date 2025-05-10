@@ -13,59 +13,73 @@ export default defineEventHandler(async (event) => {
 
   const body = await readBody(event)
 
-  validateRequiredFields(body, [
-    'name',
-    'description',
-    'startDateTime',
-    'endDateTime',
-    'gameType',
-    'latitude',
-    'longitude',
-    'address',
-    'allowedConsumables',
-    'price',
-    'validationType',
-    'hasAmenities',
-    'hasParking',
-    'hasEquipmentRental',
-    'privacyType',
-    'maxParticipants'
-  ])
-  validateFieldRules(body, {
-    name: { check: (value) => isString(value) && isNotBlankString(value) && nameRegex.test(value) },
-    startDateTime: {
-      check: (value) => isString(value) && isNotBlankString(value) && isInFuture(value)
+  validateRequiredFields(
+    body,
+    [
+      'name',
+      'description',
+      'startDateTime',
+      'endDateTime',
+      'gameType',
+      'latitude',
+      'longitude',
+      'address',
+      'allowedConsumables',
+      'price',
+      'validationType',
+      'hasAmenities',
+      'hasParking',
+      'hasEquipmentRental',
+      'privacyType',
+      'maxParticipants'
+    ],
+    user.id,
+    'postGame'
+  )
+  validateFieldRules(
+    body,
+    {
+      name: {
+        check: (value) => isString(value) && isNotBlankString(value) && nameRegex.test(value)
+      },
+      startDateTime: {
+        check: (value) => isString(value) && isNotBlankString(value) && isInFuture(value)
+      },
+      endDateTime: {
+        check: (value) => isString(value) && isNotBlankString(value) && isInFuture(value)
+      },
+      gameType: {
+        check: (value) =>
+          isString(value) &&
+          isNotBlankString(value) &&
+          Object.values(GameType).includes(value as GameType)
+      },
+      latitude: { check: (value) => !isNaN(Number(value)) },
+      longitude: { check: (value) => !isNaN(Number(value)) },
+      address: { check: (value) => isString(value) && isNotBlankString(value) },
+      price: { check: (value) => !isNaN(Number(value)) && isPositiveNumber(Number(value)) },
+      validationType: {
+        check: (value) =>
+          isString(value) &&
+          isNotBlankString(value) &&
+          Object.values(ValidationType).includes(value as ValidationType)
+      },
+      hasAmenities: { check: (value) => typeof value === 'boolean' },
+      hasParking: { check: (value) => typeof value === 'boolean' },
+      hasEquipmentRental: { check: (value) => typeof value === 'boolean' },
+      privacyType: {
+        check: (value) =>
+          isString(value) &&
+          isNotBlankString(value) &&
+          Object.values(PrivacyType).includes(value as PrivacyType)
+      },
+      maxParticipants: {
+        check: (value) => !isNaN(Number(value)) && isPositiveNumber(Number(value))
+      }
     },
-    endDateTime: {
-      check: (value) => isString(value) && isNotBlankString(value) && isInFuture(value)
-    },
-    gameType: {
-      check: (value) =>
-        isString(value) &&
-        isNotBlankString(value) &&
-        Object.values(GameType).includes(value as GameType)
-    },
-    latitude: { check: (value) => !isNaN(Number(value)) },
-    longitude: { check: (value) => !isNaN(Number(value)) },
-    address: { check: (value) => isString(value) && isNotBlankString(value) },
-    price: { check: (value) => !isNaN(Number(value)) && isPositiveNumber(Number(value)) },
-    validationType: {
-      check: (value) =>
-        isString(value) &&
-        isNotBlankString(value) &&
-        Object.values(ValidationType).includes(value as ValidationType)
-    },
-    hasAmenities: { check: (value) => typeof value === 'boolean' },
-    hasParking: { check: (value) => typeof value === 'boolean' },
-    hasEquipmentRental: { check: (value) => typeof value === 'boolean' },
-    privacyType: {
-      check: (value) =>
-        isString(value) &&
-        isNotBlankString(value) &&
-        Object.values(PrivacyType).includes(value as PrivacyType)
-    },
-    maxParticipants: { check: (value) => !isNaN(Number(value)) && isPositiveNumber(Number(value)) }
-  })
+    user.id,
+    'postGame'
+  )
 
   const gameRepository = TypeORM.getRepository(Game)
 

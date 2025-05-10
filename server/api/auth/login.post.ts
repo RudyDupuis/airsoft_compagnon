@@ -8,7 +8,7 @@ import { isNull } from '~/utils/types/typeGuards'
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
 
-  validateRequiredFields(body, ['email', 'password'])
+  validateRequiredFields(body, ['email', 'password'], 0, 'login')
 
   const userRepository = TypeORM.getRepository(User)
   const user = await userRepository.findOne({ where: { email: body.email } })
