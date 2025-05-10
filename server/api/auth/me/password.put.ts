@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const userRepository = TypeORM.getRepository(User)
-  user.passwordHash = await hashPassword(newPassword)
+  user.passwordHash = await hashPassword(body.newPassword)
   await userRepository.save(user)
 
   return successResponse('Password updated successfully')

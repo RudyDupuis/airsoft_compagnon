@@ -39,7 +39,7 @@ export class User {
   @Column({ type: 'timestamptz', nullable: false })
   createdAt!: Date
 
-  @Column({ type: 'integer', nullable: false })
+  @Column({ type: 'integer', nullable: false, default: 0 })
   gamesPlayed!: number
 
   @ManyToMany(() => Game, (game) => game.participants)
