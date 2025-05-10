@@ -7,13 +7,13 @@ const userCard = {
   pseudo: 'Alice85',
   reputation: 'Not rated',
   id: 'ID: 3',
-  memberSince: 'Member since 01/01/2025',
+  memberSince: 'Member since 1/1/2025',
   gamesPlayed: '20 games played'
 }
 
 const userCardAdmin = {
   email: 'Email: alice.smith@example.com',
-  dateOfBirth: 'Date of birth: 05/05/1985',
+  dateOfBirth: 'Date of birth: 5/5/1985',
   firstName: 'First name: Alice',
   lastName: 'Last name: Smith'
 }

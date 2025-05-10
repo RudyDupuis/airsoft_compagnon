@@ -25,7 +25,7 @@ defineProps<{
           <span v-if="isNotNull(user.reputation)" data-cy="user-card-reputation">
             {{ user.reputation }} / 5
           </span>
-          <span v-else>{{ $t('entities.user.no-reputation') }}</span>
+          <span v-else data-cy="user-card-reputation">{{ $t('entities.user.no-reputation') }}</span>
         </p>
       </div>
     </div>
