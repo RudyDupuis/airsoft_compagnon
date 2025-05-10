@@ -34,7 +34,7 @@ describe('As a user, I want to find players', () => {
     cy.getBySel('form-submit-button').click()
 
     cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/games`)
-    cy.getBySel('player-tab').click()
+    cy.getBySel('players-tab').click()
     cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/players`)
   })
 
@@ -75,7 +75,7 @@ describe('As an admin, I want to handle players', () => {
     cy.getBySel('form-submit-button').click()
 
     cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/games`)
-    cy.getBySel('player-tab').click()
+    cy.getBySel('players-tab').click()
     cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/players`)
   })
 
