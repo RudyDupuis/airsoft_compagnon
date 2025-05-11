@@ -2,7 +2,7 @@
 import { useLocalePath, useUserSession, navigateTo } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { type Game } from '~/server/db/entities/Game'
 import type { MarkerData } from '~/components/MapComp.vue'
 import { isDefined, isNull } from '~/utils/types/typeGuards'
@@ -11,9 +11,15 @@ usePageMeta('index')
 const localePath = useLocalePath()
 const { loggedIn } = useUserSession()
 
-if (loggedIn.value) {
-  navigateTo(localePath('/dashboard/games'))
-}
+watch(
+  loggedIn,
+  (newValue) => {
+    if (newValue) {
+      navigateTo(localePath('/dashboard/games'))
+    }
+  },
+  { immediate: true }
+)
 
 const {
   data: games,
