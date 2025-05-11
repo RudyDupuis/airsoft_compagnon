@@ -43,7 +43,7 @@ describe('As a user, I want to find players', () => {
     cy.getBySel('player-list-item-2').should('exist')
     cy.getBySel('player-list-item-3').should('exist')
     cy.getBySel('player-list-item-4').should('exist')
-    cy.getBySel('player-list-item-5').should('exist')
+    cy.getBySel('player-list-item-5').should('not.exist')
   })
 
   it('should be able to search for a player', () => {
