@@ -12,14 +12,14 @@ const gameAlreadyAdded = {
   name: 'Opération Forêt Noire',
   description:
     "Partie tactique en forêt avec objectifs multiples. Venez avec votre équipement complet et prêt pour 6h d'action.",
-  startDateTime: new Date('2025-05-10T09:00:00').toLocaleString(undefined, {
+  startDateTime: new Date('2030-05-10T09:00:00').toLocaleString(undefined, {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
     hour: '2-digit',
     minute: '2-digit'
   }),
-  endDateTime: new Date('2025-05-10T15:00:00').toLocaleString(undefined, {
+  endDateTime: new Date('2030-05-10T15:00:00').toLocaleString(undefined, {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',

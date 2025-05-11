@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { useUserSession } from '#imports'
+import { useUserSession, definePageMeta } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { computed, ref } from 'vue'
 import { isBlankString, isDefined, isNotNull, isNull } from '~/utils/types/typeGuards'
 import type { User } from '~/server/db/entities/User'
 
+definePageMeta({
+  middleware: ['authenticated']
+})
 usePageMeta('dashboard.players')
 
 const { user } = useUserSession()

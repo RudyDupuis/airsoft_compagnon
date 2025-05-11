@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useUserSession } from '#imports'
+import { useUserSession, definePageMeta } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { computed, ref, watch } from 'vue'
@@ -7,6 +7,9 @@ import { type Game } from '~/server/db/entities/Game'
 import type { MarkerData } from '~/components/MapComp.vue'
 import { isDefined, isNotNull, isNull, isUndefined } from '~/utils/types/typeGuards'
 
+definePageMeta({
+  middleware: ['authenticated']
+})
 usePageMeta('dashboard.games')
 
 const { user } = useUserSession()
@@ -17,7 +20,11 @@ const {
   isLoading,
   isSuccess,
   execute: executeFetchGames
-} = useFetchWithState<Game[]>('/api/games')
+} = useFetchWithState<Game[]>('/api/games', {
+  query: {
+    notInProgressOrFinished: true
+  }
+})
 executeFetchGames()
 
 const markersData = computed<MarkerData[]>(() => {

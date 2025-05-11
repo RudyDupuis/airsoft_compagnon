@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useLocalePath, useUserSession } from '#imports'
+import { useLocalePath, useUserSession, definePageMeta } from '#imports'
 import { useI18n } from 'vue-i18n'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
@@ -10,6 +10,9 @@ import { computed, ref, watch } from 'vue'
 import { emailRegex, passwordRegex, pseudoRegex, usernameRegex } from '~/utils/validations/regex'
 import { isOfLegalAge } from '~/utils/validations/methods'
 
+definePageMeta({
+  middleware: ['authenticated']
+})
 usePageMeta('me')
 const localePath = useLocalePath()
 const router = useRouter()

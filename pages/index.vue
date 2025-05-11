@@ -21,7 +21,11 @@ const {
   isLoading,
   isSuccess,
   execute: executeFetchGames
-} = useFetchWithState<Game[]>('/api/games')
+} = useFetchWithState<Game[]>('/api/games', {
+  query: {
+    notInProgressOrFinished: true
+  }
+})
 executeFetchGames()
 
 const markersData = computed<MarkerData[]>(() => {

@@ -43,6 +43,7 @@ export async function getSessionAndUser(event: H3Event<EventHandlerRequest>) {
 
   if (requiresUserSessionRefresh) {
     await standardizeUserSession(event, user)
+    setHeader(event, 'X-Refresh-Session', 'true')
   }
 
   return { session, user }

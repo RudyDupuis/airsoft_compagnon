@@ -16,11 +16,13 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  return users.map((user) => ({
-    id: user.id,
-    pseudo: user.pseudo,
-    reputation: user.reputation,
-    createdAt: user.createdAt,
-    gamesPlayed: user.gamesPlayed
-  }))
+  return users
+    .filter((user) => !user.isBanned)
+    .map((user) => ({
+      id: user.id,
+      pseudo: user.pseudo,
+      reputation: user.reputation,
+      createdAt: user.createdAt,
+      gamesPlayed: user.gamesPlayed
+    }))
 })

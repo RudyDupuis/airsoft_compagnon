@@ -6,8 +6,8 @@ export const gameSeeds = [
     name: 'Opération Forêt Noire',
     description:
       "Partie tactique en forêt avec objectifs multiples. Venez avec votre équipement complet et prêt pour 6h d'action.",
-    startDateTime: new Date('2025-05-10T09:00:00'),
-    endDateTime: new Date('2025-05-10T15:00:00'),
+    startDateTime: new Date('2030-05-10T09:00:00'),
+    endDateTime: new Date('2030-05-10T15:00:00'),
     gameType: GameType.OP,
     latitude: 48.5734,
     longitude: 7.7521,
@@ -28,8 +28,8 @@ export const gameSeeds = [
     name: 'Dominicale Urbex',
     description:
       'Partie dominicale dans une zone urbaine abandonnée. Rythme détendu, parfait pour les débutants et intermédiaires.',
-    startDateTime: new Date('2025-05-04T10:00:00'),
-    endDateTime: new Date('2025-05-04T16:00:00'),
+    startDateTime: new Date('2030-05-04T10:00:00'),
+    endDateTime: new Date('2030-05-04T16:00:00'),
     gameType: GameType.DOMINICAL,
     latitude: 45.7578,
     longitude: 4.832,
@@ -49,8 +49,8 @@ export const gameSeeds = [
     name: 'Night Ops Elite',
     description:
       'Opération nocturne réservée aux joueurs confirmés. Équipement night vision recommandé. Scénarios tactiques avancés.',
-    startDateTime: new Date('2025-05-15T20:00:00'),
-    endDateTime: new Date('2025-05-16T02:00:00'),
+    startDateTime: new Date('2030-05-15T20:00:00'),
+    endDateTime: new Date('2030-05-16T02:00:00'),
     gameType: GameType.OP,
     latitude: 50.6333,
     longitude: 3.0667,
@@ -70,8 +70,8 @@ export const gameSeeds = [
     name: 'Partie forestière du dimanche',
     description:
       'Partie classique en forêt dense, nombreux abris naturels et zones de combat variées.',
-    startDateTime: new Date('2025-05-18T09:30:00'),
-    endDateTime: new Date('2025-05-18T15:30:00'),
+    startDateTime: new Date('2030-05-18T09:30:00'),
+    endDateTime: new Date('2030-05-18T15:30:00'),
     gameType: GameType.DOMINICAL,
     latitude: 44.8378,
     longitude: -0.5792,
@@ -91,8 +91,8 @@ export const gameSeeds = [
     name: 'CQB Warehouse',
     description:
       'Combat rapproché dans un entrepôt aménagé. Nombreux couloirs et salles. Idéal pour les AEGs compactes.',
-    startDateTime: new Date('2025-06-01T13:00:00'),
-    endDateTime: new Date('2025-06-01T18:00:00'),
+    startDateTime: new Date('2030-06-01T13:00:00'),
+    endDateTime: new Date('2030-06-01T18:00:00'),
     gameType: GameType.OP,
     latitude: 48.8723,
     longitude: 2.2951,
@@ -112,8 +112,8 @@ export const gameSeeds = [
     name: 'Milsim Opération Dragon',
     description:
       'Weekend complet en mode milsim. Nécessite équipement complet, répliques réalistes et tenue adaptée.',
-    startDateTime: new Date('2025-06-20T08:00:00'),
-    endDateTime: new Date('2025-06-21T18:00:00'),
+    startDateTime: new Date('2030-06-20T08:00:00'),
+    endDateTime: new Date('2030-06-21T18:00:00'),
     gameType: GameType.OP,
     latitude: 49.1234,
     longitude: 2.5678,
@@ -134,8 +134,8 @@ export const gameSeeds = [
     name: 'Partie débutants friendly',
     description:
       "Session d'initiation spécialement conçue pour les nouveaux joueurs d'airsoft qui souhaitent découvrir ce sport dans les meilleures conditions possibles. Notre équipe de joueurs expérimentés vous accompagnera tout au long de cette journée avec un rythme adapté, de nombreuses explications sur les règles, l'équipement et les techniques de base. Le terrain a été spécialement aménagé pour offrir différentes zones de jeu accessibles aux débutants : zones dégagées pour faciliter la visibilité, bunkers simples pour apprendre le jeu de couverture, et quelques zones plus techniques pour ceux qui se sentent prêts à relever des défis. Des pauses régulières sont prévues pour permettre des débriefings, répondre à vos questions, et vous donner des conseils personnalisés pour améliorer votre expérience. Les scénarios proposés seront progressifs en difficulté, commençant par des objectifs simples jusqu'à des missions plus élaborées en fin de journée. Aucune expérience préalable n'est requise, et l'atmosphère sera détendue et bienveillante pour assurer que chacun prenne du plaisir, quel que soit son niveau.",
-    startDateTime: new Date('2025-05-25T10:00:00'),
-    endDateTime: new Date('2025-05-25T15:00:00'),
+    startDateTime: new Date('2030-05-25T10:00:00'),
+    endDateTime: new Date('2030-05-25T15:00:00'),
     gameType: GameType.DOMINICAL,
     latitude: 43.2965,
     longitude: 5.3698,
@@ -150,6 +150,27 @@ export const gameSeeds = [
     maxParticipants: 25,
     createdAt: new Date('2025-02-15'),
     createdById: 1
+  },
+  {
+    name: 'Partie terminée il y a longtemps',
+    description:
+      "Session d'initiation spécialement conçue pour les nouveaux joueurs d'airsoft qui souhaitent découvrir ce sport dans les meilleures conditions possibles. Notre équipe de joueurs expériment",
+    startDateTime: new Date('2020-05-25T10:00:00'),
+    endDateTime: new Date('2020-05-25T15:00:00'),
+    gameType: GameType.DOMINICAL,
+    latitude: 44.2965,
+    longitude: 6.3698,
+    address: 'Chemin du Vallon de Toulouse, 13009 Marseille, France',
+    allowedConsumables: "BBs fournies. Pas d'équipement spécial nécessaire.",
+    price: 10.0,
+    validationType: ValidationType.AUTO,
+    hasAmenities: true,
+    hasParking: true,
+    hasEquipmentRental: true,
+    privacyType: PrivacyType.PUBLIC,
+    maxParticipants: 25,
+    createdAt: new Date('2019-02-15'),
+    createdById: 3
   }
 ]
 

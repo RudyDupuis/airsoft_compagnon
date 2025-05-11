@@ -18,7 +18,12 @@ export function useFetchWithState<T>(url: string | Ref<string>, options: UseFetc
   } = useFetch(resolvedUrl, {
     ...options,
     immediate: false,
-    watch: false
+    watch: false,
+    onResponse({ response }) {
+      if (response.headers.get('X-Refresh-Session') === 'true' && import.meta.client) {
+        refreshUserSession()
+      }
+    }
   })
 
   const error = ref<string | null>(null)
@@ -27,7 +32,6 @@ export function useFetchWithState<T>(url: string | Ref<string>, options: UseFetc
     error.value = null
 
     await executeUseFetch()
-    await refreshUserSession()
 
     if (isNotNullOrUndefined(fetchError.value)) {
       error.value = t('common.errors.server-error')
