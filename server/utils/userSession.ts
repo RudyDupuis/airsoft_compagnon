@@ -5,6 +5,7 @@ import { errorResponse } from './response'
 import { TypeORM } from '../db/config'
 
 export async function standardizeUserSession(event: H3Event<EventHandlerRequest>, user: User) {
+  setHeader(event, 'X-Refresh-Session', 'true')
   return await setUserSession(event, {
     user: {
       id: user.id,
@@ -43,7 +44,6 @@ export async function getSessionAndUser(event: H3Event<EventHandlerRequest>) {
 
   if (requiresUserSessionRefresh) {
     await standardizeUserSession(event, user)
-    setHeader(event, 'X-Refresh-Session', 'true')
   }
 
   return { session, user }
