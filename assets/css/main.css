@@ -66,6 +66,10 @@
   @apply bg-primary text-center text-lg py-4 px-8 rounded-lg shadow-inner hover:bg-on-background hover:text-background transition duration-300 ease-in-out;
 }
 
+.icon-button {
+  @apply hover:text-primary cursor-pointer bg-background size-14 flex items-center justify-center rounded-full;
+}
+
 .button-secondary {
   @apply bg-secondary text-center text-lg py-4 px-8 rounded-lg shadow-inner hover:bg-on-background hover:text-background transition duration-300 ease-in-out;
 }

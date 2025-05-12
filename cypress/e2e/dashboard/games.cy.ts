@@ -1,5 +1,6 @@
 const verifiedUser = {
   email: 'alice.smith@example.com',
+  pseudo: 'Alice85',
   password: 'Password123!'
 }
 
@@ -32,7 +33,8 @@ const gameAlreadyAdded = {
     'BBs biodégradables uniquement. Grenades fumigènes autorisées. Pas de grenades à fragmentation.',
   price: 25.5,
   privacyType: 'Public',
-  maxParticipants: 40
+  maxParticipants: 40,
+  createdBy: 'Johnny'
 }
 
 const game = {
@@ -116,7 +118,9 @@ describe('As a unverified user, I want to handle games', () => {
       'contain',
       gameAlreadyAdded.maxParticipants
     )
+    cy.getBySel('game-infos-panel-participants-link').should('not.exist')
     cy.getBySel('game-infos-panel-address').should('contain', gameAlreadyAdded.address)
+    cy.getBySel('game-infos-panel-address-link').should('exist')
     cy.getBySel('game-infos-panel-has-amenities').should('exist')
     cy.getBySel('game-infos-panel-has-parking').should('exist')
     cy.getBySel('game-infos-panel-has-equipment-rental').should('exist')
@@ -124,6 +128,10 @@ describe('As a unverified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-allowed-consumables').should(
       'contain',
       gameAlreadyAdded.allowedConsumables
+    )
+    cy.getBySel('user-list-pseudo-game-infos-panel-created-by').should(
+      'contain',
+      gameAlreadyAdded.createdBy
     )
   })
 })
@@ -166,6 +174,37 @@ describe('As a verified user, I want to handle games', () => {
     cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/games`)
 
     cy.intercept('POST', '/api/games/create').as('createGameRequest')
+  })
+
+  it('should join a game', () => {
+    cy.getBySel('marker-map-3').click()
+    cy.getBySel('game-infos-panel-join-button').click()
+    cy.getBySel('game-infos-panel-max-participants').should('contain', `1 /`)
+    cy.getBySel('game-infos-panel-participants-link').click()
+    cy.getBySel('user-list-pseudo-participant-3').should('coutain', verifiedUser.pseudo).click()
+    cy.getBySel('user-card-pseudo').should('contain', verifiedUser.pseudo)
+  })
+
+  it('should filter games', () => {
+    cy.getBySel('open-filter-panel').click()
+    cy.getBySel('radio-button-canJoin-game-filter').click()
+    cy.getBySel('close-dashboard-panel').click()
+    cy.getBySel('games-filter-category-display').should('contain', '6 Available games')
+
+    cy.getBySel('open-filter-panel').click()
+    cy.getBySel('radio-button-joined-game-filter').click()
+    cy.getBySel('close-dashboard-panel').click()
+    cy.getBySel('games-filter-category-display').should('contain', '1 Joined games')
+
+    cy.getBySel('open-filter-panel').click()
+    cy.getBySel('radio-button-completed-game-filter').click()
+    cy.getBySel('close-dashboard-panel').click()
+    cy.getBySel('games-filter-category-display').should('contain', '0 Completed games')
+
+    cy.getBySel('open-filter-panel').click()
+    cy.getBySel('radio-button-createdByMe-game-filter').click()
+    cy.getBySel('close-dashboard-panel').click()
+    cy.getBySel('games-filter-category-display').should('contain', '3 Created games')
   })
 
   it('should see the button to add a game', () => {
@@ -256,6 +295,22 @@ describe('As a verified user, I want to handle games', () => {
   it('should not be able to update if he is not the owner', () => {
     cy.getBySel('marker-map-4').click()
     cy.getBySel('game-infos-panel').should('exist')
+    cy.getBySel('game-infos-panel-edit-button').should('not.exist')
+  })
+
+  it('should not be able to update if the game is started', () => {
+    cy.getBySel('open-filter-panel').click()
+    cy.getBySel('radio-button-createdByMe-game-filter').click()
+    cy.getBySel('close-dashboard-panel').click()
+    cy.getBySel('marker-map-8').click()
+    cy.getBySel('game-infos-panel-edit-button').should('not.exist')
+  })
+
+  it('should not be able to update if the game has participants', () => {
+    cy.getBySel('open-filter-panel').click()
+    cy.getBySel('radio-button-createdByMe-game-filter').click()
+    cy.getBySel('close-dashboard-panel').click()
+    cy.getBySel('marker-map-3').click()
     cy.getBySel('game-infos-panel-edit-button').should('not.exist')
   })
 

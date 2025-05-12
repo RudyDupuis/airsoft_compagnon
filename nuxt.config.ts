@@ -22,7 +22,12 @@ function fontawesomeIcons() {
       'coins',
       'calendar-days',
       'calendar',
-      'map-location-dot'
+      'map-location-dot',
+      'plus',
+      'filter',
+      'left-long',
+      'up-right-from-square',
+      'right-to-bracket'
     ]
   }
 }

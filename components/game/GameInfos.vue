@@ -1,15 +1,26 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import { GameType, PrivacyType, type Game } from '~/server/db/entities/Game'
 import { displayDateTime } from '~/utils/formatting/date'
-import { isNotBlankString } from '~/utils/types/typeGuards'
+import { isDefined, isNotBlankString } from '~/utils/types/typeGuards'
 
-defineProps<{
+const props = defineProps<{
   game: Game
 }>()
+
+enum View {
+  DETAILS = 'details',
+  PARTICIPANTS = 'participants'
+}
+const view = ref<View>(View.DETAILS)
+const selectedParticipantId = ref<number | undefined>(undefined)
+const selectedParticipant = computed(() => {
+  return props.game.participants.find((player) => player.id === selectedParticipantId.value)
+})
 </script>
 
 <template>
-  <div data-cy="game-infos-panel">
+  <div v-if="view === View.DETAILS" class="w-full" data-cy="game-infos-panel">
     <h3 data-cy="game-infos-panel-name" class="text-xl text-center font-bold mb-10">
       {{ game.name }}
     </h3>
@@ -33,19 +44,42 @@ defineProps<{
         <font-awesome :icon="['fas', 'calendar']" />
         {{ displayDateTime(new Date(game.endDateTime)) }}
       </p>
-      <p data-cy="game-infos-panel-max-participants" class="text-center">
-        <font-awesome :icon="['fas', 'people-group']" />
-        {{ game.participants.length }} /
-        {{ game.maxParticipants }}
-      </p>
-      <a
-        :href="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(game.address)}`"
-        target="_blank"
-        data-cy="game-infos-panel-address"
-        class="text-center hover:text-primary"
-      >
-        <font-awesome :icon="['fas', 'map-location-dot']" /> {{ game.address }}
-      </a>
+
+      <div class="space-y-5">
+        <p data-cy="game-infos-panel-max-participants" class="text-center">
+          <font-awesome :icon="['fas', 'people-group']" />
+          {{ game.participants.length }} /
+          {{ game.maxParticipants }}
+        </p>
+        <p
+          v-if="game.participants.length > 0"
+          class="text-right hover:text-primary cursor-pointer text-sm"
+          @click="view = View.PARTICIPANTS"
+          data-cy="game-infos-panel-participants-link"
+        >
+          <font-awesome :icon="['fas', 'right-to-bracket']" />
+          <span class="underline ml-2">
+            {{ $t('pages.dashboard.games.view-participants') }}
+          </span>
+        </p>
+      </div>
+
+      <div class="space-y-5">
+        <p data-cy="game-infos-panel-address" class="text-center">
+          <font-awesome :icon="['fas', 'map-location-dot']" /> {{ game.address }}
+        </p>
+        <p class="text-right hover:text-primary text-sm" data-cy="game-infos-panel-address-link">
+          <a
+            :href="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(game.address)}`"
+            target="_blank"
+          >
+            <font-awesome :icon="['fas', 'up-right-from-square']" />
+            <span class="underline ml-2">
+              {{ $t('pages.dashboard.games.go-to') }}
+            </span>
+          </a>
+        </p>
+      </div>
 
       <div class="flex justify-center align-center space-x-5 pt-5">
         <p v-if="game.hasAmenities" data-cy="game-infos-panel-has-amenities" class="icon-with-text">
@@ -73,10 +107,71 @@ defineProps<{
         data-cy="game-infos-panel-allowed-consumables"
         class="my-5"
       >
-        <span class="underline">{{ $t('entities.game.allowed-consumables') }}</span>
+        <span class="underline">{{ $t('entities.game.allowed-consumables') }}:</span>
         {{ game.allowedConsumables }}
       </p>
+
+      <div>
+        <p class="underline">{{ $t('entities.game.created-by') }}:</p>
+        <UserListElement
+          :user="{
+            id: game.createdBy.id,
+            pseudo: game.createdBy.pseudo,
+            reputation: game.createdBy.reputation,
+            createdAt: game.createdBy.createdAt,
+            gamesPlayed: game.createdBy.gamesPlayed
+          }"
+          cy="created-by"
+        />
+      </div>
       <slot></slot>
     </div>
+  </div>
+  <div v-if="view === View.PARTICIPANTS" class="w-full">
+    <template v-if="isDefined(selectedParticipantId) && isDefined(selectedParticipant)">
+      <font-awesome
+        :icon="['fas', 'left-long']"
+        class="absolute top-0 left-0 m-5 text-2xl hover:text-primary cursor-pointer mb-5"
+        @click="selectedParticipantId = undefined"
+      />
+      <UserCard
+        :user="{
+          id: selectedParticipant.id,
+          pseudo: selectedParticipant.pseudo,
+          reputation: selectedParticipant.reputation,
+          createdAt: selectedParticipant.createdAt,
+          gamesPlayed: selectedParticipant.gamesPlayed
+        }"
+      />
+    </template>
+    <template v-else>
+      <font-awesome
+        :icon="['fas', 'left-long']"
+        class="absolute top-0 left-0 m-5 text-2xl hover:text-primary cursor-pointer mb-5"
+        @click="view = View.DETAILS"
+      />
+      <h3 class="text-xl text-center font-bold mb-10">
+        {{ $t('pages.dashboard.games.view-participants') }}
+      </h3>
+      <ul>
+        <li
+          v-for="participant in game.participants"
+          :key="participant.id"
+          class="px-10 py-5 border-b-2 hover:bg-secondary cursor-pointer"
+          @click="selectedParticipantId = participant.id"
+        >
+          <UserListElement
+            :user="{
+              id: participant.id,
+              pseudo: participant.pseudo,
+              reputation: participant.reputation,
+              createdAt: participant.createdAt,
+              gamesPlayed: participant.gamesPlayed
+            }"
+            :cy="`participant-${participant.id}`"
+          />
+        </li>
+      </ul>
+    </template>
   </div>
 </template>

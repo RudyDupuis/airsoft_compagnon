@@ -2,6 +2,7 @@
 import { onMounted, watch, useId } from 'vue'
 import 'leaflet/dist/leaflet.css'
 
+//TODO: Changer le comportement quand il y a un seul marker et régler le problème des marqueurs au même endroit
 export interface MarkerData {
   latitude: number
   longitude: number

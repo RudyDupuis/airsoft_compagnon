@@ -5,7 +5,7 @@ import { useFetchWithState } from '~/composables/useFetchWithState'
 import { computed, ref, watch } from 'vue'
 import { type Game } from '~/server/db/entities/Game'
 import type { MarkerData } from '~/components/MapComp.vue'
-import { isDefined, isNotNull, isNull, isUndefined } from '~/utils/types/typeGuards'
+import { isDefined, isNull, isUndefined } from '~/utils/types/typeGuards'
 
 definePageMeta({
   middleware: ['authenticated']
@@ -22,21 +22,21 @@ const {
   execute: executeFetchGames
 } = useFetchWithState<Game[]>('/api/games', {
   query: {
-    notInProgressOrFinished: true
+    filteredForUser: 'true'
   }
 })
 executeFetchGames()
 
-const markersData = computed<MarkerData[]>(() => {
-  if (isNotNull(games.value)) {
-    return games.value.map((game) => ({
-      latitude: game.latitude,
-      longitude: game.longitude,
-      id: game.id
-    }))
-  }
+const openFilterPanel = ref(false)
+const filteredGames = ref<Game[]>([])
+const gamesFilterCategoryKey = ref<string | undefined>(undefined)
 
-  return []
+const markersData = computed<MarkerData[]>(() => {
+  return filteredGames.value.map((game) => ({
+    latitude: game.latitude,
+    longitude: game.longitude,
+    id: game.id
+  }))
 })
 
 const selectedGameId = ref<number | undefined>()
@@ -52,17 +52,49 @@ const openAddGamePanel = ref(false)
 const gameToUpdate = ref<Game | undefined>(undefined)
 
 const canJoinSelectedGame = computed(() => {
-  if (isUndefined(selectedGame.value)) {
+  if (isUndefined(selectedGame.value) || isUndefined(user.value)) {
+    return false
+  }
+
+  if (new Date(selectedGame.value.startDateTime) < new Date()) {
     return false
   }
 
   const isParticipant = selectedGame.value.participants.some((participant) => {
-    return participant.id === user.value?.id
+    return participant.id === user.value.id
   })
 
   const gameFull = selectedGame.value.participants.length >= selectedGame.value.maxParticipants
 
   return !isParticipant && !gameFull
+})
+
+const canEditSelectedGame = computed(() => {
+  if (isUndefined(selectedGame.value) || isUndefined(user.value)) {
+    return false
+  }
+
+  if (user.value.isAdmin) {
+    return true
+  }
+
+  if (new Date(selectedGame.value.startDateTime) < new Date()) {
+    return false
+  }
+
+  if (selectedGame.value.participants.length > 0) {
+    return false
+  }
+
+  if (!user.value.isVerified) {
+    return false
+  }
+
+  if (selectedGame.value.createdById !== user.value.id) {
+    return false
+  }
+
+  return true
 })
 
 const {
@@ -93,11 +125,18 @@ async function joinGame() {
 
 <template>
   <section v-if="isSuccess" class="relative fullscreen-without-navbar">
+    <p
+      v-if="isDefined(gamesFilterCategoryKey)"
+      class="absolute z-10 top-0 right-0 bg-background m-2 px-4 py-2 rounded-lg"
+      data-cy="games-filter-category-display"
+    >
+      {{ filteredGames.length }} {{ $t(gamesFilterCategoryKey) }}
+    </p>
     <MapComp :markersData="markersData" @marker-clicked="(id) => (selectedGameId = id)" />
     <DashboardPanel v-if="isDefined(selectedGameId)" @close-panel="selectedGameId = undefined">
       <GameInfos v-if="isDefined(selectedGame)" :game="selectedGame">
         <button
-          v-if="(selectedGame.createdById === user.id || user.isAdmin) && user.isVerified"
+          v-if="canEditSelectedGame"
           class="button-secondary"
           @click="
             () => {
@@ -114,6 +153,7 @@ async function joinGame() {
           :disabled="isJoinGameLoading"
           class="button"
           @click="joinGame"
+          data-cy="game-infos-panel-join-button"
         >
           <FetchDataComp :error="joinGameError" :isLoading="isJoinGameLoading" />
           <span v-if="!isJoinGameLoading && isNull(joinGameError)">
@@ -150,15 +190,29 @@ async function joinGame() {
         "
       />
     </DashboardPanel>
+    <DashboardPanel v-show="openFilterPanel" @close-panel="openFilterPanel = false">
+      <GameFilters
+        v-model:filtered-games="filteredGames"
+        v-model:games-filter-category-key="gamesFilterCategoryKey"
+        :games="games"
+        :user="user"
+      />
+    </DashboardPanel>
     <DashboardMenu>
       <button
         v-if="user.isVerified"
-        class="m-3 self-start flex flex-col items-center hover:text-primary cursor-pointer bg-background p-5 rounded-full pointer-events-auto"
+        class="icon-button"
         @click="openAddGamePanel = !openAddGamePanel"
         data-cy="open-add-panel"
       >
-        <font-awesome :icon="['fas', 'map-location-dot']" class="text-xl" />
-        <span class="text-xs text-center mt-2">{{ $t('common.form.add') }}</span>
+        <font-awesome :icon="['fas', 'plus']" />
+      </button>
+      <button
+        class="icon-button"
+        @click="openFilterPanel = !openFilterPanel"
+        data-cy="open-filter-panel"
+      >
+        <font-awesome :icon="['fas', 'filter']" />
       </button>
     </DashboardMenu>
   </section>

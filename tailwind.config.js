@@ -12,7 +12,11 @@ export default {
     fontFamily: {
       primary: ['Aldrich-Regular', 'Arial']
     },
-    extend: {}
+    extend: {
+      width: {
+        lg: '32rem'
+      }
+    }
   },
   plugins: []
 }

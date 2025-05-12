@@ -57,6 +57,7 @@
       "longitude": "Longitude",
       "address": "Address",
       "allowed-consumables": "Allowed consumables",
+      "created-by": "Organizer",
       "price": "Price (Entrance fee)",
       "public": "Public",
       "private": "Private",
@@ -101,7 +102,7 @@
         "email-already-exists": "This email is already in use",
         "invalid-first-name": "First name must contain between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.",
         "invalid-last-name": "Last name must contain between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.",
-        "invalid-pseudo": "Username must contain between 3 and 20 characters and can only include letters, numbers, hyphens (-) and underscores (_).",
+        "invalid-pseudo": "Username must contain between 3 and 15 characters and can only include letters, numbers, hyphens (-) and underscores (_).",
         "invalid-date-of-birth": "You must be at least 18 years old to register.",
         "invalid-email": "Please enter a valid email address.",
         "invalid-password": "Password must contain at least 8 characters, include a lowercase letter, an uppercase letter, a number and a special character (among '$ ! % * ? &')."
@@ -153,12 +154,24 @@
         "join": "Join the game",
         "add": "Create a game",
         "edit": "Edit the game",
+        "view-participants": "View participants",
+        "go-to": "Get directions",
         "coordinate-entry-mode": {
           "auto-button": "Enter coordinates manually?",
           "manual-button": "Generate coordinates from address?"
         },
+        "filters": {
+          "title": "Filter games",
+          "canJoin": "Available games",
+          "joined": "Joined games",
+          "completed": "Completed games",
+          "createdByMe": "Created games",
+          "all": "Games in database"
+        },
         "errors": {
           "user-already-joined": "You have already joined this game.",
+          "game-in-progress-or-finished": "Action not allowed because the game is already in progress or finished.",
+          "game-has-participants": "Action not allowed because the game has participants.",
           "game-full": "This game is full.",
           "private-game": "This game is private."
         }

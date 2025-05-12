@@ -40,10 +40,10 @@ const privacyType = ref<PrivacyType>(props.gameToUpdate?.privacyType ?? PrivacyT
 const maxParticipants = ref(props.gameToUpdate?.maxParticipants ?? 1)
 
 enum CoordinateEntryMode {
-  Auto = 'auto',
-  Manual = 'manual'
+  AUTO = 'auto',
+  MANUAL = 'manual'
 }
-const coordinateEntryMode = ref<CoordinateEntryMode>(CoordinateEntryMode.Auto)
+const coordinateEntryMode = ref<CoordinateEntryMode>(CoordinateEntryMode.AUTO)
 
 const {
   getCoordinates,
@@ -52,7 +52,7 @@ const {
 } = useGeocoding(address)
 
 async function generateCoordinates() {
-  if (coordinateEntryMode.value === CoordinateEntryMode.Manual) {
+  if (coordinateEntryMode.value === CoordinateEntryMode.MANUAL) {
     return
   }
 
@@ -203,19 +203,19 @@ async function remove() {
       <button
         @click.prevent="
           coordinateEntryMode =
-            coordinateEntryMode === CoordinateEntryMode.Auto
-              ? CoordinateEntryMode.Manual
-              : CoordinateEntryMode.Auto
+            coordinateEntryMode === CoordinateEntryMode.AUTO
+              ? CoordinateEntryMode.MANUAL
+              : CoordinateEntryMode.AUTO
         "
         class="hover:text-primary cursor-pointer underline"
       >
         {{
-          coordinateEntryMode === CoordinateEntryMode.Auto
+          coordinateEntryMode === CoordinateEntryMode.AUTO
             ? $t('pages.dashboard.games.coordinate-entry-mode.auto-button')
             : $t('pages.dashboard.games.coordinate-entry-mode.manual-button')
         }}
       </button>
-      <div v-if="coordinateEntryMode === CoordinateEntryMode.Auto" class="w-full h-40 relative">
+      <div v-if="coordinateEntryMode === CoordinateEntryMode.AUTO" class="w-full h-40 relative">
         <div
           v-if="isLoadingGeocoding || isNotNull(geocodingError)"
           class="absolute inset-0 z-10 w-full h-full flex items-center justify-center bg-opacity-70 bg-background p-10"
@@ -224,7 +224,7 @@ async function remove() {
         </div>
         <MapComp :markersData="markersData" />
       </div>
-      <template v-if="coordinateEntryMode === CoordinateEntryMode.Manual">
+      <template v-if="coordinateEntryMode === CoordinateEntryMode.MANUAL">
         <InputField
           v-model="latitude"
           placeholderKey="entities.game.latitude"

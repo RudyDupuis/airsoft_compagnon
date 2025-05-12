@@ -18,8 +18,12 @@ export default defineEventHandler(async (event) => {
   })
   throwIfObjectIsNotFound(game, 'Game', id, user.id, 'joinGame')
 
-  const isAlreadyParticipant = game.participants.some((participant) => participant.id === user.id)
-  if (isAlreadyParticipant) {
+  if (new Date(game.startDateTime) < new Date()) {
+    consoleError(`Game is already in progress or finished, ID: ${game.id}`, user.id, 'joinGame')
+    throw errorResponse('pages.dashboard.games.errors.game-in-progress-or-finished')
+  }
+
+  if (game.participants.some((participant) => participant.id === user.id)) {
     consoleError(`User is already a participant in game ${game.id}`, user.id, 'joinGame')
     throw errorResponse('pages.dashboard.games.errors.user-already-joined')
   }

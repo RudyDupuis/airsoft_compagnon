@@ -3,7 +3,7 @@ import { useUserSession, definePageMeta } from '#imports'
 import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { computed, ref } from 'vue'
-import { isBlankString, isDefined, isNotNull, isNull } from '~/utils/types/typeGuards'
+import { isBlankString, isDefined, isNull } from '~/utils/types/typeGuards'
 import type { User } from '~/server/db/entities/User'
 
 definePageMeta({
@@ -70,17 +70,16 @@ const selectedPlayer = computed(() => {
         @click="selectedPlayerId = player.id"
         :data-cy="`player-list-item-${player.id}`"
       >
-        <div class="flex justify-between max-w-md">
-          <p class="flex flex-col gap-2">
-            <span class="text-xl" data-cy="me-pseudo">{{ player.pseudo }}</span>
-            <span>
-              <font-awesome class="mr-2" :icon="['fas', 'trophy']" />
-              <span v-if="isNotNull(player.reputation)"> {{ player.reputation }} / 5 </span>
-              <span v-else>{{ $t('entities.user.no-reputation') }}</span>
-            </span>
-          </p>
-          <p class="text-sm">{{ $t('entities.user.id') }}: {{ player.id }}</p>
-        </div>
+        <UserListElement
+          :user="{
+            id: player.id,
+            pseudo: player.pseudo,
+            reputation: player.reputation,
+            createdAt: player.createdAt,
+            gamesPlayed: player.gamesPlayed
+          }"
+          :cy="`player-${player.id}`"
+        />
       </li>
     </ul>
     <DashboardPanel

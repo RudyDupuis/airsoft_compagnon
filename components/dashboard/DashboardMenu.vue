@@ -7,7 +7,7 @@ const localePath = useLocalePath()
 
 <template>
   <div class="w-full flex flex-col items-center absolute bottom-0 pointer-events-none">
-    <slot></slot>
+    <div class="self-start pointer-events-auto m-3 flex gap-3"><slot></slot></div>
     <div
       class="w-full lg:w-fit lg:rounded-xl lg:mb-5 flex items-center justify-center gap-5 p-5 bg-background pointer-events-auto"
     >

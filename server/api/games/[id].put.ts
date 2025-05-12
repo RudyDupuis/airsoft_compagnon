@@ -51,10 +51,12 @@ export default defineEventHandler(async (event) => {
         check: (value) => isString(value) && isNotBlankString(value) && nameRegex.test(value)
       },
       startDateTime: {
-        check: (value) => isString(value) && isNotBlankString(value) && isInFuture(value)
+        check: (value) =>
+          (isString(value) && isNotBlankString(value) && isInFuture(value)) || user.isAdmin
       },
       endDateTime: {
-        check: (value) => isString(value) && isNotBlankString(value) && isInFuture(value)
+        check: (value) =>
+          (isString(value) && isNotBlankString(value) && isInFuture(value)) || user.isAdmin
       },
       gameType: {
         check: (value) =>
@@ -91,12 +93,24 @@ export default defineEventHandler(async (event) => {
 
   const gameRepository = TypeORM.getRepository(Game)
 
-  const game = await gameRepository.findOne({ where: { id } })
+  const game = await gameRepository.findOne({ relations: ['participants'], where: { id } })
   throwIfObjectIsNotFound(game, 'Game', id, user.id, 'putGame')
 
-  if (game.createdById !== user.id && !user.isAdmin) {
-    consoleError(`User is not the creator of the game, ID: ${game.id}`, user.id, 'putGame')
-    throw errorResponse('common.errors.forbidden', 403)
+  if (!user.isAdmin) {
+    if (new Date(game.startDateTime) < new Date()) {
+      consoleError(`Game is already in progress or finished, ID: ${game.id}`, user.id, 'putGame')
+      throw errorResponse('pages.dashboard.games.errors.game-in-progress-or-finished')
+    }
+
+    if (game.participants.length > 0) {
+      consoleError(`Game has participants, ID: ${game.id}`, user.id, 'putGame')
+      throw errorResponse('pages.dashboard.games.errors.game-has-participants')
+    }
+
+    if (game.createdById !== user.id) {
+      consoleError(`User is not the creator of the game, ID: ${game.id}`, user.id, 'putGame')
+      throw errorResponse('common.errors.forbidden', 403)
+    }
   }
 
   Object.assign(game, {
