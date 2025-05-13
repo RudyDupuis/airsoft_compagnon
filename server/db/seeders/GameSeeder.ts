@@ -125,7 +125,7 @@ export const gameSeeds = [
     hasAmenities: true,
     hasParking: true,
     hasEquipmentRental: false,
-    privacyType: PrivacyType.PRIVATE,
+    privacyType: PrivacyType.PUBLIC,
     maxParticipants: 60,
     createdAt: new Date('2024-10-10'),
     createdById: 3
