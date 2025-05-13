@@ -24,7 +24,7 @@ const errorMessages = {
   lastName:
     'Last name must contain between 2 and 50 characters and can only include letters, spaces, hyphens and apostrophes.',
   pseudo:
-    'Username must contain between 3 and 20 characters and can only include letters, numbers, hyphens (-) and underscores (_).',
+    'Username must contain between 3 and 15 characters and can only include letters, numbers, hyphens (-) and underscores (_).',
   dateOfBirth: 'You must be at least 18 years old to register.',
   email: 'Please enter a valid email address.',
   emailAlreadyUsed: 'This email is already in use',

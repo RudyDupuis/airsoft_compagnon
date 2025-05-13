@@ -129,10 +129,7 @@ describe('As a unverified user, I want to handle games', () => {
       'contain',
       gameAlreadyAdded.allowedConsumables
     )
-    cy.getBySel('user-list-pseudo-game-infos-panel-created-by').should(
-      'contain',
-      gameAlreadyAdded.createdBy
-    )
+    cy.getBySel('user-list-pseudo-panel-created-by').should('contain', gameAlreadyAdded.createdBy)
   })
 })
 
@@ -177,7 +174,7 @@ describe('As a verified user, I want to handle games', () => {
   })
 
   it('should join a game', () => {
-    cy.getBySel('marker-map-3').click()
+    cy.getBySel('marker-map-3').should('exist').click()
     cy.getBySel('game-infos-panel-join-button').click()
     cy.getBySel('game-infos-panel-max-participants').should('contain', `1 /`)
     cy.getBySel('game-infos-panel-participants-link').click()
@@ -189,7 +186,7 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-canJoin-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('games-filter-category-display').should('contain', '6 Available games')
+    cy.getBySel('games-filter-category-display').should('contain', '7 Available games')
 
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-joined-game-filter').click()
