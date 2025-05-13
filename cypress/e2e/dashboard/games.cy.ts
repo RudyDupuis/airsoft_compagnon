@@ -72,8 +72,8 @@ const game = {
   hasAmenities: true,
   hasParking: false,
   hasequipmentRental: true,
-  privacyType: 'Private',
-  privacyTypeToSelect: 'private',
+  privacyType: 'Public',
+  privacyTypeToSelect: 'public',
   maxParticipants: 30,
   minimalReputation: 4,
   allowedNotRated: false
@@ -373,7 +373,7 @@ describe('As a rated user, I want to handle games', () => {
   it('should join a game if minimal reputation is lesser than him', () => {
     cy.getBySel('marker-map-6').click()
     cy.getBySel('game-infos-panel-join-button').click()
-    cy.getBySel('game-infos-panel-max-participants').should('contain', `1 /`)
+    cy.getBySel('game-infos-panel-max-participants').should('contain', '2 /')
   })
 
   it('should not be able to join a game if it requires players with higher reputation', () => {
