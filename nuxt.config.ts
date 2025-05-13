@@ -27,7 +27,8 @@ function fontawesomeIcons() {
       'filter',
       'left-long',
       'up-right-from-square',
-      'right-to-bracket'
+      'right-to-bracket',
+      'triangle-exclamation'
     ]
   }
 }

@@ -135,11 +135,8 @@ function validateInput() {
         }
       "
     />
-    <p
-      v-if="isDefined(errorMessageKey) && !isInputValid"
-      class="text-error"
-      :data-cy="`text-input-${cy}-error`"
-    >
+    <p v-if="isDefined(errorMessageKey) && !isInputValid" :data-cy="`text-input-${cy}-error`">
+      <font-awesome class="text-error text-2xl mr-2" :icon="['fas', 'triangle-exclamation']" />
       {{ $t(errorMessageKey) }}
     </p>
   </div>

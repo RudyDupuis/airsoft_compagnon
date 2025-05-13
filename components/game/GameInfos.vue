@@ -25,44 +25,52 @@ const selectedParticipant = computed(() => {
       {{ game.name }}
     </h3>
     <div class="flex flex-col space-y-10">
-      <p data-cy="game-infos-panel-types" class="text-center">
-        {{ game.gameType === GameType.OP ? $t('entities.game.game-type.op') : '' }}
-        {{ game.gameType === GameType.DOMINICAL ? $t('entities.game.game-type.dominical') : '' }}
-        -
-        {{
-          game.privacyType === PrivacyType.PRIVATE ? $t('entities.game.privacy-type.private') : ''
-        }}
-        {{ game.privacyType === PrivacyType.PUBLIC ? $t('entities.game.privacy-type.public') : '' }}
+      <p class="flex justify-between items-center">
+        <span data-cy="game-infos-panel-types">
+          {{ game.gameType === GameType.OP ? $t('entities.game.game-type.op') : '' }}
+          {{ game.gameType === GameType.DOMINICAL ? $t('entities.game.game-type.dominical') : '' }}
+          -
+          {{
+            game.privacyType === PrivacyType.PRIVATE ? $t('entities.game.privacy-type.private') : ''
+          }}
+          {{
+            game.privacyType === PrivacyType.PUBLIC ? $t('entities.game.privacy-type.public') : ''
+          }}
+        </span>
+        <span data-cy="game-infos-panel-price">
+          <font-awesome :icon="['fas', 'coins']" /> {{ game.price }} €
+        </span>
       </p>
-      <p data-cy="game-infos-panel-price" class="text-center">
-        <font-awesome :icon="['fas', 'coins']" /> {{ game.price }} €
-      </p>
-      <p data-cy="game-infos-panel-dates" class="text-center text-nowrap">
+      <div class="flex justify-center items-center space-x-5">
         <font-awesome :icon="['fas', 'calendar-days']" />
-        {{ displayDateTime(new Date(game.startDateTime)) }}
-        <br />
-        <font-awesome :icon="['fas', 'calendar']" />
-        {{ displayDateTime(new Date(game.endDateTime)) }}
-      </p>
-
-      <div class="space-y-2 text-center">
-        <p>
-          <font-awesome :icon="['fas', 'trophy']" />
-          {{ $t('entities.game.minimal-reputation') }}:
-          <span data-cy="game-infos-panel-minimal-reputation">
-            {{ game.minimalReputation }} / 5
-          </span>
-        </p>
-        <p v-if="game.allowedNotRated" data-cy="game-infos-panel-allowed-not-rated">
-          {{ $t('entities.game.allowed-not-rated') }}
+        <p data-cy="game-infos-panel-dates">
+          {{ displayDateTime(new Date(game.startDateTime)) }}
+          <br />
+          {{ displayDateTime(new Date(game.endDateTime)) }}
         </p>
       </div>
 
       <div class="space-y-5">
-        <p data-cy="game-infos-panel-max-participants" class="text-center">
-          <font-awesome :icon="['fas', 'people-group']" />
-          {{ game.participants.length }} /
-          {{ game.maxParticipants }}
+        <p class="flex justify-between items-center">
+          <span data-cy="game-infos-panel-max-participants">
+            <font-awesome :icon="['fas', 'people-group']" />
+            {{ game.participants.length }} /
+            {{ game.maxParticipants }}
+          </span>
+          <span data-cy="game-infos-panel-minimal-reputation">
+            <font-awesome :icon="['fas', 'trophy']" />
+            >
+            {{ game.minimalReputation }} / 5
+          </span>
+          <span>
+            <font-awesome
+              v-if="game.allowedNotRated"
+              :icon="['fas', 'check']"
+              data-cy="game-infos-panel-allowed-not-rated"
+            />
+            <font-awesome v-else :icon="['fas', 'xmark']" />
+            {{ $t('entities.user.no-reputation') }}
+          </span>
         </p>
         <p
           v-if="game.participants.length > 0"
@@ -78,9 +86,10 @@ const selectedParticipant = computed(() => {
       </div>
 
       <div class="space-y-5">
-        <p data-cy="game-infos-panel-address" class="text-center">
-          <font-awesome :icon="['fas', 'map-location-dot']" /> {{ game.address }}
-        </p>
+        <div data-cy="game-infos-panel-address" class="flex justify-center items-center space-x-5">
+          <font-awesome :icon="['fas', 'map-location-dot']" />
+          <p>{{ game.address }}</p>
+        </div>
         <p
           class="text-right text-secondary hover:text-primary text-sm"
           data-cy="game-infos-panel-address-link"
@@ -124,6 +133,7 @@ const selectedParticipant = computed(() => {
         class="my-5"
       >
         <span class="underline">{{ $t('entities.game.allowed-consumables') }}:</span>
+        <br />
         {{ game.allowedConsumables }}
       </p>
 
