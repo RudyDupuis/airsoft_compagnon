@@ -2,15 +2,20 @@
 import { onMounted, watch, useId } from 'vue'
 import 'leaflet/dist/leaflet.css'
 
-//TODO: Changer le comportement quand il y a un seul marker et régler le problème des marqueurs au même endroit
 export interface MarkerData {
   latitude: number
   longitude: number
   id: number
 }
-const props = defineProps<{
-  markersData: MarkerData[]
-}>()
+const props = withDefaults(
+  defineProps<{
+    markersData: MarkerData[]
+    focusOnUniqueMarker?: boolean
+  }>(),
+  {
+    focusOnUniqueMarker: false
+  }
+)
 
 const emit = defineEmits<{
   (e: 'markerClicked', id: number): void
@@ -80,7 +85,7 @@ onMounted(async () => {
           .on('click', () => emit('markerClicked', markerData.id))
       })
 
-      if (props.markersData.length === 1) {
+      if (props.focusOnUniqueMarker) {
         const { latitude, longitude } = props.markersData[0]
         map.setView([latitude, longitude], 5)
       }

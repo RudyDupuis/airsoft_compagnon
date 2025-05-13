@@ -61,11 +61,8 @@
       "price": "Prix (PAF)",
       "public": "Public",
       "private": "Privée",
-      "validation-type": {
-        "title": "Type de validation",
-        "auto": "Automatique",
-        "manual": "Manuelle"
-      },
+      "minimal-reputation": "Réputation minimale",
+      "allowed-not-rated": "Joueurs non notés autorisés",
       "has-amenities": "Commodités",
       "has-parking": "Parking",
       "has-equipment-rental": "Location d'équipement",
@@ -173,7 +170,9 @@
           "game-in-progress-or-finished": "Action non permise car la partie est déjà en cours ou terminée.",
           "game-has-participants": "Action non permise car la partie a des participants.",
           "game-full": "Cette partie est complète.",
-          "private-game": "Cette partie est privée."
+          "private-game": "Cette partie est privée.",
+          "not-enough-reputation": "Vous n'avez pas assez de réputation pour rejoindre cette partie.",
+          "not-rated-not-allowed": "Les joueurs non notés ne sont pas autorisés à rejoindre cette partie."
         }
       },
       "players": {

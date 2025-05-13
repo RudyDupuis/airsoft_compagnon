@@ -61,11 +61,8 @@
       "price": "Price (Entrance fee)",
       "public": "Public",
       "private": "Private",
-      "validation-type": {
-        "title": "Validation type",
-        "auto": "Automatic",
-        "manual": "Manual"
-      },
+      "minimal-reputation": "Minimum reputation",
+      "allowed-not-rated": "Unrated players allowed",
       "has-amenities": "Amenities",
       "has-parking": "Parking",
       "has-equipment-rental": "Equipment rental",
@@ -173,7 +170,9 @@
           "game-in-progress-or-finished": "Action not allowed because the game is already in progress or finished.",
           "game-has-participants": "Action not allowed because the game has participants.",
           "game-full": "This game is full.",
-          "private-game": "This game is private."
+          "private-game": "This game is private.",
+          "not-enough-reputation": "You do not have enough reputation to join this game.",
+          "not-rated-not-allowed": "Unrated players are not allowed to join this game."
         }
       },
       "players": {

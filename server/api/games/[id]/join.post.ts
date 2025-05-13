@@ -3,6 +3,7 @@ import { TypeORM } from '~/server/db/config'
 import { getSessionAndUser } from '~/server/utils/userSession'
 import { consoleError, errorResponse, successResponse } from '~/server/utils/response'
 import { throwIfIdIsNaN, throwIfObjectIsNotFound } from '~/server/utils/validation'
+import { isNotNull, isNull } from '~/utils/types/typeGuards'
 
 export default defineEventHandler(async (event) => {
   const { user } = await getSessionAndUser(event)
@@ -17,6 +18,14 @@ export default defineEventHandler(async (event) => {
     relations: ['participants']
   })
   throwIfObjectIsNotFound(game, 'Game', id, user.id, 'joinGame')
+
+  if (isNull(user.reputation) && !game.allowedNotRated) {
+    throw errorResponse('pages.dashboard.games.errors.not-rated-not-allowed')
+  }
+
+  if (isNotNull(user.reputation) && game.minimalReputation > user.reputation) {
+    throw errorResponse('pages.dashboard.games.errors.not-enough-reputation')
+  }
 
   if (new Date(game.startDateTime) < new Date()) {
     consoleError(`Game is already in progress or finished, ID: ${game.id}`, user.id, 'joinGame')

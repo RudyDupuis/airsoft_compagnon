@@ -6,11 +6,6 @@ export enum GameType {
   OP = 'op'
 }
 
-export enum ValidationType {
-  AUTO = 'auto',
-  MANUAL = 'manual'
-}
-
 export enum PrivacyType {
   PRIVATE = 'private',
   PUBLIC = 'public'
@@ -55,12 +50,11 @@ export class Game {
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   price!: number
 
-  @Column({
-    type: 'enum',
-    enum: ValidationType,
-    default: ValidationType.MANUAL
-  })
-  validationType!: ValidationType
+  @Column({ type: 'integer', nullable: false })
+  minimalReputation!: number
+
+  @Column({ type: 'boolean', default: true })
+  allowedNotRated!: boolean
 
   @Column({ type: 'boolean', default: false })
   hasAmenities!: boolean

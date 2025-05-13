@@ -45,6 +45,19 @@ const selectedParticipant = computed(() => {
         {{ displayDateTime(new Date(game.endDateTime)) }}
       </p>
 
+      <div class="space-y-2 text-center">
+        <p>
+          <font-awesome :icon="['fas', 'trophy']" />
+          {{ $t('entities.game.minimal-reputation') }}:
+          <span data-cy="game-infos-panel-minimal-reputation">
+            {{ game.minimalReputation }} / 5
+          </span>
+        </p>
+        <p v-if="game.allowedNotRated" data-cy="game-infos-panel-allowed-not-rated">
+          {{ $t('entities.game.allowed-not-rated') }}
+        </p>
+      </div>
+
       <div class="space-y-5">
         <p data-cy="game-infos-panel-max-participants" class="text-center">
           <font-awesome :icon="['fas', 'people-group']" />

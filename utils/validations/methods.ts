@@ -18,3 +18,7 @@ export function isInFuture(dateString: string): boolean {
 export function isPositiveNumber(value: number): boolean {
   return value > 0
 }
+
+export function isNumberBetween0And5(value: number): boolean {
+  return value >= 0 && value <= 5
+}

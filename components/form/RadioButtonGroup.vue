@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { useId } from 'vue'
+import { isNotNull } from '~/utils/types/typeGuards'
 
-type EnumType = Record<string, string>
+type OptionType = {
+  label: string
+  value: string | number | null
+}
 
-const selectedValue = defineModel<string>({ required: true })
+const selectedValue = defineModel<string | number | null>({ required: true })
 
 defineProps<{
-  enumObject: EnumType
-  name: string
-  labelKeyStart: string
+  options: OptionType[]
+  orientation: 'horizontal' | 'vertical'
   cy?: string
 }>()
 
@@ -16,23 +19,27 @@ const uniqueId = useId()
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div
+    :class="{
+      'flex flex-wrap items-center justify-center space-x-5': orientation === 'horizontal',
+      'space-y-5': orientation === 'vertical'
+    }"
+  >
     <div
-      v-for="enumValue in Object.values(enumObject)"
-      :key="enumValue"
-      class="flex items-center space-x-3"
+      v-for="option in options"
+      :key="isNotNull(option.value) ? option.value : 'null'"
+      class="flex items-center space-x-2"
     >
       <input
         type="radio"
-        :id="`radio-button-${enumValue}-${uniqueId}`"
-        :name="name"
-        :value="enumValue"
+        :id="`radio-button-${option.value}-${uniqueId}`"
+        :value="option.value"
         v-model="selectedValue"
-        :data-cy="`radio-button-${enumValue}-${cy}`"
+        :data-cy="`radio-button-${option.value}-${cy}`"
         class="relative appearance-none w-5 h-5 bg-on-background border-2 border-primary rounded-full cursor-pointer checked:bg-primary focus:outline-none"
       />
-      <label :for="`radio-button-${enumValue}-${uniqueId}`" class="cursor-pointer">
-        {{ $t(`${labelKeyStart}.${enumValue}`) }}
+      <label :for="`radio-button-${option.value}-${uniqueId}`" class="cursor-pointer">
+        {{ option.label }}
       </label>
     </div>
   </div>

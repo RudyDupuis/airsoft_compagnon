@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useGeocoding } from '~/composables/useGeocoding'
-import { Game, GameType, PrivacyType, ValidationType } from '~/server/db/entities/Game'
+import { Game, GameType, PrivacyType } from '~/server/db/entities/Game'
 import { isDefined, isNotNull, isNull } from '~/utils/types/typeGuards'
 import { isInFuture, isPositiveNumber } from '~/utils/validations/methods'
 import { nameRegex } from '~/utils/validations/regex'
@@ -30,9 +30,8 @@ const longitude = ref(props.gameToUpdate?.longitude ?? 1.888334)
 const address = ref(props.gameToUpdate?.address ?? '')
 const allowedConsumables = ref(props.gameToUpdate?.allowedConsumables ?? '')
 const price = ref(props.gameToUpdate?.price ?? 1)
-const validationType = ref<ValidationType>(
-  props.gameToUpdate?.validationType ?? ValidationType.AUTO
-)
+const minimalReputation = ref(props.gameToUpdate?.minimalReputation ?? 0)
+const allowedNotRated = ref(props.gameToUpdate?.allowedNotRated ?? true)
 const hasAmenities = ref(props.gameToUpdate?.hasAmenities ?? false)
 const hasParking = ref(props.gameToUpdate?.hasParking ?? false)
 const hasEquipmentRental = ref(props.gameToUpdate?.hasEquipmentRental ?? false)
@@ -94,7 +93,8 @@ const {
       address: address.value,
       allowedConsumables: allowedConsumables.value,
       price: price.value,
-      validationType: validationType.value,
+      minimalReputation: minimalReputation.value,
+      allowedNotRated: allowedNotRated.value,
       hasAmenities: hasAmenities.value,
       hasParking: hasParking.value,
       hasEquipmentRental: hasEquipmentRental.value,
@@ -222,7 +222,7 @@ async function remove() {
         >
           <FetchDataComp :isLoading="isLoadingGeocoding" :error="geocodingError" />
         </div>
-        <MapComp :markersData="markersData" />
+        <MapComp :markersData="markersData" :focus-on-unique-marker="true" />
       </div>
       <template v-if="coordinateEntryMode === CoordinateEntryMode.MANUAL">
         <InputField
@@ -260,16 +260,6 @@ async function remove() {
         required
         cy="game-price"
       />
-      <SelectField
-        v-model="validationType"
-        placeholderKey="entities.game.validation-type.title"
-        :options="[
-          { value: ValidationType.AUTO, label: $t('entities.game.validation-type.auto') },
-          { value: ValidationType.MANUAL, label: $t('entities.game.validation-type.manual') }
-        ]"
-        required
-        cy="game-validation-type"
-      />
       <CheckboxField
         v-model="hasAmenities"
         labelKey="entities.game.has-amenities"
@@ -295,6 +285,27 @@ async function remove() {
         required
         cy="game-privacy-type"
       />
+      <div v-if="privacyType === PrivacyType.PUBLIC" class="space-y-4">
+        <label class="inline-block">{{ $t('entities.game.minimal-reputation') }}</label>
+        <RadioButtonGroup
+          v-model="minimalReputation"
+          orientation="horizontal"
+          :options="[
+            { value: 0, label: '0' },
+            { value: 1, label: '1' },
+            { value: 2, label: '2' },
+            { value: 3, label: '3' },
+            { value: 4, label: '4' },
+            { value: 5, label: '5' }
+          ]"
+          cy="game-minimal-reputation"
+        />
+        <CheckboxField
+          v-model="allowedNotRated"
+          labelKey="entities.game.allowed-not-rated"
+          cy="game-allowed-not-rated"
+        />
+      </div>
       <InputField
         v-model="maxParticipants"
         placeholderKey="entities.game.max-participants"

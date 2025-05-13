@@ -1,6 +1,11 @@
-const verifiedUser = {
+const verifiedButUnratedUser = {
   email: 'alice.smith@example.com',
   pseudo: 'Alice85',
+  password: 'Password123!'
+}
+
+const ratedUser = {
+  email: 'jane.doe@example.com',
   password: 'Password123!'
 }
 
@@ -34,7 +39,8 @@ const gameAlreadyAdded = {
   price: 25.5,
   privacyType: 'Public',
   maxParticipants: 40,
-  createdBy: 'Johnny'
+  createdBy: 'Johnny',
+  minimalReputation: 3
 }
 
 const game = {
@@ -63,14 +69,14 @@ const game = {
   allowedConsumables:
     'BBs biodégradables obligatoires. Bâtons lumineux autorisés. Grenades sonores limitées à 2 par joueur.',
   price: 35.0,
-  validationType: 'Manual',
-  validationTypeToSelect: 'manual',
   hasAmenities: true,
   hasParking: false,
   hasequipmentRental: true,
   privacyType: 'Private',
   privacyTypeToSelect: 'private',
-  maxParticipants: 30
+  maxParticipants: 30,
+  minimalReputation: 4,
+  allowedNotRated: false
 }
 
 const errorMessages = {
@@ -78,7 +84,9 @@ const errorMessages = {
     'Name must be between 2 and 50 characters and can only include letters, numbers, spaces, hyphens and apostrophes.',
   invalidDateTime: 'The game cannot be scheduled in the past.',
   startDateAfterEndDate: 'Start date must be before end date.',
-  rulesNotRespected: 'All rules must be followed.'
+  rulesNotRespected: 'All rules must be followed.',
+  notRatedNotAllowed: 'Unrated players are not allowed to join this game.',
+  notEnoughReputation: 'You do not have enough reputation to join this game.'
 }
 
 describe('As a unverified user, I want to handle games', () => {
@@ -112,6 +120,11 @@ describe('As a unverified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-types').should('contain', gameAlreadyAdded.gameType)
     cy.getBySel('game-infos-panel-types').should('contain', gameAlreadyAdded.privacyType)
     cy.getBySel('game-infos-panel-price').should('contain', gameAlreadyAdded.price)
+    cy.getBySel('game-infos-panel-minimal-reputation').should(
+      'contain',
+      `${gameAlreadyAdded.minimalReputation} / 5`
+    )
+    cy.getBySel('game-infos-panel-allowed-not-rated').should('exist')
     cy.getBySel('game-infos-panel-dates').should('contain', gameAlreadyAdded.startDateTime)
     cy.getBySel('game-infos-panel-dates').should('contain', gameAlreadyAdded.endDateTime)
     cy.getBySel('game-infos-panel-max-participants').should(
@@ -144,7 +157,10 @@ function fillGameForm(formData: typeof game) {
   cy.getBySel('text-input-game-address').clear().type(formData.address)
   cy.getBySel('text-input-game-allowed-consumables').clear().type(formData.allowedConsumables)
   cy.getBySel('text-input-game-price').clear().type(formData.price.toString())
-  cy.getBySel('select-input-game-validation-type').select(formData.validationTypeToSelect)
+  cy.getBySel(`radio-button-${formData.minimalReputation}-game-minimal-reputation`).click()
+  if (!formData.allowedNotRated) {
+    cy.getBySel('checkbox-game-allowed-not-rated').click()
+  }
   if (formData.hasAmenities) {
     cy.getBySel('checkbox-game-has-amenities').click()
   }
@@ -158,13 +174,13 @@ function fillGameForm(formData: typeof game) {
   cy.getBySel('text-input-game-max-participants').clear().type(formData.maxParticipants.toString())
 }
 
-describe('As a verified user, I want to handle games', () => {
+describe('As a verified but unrated user, I want to handle games', () => {
   beforeEach(() => {
     cy.visit('/login')
     cy.getBySel('form').should('exist')
 
-    cy.getBySel('text-input-email').should('exist').type(verifiedUser.email)
-    cy.getBySel('text-input-password').should('exist').type(verifiedUser.password)
+    cy.getBySel('text-input-email').should('exist').type(verifiedButUnratedUser.email)
+    cy.getBySel('text-input-password').should('exist').type(verifiedButUnratedUser.password)
 
     cy.getBySel('form-submit-button').click()
 
@@ -179,7 +195,13 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-max-participants').should('contain', `1 /`)
     cy.getBySel('game-infos-panel-participants-link').click()
     cy.getBySel('user-list-pseudo-participant-3').click()
-    cy.getBySel('user-card-pseudo').should('contain', verifiedUser.pseudo)
+    cy.getBySel('user-card-pseudo').should('contain', verifiedButUnratedUser.pseudo)
+  })
+
+  it('should not be able to join a game if it is waiting for rated players', () => {
+    cy.getBySel('marker-map-2').click()
+    cy.getBySel('game-infos-panel-join-button').click()
+    cy.getBySel('game-infos-panel-join-button').should('contain', errorMessages.notRatedNotAllowed)
   })
 
   it('should filter games', () => {
@@ -251,6 +273,11 @@ describe('As a verified user, I want to handle games', () => {
     cy.getBySel('game-infos-panel-types').should('contain', game.gameType)
     cy.getBySel('game-infos-panel-types').should('contain', game.privacyType)
     cy.getBySel('game-infos-panel-price').should('contain', game.price)
+    cy.getBySel('game-infos-panel-minimal-reputation').should(
+      'contain',
+      `${game.minimalReputation} / 5`
+    )
+    cy.getBySel('game-infos-panel-allowed-not-rated').should('not.exist')
     cy.getBySel('game-infos-panel-dates').should('contain', game.startDateTime)
     cy.getBySel('game-infos-panel-dates').should('contain', game.endDateTime)
     cy.getBySel('game-infos-panel-max-participants').should('contain', game.maxParticipants)
@@ -325,5 +352,33 @@ describe('As a verified user, I want to handle games', () => {
     cy.wait('@deleteGameRequest')
 
     cy.getBySel('marker-map-9').should('not.exist')
+  })
+})
+
+describe('As a rated user, I want to handle games', () => {
+  beforeEach(() => {
+    cy.visit('/login')
+    cy.getBySel('form').should('exist')
+
+    cy.getBySel('text-input-email').should('exist').type(ratedUser.email)
+    cy.getBySel('text-input-password').should('exist').type(ratedUser.password)
+
+    cy.getBySel('form-submit-button').click()
+
+    cy.url().should('eq', `${Cypress.config().baseUrl}/dashboard/games`)
+
+    cy.intercept('POST', '/api/games/create').as('createGameRequest')
+  })
+
+  it('should join a game if minimal reputation is lesser than him', () => {
+    cy.getBySel('marker-map-6').click()
+    cy.getBySel('game-infos-panel-join-button').click()
+    cy.getBySel('game-infos-panel-max-participants').should('contain', `1 /`)
+  })
+
+  it('should not be able to join a game if it requires players with higher reputation', () => {
+    cy.getBySel('marker-map-2').click()
+    cy.getBySel('game-infos-panel-join-button').click()
+    cy.getBySel('game-infos-panel-join-button').should('contain', errorMessages.notEnoughReputation)
   })
 })

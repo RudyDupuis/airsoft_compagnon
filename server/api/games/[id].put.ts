@@ -1,8 +1,8 @@
-import { Game, GameType, PrivacyType, ValidationType } from '~/server/db/entities/Game'
+import { Game, GameType, PrivacyType } from '~/server/db/entities/Game'
 import { TypeORM } from '~/server/db/config'
 import { isNotBlankString, isString } from '~/utils/types/typeGuards'
 import { nameRegex } from '~/utils/validations/regex'
-import { isInFuture, isPositiveNumber } from '~/utils/validations/methods'
+import { isInFuture, isNumberBetween0And5, isPositiveNumber } from '~/utils/validations/methods'
 import { throwIfUserIsNotVerified, getSessionAndUser } from '~/server/utils/userSession'
 import {
   throwIfIdIsNaN,
@@ -34,7 +34,8 @@ export default defineEventHandler(async (event) => {
       'address',
       'allowedConsumables',
       'price',
-      'validationType',
+      'minimalReputation',
+      'allowedNotRated',
       'hasAmenities',
       'hasParking',
       'hasEquipmentRental',
@@ -68,12 +69,10 @@ export default defineEventHandler(async (event) => {
       longitude: { check: (value) => !isNaN(Number(value)) },
       address: { check: (value) => isString(value) && isNotBlankString(value) },
       price: { check: (value) => !isNaN(Number(value)) && isPositiveNumber(Number(value)) },
-      validationType: {
-        check: (value) =>
-          isString(value) &&
-          isNotBlankString(value) &&
-          Object.values(ValidationType).includes(value as ValidationType)
+      minimalReputation: {
+        check: (value) => !isNaN(Number(value)) && isNumberBetween0And5(Number(value))
       },
+      allowedNotRated: { check: (value) => typeof value === 'boolean' },
       hasAmenities: { check: (value) => typeof value === 'boolean' },
       hasParking: { check: (value) => typeof value === 'boolean' },
       hasEquipmentRental: { check: (value) => typeof value === 'boolean' },
@@ -124,7 +123,8 @@ export default defineEventHandler(async (event) => {
     address: body.address,
     allowedConsumables: body.allowedConsumables,
     price: body.price,
-    validationType: body.validationType,
+    minimalReputation: body.minimalReputation,
+    allowedNotRated: body.allowedNotRated,
     hasAmenities: body.hasAmenities,
     hasParking: body.hasParking,
     hasEquipmentRental: body.hasEquipmentRental,

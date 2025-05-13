@@ -21,7 +21,7 @@ export const userSeeds = [
     firstName: 'Jane',
     lastName: 'Doe',
     pseudo: 'Jane_d',
-    reputation: 4.8,
+    reputation: 3.8,
     isVerified: false,
     createdAt: new Date('2024-02-01'),
     gamesPlayed: 5

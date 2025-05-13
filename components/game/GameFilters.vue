@@ -40,7 +40,7 @@ const availableGameFilterCategories = computed(() => {
     delete categories.ALL
   }
 
-  return categories
+  return Object.values(categories)
 })
 
 watch(
@@ -110,9 +110,13 @@ watch(
     </h3>
     <RadioButtonGroup
       v-model="gamesFilterCategory"
-      :enumObject="availableGameFilterCategories"
-      name="game-filter"
-      labelKeyStart="pages.dashboard.games.filters"
+      orientation="vertical"
+      :options="
+        availableGameFilterCategories.map((category) => ({
+          label: $t(`pages.dashboard.games.filters.${category}`),
+          value: category
+        }))
+      "
       cy="game-filter"
     />
   </div>
