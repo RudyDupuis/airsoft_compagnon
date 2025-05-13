@@ -135,7 +135,7 @@ function logout() {
       <div class="flex flex-col gap-4">
         <button
           @click="mode = Mode.EDIT_ACCOUNT"
-          class="text-left hover:text-primary"
+          class="text-left text-secondary hover:text-primary"
           data-cy="me-edit-account"
         >
           <font-awesome class="mr-2" :icon="['fas', 'address-card']" />
@@ -143,7 +143,7 @@ function logout() {
         </button>
         <button
           @click="mode = Mode.EDIT_PASSWORD"
-          class="text-left hover:text-primary"
+          class="text-left text-secondary hover:text-primary"
           data-cy="me-edit-password"
         >
           <font-awesome class="mr-2" :icon="['fas', 'key']" />

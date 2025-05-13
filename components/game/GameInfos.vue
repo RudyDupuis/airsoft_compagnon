@@ -66,7 +66,7 @@ const selectedParticipant = computed(() => {
         </p>
         <p
           v-if="game.participants.length > 0"
-          class="text-right hover:text-primary cursor-pointer text-sm"
+          class="text-right text-secondary hover:text-primary cursor-pointer text-sm"
           @click="view = View.PARTICIPANTS"
           data-cy="game-infos-panel-participants-link"
         >
@@ -81,7 +81,10 @@ const selectedParticipant = computed(() => {
         <p data-cy="game-infos-panel-address" class="text-center">
           <font-awesome :icon="['fas', 'map-location-dot']" /> {{ game.address }}
         </p>
-        <p class="text-right hover:text-primary text-sm" data-cy="game-infos-panel-address-link">
+        <p
+          class="text-right text-secondary hover:text-primary text-sm"
+          data-cy="game-infos-panel-address-link"
+        >
           <a
             :href="`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(game.address)}`"
             target="_blank"
@@ -170,7 +173,7 @@ const selectedParticipant = computed(() => {
         <li
           v-for="participant in game.participants"
           :key="participant.id"
-          class="px-10 py-5 border-b-2 hover:bg-secondary cursor-pointer"
+          class="px-10 py-5 border-b-2 hover:bg-muted cursor-pointer"
           @click="selectedParticipantId = participant.id"
         >
           <UserListElement

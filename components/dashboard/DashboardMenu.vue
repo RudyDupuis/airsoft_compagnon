@@ -32,11 +32,11 @@ const localePath = useLocalePath()
         <font-awesome :icon="['fas', 'person']" class="text-xl" />
         <span class="text-xs text-center mt-2">{{ $t('pages.dashboard.tab-bar.players') }}</span>
       </NuxtLink>
-      <NuxtLink class="flex flex-col items-center text-secondary">
+      <NuxtLink class="flex flex-col items-center text-muted">
         <font-awesome :icon="['fas', 'people-group']" class="text-xl" />
         <span class="text-xs text-center mt-2">{{ $t('pages.dashboard.tab-bar.teams') }}</span>
       </NuxtLink>
-      <NuxtLink class="flex flex-col items-center text-secondary">
+      <NuxtLink class="flex flex-col items-center text-muted">
         <font-awesome :icon="['fas', 'store']" class="text-xl" />
         <span class="text-xs text-center mt-2">{{ $t('pages.dashboard.tab-bar.stores') }}</span>
       </NuxtLink>

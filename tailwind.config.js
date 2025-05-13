@@ -4,7 +4,8 @@ export default {
   theme: {
     colors: {
       primary: '#F30002',
-      secondary: '#606060',
+      secondary: '#00CEF3',
+      muted: '#606060',
       background: '#1C0000',
       'on-background': '#FFF8F8',
       error: '#F30002'

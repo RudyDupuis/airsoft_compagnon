@@ -66,7 +66,7 @@ const selectedPlayer = computed(() => {
       <li
         v-for="player in filteredPlayers"
         :key="player.id"
-        class="px-10 py-5 border-b-2 hover:bg-secondary cursor-pointer"
+        class="px-10 py-5 border-b-2 hover:bg-muted cursor-pointer"
         @click="selectedPlayerId = player.id"
         :data-cy="`player-list-item-${player.id}`"
       >
