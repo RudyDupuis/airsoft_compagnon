@@ -60,6 +60,10 @@
   @apply max-h-dvh lg:max-h-full overflow-auto p-10;
 }
 
+.divider {
+  @apply w-full h-1 bg-on-background rounded-full my-2;
+}
+
 /* Button */
 
 .button {

@@ -28,7 +28,8 @@ function fontawesomeIcons() {
       'left-long',
       'up-right-from-square',
       'right-to-bracket',
-      'triangle-exclamation'
+      'triangle-exclamation',
+      'seedling'
     ]
   }
 }

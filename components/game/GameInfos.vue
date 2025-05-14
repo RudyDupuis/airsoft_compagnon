@@ -49,7 +49,7 @@ const selectedParticipant = computed(() => {
           {{ displayDateTime(new Date(game.endDateTime)) }}
         </p>
       </div>
-
+      <div class="divider"></div>
       <div class="space-y-5">
         <p class="flex justify-between items-center">
           <span data-cy="game-infos-panel-max-participants">
@@ -62,15 +62,10 @@ const selectedParticipant = computed(() => {
             >
             {{ game.minimalReputation }} / 5
           </span>
-          <span>
-            <font-awesome
-              v-if="game.allowedNotRated"
-              :icon="['fas', 'check']"
-              data-cy="game-infos-panel-allowed-not-rated"
-            />
-            <font-awesome v-else :icon="['fas', 'xmark']" />
-            {{ $t('entities.user.no-reputation') }}
-          </span>
+        </p>
+        <p v-if="game.allowedNotRated" data-cy="game-infos-panel-allowed-not-rated">
+          <font-awesome :icon="['fas', 'seedling']" />
+          {{ $t('entities.game.allowed-not-rated') }}
         </p>
         <p
           v-if="game.participants.length > 0"
@@ -84,7 +79,7 @@ const selectedParticipant = computed(() => {
           </span>
         </p>
       </div>
-
+      <div class="divider"></div>
       <div class="space-y-5">
         <div data-cy="game-infos-panel-address" class="flex justify-center items-center space-x-5">
           <font-awesome :icon="['fas', 'map-location-dot']" />
@@ -105,7 +100,7 @@ const selectedParticipant = computed(() => {
           </a>
         </p>
       </div>
-
+      <div class="divider"></div>
       <div class="flex justify-center align-center space-x-5 pt-5">
         <p v-if="game.hasAmenities" data-cy="game-infos-panel-has-amenities" class="icon-with-text">
           <font-awesome :icon="['fas', 'toilet']" />
@@ -124,6 +119,7 @@ const selectedParticipant = computed(() => {
           <span>{{ $t('entities.game.has-equipment-rental') }}</span>
         </p>
       </div>
+      <div class="divider"></div>
       <p v-if="isNotBlankString(game.description)" data-cy="game-infos-panel-description">
         {{ game.description }}
       </p>
@@ -136,7 +132,7 @@ const selectedParticipant = computed(() => {
         <br />
         {{ game.allowedConsumables }}
       </p>
-
+      <div class="divider"></div>
       <div>
         <p class="underline">{{ $t('entities.game.created-by') }}:</p>
         <UserListElement
@@ -150,6 +146,7 @@ const selectedParticipant = computed(() => {
           cy="created-by"
         />
       </div>
+      <div class="divider"></div>
       <slot></slot>
     </div>
   </div>
