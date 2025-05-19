@@ -208,22 +208,22 @@ describe('As a verified but unrated user, I want to handle games', () => {
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-canJoin-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('games-filter-category-display').should('contain', '6 Available games')
+    cy.getBySel('games-filter-category-display').should('contain', '5 Available games')
 
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-joined-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('games-filter-category-display').should('contain', '1 Joined games')
+    cy.getBySel('games-filter-category-display').should('contain', '2 Joined games')
 
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-completed-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('games-filter-category-display').should('contain', '0 Completed games')
+    cy.getBySel('games-filter-category-display').should('contain', '2 Completed games')
 
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-createdByMe-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('games-filter-category-display').should('contain', '3 Created games')
+    cy.getBySel('games-filter-category-display').should('contain', '2 Created games')
   })
 
   it('should see the button to add a game', () => {
@@ -267,7 +267,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
     cy.getBySel('form-submit-button').click()
     cy.wait('@createGameRequest')
 
-    cy.getBySel('marker-map-9').should('exist').click()
+    cy.getBySel('marker-map-10').should('exist').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-name').should('contain', game.name)
     cy.getBySel('game-infos-panel-types').should('contain', game.gameType)
@@ -291,7 +291,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
 
   it('should update a game', () => {
     cy.intercept('PUT', '/api/games/9').as('updateGameRequest')
-    cy.getBySel('marker-map-9').click()
+    cy.getBySel('marker-map-10').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-edit-button').click()
 
@@ -340,7 +340,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
 
   it('should delete a game', () => {
     cy.intercept('DELETE', '/api/games/9').as('deleteGameRequest')
-    cy.getBySel('marker-map-9').click()
+    cy.getBySel('marker-map-10').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-edit-button').click()
 
@@ -351,7 +351,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
 
     cy.wait('@deleteGameRequest')
 
-    cy.getBySel('marker-map-9').should('not.exist')
+    cy.getBySel('marker-map-10').should('not.exist')
   })
 })
 
