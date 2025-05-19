@@ -55,12 +55,12 @@ export const gameSeeds = [
     name: 'Night Ops Elite',
     description:
       'Opération nocturne réservée aux joueurs confirmés. Équipement night vision recommandé. Scénarios tactiques avancés.',
-    startDateTime: new Date('2030-05-15T20:00:00'),
+    startDateTime: new Date('2025-05-15T20:00:00'),
     endDateTime: new Date('2030-05-16T02:00:00'),
     gameType: GameType.OP,
-    latitude: 50.6333,
-    longitude: 3.0667,
-    address: 'Chemin du Fort, 59800 Lille, France',
+    latitude: 49.4431,
+    longitude: 1.0993,
+    address: 'Quai de la Bourse, 76000 Rouen, France',
     allowedConsumables: 'BBs bio uniquement. Cyalumes et IR beacons autorisés. Fumigènes limités.',
     price: 35.0,
     minimalReputation: 2,
@@ -72,7 +72,7 @@ export const gameSeeds = [
     maxParticipants: 24,
     createdAt: new Date('2025-01-25'),
     createdById: 3,
-    participantsId: [4]
+    participantsId: []
   },
   {
     name: 'Partie forestière du dimanche',
@@ -124,7 +124,7 @@ export const gameSeeds = [
     name: 'Milsim Opération Dragon',
     description:
       'Weekend complet en mode milsim. Nécessite équipement complet, répliques réalistes et tenue adaptée.',
-    startDateTime: new Date('2024-06-20T08:00:00'),
+    startDateTime: new Date('2030-06-20T08:00:00'),
     endDateTime: new Date('2030-06-21T18:00:00'),
     gameType: GameType.OP,
     latitude: 49.1234,
@@ -142,7 +142,7 @@ export const gameSeeds = [
     maxParticipants: 60,
     createdAt: new Date('2024-10-10'),
     createdById: 3,
-    participantsId: []
+    participantsId: [4]
   },
   {
     name: 'Partie débutants friendly',
