@@ -203,12 +203,12 @@ describe('As a verified but unrated user, I want to handle games', () => {
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-canJoin-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('games-filter-category-display').should('contain', '5 Available games')
+    cy.getBySel('games-filter-category-display').should('contain', '6 Available games')
 
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-joined-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('games-filter-category-display').should('contain', '2 Joined games')
+    cy.getBySel('games-filter-category-display').should('contain', '1 Joined games')
 
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-completed-game-filter').click()
@@ -321,7 +321,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-createdByMe-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('marker-map-10').click()
+    cy.getBySel('marker-map-3').click()
     cy.getBySel('game-infos-panel-edit-button').should('not.exist')
   })
 
