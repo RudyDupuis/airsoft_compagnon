@@ -26,7 +26,7 @@ export const gameSeeds = [
     maxParticipants: 40,
     createdAt: new Date('2025-03-10'),
     createdById: 1,
-    participantsId: [1, 4]
+    participantsId: []
   },
   {
     name: 'Dominicale Urbex',
@@ -118,7 +118,7 @@ export const gameSeeds = [
     maxParticipants: 20,
     createdAt: new Date(),
     createdById: 2,
-    participantsId: []
+    participantsId: [1, 4]
   },
   {
     name: 'Milsim Opération Dragon',

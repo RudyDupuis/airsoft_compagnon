@@ -285,7 +285,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
   })
 
   it('should update a game', () => {
-    cy.intercept('PUT', '/api/games/9').as('updateGameRequest')
+    cy.intercept('PUT', '/api/games/10').as('updateGameRequest')
     cy.getBySel('marker-map-10').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-edit-button').click()
@@ -321,7 +321,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-createdByMe-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('marker-map-8').click()
+    cy.getBySel('marker-map-10').click()
     cy.getBySel('game-infos-panel-edit-button').should('not.exist')
   })
 
@@ -334,7 +334,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
   })
 
   it('should delete a game', () => {
-    cy.intercept('DELETE', '/api/games/9').as('deleteGameRequest')
+    cy.intercept('DELETE', '/api/games/10').as('deleteGameRequest')
     cy.getBySel('marker-map-10').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-edit-button').click()
