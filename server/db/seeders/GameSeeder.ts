@@ -1,5 +1,7 @@
+import { isNull } from '~/utils/types/typeGuards'
 import { TypeORM } from '../config'
 import { Game, GameType, PrivacyType } from '../entities/Game'
+import { User } from '../entities/User'
 
 export const gameSeeds = [
   {
@@ -23,7 +25,8 @@ export const gameSeeds = [
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 40,
     createdAt: new Date('2025-03-10'),
-    createdById: 1
+    createdById: 1,
+    participantsId: [1, 2, 4]
   },
   {
     name: 'Dominicale Urbex',
@@ -45,7 +48,8 @@ export const gameSeeds = [
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 30,
     createdAt: new Date('2025-02-19'),
-    createdById: 2
+    createdById: 2,
+    participantsId: [1, 3, 4]
   },
   {
     name: 'Night Ops Elite',
@@ -67,7 +71,8 @@ export const gameSeeds = [
     privacyType: PrivacyType.PRIVATE,
     maxParticipants: 24,
     createdAt: new Date('2025-01-25'),
-    createdById: 3
+    createdById: 3,
+    participantsId: [2, 4]
   },
   {
     name: 'Partie forestière du dimanche',
@@ -89,7 +94,8 @@ export const gameSeeds = [
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 50,
     createdAt: new Date('2024-12-12'),
-    createdById: 1
+    createdById: 1,
+    participantsId: [1]
   },
   {
     name: 'CQB Warehouse',
@@ -111,7 +117,8 @@ export const gameSeeds = [
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 20,
     createdAt: new Date(),
-    createdById: 2
+    createdById: 2,
+    participantsId: []
   },
   {
     name: 'Milsim Opération Dragon',
@@ -134,7 +141,8 @@ export const gameSeeds = [
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 60,
     createdAt: new Date('2024-10-10'),
-    createdById: 3
+    createdById: 3,
+    participantsId: []
   },
   {
     name: 'Partie débutants friendly',
@@ -156,36 +164,79 @@ export const gameSeeds = [
     privacyType: PrivacyType.PUBLIC,
     maxParticipants: 25,
     createdAt: new Date('2025-02-15'),
-    createdById: 1
+    createdById: 1,
+    participantsId: []
   },
   {
-    name: 'Partie terminée il y a longtemps',
+    name: 'Retour aux sources',
     description:
-      "Session d'initiation spécialement conçue pour les nouveaux joueurs d'airsoft qui souhaitent découvrir ce sport dans les meilleures conditions possibles. Notre équipe de joueurs expériment",
-    startDateTime: new Date('2020-05-25T10:00:00'),
-    endDateTime: new Date('2020-05-25T15:00:00'),
+      'Partie nostalgique organisée pour les anciens du club, retour sur notre premier terrain de jeu ! Ambiance conviviale, scénarios rétro et barbecue en fin de journée.',
+    startDateTime: new Date('2018-09-16T09:00:00'),
+    endDateTime: new Date('2018-09-16T16:00:00'),
     gameType: GameType.DOMINICAL,
-    latitude: 44.2965,
-    longitude: 6.3698,
-    address: 'Chemin du Vallon de Toulouse, 13009 Marseille, France',
-    allowedConsumables: "BBs fournies. Pas d'équipement spécial nécessaire.",
-    price: 10.0,
-    minimalReputation: 2,
+    latitude: 45.764,
+    longitude: 4.8357,
+    address: 'Ancien Terrain Club, 123 Ancienne Route, 69000 Lyon, France',
+    allowedConsumables: 'BBs standard acceptées. Pas de grenades, ambiance détendue.',
+    price: 5.0,
+    minimalReputation: 0,
     allowedNotRated: true,
-    hasAmenities: true,
+    hasAmenities: false,
     hasParking: true,
-    hasEquipmentRental: true,
+    hasEquipmentRental: false,
     privacyType: PrivacyType.PUBLIC,
-    maxParticipants: 25,
-    createdAt: new Date('2019-02-15'),
-    createdById: 3
+    maxParticipants: 30,
+    createdAt: new Date('2018-07-01'),
+    createdById: 2,
+    participantsId: [1, 2, 3, 4]
+  },
+  {
+    name: 'Assaut Printanier',
+    description:
+      "Scénario d'assaut en équipe dans une zone boisée vallonnée. Missions offensives et défensives alternées, idéal pour perfectionner sa coordination et sa stratégie. Prévoir des protections supplémentaires, terrain humide.",
+    startDateTime: new Date('2017-04-22T08:30:00'),
+    endDateTime: new Date('2017-04-22T14:00:00'),
+    gameType: GameType.OP,
+    latitude: 47.2184,
+    longitude: -1.5536,
+    address: 'Bois de la Gournerie, 44800 Saint-Herblain, France',
+    allowedConsumables:
+      'BBs classiques et bio. Fumigènes autorisés sous contrôle. Pas de grenades sonores.',
+    price: 8.0,
+    minimalReputation: 0,
+    allowedNotRated: true,
+    hasAmenities: false,
+    hasParking: true,
+    hasEquipmentRental: false,
+    privacyType: PrivacyType.PUBLIC,
+    maxParticipants: 36,
+    createdAt: new Date('2017-02-10'),
+    createdById: 4,
+    participantsId: [1, 2, 3, 4],
+    hasGeneratedRatings: true
   }
 ]
 
 export async function seedGames() {
   const gameRepository = TypeORM.getRepository(Game)
+  const userRepository = TypeORM.getRepository(User)
 
   for (const seed of gameSeeds) {
+    const createdBy = await userRepository.findOne({
+      where: { id: seed.createdById }
+    })
+    if (isNull(createdBy)) {
+      console.error(`User with ID ${seed.createdById} not found for game ${seed.name}`)
+      continue
+    }
+
+    const participants =
+      seed.participantsId.length > 0
+        ? await userRepository.find({
+            where: seed.participantsId.map((id) => ({ id }))
+          })
+        : []
+
     const game = gameRepository.create({
       name: seed.name,
       description: seed.description,
@@ -205,7 +256,9 @@ export async function seedGames() {
       privacyType: seed.privacyType,
       maxParticipants: seed.maxParticipants,
       createdAt: seed.createdAt,
-      createdById: seed.createdById
+      createdBy: createdBy,
+      participants: participants,
+      hasGeneratedRatings: seed.hasGeneratedRatings
     })
 
     await gameRepository.save(game)

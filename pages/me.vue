@@ -126,9 +126,9 @@ function logout() {
         :user="{
           id: user.id,
           pseudo: user.pseudo,
-          reputation: user.reputation,
+          computedReputation: user.computedReputation,
           createdAt: user.createdAt,
-          gamesPlayed: user.gamesPlayed
+          gamesPlayedCount: user.gamesPlayedCount
         }"
       />
 

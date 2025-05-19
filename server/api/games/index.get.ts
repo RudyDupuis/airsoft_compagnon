@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
         }
       },
       {
-        createdById: user.id
+        createdBy: user
       }
     ]
 
@@ -43,16 +43,16 @@ export default defineEventHandler(async (event) => {
       participants: {
         id: true,
         pseudo: true,
-        reputation: true,
+        computedReputation: true,
         createdAt: true,
-        gamesPlayed: true
+        gamesPlayedCount: true
       },
       createdBy: {
         id: true,
         pseudo: true,
-        reputation: true,
+        computedReputation: true,
         createdAt: true,
-        gamesPlayed: true
+        gamesPlayedCount: true
       }
     }
   })

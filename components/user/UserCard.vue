@@ -7,9 +7,9 @@ defineProps<{
   user: {
     id: User['id']
     pseudo: User['pseudo']
-    reputation: User['reputation']
+    computedReputation: User['computedReputation']
     createdAt: User['createdAt']
-    gamesPlayed: User['gamesPlayed']
+    gamesPlayedCount: User['gamesPlayedCount']
   }
 }>()
 </script>
@@ -22,8 +22,8 @@ defineProps<{
         <p class="text-xl" data-cy="user-card-pseudo">{{ user.pseudo }}</p>
         <p>
           <font-awesome class="mr-2" :icon="['fas', 'trophy']" />
-          <span v-if="isNotNull(user.reputation)" data-cy="user-card-reputation">
-            {{ user.reputation }} / 5
+          <span v-if="isNotNull(user.computedReputation)" data-cy="user-card-reputation">
+            {{ user.computedReputation }} / 5
           </span>
           <span v-else data-cy="user-card-reputation">{{ $t('entities.user.no-reputation') }}</span>
         </p>
@@ -51,7 +51,7 @@ defineProps<{
           <font-awesome class="mr-2" :icon="['fas', 'gamepad']" />
         </span>
         <span class="text-sm" data-cy="user-card-games-played"
-          >{{ user.gamesPlayed }} {{ $t('entities.user.games-played') }}</span
+          >{{ user.gamesPlayedCount }} {{ $t('entities.user.games-played') }}</span
         >
       </p>
     </div>

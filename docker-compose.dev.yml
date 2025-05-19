@@ -28,6 +28,17 @@ services:
     networks:
       - app-network
 
+  cron:
+    build:
+      context: ./cron
+      dockerfile: Dockerfile
+    depends_on:
+      - app
+    environment:
+      - CRON_API_KEY=${CRON_API_KEY}
+    networks:
+      - app-network
+
 networks:
   app-network:
 

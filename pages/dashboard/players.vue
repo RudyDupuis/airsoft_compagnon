@@ -74,9 +74,7 @@ const selectedPlayer = computed(() => {
           :user="{
             id: player.id,
             pseudo: player.pseudo,
-            reputation: player.reputation,
-            createdAt: player.createdAt,
-            gamesPlayed: player.gamesPlayed
+            computedReputation: player.computedReputation
           }"
           :cy="`player-${player.id}`"
         />
@@ -91,9 +89,9 @@ const selectedPlayer = computed(() => {
           :user="{
             id: selectedPlayer.id,
             pseudo: selectedPlayer.pseudo,
-            reputation: selectedPlayer.reputation,
+            computedReputation: selectedPlayer.computedReputation,
             createdAt: selectedPlayer.createdAt,
-            gamesPlayed: selectedPlayer.gamesPlayed
+            gamesPlayedCount: selectedPlayer.gamesPlayedCount
           }"
         />
         <UserAdmin v-if="user.isAdmin" :user="selectedPlayer" @user-updated="executeFetchPlayers" />

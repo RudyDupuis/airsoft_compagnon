@@ -29,7 +29,8 @@ function fontawesomeIcons() {
       'up-right-from-square',
       'right-to-bracket',
       'triangle-exclamation',
-      'seedling'
+      'seedling',
+      'bell'
     ]
   }
 }

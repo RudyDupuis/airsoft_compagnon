@@ -24,12 +24,12 @@ export const TypeORM = new DataSource({
 export default async function initDatabase() {
   try {
     await TypeORM.initialize()
-    console.log('Database connection established successfully')
+    console.log('✅  Database connection established successfully')
 
     if (process.env.ENV === 'Dev') {
       await TypeORM.synchronize(true)
       await runSeeders()
-      console.log('Database seeded successfully')
+      console.log('🌱  Database seeded successfully')
     }
   } catch (error) {
     console.error('Unable to connect to the database:', error)

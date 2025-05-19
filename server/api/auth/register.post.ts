@@ -56,8 +56,7 @@ export default defineEventHandler(async (event) => {
     dateOfBirth: body.dateOfBirth,
     firstName: body.firstName,
     lastName: body.lastName,
-    pseudo: body.pseudo,
-    createdAt: new Date()
+    pseudo: body.pseudo
   })
   await userRepository.save(user)
 

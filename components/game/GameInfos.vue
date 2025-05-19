@@ -49,7 +49,7 @@ const selectedParticipant = computed(() => {
           {{ displayDateTime(new Date(game.endDateTime)) }}
         </p>
       </div>
-      <div class="divider"></div>
+      <div class="divider my-2"></div>
       <div class="space-y-5">
         <p class="flex justify-between items-center">
           <span data-cy="game-infos-panel-max-participants">
@@ -79,7 +79,7 @@ const selectedParticipant = computed(() => {
           </span>
         </p>
       </div>
-      <div class="divider"></div>
+      <div class="divider my-2"></div>
       <div class="space-y-5">
         <div data-cy="game-infos-panel-address" class="flex justify-center items-center space-x-5">
           <font-awesome :icon="['fas', 'map-location-dot']" />
@@ -100,7 +100,7 @@ const selectedParticipant = computed(() => {
           </a>
         </p>
       </div>
-      <div class="divider"></div>
+      <div class="divider my-2"></div>
       <div class="flex justify-center align-center space-x-5 pt-5">
         <p v-if="game.hasAmenities" data-cy="game-infos-panel-has-amenities" class="icon-with-text">
           <font-awesome :icon="['fas', 'toilet']" />
@@ -119,7 +119,7 @@ const selectedParticipant = computed(() => {
           <span>{{ $t('entities.game.has-equipment-rental') }}</span>
         </p>
       </div>
-      <div class="divider"></div>
+      <div class="divider my-2"></div>
       <p v-if="isNotBlankString(game.description)" data-cy="game-infos-panel-description">
         {{ game.description }}
       </p>
@@ -132,21 +132,19 @@ const selectedParticipant = computed(() => {
         <br />
         {{ game.allowedConsumables }}
       </p>
-      <div class="divider"></div>
+      <div class="divider my-2"></div>
       <div>
         <p class="underline">{{ $t('entities.game.created-by') }}:</p>
         <UserListElement
           :user="{
             id: game.createdBy.id,
             pseudo: game.createdBy.pseudo,
-            reputation: game.createdBy.reputation,
-            createdAt: game.createdBy.createdAt,
-            gamesPlayed: game.createdBy.gamesPlayed
+            computedReputation: game.createdBy.computedReputation
           }"
           cy="created-by"
         />
       </div>
-      <div class="divider"></div>
+      <div class="divider my-2"></div>
       <slot></slot>
     </div>
   </div>
@@ -161,9 +159,9 @@ const selectedParticipant = computed(() => {
         :user="{
           id: selectedParticipant.id,
           pseudo: selectedParticipant.pseudo,
-          reputation: selectedParticipant.reputation,
+          computedReputation: selectedParticipant.computedReputation,
           createdAt: selectedParticipant.createdAt,
-          gamesPlayed: selectedParticipant.gamesPlayed
+          gamesPlayedCount: selectedParticipant.gamesPlayedCount
         }"
       />
     </template>
@@ -187,9 +185,7 @@ const selectedParticipant = computed(() => {
             :user="{
               id: participant.id,
               pseudo: participant.pseudo,
-              reputation: participant.reputation,
-              createdAt: participant.createdAt,
-              gamesPlayed: participant.gamesPlayed
+              computedReputation: participant.computedReputation
             }"
             :cy="`participant-${participant.id}`"
           />

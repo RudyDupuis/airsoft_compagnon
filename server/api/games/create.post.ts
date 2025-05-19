@@ -100,8 +100,7 @@ export default defineEventHandler(async (event) => {
     hasEquipmentRental: body.hasEquipmentRental,
     privacyType: body.privacyType,
     maxParticipants: body.maxParticipants,
-    createdAt: new Date(),
-    createdById: user.id
+    createdBy: user
   })
 
   await gameRepository.save(game)

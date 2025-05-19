@@ -1,0 +1,1 @@
+* * * * * curl -s -X POST -H "Host: localhost" "http://app:3000/api/cron/process-finished-games?key=$CRON_API_KEY"

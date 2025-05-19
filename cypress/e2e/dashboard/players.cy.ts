@@ -5,10 +5,10 @@ const user = {
 
 const userCard = {
   pseudo: 'Alice85',
-  reputation: 'Not rated',
+  computedReputation: 3.5,
   id: 'ID: 3',
   memberSince: 'Member since 1/1/2025',
-  gamesPlayed: '20 games played'
+  gamesPlayedCount: '1 games played'
 }
 
 const userCardAdmin = {
@@ -58,10 +58,10 @@ describe('As a user, I want to find players', () => {
   it('should be able to see player details', () => {
     cy.getBySel('player-list-item-3').click()
     cy.getBySel('user-card-pseudo').contains(userCard.pseudo)
-    cy.getBySel('user-card-reputation').contains(userCard.reputation)
+    cy.getBySel('user-card-reputation').contains(userCard.computedReputation)
     cy.getBySel('user-card-id').contains(userCard.id)
     cy.getBySel('user-card-member-since').contains(userCard.memberSince)
-    cy.getBySel('user-card-games-played').contains(userCard.gamesPlayed)
+    cy.getBySel('user-card-games-played').contains(userCard.gamesPlayedCount)
   })
 })
 describe('As an admin, I want to handle players', () => {

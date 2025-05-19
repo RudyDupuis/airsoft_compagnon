@@ -5,7 +5,7 @@ const existingUser = {
   lastName: 'Doe',
   dateOfBirth: '1990-01-01',
   pseudo: 'Johnny',
-  reputation: 4.5
+  computedReputation: 4.0
 }
 
 const invalidUser = {
@@ -61,7 +61,7 @@ describe('As a user, I want to handle my account', () => {
 
   it('should be able to see my account', () => {
     cy.getBySel('user-card-pseudo').contains(existingUser.pseudo)
-    cy.getBySel('user-card-reputation').contains(`${existingUser.reputation} / 5`)
+    cy.getBySel('user-card-reputation').contains(`${existingUser.computedReputation} / 5`)
   })
 
   it('should be able to update my account', () => {

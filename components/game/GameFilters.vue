@@ -87,7 +87,7 @@ watch(
         break
       case GameFilterCategory.CREATED_BY_ME:
         filteredGames.value = props.games.filter((game) => {
-          return game.createdById === props.user.id
+          return game.createdBy.id === props.user.id
         })
 
         gamesFilterCategoryKey.value = 'pages.dashboard.games.filters.createdByMe'

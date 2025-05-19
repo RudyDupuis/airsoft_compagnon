@@ -61,7 +61,7 @@
 }
 
 .divider {
-  @apply w-full h-1 bg-on-background rounded-full my-2;
+  @apply w-full h-1 bg-on-background rounded-full;
 }
 
 /* Button */

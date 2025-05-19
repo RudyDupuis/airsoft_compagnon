@@ -6,7 +6,11 @@ export default defineEventHandler(async (event) => {
   const { user } = await getSessionAndUser(event)
 
   const userRepository = TypeORM.getRepository(User)
-  const users = await userRepository.find()
+  const users = await userRepository.find({
+    order: {
+      pseudo: 'ASC'
+    }
+  })
 
   if (user.isAdmin) {
     return users.map((user) => {
@@ -21,8 +25,8 @@ export default defineEventHandler(async (event) => {
     .map((user) => ({
       id: user.id,
       pseudo: user.pseudo,
-      reputation: user.reputation,
+      computedReputation: user.computedReputation,
       createdAt: user.createdAt,
-      gamesPlayed: user.gamesPlayed
+      gamesPlayedCount: user.gamesPlayedCount
     }))
 })

@@ -19,11 +19,11 @@ export default defineEventHandler(async (event) => {
   })
   throwIfObjectIsNotFound(game, 'Game', id, user.id, 'joinGame')
 
-  if (isNull(user.reputation) && !game.allowedNotRated) {
+  if (isNull(user.computedReputation) && !game.allowedNotRated) {
     throw errorResponse('pages.dashboard.games.errors.not-rated-not-allowed')
   }
 
-  if (isNotNull(user.reputation) && game.minimalReputation > user.reputation) {
+  if (isNotNull(user.computedReputation) && game.minimalReputation > user.computedReputation) {
     throw errorResponse('pages.dashboard.games.errors.not-enough-reputation')
   }
 

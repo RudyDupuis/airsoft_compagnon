@@ -2,7 +2,7 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-RUN apk update && apk add postgresql-client
+RUN apk update && apk add postgresql-client curl
 
 COPY . .
 RUN npm install

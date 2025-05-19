@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm'
-import { Game } from './Game'
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
 @Entity()
 export class User {
@@ -24,9 +23,6 @@ export class User {
   @Column({ type: 'varchar', nullable: false })
   pseudo!: string
 
-  @Column({ type: 'decimal', precision: 2, scale: 1, nullable: true })
-  reputation!: number
-
   @Column({ type: 'boolean', default: false })
   isVerified!: boolean
 
@@ -36,12 +32,12 @@ export class User {
   @Column({ type: 'boolean', default: false })
   isBanned!: boolean
 
-  @Column({ type: 'timestamptz', nullable: false })
+  @Column({ type: 'timestamptz', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   createdAt!: Date
 
-  @Column({ type: 'integer', nullable: false, default: 0 })
-  gamesPlayed!: number
+  @Column({ type: 'decimal', precision: 2, scale: 1, nullable: true })
+  computedReputation!: number | null
 
-  @ManyToMany(() => Game, (game) => game.participants)
-  participatingGames!: Game[]
+  @Column({ type: 'integer', nullable: false, default: 0 })
+  gamesPlayedCount!: number
 }

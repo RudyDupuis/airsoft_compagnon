@@ -83,12 +83,12 @@ export class Game {
   })
   participants!: User[]
 
-  @Column({ type: 'timestamptz', nullable: false })
+  @Column({ type: 'timestamptz', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   createdAt!: Date
 
   @ManyToOne(() => User, { nullable: false })
   createdBy!: User
 
-  @Column({ type: 'integer', nullable: false })
-  createdById!: number
+  @Column({ type: 'boolean', default: false })
+  hasGeneratedRatings!: boolean
 }

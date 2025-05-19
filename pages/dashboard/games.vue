@@ -90,7 +90,7 @@ const canEditSelectedGame = computed(() => {
     return false
   }
 
-  if (selectedGame.value.createdById !== user.value.id) {
+  if (selectedGame.value.createdBy.id !== user.value.id) {
     return false
   }
 

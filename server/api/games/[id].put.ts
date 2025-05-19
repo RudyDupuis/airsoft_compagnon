@@ -92,7 +92,10 @@ export default defineEventHandler(async (event) => {
 
   const gameRepository = TypeORM.getRepository(Game)
 
-  const game = await gameRepository.findOne({ relations: ['participants'], where: { id } })
+  const game = await gameRepository.findOne({
+    relations: ['participants', 'createdBy'],
+    where: { id }
+  })
   throwIfObjectIsNotFound(game, 'Game', id, user.id, 'putGame')
 
   if (!user.isAdmin) {
@@ -106,7 +109,7 @@ export default defineEventHandler(async (event) => {
       throw errorResponse('pages.dashboard.games.errors.game-has-participants')
     }
 
-    if (game.createdById !== user.id) {
+    if (game.createdBy.id !== user.id) {
       consoleError(`User is not the creator of the game, ID: ${game.id}`, user.id, 'putGame')
       throw errorResponse('common.errors.forbidden', 403)
     }

@@ -26,7 +26,15 @@
   },
   "components": {
     "header": {
-      "login": "Se connecter"
+      "login": "Se connecter",
+      "notification": {
+        "title": "Notifications",
+        "empty": "Pas de notifications",
+        "pending-rating": {
+          "message": "La partie '{gameName}' est terminée.",
+          "link": "Noter les participants ?"
+        }
+      }
     },
     "footer": {
       "contact": "Contact",
@@ -179,6 +187,17 @@
         "title": "Airsoft Compagnon - Joueurs",
         "description": "Retrouvez les joueurs d'airdoft.",
         "search-placeholder": "Rechercher par pseudo ou ID"
+      }
+    },
+    "rate-participants": {
+      "title": "Airsoft Compagnon - Noter les participants",
+      "description": "Noter les participants des parties que vous avez faites.",
+      "h1": "Noter les participants",
+      "explanation": "Comment s'est passée la partie avec ces joueurs ? Faites-le nous savoir en les notant !",
+      "no-ratings": "Pas de participants à noter",
+      "submit": "Noter",
+      "errors": {
+        "already-set": "Vous avez déjà noté ce participant."
       }
     },
     "contact": {

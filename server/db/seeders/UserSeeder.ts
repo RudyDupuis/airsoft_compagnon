@@ -9,10 +9,10 @@ export const userSeeds = [
     firstName: 'John',
     lastName: 'Doe',
     pseudo: 'Johnny',
-    reputation: 4.5,
     isVerified: true,
     createdAt: new Date('2023-01-01'),
-    gamesPlayed: 10
+    gamesPlayedCount: 1,
+    computedReputation: 4.0
   },
   {
     email: 'jane.doe@example.com',
@@ -21,10 +21,10 @@ export const userSeeds = [
     firstName: 'Jane',
     lastName: 'Doe',
     pseudo: 'Jane_d',
-    reputation: 3.8,
     isVerified: false,
     createdAt: new Date('2024-02-01'),
-    gamesPlayed: 5
+    gamesPlayedCount: 1,
+    computedReputation: 4.0
   },
   {
     email: 'alice.smith@example.com',
@@ -35,7 +35,8 @@ export const userSeeds = [
     pseudo: 'Alice85',
     isVerified: true,
     createdAt: new Date('2025-01-01'),
-    gamesPlayed: 20
+    gamesPlayedCount: 1,
+    computedReputation: 3.5
   },
   {
     email: 'rudy.dupuis@airsoft-compagnon.com',
@@ -46,7 +47,9 @@ export const userSeeds = [
     pseudo: 'Rudaye',
     isVerified: true,
     isAdmin: true,
-    createdAt: new Date()
+    createdAt: new Date(),
+    gamesPlayedCount: 1,
+    computedReputation: 5.0
   },
   {
     email: 'badplayer@ban.com',
@@ -73,12 +76,12 @@ export async function seedUsers() {
       firstName: seed.firstName,
       lastName: seed.lastName,
       pseudo: seed.pseudo,
-      reputation: seed.reputation,
+      computedReputation: seed.computedReputation,
       isVerified: seed.isVerified,
       isAdmin: seed.isAdmin,
       isBanned: seed.isBanned,
       createdAt: seed.createdAt,
-      gamesPlayed: seed.gamesPlayed
+      gamesPlayedCount: seed.gamesPlayedCount
     })
 
     await userRepository.save(user)

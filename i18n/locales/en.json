@@ -26,7 +26,15 @@
   },
   "components": {
     "header": {
-      "login": "Log in"
+      "login": "Log in",
+      "notification": {
+        "title": "Notifications",
+        "empty": "No notifications",
+        "pending-rating": {
+          "message": "The game '{gameName}' has ended.",
+          "link": "Rate participants?"
+        }
+      }
     },
     "footer": {
       "contact": "Contact",
@@ -179,6 +187,17 @@
         "title": "Airsoft Companion - Players",
         "description": "Find airsoft players.",
         "search-placeholder": "Search by username or ID"
+      }
+    },
+    "rate-participants": {
+      "title": "Airsoft Companion - Rate Participants",
+      "description": "Rate participants from games you have played.",
+      "h1": "Rate Participants",
+      "explanation": "How was the game with these players? Let us know by rating them!",
+      "no-ratings": "No participants to rate",
+      "submit": "Rate",
+      "errors": {
+        "already-set": "You have already rated this participant."
       }
     },
     "contact": {
