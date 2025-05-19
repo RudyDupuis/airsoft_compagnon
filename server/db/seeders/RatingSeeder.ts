@@ -9,7 +9,7 @@ export const ratingSeeds = [
     gameId: 9,
     fromUserId: 1,
     toUserId: 2,
-    rating: 4,
+    rating: 3,
     ratedAt: new Date('2017-05-01')
   },
   {

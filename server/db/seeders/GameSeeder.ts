@@ -26,7 +26,7 @@ export const gameSeeds = [
     maxParticipants: 40,
     createdAt: new Date('2025-03-10'),
     createdById: 1,
-    participantsId: [1, 2, 4]
+    participantsId: [1, 4]
   },
   {
     name: 'Dominicale Urbex',
@@ -49,7 +49,7 @@ export const gameSeeds = [
     maxParticipants: 30,
     createdAt: new Date('2025-02-19'),
     createdById: 2,
-    participantsId: [1, 3, 4]
+    participantsId: [1, 4]
   },
   {
     name: 'Night Ops Elite',
@@ -72,7 +72,7 @@ export const gameSeeds = [
     maxParticipants: 24,
     createdAt: new Date('2025-01-25'),
     createdById: 3,
-    participantsId: [2, 4]
+    participantsId: [4]
   },
   {
     name: 'Partie forestière du dimanche',

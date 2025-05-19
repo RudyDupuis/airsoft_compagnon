@@ -4,12 +4,7 @@ const verifiedButUnratedUser = {
   password: 'Password123!'
 }
 
-const ratedUser = {
-  email: 'jane.doe@example.com',
-  password: 'Password123!'
-}
-
-const UnverifiedUser = {
+const UnverifiedButRatedUser = {
   email: 'jane.doe@example.com',
   password: 'Password123!'
 }
@@ -94,8 +89,8 @@ describe('As a unverified user, I want to handle games', () => {
     cy.visit('/login')
     cy.getBySel('form').should('exist')
 
-    cy.getBySel('text-input-email').should('exist').type(UnverifiedUser.email)
-    cy.getBySel('text-input-password').should('exist').type(UnverifiedUser.password)
+    cy.getBySel('text-input-email').should('exist').type(UnverifiedButRatedUser.email)
+    cy.getBySel('text-input-password').should('exist').type(UnverifiedButRatedUser.password)
 
     cy.getBySel('form-submit-button').click()
 
@@ -360,8 +355,8 @@ describe('As a rated user, I want to handle games', () => {
     cy.visit('/login')
     cy.getBySel('form').should('exist')
 
-    cy.getBySel('text-input-email').should('exist').type(ratedUser.email)
-    cy.getBySel('text-input-password').should('exist').type(ratedUser.password)
+    cy.getBySel('text-input-email').should('exist').type(UnverifiedButRatedUser.email)
+    cy.getBySel('text-input-password').should('exist').type(UnverifiedButRatedUser.password)
 
     cy.getBySel('form-submit-button').click()
 

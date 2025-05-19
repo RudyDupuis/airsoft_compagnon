@@ -24,7 +24,7 @@ export const userSeeds = [
     isVerified: false,
     createdAt: new Date('2024-02-01'),
     gamesPlayedCount: 1,
-    computedReputation: 4.0
+    computedReputation: 3.0
   },
   {
     email: 'alice.smith@example.com',
