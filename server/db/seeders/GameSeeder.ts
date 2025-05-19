@@ -124,7 +124,7 @@ export const gameSeeds = [
     name: 'Milsim Opération Dragon',
     description:
       'Weekend complet en mode milsim. Nécessite équipement complet, répliques réalistes et tenue adaptée.',
-    startDateTime: new Date('2030-06-20T08:00:00'),
+    startDateTime: new Date('2024-06-20T08:00:00'),
     endDateTime: new Date('2030-06-21T18:00:00'),
     gameType: GameType.OP,
     latitude: 49.1234,

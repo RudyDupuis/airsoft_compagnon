@@ -321,7 +321,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-createdByMe-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
-    cy.getBySel('marker-map-3').click()
+    cy.getBySel('marker-map-6').click()
     cy.getBySel('game-infos-panel-edit-button').should('not.exist')
   })
 
