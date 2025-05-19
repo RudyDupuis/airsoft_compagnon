@@ -15,13 +15,6 @@ export const ratingSeeds = [
   {
     gameId: 9,
     fromUserId: 1,
-    toUserId: 3,
-    rating: 3,
-    ratedAt: new Date('2017-05-01')
-  },
-  {
-    gameId: 9,
-    fromUserId: 1,
     toUserId: 4,
     rating: 5,
     ratedAt: new Date('2017-05-01')
@@ -30,13 +23,6 @@ export const ratingSeeds = [
     gameId: 9,
     fromUserId: 2,
     toUserId: 1,
-    rating: 4,
-    ratedAt: new Date('2017-05-01')
-  },
-  {
-    gameId: 9,
-    fromUserId: 2,
-    toUserId: 3,
     rating: 4,
     ratedAt: new Date('2017-05-01')
   },

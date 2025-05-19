@@ -35,8 +35,7 @@ export const userSeeds = [
     pseudo: 'Alice85',
     isVerified: true,
     createdAt: new Date('2025-01-01'),
-    gamesPlayedCount: 1,
-    computedReputation: 3.5
+    gamesPlayedCount: 1
   },
   {
     email: 'rudy.dupuis@airsoft-compagnon.com',

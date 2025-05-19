@@ -5,7 +5,7 @@ const existingUser = {
   lastName: 'Doe',
   dateOfBirth: '1990-01-01',
   pseudo: 'Johnny',
-  computedReputation: 4.0
+  computedReputation: '4.0'
 }
 
 const invalidUser = {

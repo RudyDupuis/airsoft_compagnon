@@ -5,7 +5,7 @@ const user = {
 
 const userCard = {
   pseudo: 'Alice85',
-  computedReputation: 3.5,
+  computedReputation: 'Not rated',
   id: 'ID: 3',
   memberSince: 'Member since 1/1/2025',
   gamesPlayedCount: '1 games played'
