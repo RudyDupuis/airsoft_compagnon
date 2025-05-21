@@ -26,7 +26,7 @@ describe('As a user, I want to rate other players after end game', () => {
   it('should process finished games and allow rating', () => {
     cy.request({
       method: 'POST',
-      url: '/api/cron/process-finished-games?key=' + Cypress.env('CRON_API_KEY')
+      url: '/api/cron/process-finished-games?key=f62c6b3ad917483a979ece313fab0339'
     }).then((response) => {
       expect(response.body).to.contain(
         'Processed games with IDs: [8]; Created ratings with IDs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]'
