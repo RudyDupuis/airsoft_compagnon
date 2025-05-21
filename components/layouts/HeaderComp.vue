@@ -132,7 +132,7 @@ onBeforeUnmount(() => {
             {{ $t(notification.link.linkTextKey) }}
           </NuxtLink>
         </div>
-        <div v-if="notifications.length === 0">
+        <div v-if="notifications.length === 0" data-cy="header-notification-modal-empty">
           <p>{{ $t('components.header.notification.empty') }}</p>
         </div>
       </div>
