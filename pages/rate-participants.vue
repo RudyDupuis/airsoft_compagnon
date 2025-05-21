@@ -27,12 +27,16 @@ executeFetchGames()
       <div class="divider mb-12" />
       <div v-if="isSuccess && isNotNull(pendingRatings)">
         <div v-if="pendingRatings.length > 0" class="space-y-12">
-          <div v-for="rating in pendingRatings" :key="rating.id">
+          <div
+            v-for="rating in pendingRatings"
+            :key="rating.id"
+            :data-cy="`rating-form-card-${rating.id}`"
+          >
             <RatingFormCard :pendingRating="rating" @rating-sent="executeFetchGames" />
             <div class="divider my-8" />
           </div>
         </div>
-        <p v-else>
+        <p v-else data-cy="no-ratings">
           {{ $t('pages.rate-participants.no-ratings') }}
         </p>
       </div>

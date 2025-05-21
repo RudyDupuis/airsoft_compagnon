@@ -45,7 +45,7 @@ onBeforeUnmount(() => {
   <header
     class="flex items-center justify-between px-10 md:px-20 h-20 fixed top-0 left-0 w-screen z-50 bg-background bg-opacity-80"
   >
-    <NuxtLink :to="localePath('/')">
+    <NuxtLink :to="localePath('/')" data-cy="header-logo">
       <div>
         <SmallLogoSvg class="size-12 fill-on-background hover:fill-primary" />
       </div>
@@ -76,9 +76,16 @@ onBeforeUnmount(() => {
           <font-awesome class="text-xl mr-1" :icon="['fas', 'person-rifle']" />
           <span data-cy="header-user-pseudo">{{ user?.pseudo }}</span>
         </NuxtLink>
-        <button class="hover:text-primary" @click="showNotifModal = true">
+        <button
+          class="hover:text-primary"
+          @click="showNotifModal = true"
+          data-cy="header-notification-button"
+        >
           <font-awesome class="text-xl mr-1" :icon="['fas', 'bell']" />
-          <span v-if="isFetchNotificationsSuccess && isNotNull(notifications)">
+          <span
+            v-if="isFetchNotificationsSuccess && isNotNull(notifications)"
+            data-cy="header-notification-count"
+          >
             {{ notifications?.length }}
           </span>
           <font-awesome
@@ -90,7 +97,11 @@ onBeforeUnmount(() => {
       </template>
     </nav>
 
-    <div v-if="showNotifModal" class="modal flex flex-col items-center justify-center">
+    <div
+      v-if="showNotifModal"
+      class="modal flex flex-col items-center justify-center"
+      data-cy="header-notification-modal"
+    >
       <font-awesome :icon="['fas', 'circle-xmark']" @click="showNotifModal = false" />
       <h3 class="large-title">{{ $t('components.header.notification.title') }}</h3>
       <FetchDataComp
@@ -103,7 +114,7 @@ onBeforeUnmount(() => {
           :key="index"
           class="border-b-2 border-on-background py-5"
         >
-          <p>
+          <p :data-cy="`header-notification-modal-message-${index + 1}`">
             {{
               notification.message.values
                 ? $t(notification.message.key, notification.message.values)
@@ -115,7 +126,7 @@ onBeforeUnmount(() => {
             :to="localePath(notification.link.url)"
             class="text-secondary hover:text-primary"
             @click="showNotifModal = false"
-            data-cy="header-notification-link"
+            :data-cy="`header-notification-modal-link-${index + 1}`"
           >
             <font-awesome :icon="['fas', 'right-to-bracket']" />
             {{ $t(notification.link.linkTextKey) }}

@@ -18,7 +18,9 @@ defineProps<{
       <span class="text-xl" :data-cy="`user-list-pseudo-${cy}`">{{ user.pseudo }}</span>
       <span>
         <font-awesome class="mr-2" :icon="['fas', 'trophy']" />
-        <span v-if="isNotNull(user.computedReputation)"> {{ user.computedReputation }} / 5 </span>
+        <span v-if="isNotNull(user.computedReputation)" :data-cy="`user-list-reputation-${cy}`">
+          {{ user.computedReputation }} / 5
+        </span>
         <span v-else>{{ $t('entities.user.no-reputation') }}</span>
       </span>
     </p>

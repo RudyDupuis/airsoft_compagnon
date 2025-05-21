@@ -37,13 +37,16 @@ async function putRating() {
 
 <template>
   <div class="flex flex-col gap-8">
-    <h2 class="medium-title">{{ pendingRating.game.name }}</h2>
+    <h2 class="medium-title" :data-cy="`rating-form-card-title-${pendingRating.id}`">
+      {{ pendingRating.game.name }}
+    </h2>
     <UserListElement
       :user="{
         id: pendingRating.toUser.id,
         pseudo: pendingRating.toUser.pseudo,
         computedReputation: pendingRating.toUser.computedReputation
       }"
+      :cy="`rating-form-card-${pendingRating.id}`"
     />
     <RadioButtonGroup
       v-model="rating"
@@ -56,8 +59,14 @@ async function putRating() {
         { value: 4, label: '4' },
         { value: 5, label: '5' }
       ]"
+      :cy="`rating-form-card-${pendingRating.id}`"
     />
-    <button class="button" :disabled="isLoading" @click="putRating()">
+    <button
+      class="button"
+      :disabled="isLoading"
+      @click="putRating()"
+      :cy="`rating-form-card-${pendingRating.id}-submit-button`"
+    >
       <FetchDataComp :isLoading="isLoading" :error="error" />
       <template v-if="!isLoading && isNull(error)">
         {{ $t('pages.rate-participants.submit') }}
