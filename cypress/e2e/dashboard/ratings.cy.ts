@@ -29,12 +29,15 @@ describe('As a user, I want to rate other players after end game', () => {
       url: '/api/cron/process-finished-games?key=f62c6b3ad917483a979ece313fab0339'
     }).then((response) => {
       expect(response.body).to.contain(
-        'Processed games with IDs: [8]; Created ratings with IDs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]'
+        '🏅 Processed games with IDs: [8]; Created ratings with IDs: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]'
       )
     })
   })
 
   it('should see notification for rating', () => {
+    cy.intercept('GET', '/api/notifications').as('notificationRequest')
+    cy.wait('@notificationRequest')
+
     cy.getBySel('header-notification-button').should('exist')
     cy.getBySel('header-notification-count').should('contain', '1')
     cy.getBySel('header-notification-button').click()
@@ -80,6 +83,9 @@ describe('As a user, I want to rate other players after end game', () => {
   })
 
   it('should not see notification if there are no more players to rate', () => {
+    cy.intercept('GET', '/api/notifications').as('notificationRequest')
+    cy.wait('@notificationRequest')
+
     cy.getBySel('header-notification-count').should('contain', '0')
   })
 })
