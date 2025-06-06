@@ -24,7 +24,10 @@ const emit = defineEmits<{
 const uniqueId = useId()
 
 onMounted(async () => {
-  const L = await import('leaflet')
+  // Dynamically import Leaflet and MarkerCluster to avoid SSR issues
+  // Explicitly extract the default export from the dynamic import
+  const L = await import('leaflet').then((module) => module.default)
+  await import('leaflet.markercluster')
 
   const map = L.map(uniqueId, {
     minZoom: 3,
@@ -43,8 +46,52 @@ onMounted(async () => {
     noWrap: true
   }).addTo(map)
 
-  const markerGroup = L.layerGroup().addTo(map)
+  const markerGroup = L.markerClusterGroup({
+    showCoverageOnHover: false,
+    iconCreateFunction: function (cluster) {
+      return L.divIcon({
+        html: `<div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; position: relative;">
+                  <svg viewBox="0 0 384 512">
+                    <rect
+                      style="fill:#FFF8F8;fill-opacity:1;stroke:none;stroke-width:25.064;stroke-linecap:round;stroke-linejoin:round"
+                      width="134.50893"
+                      height="131.0152"
+                      x="122.28085"
+                      y="129.26833"
+                      />
+                    <rect
+                      style="fill:#FFF8F8;fill-opacity:1;stroke:none;stroke-width:25.064;stroke-linecap:round;stroke-linejoin:round"
+                      width="134.50893"
+                      height="131.0152"
+                      x="122.28085"
+                      y="129.26833"
+                      />
+                    <path
+                      d="M 243.67245,419.87691 C 286.44612,365.8783 384,235.00322 384,161.49113 384,72.33457 312.29372,0 223.91157,0 135.52939,0 63.823109,72.33457 63.823109,161.49113 c 0,73.51209 97.553891,204.38717 140.327541,258.38578 10.25566,12.8688 29.26615,12.8688 39.5218,0 z M 223.91157,107.66074 a 53.362827,53.830382 0 1 1 0,107.66076 53.362827,53.830382 0 1 1 0,-107.66076 z"
+                      style="fill:#900001;fill-opacity:1;stroke:none;stroke-width:12.9072;stroke-opacity:1"
+                      />
+                    <path
+                      d="m 211.76089,461.11266 c 42.77367,-53.99861 140.32755,-184.8737 140.32755,-258.38579 0,-89.15656 -71.70628,-161.491125 -160.08843,-161.491125 -88.38218,0 -160.088453,72.334565 -160.088453,161.491125 0,73.51209 97.553883,204.38718 140.327533,258.38579 10.25566,12.86879 29.26615,12.86879 39.5218,0 z M 192.00001,148.89648 a 53.362827,53.830382 0 1 1 0,107.66076 53.362827,53.830382 0 1 1 0,-107.66076 z"
+                      style="fill:#c20002;fill-opacity:1;stroke:none;stroke-width:1.17695;stroke-opacity:1"
+                      />
+                    <path
+                      d="M 179.84934,502.3484 C 222.62301,448.34979 320.17689,317.47471 320.17689,243.96262 320.17689,154.80606 248.47061,82.471498 160.08846,82.471498 71.706276,82.471498 0,154.80606 0,243.96262 c 0,73.51209 97.553888,204.38717 140.32754,258.38578 10.25566,12.8688 29.26615,12.8688 39.5218,0 z M 160.08846,190.13223 a 53.362827,53.830382 0 1 1 0,107.66076 53.362827,53.830382 0 1 1 0,-107.66076 z"
+                      style="fill:#f30002;fill-opacity:1;stroke:none;stroke-width:0.79;stroke-opacity:1;stroke-dasharray:none"
+                      />
+                  </svg>
+                  <p style="position: absolute; bottom: 0; right:0; color: #1C0000; font-size: 15px; font-weight: bold; z-index: 200;">
+                    ${cluster.getChildCount()}
+                  </p>
+                </div>`,
+        // Remove default style
+        className: '',
+        iconSize: [32.5, 53.3],
+        iconAnchor: [16.25, 26.65]
+      })
+    }
+  }).addTo(map)
 
+  // TODO Voir la violation
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords
