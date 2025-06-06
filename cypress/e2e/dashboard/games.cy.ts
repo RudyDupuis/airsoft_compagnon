@@ -105,6 +105,8 @@ describe('As a unverified user, I want to handle games', () => {
     cy.getBySel('marker-map-1').should('exist')
     cy.getBySel('marker-map-2').should('exist')
     cy.getBySel('marker-map-4').should('exist')
+    cy.getBySel('marker-map-5').should('not.exist')
+    cy.getBySel('marker-map-6').should('not.exist')
     cy.getBySel('marker-map-7').should('exist')
 
     cy.getBySel('marker-map-1').click()
@@ -136,12 +138,6 @@ describe('As a unverified user, I want to handle games', () => {
       gameAlreadyAdded.allowedConsumables
     )
     cy.getBySel('user-list-pseudo-created-by').should('contain', gameAlreadyAdded.createdBy)
-
-    cy.getBySel('close-dashboard-panel').click()
-
-    cy.getBySel('marker-cluster-map').click()
-    cy.getBySel('marker-map-5').should('exist')
-    cy.getBySel('marker-map-6').should('exist')
   })
 })
 

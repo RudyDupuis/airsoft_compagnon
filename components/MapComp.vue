@@ -86,7 +86,7 @@ onMounted(async () => {
         // Remove default style
         className: '',
         iconSize: [32.5, 53.3],
-        iconAnchor: [25, 40]
+        iconAnchor: [20, 40]
       })
     }
   }).addTo(map)
