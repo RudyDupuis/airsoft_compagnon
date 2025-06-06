@@ -39,7 +39,7 @@ describe('As a user, I want to rate other players after end game', () => {
     cy.getBySel('header-notification-modal').should('exist')
     cy.getBySel('header-notification-modal-message-1').should(
       'contain',
-      "La partie 'Retour aux sources' est terminée."
+      "The game 'Retour aux sources' has ended."
     )
     cy.getBySel('header-notification-modal-link-1').click()
     cy.url().should('eq', `${Cypress.config().baseUrl}/rate-participants`)

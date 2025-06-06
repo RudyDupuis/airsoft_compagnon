@@ -65,7 +65,7 @@ async function putRating() {
       class="button"
       :disabled="isLoading"
       @click="putRating()"
-      :cy="`rating-form-card-submit-${pendingRating.id}`"
+      :data-cy="`rating-form-card-submit-${pendingRating.id}`"
     >
       <FetchDataComp :isLoading="isLoading" :error="error" />
       <template v-if="!isLoading && isNull(error)">
