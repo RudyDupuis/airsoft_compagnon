@@ -105,9 +105,12 @@ describe('As a unverified user, I want to handle games', () => {
     cy.getBySel('marker-map-1').should('exist')
     cy.getBySel('marker-map-2').should('exist')
     cy.getBySel('marker-map-4').should('exist')
+    cy.getBySel('marker-map-7').should('exist')
+
+    cy.getBySel('marker-cluster-map').click()
     cy.getBySel('marker-map-5').should('exist')
     cy.getBySel('marker-map-6').should('exist')
-    cy.getBySel('marker-map-7').should('exist')
+
     cy.getBySel('marker-map-1').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-name').should('contain', gameAlreadyAdded.name)
@@ -184,6 +187,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
   })
 
   it('should join a game', () => {
+    cy.getBySel('marker-cluster-map').click()
     cy.getBySel('marker-map-6').click()
     cy.getBySel('game-infos-panel-join-button').click()
     cy.getBySel('game-infos-panel-max-participants').should('contain', `2 /`)
@@ -328,6 +332,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-createdByMe-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
+    cy.getBySel('marker-cluster-map').click()
     cy.getBySel('marker-map-6').click()
     cy.getBySel('game-infos-panel-edit-button').should('not.exist')
   })
@@ -365,6 +370,7 @@ describe('As a rated user, I want to handle games', () => {
   })
 
   it('should join a game if minimal reputation is lesser than him', () => {
+    cy.getBySel('marker-cluster-map').click()
     cy.getBySel('marker-map-6').click()
     cy.getBySel('game-infos-panel-join-button').click()
     cy.getBySel('game-infos-panel-max-participants').should('contain', '3 /')

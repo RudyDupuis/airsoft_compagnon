@@ -50,7 +50,7 @@ onMounted(async () => {
     showCoverageOnHover: false,
     iconCreateFunction: function (cluster) {
       return L.divIcon({
-        html: `<div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; position: relative;">
+        html: `<div data-cy="marker-cluster-map" style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; position: relative;">
                   <svg viewBox="0 0 384 512">
                     <rect
                       style="fill:#FFF8F8;fill-opacity:1;stroke:none;stroke-width:25.064;stroke-linecap:round;stroke-linejoin:round"
