@@ -1,5 +1,6 @@
 {
   "name": "airsoft_compagnon",
+  "author": "Rudy Dupuis",
   "private": true,
   "type": "module",
   "scripts": {
