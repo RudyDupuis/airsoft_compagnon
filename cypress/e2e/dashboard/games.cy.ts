@@ -107,10 +107,6 @@ describe('As a unverified user, I want to handle games', () => {
     cy.getBySel('marker-map-4').should('exist')
     cy.getBySel('marker-map-7').should('exist')
 
-    cy.getBySel('marker-cluster-map').click()
-    cy.getBySel('marker-map-5').should('exist')
-    cy.getBySel('marker-map-6').should('exist')
-
     cy.getBySel('marker-map-1').click()
     cy.getBySel('game-infos-panel').should('exist')
     cy.getBySel('game-infos-panel-name').should('contain', gameAlreadyAdded.name)
@@ -140,6 +136,12 @@ describe('As a unverified user, I want to handle games', () => {
       gameAlreadyAdded.allowedConsumables
     )
     cy.getBySel('user-list-pseudo-created-by').should('contain', gameAlreadyAdded.createdBy)
+
+    cy.getBySel('close-dashboard-panel').click()
+
+    cy.getBySel('marker-cluster-map').click()
+    cy.getBySel('marker-map-5').should('exist')
+    cy.getBySel('marker-map-6').should('exist')
   })
 })
 
@@ -324,6 +326,7 @@ describe('As a verified but unrated user, I want to handle games', () => {
     cy.getBySel('open-filter-panel').click()
     cy.getBySel('radio-button-createdByMe-game-filter').click()
     cy.getBySel('close-dashboard-panel').click()
+    cy.getBySel('marker-cluster-map').click()
     cy.getBySel('marker-map-3').click()
     cy.getBySel('game-infos-panel-edit-button').should('not.exist')
   })

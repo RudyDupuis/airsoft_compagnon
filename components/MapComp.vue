@@ -79,14 +79,14 @@ onMounted(async () => {
                       style="fill:#f30002;fill-opacity:1;stroke:none;stroke-width:0.79;stroke-opacity:1;stroke-dasharray:none"
                       />
                   </svg>
-                  <p style="position: absolute; bottom: 0; right:0; color: #1C0000; font-size: 15px; font-weight: bold; z-index: 200;">
+                  <p style="position: absolute; bottom: 0; right:0; color: #1C0000; font-size: 15px; font-family: Aldrich-Regular; font-weight: bold; z-index: 200; background-color: #FFF8F8; padding: 0 5px; border-radius: 10px;">
                     ${cluster.getChildCount()}
                   </p>
                 </div>`,
         // Remove default style
         className: '',
         iconSize: [32.5, 53.3],
-        iconAnchor: [16.25, 26.65]
+        iconAnchor: [25, 40]
       })
     }
   }).addTo(map)
