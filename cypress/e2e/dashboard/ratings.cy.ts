@@ -60,7 +60,7 @@ describe('As a user, I want to rate other players after end game', () => {
       `${rating.toUserReputation} / 5`
     )
     cy.getBySel('radio-button-0-rating-form-card-11').click()
-    cy.getBySel('rating-form-card-submit-button-11').click()
+    cy.getBySel('rating-form-card-submit-11').click()
 
     cy.wait('@rateRequest')
 
@@ -72,8 +72,8 @@ describe('As a user, I want to rate other players after end game', () => {
 
   it('should rate all players', () => {
     cy.visit('/rate-participants')
-    cy.getBySel('rating-form-card-submit-button-12').click()
-    cy.getBySel('rating-form-card-submit-button-13').click()
+    cy.getBySel('rating-form-card-submit-12').click()
+    cy.getBySel('rating-form-card-submit-13').click()
     cy.getBySel('no-ratings').should('exist')
   })
 

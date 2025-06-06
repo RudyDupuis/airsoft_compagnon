@@ -3,7 +3,7 @@ import { useRoute, useLocalePath, useUserSession } from '#imports'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import type Notification from '~/utils/interface/Notification'
 import { isNotNull } from '~/utils/types/typeGuards'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
 
 const route = useRoute()
 const localePath = useLocalePath()
@@ -27,6 +27,10 @@ const refreshNotifications = () => {
     executeFetchNotifications()
   }
 }
+
+watch(loggedIn, () => {
+  refreshNotifications()
+})
 
 onMounted(() => {
   refreshNotifications()
