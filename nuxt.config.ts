@@ -36,7 +36,7 @@ function fontawesomeIcons() {
 }
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-04-02',
+  compatibilityDate: '2025-06-08',
   serverHandlers: [{ route: '/api/**', handler: './server/index' }],
   components: [{ path: '~/components', pathPrefix: false }],
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', '@vesp/nuxt-fontawesome', 'nuxt-auth-utils'],
