@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, watch, useId } from 'vue'
 import 'leaflet/dist/leaflet.css'
+import type { Map } from 'leaflet'
 
 export interface MarkerData {
   latitude: number
@@ -41,10 +42,64 @@ onMounted(async () => {
     6
   )
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    noWrap: true
-  }).addTo(map)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
+
+  map.zoomControl.remove()
+
+  function createCustomControl(
+    title: string,
+    svg: string,
+    position: string,
+    onClick: (map: Map) => void
+  ) {
+    return L.Control.extend({
+      options: { position },
+      onAdd: (map: Map) => {
+        const container = L.DomUtil.create('div', 'custom-leaflet-controls')
+        container.innerHTML = `
+        <a role="button" title="${title}" style="  cursor: pointer; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; background-color: #1c0000; border-radius: 1000px;">
+          ${svg}
+        </a>
+      `
+
+        L.DomEvent.disableClickPropagation(container)
+        L.DomEvent.disableScrollPropagation(container)
+        L.DomEvent.on(container, 'click', () => onClick(map))
+
+        return container
+      }
+    })
+  }
+
+  const CustomZoomInControl = createCustomControl(
+    'Zoom in',
+    `<svg viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM184 296c0 13.3 10.7 24 24 24s24-10.7 24-24l0-64 64 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-64 0 0-64c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 64-64 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l64 0 0 64z"/></svg>`,
+    'topleft',
+    (map) => map.zoomIn()
+  )
+  const CustomZoomOutControl = createCustomControl(
+    'Zoom out',
+    `<svg viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM136 184c-13.3 0-24 10.7-24 24s10.7 24 24 24l144 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-144 0z"/></svg>`,
+    'topleft',
+    (map) => map.zoomOut()
+  )
+  const LocateControl = createCustomControl(
+    'Locate me',
+    `<svg viewBox="0 0 512 512"><path d="M256 0c17.7 0 32 14.3 32 32l0 34.7C368.4 80.1 431.9 143.6 445.3 224l34.7 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-34.7 0C431.9 368.4 368.4 431.9 288 445.3l0 34.7c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-34.7C143.6 431.9 80.1 368.4 66.7 288L32 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l34.7 0C80.1 143.6 143.6 80.1 224 66.7L224 32c0-17.7 14.3-32 32-32zM128 256a128 128 0 1 0 256 0 128 128 0 1 0 -256 0zm128-80a80 80 0 1 1 0 160 80 80 0 1 1 0-160z"/></svg>`,
+    'topleft',
+    (map) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const { latitude, longitude } = position.coords
+          map.setView([latitude, longitude], 8)
+        })
+      }
+    }
+  )
+
+  new CustomZoomInControl().addTo(map)
+  new CustomZoomOutControl().addTo(map)
+  new LocateControl().addTo(map)
 
   const markerGroup = L.markerClusterGroup({
     showCoverageOnHover: false,
@@ -91,14 +146,6 @@ onMounted(async () => {
     }
   }).addTo(map)
 
-  // TODO Voir la violation
-  if ('geolocation' in navigator) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords
-      map.setView([latitude, longitude], 6)
-    })
-  }
-
   watch(
     () => props.markersData,
     (newMarkers) => {
@@ -143,5 +190,18 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div :id="uniqueId" class="z-0 w-full h-full"></div>
+  <ClientOnly>
+    <div :id="uniqueId" class="z-0 w-full h-full"></div>
+  </ClientOnly>
 </template>
+
+<style>
+.custom-leaflet-controls svg {
+  width: 25px;
+  height: 25px;
+  fill: #fff8f8;
+}
+.custom-leaflet-controls a:hover svg {
+  fill: #f30002;
+}
+</style>
