@@ -30,12 +30,6 @@
 }
 
 /* Container */
-
-.fullscreen-player-lying-in-the-grass-background {
-  @apply w-screen min-h-dvh pb-20 bg-cover bg-center bg-left flex items-center justify-center;
-  background-image: url('/images/player-lying-in-the-grass-background.png');
-}
-
 .wrapper {
   @apply flex flex-col items-center justify-center w-full md:w-fit py-20 px-10 gap-20 mx-auto;
   min-height: calc(100dvh - 5rem);
@@ -43,6 +37,11 @@
 
 .container {
   @apply bg-background rounded-lg border-on-background border-2 px-10 mx-5 sm:px-40 py-10 flex flex-col items-center justify-center gap-10 w-auto;
+}
+
+.min-fullscreen-whithout-navbar {
+  @apply w-full;
+  min-height: calc(100dvh - 5rem);
 }
 
 .fullscreen-without-navbar {

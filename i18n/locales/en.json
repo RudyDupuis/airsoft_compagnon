@@ -130,20 +130,20 @@
       "title": "Airsoft Companion - Home",
       "description": "Airsoft Companion is a platform for airsoft enthusiasts. Find games, meet players and build your reputation.",
       "hero-banner": {
-        "subtitle": "Find games,\nMeet players,\nBuild your reputation!",
-        "cta": "Find a game"
+        "subtitle": "The platform for airsoft players",
+        "cta": "Find a game",
+        "infos": {
+          "title1": "Find games",
+          "description1": "Easily find airsoft games near you.",
+          "title2": "Meet players",
+          "description2": "Join a community of enthusiasts and make new connections.",
+          "title3": "Build your reputation",
+          "description3": "Gain recognition by participating in games and getting involved in the community."
+        }
       },
       "find-a-game": {
         "title": "Find a game",
         "join-game": "Log in to join"
-      },
-      "infos": {
-        "title1": "What is Airsoft Companion?",
-        "description1": "Whether you're a player or an organizer, Airsoft Companion is your ideal ally for managing and finding airsoft games. With a single click, access events near you and specialized stores. Publish your games with ease, without worrying about payments and registrations - we take care of everything! And the best part? It's 100% free!",
-        "title2": "What are the benefits for organizers?",
-        "description2": "Tired of wasting time managing registrations? Airsoft Companion takes care of it for you! Publish your listing instantly and let the platform handle the rest. Problematic players are automatically filtered, and entrance fee payments are secured directly via the application. By validating registrations after payment, significantly reduce absenteeism.",
-        "title3": "What are the benefits for Players?",
-        "description3": "No more endless searches! Access all games and stores near you with one click. Easily manage your entrance fee and view history of your past and upcoming events. Create your profile, display your equipment and join teams. Collect badges to show your commitment within the community."
       }
     },
     "dashboard": {

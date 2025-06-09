@@ -58,23 +58,51 @@ const selectedGame = computed(() => {
 </script>
 
 <template>
-  <section class="fullscreen-player-lying-in-the-grass-background">
-    <div class="lg:w-5/12"></div>
-    <div class="flex flex-col items-center justify-center gap-14 md:gap-20">
-      <BigLogoSvg class="w-10/12 md:w-fit" />
-      <pre class="text-lg md:text-2xl" data-cy="hero-banner-subtitle">{{
-        $t('pages.index.hero-banner.subtitle')
-      }}</pre>
-      <a class="button" href="/#find-a-game" data-cy="hero-banner-cta">{{
-        $t('pages.index.hero-banner.cta')
-      }}</a>
+  <section
+    class="min-fullscreen-whithout-navbar flex flex-col items-center justify-center space-y-12"
+  >
+    <img class="w-60" src="/images/player-who-rates.png" alt="Player who rates" />
+    <h1 class="large-title" data-cy="hero-banner-subtitle">
+      {{ $t('pages.index.hero-banner.subtitle') }}
+    </h1>
+    <a class="button" href="/#find-a-game" data-cy="hero-banner-cta">
+      {{ $t('pages.index.hero-banner.cta') }}
+    </a>
+    <div class="flex flex-col xl:flex-row px-10 space-y-10 xl:space-y-0 xl:space-x-10">
+      <div class="lg:w-96">
+        <div class="flex items-center">
+          <font-awesome class="text-3xl mr-4" :icon="['fas', 'magnifying-glass-location']" />
+          <h3 class="small-title my-4">
+            {{ $t('pages.index.hero-banner.infos.title1') }}
+          </h3>
+        </div>
+        <p>{{ $t('pages.index.hero-banner.infos.description1') }}</p>
+      </div>
+      <div class="lg:w-96">
+        <div class="flex items-center">
+          <font-awesome class="text-3xl mr-4" :icon="['fas', 'people-group']" />
+          <h3 class="small-title my-4">
+            {{ $t('pages.index.hero-banner.infos.title2') }}
+          </h3>
+        </div>
+        <p>{{ $t('pages.index.hero-banner.infos.description2') }}</p>
+      </div>
+      <div class="lg:w-96">
+        <div class="flex items-center">
+          <font-awesome class="text-3xl mr-4" :icon="['fas', 'trophy']" />
+          <h3 class="small-title my-4">
+            {{ $t('pages.index.hero-banner.infos.title3') }}
+          </h3>
+        </div>
+        <p>{{ $t('pages.index.hero-banner.infos.description3') }}</p>
+      </div>
     </div>
   </section>
   <section
     id="find-a-game"
     class="relative fullscreen-without-navbar p-5 flex flex-col items-center justify-center"
   >
-    <h2 class="large-title my-10">{{ $t('pages.index.find-a-game.title') }}</h2>
+    <h2 class="medium-title my-10">{{ $t('pages.index.find-a-game.title') }}</h2>
     <FetchDataComp :error="error" :isLoading="isLoading" />
     <template v-if="isSuccess">
       <MapComp :markersData="markersData" @marker-clicked="(id) => (selectedGameId = id)" />
@@ -90,19 +118,5 @@ const selectedGame = computed(() => {
         </GameInfos>
       </div>
     </template>
-  </section>
-  <section
-    class="w-screen bg-cover bg-center flex items-center justify-center xl:justify-between"
-    style="background-image: url('/images/player-in-forest-background.png')"
-  >
-    <div></div>
-    <div class="px-10 xl:pr-40 py-40 xl:py-60 xl:w-5/12">
-      <h3 class="font-bold text-2xl py-8">{{ $t('pages.index.infos.title1') }}</h3>
-      <p>{{ $t('pages.index.infos.description1') }}</p>
-      <h3 class="font-bold text-2xl py-8">{{ $t('pages.index.infos.title2') }}</h3>
-      <p>{{ $t('pages.index.infos.description2') }}</p>
-      <h3 class="font-bold text-2xl py-8">{{ $t('pages.index.infos.title3') }}</h3>
-      <p>{{ $t('pages.index.infos.description3') }}</p>
-    </div>
   </section>
 </template>

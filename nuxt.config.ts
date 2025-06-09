@@ -30,7 +30,8 @@ function fontawesomeIcons() {
       'right-to-bracket',
       'triangle-exclamation',
       'seedling',
-      'bell'
+      'bell',
+      'magnifying-glass-location'
     ]
   }
 }

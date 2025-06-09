@@ -1,5 +1,5 @@
 const texts = {
-  heroBannerSubtitle: 'Find games,\nMeet players,\nBuild your reputation!',
+  heroBannerSubtitle: 'The platform for airsoft players',
   heroBannerCta: 'Find a game'
 }
 
