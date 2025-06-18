@@ -31,7 +31,9 @@ function fontawesomeIcons() {
       'triangle-exclamation',
       'seedling',
       'bell',
-      'magnifying-glass-location'
+      'magnifying-glass-location',
+      'stopwatch',
+      'heart'
     ]
   }
 }

@@ -64,8 +64,8 @@ async function loginUser() {
       {{ $t('pages.login.register') }}
     </NuxtLink>
 
-    <!-- TODO <NuxtLink :to="localePath('/forgot-password')" class="underline hover:text-primary">
-        {{ $t('login.forgot-password') }}
-      </NuxtLink> -->
+    <NuxtLink :to="localePath('/forgot-password')" class="underline hover:text-primary">
+      {{ $t('pages.login.forgot-password') }}
+    </NuxtLink>
   </section>
 </template>

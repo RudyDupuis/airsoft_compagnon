@@ -18,6 +18,7 @@
       "delete": "Supprimer",
       "confirm-delete": "Êtes-vous sûr de vouloir supprimer l'élément ?\n(Cette action est irréversible)",
       "cancel": "Annuler",
+      "redirecting": "Redirection vers la page d'accueil dans 5 secondes.",
       "errors": {
         "all-fields-required": "Des champs obligatoires n'ont pas été renseignés.",
         "rules-not-respected": "Toutes les règles doivent être respectées."
@@ -206,17 +207,24 @@
       "h1": "Nous contacter",
       "message": "Votre message",
       "thank-you": "Merci pour votre message !",
-      "message-sent": "Nous vous répondrons dans les plus brefs délais.",
-      "redirecting": "Redirection vers la page d'accueil dans 5 secondes."
+      "message-sent": "Nous vous répondrons dans les plus brefs délais."
     },
     "login": {
       "title": "Airsoft Compagnon - Connexion",
       "description": "Création de votre compte",
       "h1": "Se connecter",
       "register": "Pas de compte ?",
+      "forgot-password": "Mot de passe oublié ?",
       "errors": {
         "invalid-credentials": "Email ou mot de passe invalide."
       }
+    },
+    "forgot-password": {
+      "title": "Airsoft Compagnon - Mot de passe oublié",
+      "description": "Réinitialiser votre mot de passe",
+      "h1": "Mot de passe oublié ?",
+      "send-reset-link": "Recevoir un mail de réinitialisation",
+      "success-message": "Si cet email est enregistré, vous recevrez un email pour réinitialiser votre mot de passe."
     },
     "register": {
       "title": "Airsoft Compagnon - Enregistrement",

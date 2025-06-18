@@ -59,9 +59,9 @@ const selectedGame = computed(() => {
 
 <template>
   <section
-    class="min-fullscreen-whithout-navbar flex flex-col items-center justify-center space-y-12"
+    class="min-fullscreen-whithout-navbar flex flex-col items-center justify-center space-y-12 py-10"
   >
-    <img class="w-60" src="/images/player-who-rates.png" alt="Player who rates" />
+    <img class="w-60" src="/images/player-who-use-the-app.png" alt="Player who rates" />
     <h1 class="large-title" data-cy="hero-banner-subtitle">
       {{ $t('pages.index.hero-banner.subtitle') }}
     </h1>

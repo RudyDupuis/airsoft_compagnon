@@ -19,7 +19,7 @@ const {
   execute: executeFetchNotifications
 } = useFetchWithState<Notification[]>('/api/notifications')
 
-//TODO: use a better way to refresh notifications
+// IMPROVE : use a better way to refresh notifications
 let notificationInterval: ReturnType<typeof setInterval> | null = null
 
 const refreshNotifications = () => {

@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // TODO : send email
+  // TODO : send email watch out for form spam
 
   return {
     status: 'ok'

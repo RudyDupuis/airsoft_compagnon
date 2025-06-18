@@ -18,6 +18,7 @@
       "delete": "Delete",
       "confirm-delete": "Are you sure you want to delete this item?\n(This action is irreversible)",
       "cancel": "Cancel",
+      "redirecting": "Redirecting to the home page in 5 seconds.",
       "errors": {
         "all-fields-required": "Required fields have not been filled.",
         "rules-not-respected": "All rules must be followed."
@@ -206,17 +207,24 @@
       "h1": "Contact us",
       "message": "Your message",
       "thank-you": "Thank you for your message!",
-      "message-sent": "We will respond as soon as possible.",
-      "redirecting": "Redirecting to the home page in 5 seconds."
+      "message-sent": "We will respond as soon as possible."
     },
     "login": {
       "title": "Airsoft Companion - Login",
       "description": "Create your account",
       "h1": "Log in",
       "register": "No account?",
+      "forgot-password": "Forgot your password?",
       "errors": {
         "invalid-credentials": "Invalid email or password."
       }
+    },
+    "forgot-password": {
+      "title": "Airsoft Companion - Forgot Password",
+      "description": "Reset your password",
+      "h1": "Forgot your password?",
+      "send-reset-link": "Send password reset email",
+      "success-message": "If this email is registered, you will receive an email to reset your password."
     },
     "register": {
       "title": "Airsoft Companion - Registration",

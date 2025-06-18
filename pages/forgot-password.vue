@@ -5,30 +5,27 @@ import { usePageMeta } from '~/composables/usePageMeta'
 import { useFetchWithState } from '~/composables/useFetchWithState'
 import { useRouter } from 'vue-router'
 import type { User } from '~/server/db/entities/User'
-import { emailRegex } from '~/utils/validations/regex'
 
-usePageMeta('contact')
+usePageMeta('forgot-password')
 const localePath = useLocalePath()
 const router = useRouter()
 
 const email = ref('')
-const message = ref('')
 
 const {
   error,
   isLoading,
   isSuccess,
-  execute: executeSendMessage
-} = useFetchWithState<User>('/api/contact', {
+  execute: executeSendEmailUser
+} = useFetchWithState<User>('/api/auth/forgot-password', {
   method: 'POST',
   body: computed(() => ({
-    email: email.value,
-    message: message.value
+    email: email.value
   }))
 })
 
-async function sendMessage() {
-  await executeSendMessage()
+async function sendEmail() {
+  await executeSendEmailUser()
 
   if (isSuccess.value) {
     setTimeout(() => router.push(localePath('/')), 5000)
@@ -38,38 +35,27 @@ async function sendMessage() {
 
 <template>
   <section class="wrapper">
-    <h1 class="large-title">{{ $t('pages.contact.h1') }}</h1>
-
+    <h1 class="large-title">{{ $t('pages.forgot-password.h1') }}</h1>
     <FormComp
       v-if="!isSuccess"
-      submitButtonKey="common.form.submit"
+      submitButtonKey="pages.forgot-password.send-reset-link"
       :error="error"
       :isLoading="isLoading"
-      @submit="sendMessage"
+      @submit="sendEmail"
     >
       <InputField
         v-model="email"
         placeholderKey="entities.user.email"
-        :regex="emailRegex"
-        errorMessageKey="entities.user.errors.invalid-email"
         type="email"
         required
-      />
-      <InputField
-        v-model="message"
-        type="textarea"
-        placeholderKey="pages.contact.message"
-        required
+        cy="email"
       />
     </FormComp>
 
     <div v-else class="mb-20 space-y-10">
-      <h2 class="text-2xl text-center">
-        <font-awesome :icon="['fas', 'heart']" />
-        {{ $t('pages.contact.thank-you') }}
-      </h2>
       <p class="text-xl">
-        {{ $t('pages.contact.message-sent') }}
+        <font-awesome :icon="['fas', 'check']" class="text-2xl" />
+        {{ $t('pages.forgot-password.success-message') }}
       </p>
       <p>
         <font-awesome :icon="['fas', 'stopwatch']" class="text-xl" />
